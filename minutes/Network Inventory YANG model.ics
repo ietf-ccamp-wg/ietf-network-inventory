@@ -1,0 +1,172 @@
+BEGIN:VCALENDAR
+PRODID:-//Microsoft Corporation//Outlook 15.0 MIMEDIR//EN
+VERSION:2.0
+METHOD:REQUEST
+X-MS-OLK-FORCEINSPECTOROPEN:TRUE
+BEGIN:VTIMEZONE
+TZID:W. Europe Standard Time
+BEGIN:STANDARD
+DTSTART:16011028T030000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:16010325T020000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+ATTENDEE;CN="BOUQUIER, JEAN-FRANCOIS, Vodafone Spain";RSVP=TRUE:mailto:jeff
+	.bouquier@vodafone.com
+ATTENDEE;CN="'Anton Snitser'";RSVP=TRUE:mailto:antons@sedonasys.com
+ATTENDEE;CN="Peruzzini Fabio";RSVP=TRUE:mailto:fabio.peruzzini@telecomitali
+	a.it
+ATTENDEE;CN="Oscar González de Dios";RSVP=TRUE:mailto:oscar.gonzalezdedios
+	@telefonica.com
+ATTENDEE;CN=Zhenghaomian;RSVP=TRUE:mailto:zhenghaomian@huawei.com
+ATTENDEE;CN="Paolo Volpato";RSVP=TRUE:mailto:paolo.volpato@huawei.com
+ATTENDEE;CN="Lopez, Victor (Nokia - ES/Madrid)";RSVP=TRUE:mailto:victor.lop
+	ez@nokia.com
+ATTENDEE;CN="Aihua Guo";RSVP=TRUE:mailto:aihuaguo@futurewei.com
+ATTENDEE;CN=yuchaode;RSVP=TRUE:mailto:yuchaode@huawei.com
+ATTENDEE;CN="Zheng Yanlei";RSVP=TRUE:mailto:zhengyanlei@chinaunicom.cn
+ATTENDEE;CN="Italo Busi";RSVP=TRUE:mailto:Italo.Busi@huawei.com
+CATEGORIES:ietf-yang-inventory
+CLASS:PUBLIC
+CREATED:20211006T134254Z
+DESCRIPTION:Added recurrence till March 16th \, before IETF 113\n\n-- Do no
+	t delete or change any of the following text. --\n\nWelcome to Nokia Meeti
+	ngs\n\nJoin me now in my Personal Room.\n\nNote that attendee's phone numb
+	er is visible in Webex Meetings when connected by phone By joining the Web
+	ex meeting you are accepting the Webex Privacy Notice <https://nokia.share
+	point.com/sites/itpedia/infra/Voice%20WebEx%20and%20Video/Jabber/Jabber%20
+	migration%20(Project%20folder)/Guides/Webex%20Privacy%20Notice.pdf>\n-----
+	--------------------------------------\nJoin Webex meeting<https://nokiame
+	etings.webex.com/join/sergio.belotti>\nMeeting number: 956 501 725\nMeetin
+	g password: This meeting does not require a password.\n-------------------
+	------------------------\nJoin by phone\n8200300 Internal\n+390294757854 I
+	taly\nAccess code: 956 501 725\nGlobal call-in numbers<https://nokiameetin
+	gs.webex.com/cmp3300/webcomponents/widget/globalcallin/globalcallin.do?sit
+	eurl=nokiameetings&serviceType=MC&ED=471578802&tollFree=1>\n--------------
+	-----------------------------\nJoin by video conferencing system\n*956 501
+	 725 Internal\n3'rd party instructions <http://nokia.ly/meetings>\n-------
+	------------------------------------\n\n
+DTEND;TZID="W. Europe Standard Time":20211006T153000
+DTSTAMP:20210928T140249Z
+DTSTART;TZID="W. Europe Standard Time":20211006T143000
+LAST-MODIFIED:20211006T134254Z
+ORGANIZER;CN="Belotti, Sergio (Nokia - IT/Vimercate)":mailto:sergio.belotti
+	@nokia.com
+PRIORITY:5
+RRULE:FREQ=WEEKLY;COUNT=24;BYDAY=WE
+SEQUENCE:1
+SUMMARY;LANGUAGE=it:Network Inventory YANG model
+TRANSP:OPAQUE
+UID:040000008200E00074C5B7101A82E00800000000D0406F3080B4D701000000000000000
+	0100000001A2F0C1BAB8D50449B3EB9F18E48EFD4
+X-ALT-DESC;FMTTYPE=text/html:<html xmlns:v="urn:schemas-microsoft-com:vml" 
+	xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-mic
+	rosoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/
+	12/omml" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="C
+	ontent-Type" content="text/html\; charset=iso-8859-1"><meta name="Generato
+	r" content="Microsoft Word 15 (filtered medium)"><style><!--\n/* Font Defi
+	nitions */\n@font-face\n	{font-family:"Cambria Math"\;\n	panose-1:2 4 5 3 
+	5 4 6 3 2 4\;}\n@font-face\n	{font-family:Calibri\;\n	panose-1:2 15 5 2 2 
+	2 4 3 2 4\;}\n/* Style Definitions */\np.MsoNormal\, li.MsoNormal\, div.Ms
+	oNormal\n	{margin:0cm\;\n	font-size:11.0pt\;\n	font-family:"Calibri"\,sans
+	-serif\;}\na:link\, span.MsoHyperlink\n	{mso-style-priority:99\;\n	color:#
+	0563C1\;\n	text-decoration:underline\;}\n.MsoChpDefault\n	{mso-style-type:
+	export-only\;\n	font-size:10.0pt\;}\n@page WordSection1\n	{size:612.0pt 79
+	2.0pt\;\n	margin:70.85pt 2.0cm 2.0cm 2.0cm\;}\ndiv.WordSection1\n	{page:Wo
+	rdSection1\;}\n--></Style><!--[if gte mso 9]><xml>\n<o:shapedefaults v:ext
+	="edit" spidmax="1026" />\n</xml><![endif]--><!--[if gte mso 9]><xml>\n<o:
+	shapelayout v:ext="edit">\n<o:idmap v:ext="edit" data="1" />\n</o:shapelay
+	out></xml><![endif]--></Head><body lang="EN-US" link="#0563C1" vlink="#954
+	F72" style="word-wrap:break-word"><div class="WordSection1"><p><span style
+	="font-size:10.0pt\;font-family:"Arial"\,sans-serif\;color:#3D3D3D">Added 
+	recurrence till March 16<sup>th</Sup> \, before IETF 113<o:p></o:p></Span>
+	</P><div><p><span style="font-size:10.0pt\;font-family:"Arial"\,sans-serif
+	\;color:#3D3D3D">-<a name="WBXD833D">- Do not delete or change any of the 
+	following text. --</A></Span><span style="mso-bookmark:WBXD833D"><o:p></o:
+	p></Span></P><p><span style="mso-bookmark:WBXD833D"><strong><span style="f
+	ont-size:13.5pt\;font-family:"Arial"\,sans-serif\;color:#125591">Welcome t
+	o Nokia Meetings</Span></Strong><o:p></o:p></Span></P><p class="MsoNormal"
+	><span style="mso-bookmark:WBXD833D"><span style="font-size:12.0pt\;font-f
+	amily:"Arial"\,sans-serif\;color:black">Join me now in my Personal Room.</
+	Span><br>\n<br>\n</Span><span style="mso-bookmark:WBXD833D"><span style="f
+	ont-size:10.0pt\;font-family:"Arial"\,sans-serif\;color:#3D3D3D">Note that
+	 attendee's phone number is visible in Webex Meetings when connected by ph
+	one</Span> </Span><span style="mso-bookmark:WBXD833D"><span style="font-si
+	ze:10.0pt\;font-family:"Arial"\,sans-serif\;color:#3D3D3D">By joining the 
+	Webex meeting you are accepting the </Span></Span><a href="https://nokia.s
+	harepoint.com/sites/itpedia/infra/Voice%20WebEx%20and%20Video/Jabber/Jabbe
+	r%20migration%20(Project%20folder)/Guides/Webex%20Privacy%20Notice.pdf"><s
+	pan style="mso-bookmark:WBXD833D"><span style="font-size:10.0pt\;font-fami
+	ly:"Arial"\,sans-serif">Webex Privacy Notice </Span></Span><span style="ms
+	o-bookmark:WBXD833D"></Span></A><span style="mso-bookmark:WBXD833D"><br>\n
+	</Span><span style="mso-bookmark:WBXD833D"><span style="font-size:10.0pt\;
+	font-family:"Arial"\,sans-serif\;color:#3D3D3D">--------------------------
+	-----------------</Span><br>\n</Span><a href="https://nokiameetings.webex.
+	com/join/sergio.belotti"><span style="mso-bookmark:WBXD833D"><span style="
+	font-size:12.0pt\;font-family:"Arial"\,sans-serif\;color:#00AFF9">Join Web
+	ex meeting</Span></Span><span style="mso-bookmark:WBXD833D"></Span></A><sp
+	an style="mso-bookmark:WBXD833D"><br>\n</Span><span style="mso-bookmark:WB
+	XD833D"><span style="font-size:10.0pt\;font-family:"Arial"\,sans-serif\;co
+	lor:#3D3D3D">Meeting number: 956 501 725 <br>\nMeeting password: This meet
+	ing does not require a password. </Span><br>\n</Span><span style="mso-book
+	mark:WBXD833D"><span style="font-size:10.0pt\;font-family:"Arial"\,sans-se
+	rif\;color:#3D3D3D">-------------------------------------------</Span><br>
+	\n</Span><span style="mso-bookmark:WBXD833D"><b><span style="font-size:9.0
+	pt\;font-family:"Arial"\,sans-serif\;color:black">Join by phone</Span></B>
+	</Span><span style="mso-bookmark:WBXD833D"><span style="font-size:7.5pt\;f
+	ont-family:"Arial"\,sans-serif\;color:#3D3D3D">  <br>\n</Span></Span><span
+	 style="mso-bookmark:WBXD833D"><span style="font-size:10.5pt\;font-family:
+	"Arial"\,sans-serif\;color:#3D3D3D">8200300 </Span></Span><span style="mso
+	-bookmark:WBXD833D"><span style="font-size:10.5pt\;font-family:"Arial"\,sa
+	ns-serif\;color:#999999">Internal</Span></Span><span style="mso-bookmark:W
+	BXD833D"><span style="font-size:7.5pt\;font-family:"Arial"\,sans-serif\;co
+	lor:#3D3D3D">  <br>\n</Span></Span><span style="mso-bookmark:WBXD833D"><sp
+	an style="font-size:10.5pt\;font-family:"Arial"\,sans-serif\;color:#3D3D3D
+	">+390294757854 </Span></Span><span style="mso-bookmark:WBXD833D"><span st
+	yle="font-size:10.5pt\;font-family:"Arial"\,sans-serif\;color:#999999">Ita
+	ly</Span></Span><span style="mso-bookmark:WBXD833D"><span style="font-size
+	:7.5pt\;font-family:"Arial"\,sans-serif\;color:#3D3D3D">  <br>\n</Span></S
+	pan><span style="mso-bookmark:WBXD833D"><span style="font-size:10.5pt\;fon
+	t-family:"Arial"\,sans-serif\;color:#999999">Access code: 956 501 725</Spa
+	n></Span><span style="mso-bookmark:WBXD833D"><span style="font-size:7.5pt\
+	;font-family:"Arial"\,sans-serif\;color:#3D3D3D">  <br>\n</Span></Span><a 
+	href="https://nokiameetings.webex.com/cmp3300/webcomponents/widget/globalc
+	allin/globalcallin.do?siteurl=nokiameetings&serviceType=MC&ED=471578802&to
+	llFree=1"><span style="mso-bookmark:WBXD833D"><span style="font-size:10.5p
+	t\;font-family:"Arial"\,sans-serif\;color:#005E7D">Global call-in numbers<
+	/Span></Span><span style="mso-bookmark:WBXD833D"></Span></A><span style="m
+	so-bookmark:WBXD833D"><span style="font-size:7.5pt\;font-family:"Arial"\,s
+	ans-serif\;color:#3D3D3D"> </Span><br>\n</Span><span style="mso-bookmark:W
+	BXD833D"><span style="font-size:10.0pt\;font-family:"Arial"\,sans-serif\;c
+	olor:#3D3D3D">-------------------------------------------</Span><br>\n</Sp
+	an><span style="mso-bookmark:WBXD833D"><span style="font-size:12.0pt\;font
+	-family:"Arial"\,sans-serif\;color:#3D3D3D">Join by video conferencing sys
+	tem </Span><br>\n</Span><span style="mso-bookmark:WBXD833D"><span style="f
+	ont-size:10.0pt\;font-family:"Arial"\,sans-serif\;color:#3D3D3D">*956 501 
+	725 Internal<br>\n</Span></Span><a href="http://nokia.ly/meetings"><span s
+	tyle="mso-bookmark:WBXD833D"><span style="font-size:7.5pt\;font-family:"Ar
+	ial"\,sans-serif">3'rd party instructions </Span></Span><span style="mso-b
+	ookmark:WBXD833D"></Span></A><span style="mso-bookmark:WBXD833D"><br>\n</S
+	pan><span style="mso-bookmark:WBXD833D"><span style="font-size:10.0pt\;fon
+	t-family:"Arial"\,sans-serif\;color:#3D3D3D">-----------------------------
+	--------------</Span></Span><o:p></o:p></P></Div><p class="MsoNormal"><o:p
+	> </o:p></P></Div></Body></Html>
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+BEGIN:VALARM
+TRIGGER:-PT5M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR
