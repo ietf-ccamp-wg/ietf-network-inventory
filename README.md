@@ -32,3 +32,12 @@ repository constitutes Contributions to the IETF Standards Process
 You agree to comply with all applicable IETF policies and procedures, including,
 BCP 78, 79, the TLP, and the TLP rules regarding code components (e.g. being
 subject to a Simplified BSD License) in Contributions.
+
+### Weekly Calls
+
+The contributors on this draft has weekly informal conference calls at 2:30pm CEST, starting from October 6, 2021
+- [Calendar](https://github.com/FabioPeruzzini/actn-poi/blob/master/minutes/Slot1_Webex_Meeting.ics)
+- [Join Meeting](https://ietf.webex.com/ietf/j.php?MTID=m1f27ff49f21119bc2cc522005af7cb2e)
+- Draft minutes taken during the call: https://demo.hedgedoc.org/G0vMerovQUu1kH7LR_Gyiw
+
+The official minutes of these calls are available in this repository: https://github.com/italobusi/ietf-network-inventory/tree/master/minutes
