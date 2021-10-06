@@ -36,8 +36,8 @@ subject to a Simplified BSD License) in Contributions.
 ### Weekly Calls
 
 The contributors on this draft has weekly informal conference calls at 2:30pm CEST, starting from October 6, 2021
-- [Calendar](https://github.com/FabioPeruzzini/actn-poi/blob/master/minutes/Slot1_Webex_Meeting.ics)
-- [Join Meeting](https://ietf.webex.com/ietf/j.php?MTID=m1f27ff49f21119bc2cc522005af7cb2e)
+- [Calendar](https://github.com/FabioPeruzzini/actn-poi/blob/master/minutes/Network Inventory YANG model.ics)
+- [Join Meeting](https://nokiameetings.webex.com/join/sergio.belotti)
 - Draft minutes taken during the call: https://demo.hedgedoc.org/G0vMerovQUu1kH7LR_Gyiw
 
 The official minutes of these calls are available in this repository: https://github.com/italobusi/ietf-network-inventory/tree/master/minutes
