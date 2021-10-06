@@ -36,7 +36,7 @@ subject to a Simplified BSD License) in Contributions.
 ### Weekly Calls
 
 The contributors on this draft has weekly informal conference calls at 2:30pm CEST, starting from October 6, 2021
-- [Calendar](https://github.com/FabioPeruzzini/actn-poi/blob/master/minutes/Network Inventory YANG model.ics)
+- [Calendar](https://github.com/italobusi/ietf-network-inventory/blob/main/minutes/Network%20Inventory%20YANG%20model.ics)
 - [Join Meeting](https://nokiameetings.webex.com/join/sergio.belotti)
 - Draft minutes taken during the call: https://demo.hedgedoc.org/G0vMerovQUu1kH7LR_Gyiw
 
