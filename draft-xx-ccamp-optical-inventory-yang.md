@@ -1,7 +1,7 @@
 ---
 coding: utf-8
 
-title: Inventory YANG Data Model in Optical Networks 
+title: A YANG Data Model for Optical Network Inventory
 
 abbrev: Optical Inventory YANG
 docname: draft-xx-ccamp-optical-inventory-yang-00
@@ -50,8 +50,9 @@ normative:
   is also requested to be defined as data model for inventory management. 
 
   This document defines the YANG data model for optical network inventory
-  information. It augments the generic YANG model entities and can be used
-  for resource management. 
+  information. The YANG data model defined in this
+   document conforms to the Network Management Datastore Architecture
+   (NMDA).
 
 --- middle
 
@@ -67,12 +68,40 @@ normative:
   to acquire new assets and what is needed, or to decommission old ones, 
   which can help improving network performance and capacity planning.
    
+  This document defines one YANG module: TBD
+  ({{inventory-yang}}).  This document augments the generic network model {{!RFC8345}}.
+
   TBD: review the related modules, depending on the augmentation relationship. 
   TBD: give the augmentation relationship. 
 
-# Terminologies
+  The YANG data model defined in this document conforms to the Network
+  Management Datastore Architecture {{!RFC8342}}.
 
-## Terms on Network Equipment 
+## Terminology and Notations 
+
+  Refer to {{!RFC7446}} and {{!RFC7581}} for the key terms used in this
+  document.  The following terms are defined in {{!RFC7950}} and are not
+  redefined here:
+
+  *  client
+
+  *  server
+
+  *  augment
+
+  *  data model
+
+  *  data node
+
+  The following terms are defined in {{!RFC6241}} and are not redefined
+  here:
+
+  *  configuration data
+
+  *  state data
+
+  The terminology for describing YANG data models is found in
+  {{!RFC7950}}.
 
   TBD: Recap the concept of chassis/slot/component/board/... in TMF.
    
@@ -90,7 +119,62 @@ normative:
   Component: 
    
   Board/Card:    
-   
+
+## Tree Diagram
+
+  A simplified graphical representation of the data model is used in
+  {{inventory-tree}} of this document.  The meaning of the symbols in these
+  diagrams is defined in {{!RFC8340}}.
+
+## Prefix in Data Node Names
+
+  In this document, names of data nodes and other data model objects
+  are prefixed using the standard prefix associated with the
+  corresponding YANG imported modules, as shown in the following table.
+
+| Prefix      | YANG module             | Reference
+| nw          | ietf-network            | {{!RFC8345}}
+| nt          | ietf-network-topology   | {{!RFC8345}}
+| ianahw      | iana-hardware           | {{!RFC8348}}
+| ni          | ietf-network-inventory  | This Document         
+{: #tab-prefixes title="Inventory Related Model and Prefixes"}
+
+# YANG Data Model for Optical Network Inventory 
+
+## YANG Model Overview
+
+The YANG model for optical network inventory augments the abstract network model defined in {{!RFC8345}},
+as described in Figure 1 of {{!RFC8345}} and shown below in {{fig-inventory}}.
+
+~~~~
+                         +-------------------------+
+                         | Abstract Network Model  |
+                         +-------------------------+
+                                      |
+                              +-------+-------+
+                              |               |
+                              V               V
+                       +------------+  ..............
+                       |  Abstract  |  : Inventory  :
+                       |  Topology  |  :  Model(s)  :
+                       |   Model    |  :            :
+                       +------------+  ''''''''''''''
+~~~~
+{: #fig-inventory title="Inventory Model Position"}
+
+The YANG data model for network inventory follows the same approach of {{!RFC8348}} and reports the network
+inventory as a list of components of different types (e.g., chassis, module, port).
+
+TBD whether the component list is under the network or under the node container
+
+TBD whether to re-use definitions from {{!RFC8348}} or use schema-mount
+
+While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a Network Element), the Network
+Inventory YANG data model is used to retrieve the network inventory information from a controller which
+controls a network with multiple Network Elements.
+
+The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.
+Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.
 
 ## State of Network Equipment: 
 
@@ -108,47 +192,13 @@ normative:
    
   Unknown: the state of the equipment are not known;
 
-## Model Structure
+{: #inventory-tree}
 
-  TBD: Top-down relationship from the above terms.
-   
+# Optical Network Inventory Tree Diagram
 
-   
+{: #inventory-yang}
 
-
-# YANG Data Model for Optical Network Inventory 
-
-## YANG Model Overview
-
-~~~~
-                         +-------------------------+
-                         | Abstract Network Model  |
-                         +-------------------------+
-                                      |
-                              +-------+-------+
-                              |               |
-                              V               V
-                       +------------+  ..............
-                       |  Abstract  |  : Inventory  :
-                       |  Topology  |  :  Model(s)  :
-                       |   Model    |  :            :
-                       +------------+  ''''''''''''''
-~~~~
-{: #fig-yang title="Inventory Model Position"}
-
-  In this document, names of data nodes and other data model objects
-  are prefixed using the standard prefix associated with the
-  corresponding YANG imported modules, as shown in the following table.
-
-| Prefix      | YANG module             | Reference
-| nw          | ietf-network            | {{!RFC8345}}
-| nt          | ietf-network-topology   | {{!RFC8345}}
-| ninv        | ietf-network-inventory  | This Document         
-{: #tab-prefixes title="Inventory Related Model and Prefixes"}
-
-## MPI YANG Model Tree
-
-# YANG Code for Optical Network Inventory
+# YANG Model for Optical Network Inventory
 
 # Manageability Considerations
 
