@@ -15,15 +15,10 @@
   <front>
     <title abbrev="Optical Inventory YANG">A YANG Data Model for Optical Network Inventory</title>
 
-    <author initials="H." surname="Zheng" fullname="Haomian Zheng">
+    <author initials="C." surname="Yu" fullname="Chaode Yu">
       <organization>Huawei Technologies</organization>
       <address>
-        <postal>
-          <street>H1, Xiliu Beipo Village, Songshan Lake</street>
-          <city>Dongguan</city>
-          <country>China</country>
-        </postal>
-        <email>zhenghaomian@huawei.com</email>
+        <email>yuchaode@huawei.com</email>
       </address>
     </author>
     <author initials="I." surname="Busi" fullname="Italo Busi">
@@ -39,7 +34,7 @@
       </address>
     </author>
 
-    <date year="2021" month="October" day="11"/>
+    <date year="2021" month="October" day="13"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -85,6 +80,10 @@
 
 <t>TBD: review the related modules, depending on the augmentation relationship. 
   TBD: give the augmentation relationship.</t>
+
+<t>The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.</t>
+
+<t>Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.</t>
 
 <t>The YANG data model defined in this document conforms to the Network
   Management Datastore Architecture <xref target="RFC8342"/>.</t>
@@ -172,7 +171,7 @@
 <t>The YANG model for optical network inventory augments the abstract network model defined in <xref target="RFC8345"/>,
 as described in Figure 1 of <xref target="RFC8345"/> and shown below in <xref target="fig-inventory"/>.</t>
 
-<figure title="Inventory Model Position" anchor="fig-inventory"><artwork><![CDATA[
+<figure title="Network Inventory and Network Topology Models Relationship" anchor="fig-inventory"><artwork><![CDATA[
                          +-------------------------+
                          | Abstract Network Model  |
                          +-------------------------+
@@ -195,28 +194,11 @@ inventory as a list of components of different types (e.g., chassis, module, por
 <t>TBD whether to re-use definitions from <xref target="RFC8348"/> or use schema-mount</t>
 
 <t>While <xref target="RFC8348"/> is used to manage the hardware of a single server (e.g., a Network Element), the Network
-Inventory YANG data model is used to retrieve the network inventory information from a controller which
-controls a network with multiple Network Elements.</t>
+Inventory YANG data model is used to retrieve the network inventory information that a controller that discovers it  from multiple Network Elements it controls.</t>
 
-<t>The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.
-Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.</t>
+<t>The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.</t>
 
-</section>
-<section anchor="state-of-network-equipment" title="State of Network Equipment:">
-
-<t>Empty: no equipment is installed and no expected equipment has been identified;</t>
-
-<t>Installed &amp; not expected: physically inserted in the NE but not expected;</t>
-
-<t>Expected &amp; not Installed: expected but not currently installed;</t>
-
-<t>Installed &amp; Expected: expected and currently installed;</t>
-
-<t>Mismatch of Installed &amp; Expected: there is an inconsistency between the expected equipment and the installed equipment;</t>
-
-<t>Unavailable: this holder cannot accept the installation or provisioning of equipment (this is typically caused by a double width card installed next to this slot);</t>
-
-<t>Unknown: the state of the equipment are not known;</t>
+<t>Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.</t>
 
 </section>
 </section>
@@ -406,65 +388,58 @@ Further analysis of requirements and use cases is needed to extend the applicabi
   </back>
 
 <!-- ##markdown-source:
-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
-/e0FVWLBXlBcDyG72kGRNRGIKE8JdXtpWZdG/8IvYtt+z+Ntv+fbke7YOCjV
-z+JOKXb3f+a0yvYJuMDh+RfSvfuF9H9Y/94Gv6Lqc8aSld82LIjTm5U+0kFg
-svQRrOs+bx2W98Wu2XscK7gsYC1/W7HW9fpq5ecjjVJ2JQgf5qxn/A5LOjUe
-ytNNoySl2MPU8tXTZ5ZBuWe8wQzPMdUP0+O4Sw+0OFRjM9xjokGa0h5XSuNn
-jNBafQORU1dpLbOLBnVnVySzpG/bo646jxiRp+USswutK67P+OGlo+bpUyet
-8+4uKAX9BofU2uiRhqMq6DWCtM3HaMW+aEg/6U61qlY1JoIAMlkhKh5X9LAV
-RT8WshSrcKGvg67fxvwIFMo51OeMOiHw/Fga1Ofr887eaGWYX32P3DRKOFUs
-FttuxXjo4MFLgVeRO7No+B2CuAUu6g7IfYGA68pVW1rZlGJdTJP4EEOkNIrE
-WBcPbkURxbYJc5SLTtBM3XbOobcUbJ++plNckZkzboR5vJ8k0UWrnQs9Xeli
-6xFq/SpL/MUni93N95AG41uGodK9SIW5a10L4PhJx8cswDrrGD9NfXDTO457
-84S3ttTtTedVQ8+jNVj3r3ySBjdMQ7B+7oSl208Npid8L8F6A8ocn27SfBVG
-1Dc9/q/d1hHQ0/4hoiS3I9RsWL/gwXM2ae0K/KuO3nlg78n15NOlYAE1azUl
-safvoV5tkOq8l6in4Jb/7diX0iBGfdXZTIkcIdxTEU1+iFh4H/7MFrCTnYvw
-MPjQlLzz+dLs/V3g/qea33JZ0viY+lAoVEmVJOM1qc0ztzkNqHQjvmbuwcN0
-r00Qfsl31xHCP4iezikZd0k7QanElN2CHfIst/SCovOBgDVC1S/2QKclbW8p
-Kb3k1GkYqn38Oc2XCnfbqIN8FbkOsrZr0CS3fWpb3XdW0d1rSz8IftH/Zdnp
-niRCup2S73Lht2HTbar0BIKMEoiRzTB///04pzBaoIZ2QNkK0B/cM+T4avwo
-sgN4gEhvmRMskk7buq0miLX822dTXhrh595xRuaEc/wkSkTX3pvo7RpzdQPz
-h83nBgbM4YQk+h9GQCBitRoAAA==
+H4sIAEKrZmEAA+1Y3VLcyBW+11N0zMWaGAlM8IadyqZ2DIvXF2AXprK1laRc
+PVLPqIOk1na3GE8BeZA8S94pr5DvnJY00sCAtyqXURXUqPv8/x/FcRylJtPV
+YiIaP4+Po8hrX6iJmIpfphfvxKn0UpybTBVibqz4UHudykJcKL809lq8r25U
+5Y1dRZGczay6mfQg/RUTijKTVrIE4czKuY+/fInTVJZ1bAJ4rDvweCWrRXxw
+EBGDhTVNPREnJ9Pzj+JnHEBS8Y4Oo1R6tQD8RDifRbq2E+Ft4/zhwcF3B4dR
+5Lysss+yMBWYrpSLaj0Rf/Um3RPOWG/V3OHXqgw/UlOW4O/+DkUanxs7iYSI
+8SdEEPskl7CC+KXhM2NhsJ8auVRaXKk0r0xhFhpM6FKVUhfg2aSM80POcAlY
+bNB87yGeeNs4/dVENaEkM6BsJzvVuBLvGrOmetb4xqqnCEtCWjQm0crPf1jQ
+IZOOop3UVN7qWePJKjvEK6qMLaXXN4rMdHV+Fp9fffj0/vNRcjBhom0Q4Ubw
+jcCN+PHXRtdk5RBQDLg2di/r1bk4M7YpxUug7/JNBl9PhIBrj/ndKQvxdTU3
+gcen08P48OBzz2BN30u7UH4icu9rN9nfXy6XiS/nRD8Bt32rnGlsqty+a7RX
++6U3TsdH8cF+FMVxLOTMeStTH4FaF/R9qArthEReNFUmiS2ift5UqdemkoX2
+uK9E1SKVspILRVCghMgUS+mEq1Wq51pldL1ClEoLiguTiHewbSV8ruAfZRcU
+9mZOdpCi5GwkEqAECG1FpurCrNi0YGlqZSXk+8YNuCLUnVflHtOESpkOYvYS
+gxipUzgjrPq1UYDOhDdipkB+riu8QeKBBFQP1qZYc0oEGesqBzUkfcPMAwXH
+zLmubNBpq0BvrZ4uSQU3c7SZKgHZhwQ68TQZTHNU94wRu4TtSBNi3vnwfG0Y
+KnEOvJSY2jRHEKSUK0Tl5cX56XQ3CZFQ6iwrFNIBlc1bkzXBao/GxcDs5KfS
+VBrn5ESOmNTqoG4trSe/goiqXMMQJGVnBtSwlRO5koXPV3tiqYoirgtZQds9
+ptw5jxDZVIyeSov8QCi1dJJnRCwKs2TfgEQXPGSwa6VqipX0moRc5tKLOl+5
+kacydaORPkLCfiQuJFkLsnZnWjTUZRBahbqRFI5m7peERGrk0mb0kpASgqNH
+PYyFscyI01wVdYipkdSVWUJYpA/lhxEyRVmwRG+JCHbKu5B/pI4mG6mMzBmQ
+M0WdQDsHowpTZALtA+0BlJa5TnOYtmK2Qpe1NTekUicnROBArdKgVCprmVIV
+YI8BMumVeyw1wChENoK64eL59hTAL29vx63x/n432aQhmwV3L7bFQlUoj+m6
+8nCS3N7+7vLs5PgPR2/u7xNO0LenE7jjRsMshAbPSEr5wB46o6ioip1mgjdb
+LpyJARw/XK5rdhvTW6BsPQMbReRcGK82Duw2kzlHkZkpOA++LlYu1KDU3Cjb
+SsnODNqSlRtH8e5gwCfnE7A9aywo2JYwzIeYfoJcHxokgPriYYugWV0X4DHT
+XOFBg2rOAzWAY5ibX9WKWbXucMH4z5exZ2sYyDxbxdZuP2S37+xgALCl5glg
+xRpfmOAlx2X7Us0VJ0JA/OPR0bf39wzXHrw5fo0DsjWJcq1WwiuSrXGjCtwJ
+nwRd54ZqDJc3hqbEH+jb0v7uzUHLjO4rQ63Sqg4O1sS4gaPfC5EWmjppeME0
+gPBoX9rAa9/W5h0eVDjovPBVkn17ePR6LNlaLtAZSQZn6UVjQ+QTu05KmFn1
+B8TaDzxBBs2UQ2eYkSwbscHRyHMGZAL20F7rZL5UKDmhARgUoZpbC2ZQFDOM
+N4Xx+6htNepM5fdnBiV3P0kSUhIjVFebzh4xB7uWBLSqxrzUpzXHvhI5Wo2k
+mKOkCZWC+8iWjt7X+C5Hfyw4gift8QlSC0j/+fe/JE3leOm5USfa6zRibzjU
+4nlP8STcTLr3T9C5fznpdO9P3rINTvBvQqNiyA6rlDjVcmFlSYadCodKX4Qh
+DYd1zlo9bolBMus+I9hd6xKOxUMhlLq6sZEnpZJVO+sRQawnM1N0ZnXUn7Mg
+G0fEgzhFnh90ef4Ri43+Qne8w13Q9nKBMdWRWu83aswerw6unzEpQ4KFQxUb
+aGZm/0BtoRyn2KiZi6LC2Q0vvHjBqO0d9VyTau4tS+3zds5IjYUF4ZGsj3cY
+GovZsAXRiJybZdXF1SBZ5axQUPSu05Ofu2EHFcPnLlQ2hbwATrUc3tDGE3dx
+OsIZNk1C89vQYo92xon8CJpGlc6XPRre4m7geZzbceCmt3Jbj0S44VHgtGsW
+3RPdTsQOrBS3HnJhJ/v+xXovv2w7/nm/UHxsYV/c05z7mz4AhPRhlAD9ATWZ
+hovQ7zu/PDfvj0eZbvvamGUei3uYei+iBSUU0XB7RpVYidcU10PItnZQZM0U
+IipQQt1eW5bT6J94IrHteRVve15tR7oT006pfhdhpcTd/5jTmO0zcB2HV19J
+9+430v/L5vs2+JGqr4RIRs82LIjTm5VeJoPAFJMnsK76vGWs4IuXbvdprM5l
+Hdb62Yq1qdc3oydEGqXsKAi7nH2YbTy5tae9DudhVrgcjNuUyY8Nm5SED5Mv
+1NeQew4NgYZdayT2nmECHbcJhCaIeu2Gm140SGTadAvtwhTSNd/QYvSca7Fv
+p+OXKlkkfWPfa+v3niDytH5juqGFLszTPN601AJ96rVV1t51SkG/wSE1P/qM
+JVE37AZB+t4R09zPZUWHWXhuTTnWmAgCyKW5KmVcYhjDkPlzrgs1hus6P+iG
+fTUMSV3Bh/pSUK8EXhhcO/Xl5kS0uzca98cfVB8bNlgVj9W/XcIeOnjwLQUQ
+WIAlm8XC72wqnGTa8bqFCQO5xHYom8LrulCbAjJIi+/+v9hFnMAbox410u1N
+czxujtF52e/78Fd9g99pN8JOiROEss5UWEZcuyjQ97kd8UmljX0c5m9/mmZY
+dKoVArQFSkdAf+avYNOL6ZPIDPAAkT6lzTDHs7ZVU85QCLLvX8xl4VQYO6Yp
+fcEpVBYGASK68bmDPp1irKmRT93geQ0DZujnSfRfV+RfutMYAAA=
 
 -->
 

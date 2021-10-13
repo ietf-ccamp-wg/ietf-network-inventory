@@ -14,12 +14,9 @@ pi: [toc, sortrefs, symrefs, comments]
 
 author:
   -
-    name: Haomian Zheng
+    name: Chaode Yu
     org: Huawei Technologies
-    street: H1, Xiliu Beipo Village, Songshan Lake
-    city: Dongguan
-    country: China
-    email: zhenghaomian@huawei.com
+    email: yuchaode@huawei.com
   -
     name: Italo Busi
     org: Huawei Technologies
@@ -72,7 +69,11 @@ normative:
   ({{inventory-yang}}).  This document augments the generic network model {{!RFC8345}}.
 
   TBD: review the related modules, depending on the augmentation relationship. 
-  TBD: give the augmentation relationship. 
+  TBD: give the augmentation relationship.
+
+The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.
+
+Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.
 
   The YANG data model defined in this document conforms to the Network
   Management Datastore Architecture {{!RFC8342}}.
@@ -160,7 +161,7 @@ as described in Figure 1 of {{!RFC8345}} and shown below in {{fig-inventory}}.
                        |   Model    |  :            :
                        +------------+  ''''''''''''''
 ~~~~
-{: #fig-inventory title="Inventory Model Position"}
+{: #fig-inventory title="Network Inventory and Network Topology Models Relationship"}
 
 The YANG data model for network inventory follows the same approach of {{!RFC8348}} and reports the network
 inventory as a list of components of different types (e.g., chassis, module, port).
@@ -170,27 +171,11 @@ TBD whether the component list is under the network or under the node container
 TBD whether to re-use definitions from {{!RFC8348}} or use schema-mount
 
 While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a Network Element), the Network
-Inventory YANG data model is used to retrieve the network inventory information from a controller which
-controls a network with multiple Network Elements.
+Inventory YANG data model is used to retrieve the network inventory information that a controller that discovers it  from multiple Network Elements it controls.
 
 The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.
+
 Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.
-
-## State of Network Equipment: 
-
-  Empty: no equipment is installed and no expected equipment has been identified; 
-   
-  Installed & not expected: physically inserted in the NE but not expected;
-   
-  Expected & not Installed: expected but not currently installed;
-   
-  Installed & Expected: expected and currently installed;
-   
-  Mismatch of Installed & Expected: there is an inconsistency between the expected equipment and the installed equipment;
-   
-  Unavailable: this holder cannot accept the installation or provisioning of equipment (this is typically caused by a double width card installed next to this slot);
-   
-  Unknown: the state of the equipment are not known;
 
 {: #inventory-tree}
 
