@@ -25,7 +25,19 @@ author:
     name: Aihua Guo
     org: Futurewei Technologies
     email: aihuaguo.ietf@gmail.com
-
+  -
+    name: Sergio Belotti
+    org: Nokia
+    email: sergio.belotti@nokia.com
+  -
+    ins: J-F. Bouquier
+    name: Jean-Francois Bouquier
+    org: Vodafone
+    email: jeff.bouquier@vodafone.com
+  -
+    name: Fabio Peruzzini
+    org: TIM
+    email: fabio.peruzzini@telecomitalia.it
 
 #contributor:
 #  -
@@ -39,44 +51,52 @@ normative:
     seriesinfo: TMF SD2-20_EquipmentModel
     target: https://www.tmforum.org/resources/suite/mtosi-4-0/
 
+informative:
+  ONF_TR-547:
+    title: TAPI v2.1.3 Reference Implementation Agreement
+    author:
+      org: Open Networking Foundation (ONF)
+    date:  July 2020
+    seriesinfo: ONF TR-547 TAPI RIA v1.0
+    target: https://opennetworking.org/wp-content/uploads/2020/08/TR-547-TAPI-v2.1.3-Reference-Implementation-Agreement-1.pdf
+
 --- abstract
 
-  Network inventory is a foundamental functionality in network management
-  and was specified many years ago. Given the emerging of data model and 
-  their deployment in operator's management system, the traditional function
-  is also requested to be defined as data model for inventory management. 
+This document defines a YANG data model for optical network inventory data information.
 
-  This document defines the YANG data model for optical network inventory
-  information. The YANG data model defined in this
-   document conforms to the Network Management Datastore Architecture
-   (NMDA).
+Future versions of this document may define a generic YANG data model for network inventory data information which can be augmented, when required, with technology-specific (e.g., optical) inventory data.
+
+The YANG data model defined in this document conforms to the Network Management Datastore Architecture (NMDA).
 
 --- middle
 
 # Introduction
 
-  Network inventory management and monitoring is a critical part of 
-  ensuring the network stays healthy, well-planned, and functioning 
-  in the carriers network. Network inventory management allows the
-  operator to keep track of what physical network devices are staying
-  in the network including relevant software and hardware. 
-   
-  The network inventory management also helps the operator to know when 
-  to acquire new assets and what is needed, or to decommission old ones, 
-  which can help improving network performance and capacity planning.
-   
-  This document defines one YANG module: TBD
-  ({{inventory-yang}}).  This document augments the generic network model {{!RFC8345}}.
+Network inventory management is a key component in operators' OSS architectures.
 
-  TBD: review the related modules, depending on the augmentation relationship. 
-  TBD: give the augmentation relationship.
+In {{?I-D.ietf-teas-actn-poi-applicability}} a gap was identified regarding the lack of a YANG data model that could be used at ACTN MPI interface level to report whole/partial hardware inventory information available at PNC level towards north bound systems (e.g., MDSC or OSS layer).
+
+{{?RFC8345}} initial goal was to make possible the augmentation of the YANG data model with network inventory data model but this was never developped and the scope was kept limited to network topology data only.
+
+It is key for operators to drive the industry towards the use of standard YANG data model for network inventory data instead of using vendors proprietary APIs (e.g., REST API).
+
+In the ACTN architecture this would bring also clear benefits at MDSC level for packet over optical integration scenarios since this would enable to correlate the inventory information with the links information reported in the network topology model.
+
+The intention is to define a generic YANG data model that would be as much as possible technology agnostic (valid for IP, optical and microwave networks) and that could be augmented, when required, to include some technology-specific inventory details.
+
+{{!RFC8348}} defines a YANG data model for the management of the hardware on a single server and therefore it is more applicable to the PNC South Bound Interface (SBI) towards the network elements rather than at the PNC MPI. However, the YANG data model defined in {{!RFC8348}} has been used as a reference for defining the YANG network inventory data model.
+
+For optical network inventory, the network inventory YANG data model should support the use cases (4a and 4b) and requirements defined in {{ONF_TR-547}}, in order to guarantee a seamless integration at MDSC/OSS/orchestration layers.
 
 The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.
 
-Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.
+Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are tecnology-spefic for optical networks.
 
-  The YANG data model defined in this document conforms to the Network
-  Management Datastore Architecture {{!RFC8342}}.
+This document defines one YANG module: TBD ({{ni-yang}}).
+
+Note: review in future versions of this document the related modules, depending on the augmentation relationship.
+
+The YANG data model defined in this document conforms to the Network Management Datastore Architecture {{!RFC8342}}.
 
 ## Terminology and Notations 
 
@@ -123,9 +143,8 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 
 ## Tree Diagram
 
-  A simplified graphical representation of the data model is used in
-  {{inventory-tree}} of this document.  The meaning of the symbols in these
-  diagrams is defined in {{!RFC8340}}.
+A simplified graphical representation of the data model is used in {{ni-tree}} of this document.
+The meaning of the symbols in these diagrams is defined in {{!RFC8340}}.
 
 ## Prefix in Data Node Names
 
@@ -134,60 +153,59 @@ Further analysis of requirements and use cases is needed to extend the applicabi
   corresponding YANG imported modules, as shown in the following table.
 
 | Prefix      | YANG module             | Reference
-| nw          | ietf-network            | {{!RFC8345}}
-| nt          | ietf-network-topology   | {{!RFC8345}}
 | ianahw      | iana-hardware           | {{!RFC8348}}
-| ni          | ietf-network-inventory  | This Document         
-{: #tab-prefixes title="Inventory Related Model and Prefixes"}
+| ni          | ietf-network-inventory  | RFCXXXX         
+{: #tab-prefixes title="Prefixes and corresponding YANG modules"}
+
+RFC Editor Note:
+Please replace XXXX with the RFC number assigned to this document.
+Please remove this note.
 
 # YANG Data Model for Optical Network Inventory 
 
 ## YANG Model Overview
 
-The YANG model for optical network inventory augments the abstract network model defined in {{!RFC8345}},
-as described in Figure 1 of {{!RFC8345}} and shown below in {{fig-inventory}}.
+The YANG model for optical network inventory ...
 
-~~~~
-                         +-------------------------+
-                         | Abstract Network Model  |
-                         +-------------------------+
-                                      |
-                              +-------+-------+
-                              |               |
-                              V               V
-                       +------------+  ..............
-                       |  Abstract  |  : Inventory  :
-                       |  Topology  |  :  Model(s)  :
-                       |   Model    |  :            :
-                       +------------+  ''''''''''''''
-~~~~
-{: #fig-inventory title="Network Inventory and Network Topology Models Relationship"}
+TBD: add some overview of the tree (network-inventory, rooms and network-elements lists)
 
-The YANG data model for network inventory follows the same approach of {{!RFC8348}} and reports the network
-inventory as a list of components of different types (e.g., chassis, module, port).
+Note: review in future versions of this document whether network inventory should be defined as an augmentation of the network model defined in {{?RFC8345}} instead of under a new network-inventory root
 
-TBD whether the component list is under the network or under the node container
+TBD: add some overview of the tree of the equiment rooms
 
-TBD whether to re-use definitions from {{!RFC8348}} or use schema-mount
+The YANG data model for network inventory follows the same approach of {{!RFC8348}} and reports the network inventory as a list of components of different types (e.g., chassis, module, port).
 
-While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a Network Element), the Network
-Inventory YANG data model is used to retrieve the network inventory information that a controller that discovers it  from multiple Network Elements it controls.
+TBD: add some overview of the tree of the component list
+
+Note: review in future versions of this document whether the component list should be under the network-inventory instead of under the network-element container
+
+While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a Network Element), the Network Inventory YANG data model is used to retrieve the network inventory information that a controller discovers from multiple Network Elements under its control.
+
+However, the YANG data model defined in {{!RFC8348}} has been used as a reference for defining the YANG network inventory data model.
+
+Note: review in future versions of this document which attributes from {{!RFC8348}} are required also for network inventory and whether there attributes not defined in {{!RFC8348}}which are required for network inventory
+
+Note: review in future versions of this document whether to re-use definitions from {{!RFC8348}} or use schema-mount
 
 The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.
 
-Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.
+Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are tecnology-spefic for optical networks.
 
-{: #inventory-tree}
+{: #ni-tree}
 
 # Optical Network Inventory Tree Diagram
 
-{: #inventory-yang}
+TBA
+
+{: #ni-yang}
 
 # YANG Model for Optical Network Inventory
 
+TBA
+
 # Manageability Considerations
 
-  TBD. 
+  \<Add any manageability considerations>
 
 # Security Considerations
 
@@ -203,4 +221,6 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 
 # Acknowledgments
 
-   This document was prepared using kramdown.
+The authors of this document would like to thank the authors of {{?I-D.ietf-teas-actn-poi-applicability}} for having identified the gap and requirements to trigger this work.
+
+This document was prepared using kramdown.
