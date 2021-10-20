@@ -1,0 +1,29 @@
+module: ietf-network-inventory
+   +--rw inventory-info
+      +--rw equipment-rooms
+      |  +--rw equipment-room* [name]
+      |     +--rw name         string
+      |     +--rw location?    string
+      |     +--rw rack-list* [name]
+      |        +--rw name           leafref
+      |        +--rw rack-number?   int32
+      |        +--rw row-number?    int32
+      |        +--rw shelves* [name]
+      |           +--rw name            leafref
+      |           +--rw shelf-number?   int8
+      |           +--rw ne-ref?         leafref
+      |           +--rw chassis-ref?    leafref
+      +--rw network-elements
+         +--rw network-element-list* [name]
+            +--rw name          string
+            +--rw components
+               +--rw component-instances* [uuid]
+                  +--rw uuid              yang-types:uuid
+                  +--rw name?             string
+                  +--rw class?            identityref
+                  +--rw parent-rel-pos?   int32
+                  +--rw description?      string
+                  +--rw children* [name]
+                  |  +--rw name    leafref
+                  +--rw parent
+                     +--rw name?   leafref

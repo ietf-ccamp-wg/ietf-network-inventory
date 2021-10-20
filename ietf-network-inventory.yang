@@ -1,0 +1,147 @@
+module ietf-network-inventory {
+
+  namespace "urn:ietf:params:xml:ns:yang:network-inventory";
+  prefix "inventory";
+
+  import ietf-yang-types {
+    prefix "yang-types";
+  }
+  
+  import ietf-inventory-types {
+    prefix "inventory-types";
+  }
+  
+  revision 2021-09-14 {
+    description
+     "Initial revision.";
+  }
+  
+  container inventory-info {
+	uses equipment-rooms-grouping;
+	uses network-elements-grouping;
+  }
+  
+  grouping network-elements-grouping {
+    container network-elements {
+	  list network-element-list {
+	    key name;
+	  
+	    leaf name {
+	      type string;
+	    }
+	  
+	    uses components-grouping;
+	  }
+	}
+  }
+  
+  
+  grouping equipment-rooms-grouping {
+    container equipment-rooms {
+	  list equipment-room {
+	    key name;
+		leaf name {
+		  type string;
+		}
+		
+		leaf location {
+		  type string;
+		  description "compared with the location information of the other inventory objects, a GIS address is preferred for equipment room";
+		}
+		
+		list rack-list {
+		  key name;
+		  
+		  leaf name {
+		    type leafref {
+			  path "/inventory:inventory-info/network-elements/network-element-list/components/component-instances/name";
+			}
+		  }
+		  
+		  leaf rack-number {
+		    type int32;
+		  }
+		  
+		  leaf row-number {
+		    type int32;
+		  }
+		  
+		  list shelves {
+		    key name;
+			
+			leaf name {
+			  type leafref {
+			    path "/inventory:inventory-info/network-elements/network-element-list/components/component-instances/name";
+			  }
+			}
+			
+			leaf shelf-number {
+			  type int8;
+			}
+			
+			leaf ne-ref {
+			  type leafref {
+			    path "/inventory:inventory-info/network-elements/network-element-list/name";
+			  }
+			}
+			
+			leaf chassis-ref {
+			  type leafref {
+			    path "/inventory:inventory-info/network-elements/network-element-list/components/component-instances/name";
+			  }
+			}
+		  }
+		}
+
+	  }
+	}
+  }
+  
+  grouping components-grouping {
+    container components {
+	  list component-instances {
+	    key uuid;
+		
+		leaf uuid {
+		  type yang-types:uuid;
+		}
+		
+		leaf name {
+		  type string;
+		}
+		
+		leaf class {
+		  type identityref {
+		    base inventory-types:component-type;
+		  }
+		}
+		
+		leaf  parent-rel-pos {
+		  type int32;
+		}
+		
+		leaf description {
+		  type string;
+		}
+		
+		list children {
+		  key name;
+		  
+		  leaf name {
+		    type leafref {
+			  path "../name";
+			}
+		  }
+		}
+		
+		container parent {
+		  leaf name {
+		    type leafref {
+			  path "../name";
+			}
+		  }
+		}
+	  }
+	}
+  }
+}
