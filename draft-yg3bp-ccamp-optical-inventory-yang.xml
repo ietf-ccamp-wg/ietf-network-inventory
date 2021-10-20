@@ -33,8 +33,26 @@
         <email>aihuaguo.ietf@gmail.com</email>
       </address>
     </author>
+    <author initials="S." surname="Belotti" fullname="Sergio Belotti">
+      <organization>Nokia</organization>
+      <address>
+        <email>sergio.belotti@nokia.com</email>
+      </address>
+    </author>
+    <author initials="J-F." surname="Bouquier" fullname="Jean-Francois Bouquier">
+      <organization>Vodafone</organization>
+      <address>
+        <email>jeff.bouquier@vodafone.com</email>
+      </address>
+    </author>
+    <author initials="F." surname="Peruzzini" fullname="Fabio Peruzzini">
+      <organization>TIM</organization>
+      <address>
+        <email>fabio.peruzzini@telecomitalia.it</email>
+      </address>
+    </author>
 
-    <date year="2021" month="October" day="13"/>
+    <date year="2021" month="October" day="20"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -43,15 +61,11 @@
     <abstract>
 
 
-<t>Network inventory is a foundamental functionality in network management
-  and was specified many years ago. Given the emerging of data model and 
-  their deployment in operator’s management system, the traditional function
-  is also requested to be defined as data model for inventory management.</t>
+<t>This document defines a YANG data model for optical network inventory data information.</t>
 
-<t>This document defines the YANG data model for optical network inventory
-  information. The YANG data model defined in this
-   document conforms to the Network Management Datastore Architecture
-   (NMDA).</t>
+<t>Future versions of this document may define a generic YANG data model for network inventory data information which can be augmented, when required, with technology-specific (e.g., optical) inventory data.</t>
+
+<t>The YANG data model defined in this document conforms to the Network Management Datastore Architecture (NMDA).</t>
 
 
 
@@ -63,32 +77,35 @@
   <middle>
 
 
-<section anchor="introduction" title="Introduction">
+<section anchor="introduction"><name>Introduction</name>
 
-<t>Network inventory management and monitoring is a critical part of 
-  ensuring the network stays healthy, well-planned, and functioning 
-  in the carriers network. Network inventory management allows the
-  operator to keep track of what physical network devices are staying
-  in the network including relevant software and hardware.</t>
+<t>Network inventory management is a key component in operators' OSS architectures.</t>
 
-<t>The network inventory management also helps the operator to know when 
-  to acquire new assets and what is needed, or to decommission old ones, 
-  which can help improving network performance and capacity planning.</t>
+<t>In <xref target="I-D.ietf-teas-actn-poi-applicability"/> a gap was identified regarding the lack of a YANG data model that could be used at ACTN MPI interface level to report whole/partial hardware inventory information available at PNC level towards north bound systems (e.g., MDSC or OSS layer).</t>
 
-<t>This document defines one YANG module: TBD
-  (<xref target="inventory-yang"/>).  This document augments the generic network model <xref target="RFC8345"/>.</t>
+<t><xref target="RFC8345"/> initial goal was to make possible the augmentation of the YANG data model with network inventory data model but this was never developped and the scope was kept limited to network topology data only.</t>
 
-<t>TBD: review the related modules, depending on the augmentation relationship. 
-  TBD: give the augmentation relationship.</t>
+<t>It is key for operators to drive the industry towards the use of standard YANG data model for network inventory data instead of using vendors proprietary APIs (e.g., REST API).</t>
+
+<t>In the ACTN architecture this would bring also clear benefits at MDSC level for packet over optical integration scenarios since this would enable to correlate the inventory information with the links information reported in the network topology model.</t>
+
+<t>The intention is to define a generic YANG data model that would be as much as possible technology agnostic (valid for IP, optical and microwave networks) and that could be augmented, when required, to include some technology-specific inventory details.</t>
+
+<t><xref target="RFC8348"/> defines a YANG data model for the management of the hardware on a single server and therefore it is more applicable to the PNC South Bound Interface (SBI) towards the network elements rather than at the PNC MPI. However, the YANG data model defined in <xref target="RFC8348"/> has been used as a reference for defining the YANG network inventory data model.</t>
+
+<t>For optical network inventory, the network inventory YANG data model should support the use cases (4a and 4b) and requirements defined in <xref target="ONF_TR-547"/>, in order to guarantee a seamless integration at MDSC/OSS/orchestration layers.</t>
 
 <t>The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.</t>
 
-<t>Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.</t>
+<t>Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are tecnology-spefic for optical networks.</t>
 
-<t>The YANG data model defined in this document conforms to the Network
-  Management Datastore Architecture <xref target="RFC8342"/>.</t>
+<t>This document defines one YANG module: TBD (<xref target="ni-yang"/>).</t>
 
-<section anchor="terminology-and-notations" title="Terminology and Notations">
+<t>Note: review in future versions of this document the related modules, depending on the augmentation relationship.</t>
+
+<t>The YANG data model defined in this document conforms to the Network Management Datastore Architecture <xref target="RFC8342"/>.</t>
+
+<section anchor="terminology-and-notations"><name>Terminology and Notations</name>
 
 <t>Refer to <xref target="RFC7446"/> and <xref target="RFC7581"/> for the key terms used in this
   document.  The following terms are defined in <xref target="RFC7950"/> and are not
@@ -113,7 +130,7 @@
 <t>The terminology for describing YANG data models is found in
   <xref target="RFC7950"/>.</t>
 
-<t>TBD: Recap the concept of chassis/slot/component/board/… in TMF.</t>
+<t>TBD: Recap the concept of chassis/slot/component/board/... in TMF.</t>
 
 <t>Following terms are used for representation of the hierarchies in the 
   optical network inventory.</t>
@@ -131,94 +148,89 @@
 <t>Board/Card:</t>
 
 </section>
-<section anchor="tree-diagram" title="Tree Diagram">
+<section anchor="tree-diagram"><name>Tree Diagram</name>
 
-<t>A simplified graphical representation of the data model is used in
-  <xref target="inventory-tree"/> of this document.  The meaning of the symbols in these
-  diagrams is defined in <xref target="RFC8340"/>.</t>
+<t>A simplified graphical representation of the data model is used in <xref target="ni-tree"/> of this document.
+The meaning of the symbols in these diagrams is defined in <xref target="RFC8340"/>.</t>
 
 </section>
-<section anchor="prefix-in-data-node-names" title="Prefix in Data Node Names">
+<section anchor="prefix-in-data-node-names"><name>Prefix in Data Node Names</name>
 
 <t>In this document, names of data nodes and other data model objects
   are prefixed using the standard prefix associated with the
   corresponding YANG imported modules, as shown in the following table.</t>
 
-<texttable title="Inventory Related Model and Prefixes" anchor="tab-prefixes">
+<texttable title="Prefixes and corresponding YANG modules" anchor="tab-prefixes">
       <ttcol align='left'>Prefix</ttcol>
       <ttcol align='left'>YANG module</ttcol>
       <ttcol align='left'>Reference</ttcol>
-      <c>nw</c>
-      <c>ietf-network</c>
-      <c><xref target="RFC8345"/></c>
-      <c>nt</c>
-      <c>ietf-network-topology</c>
-      <c><xref target="RFC8345"/></c>
       <c>ianahw</c>
       <c>iana-hardware</c>
       <c><xref target="RFC8348"/></c>
       <c>ni</c>
       <c>ietf-network-inventory</c>
-      <c>This Document</c>
+      <c>RFCXXXX</c>
 </texttable>
 
+<t>RFC Editor Note:
+Please replace XXXX with the RFC number assigned to this document.
+Please remove this note.</t>
+
 </section>
 </section>
-<section anchor="yang-data-model-for-optical-network-inventory" title="YANG Data Model for Optical Network Inventory">
+<section anchor="yang-data-model-for-optical-network-inventory"><name>YANG Data Model for Optical Network Inventory</name>
 
-<section anchor="yang-model-overview" title="YANG Model Overview">
+<section anchor="yang-model-overview"><name>YANG Model Overview</name>
 
-<t>The YANG model for optical network inventory augments the abstract network model defined in <xref target="RFC8345"/>,
-as described in Figure 1 of <xref target="RFC8345"/> and shown below in <xref target="fig-inventory"/>.</t>
+<t>The YANG model for optical network inventory ...</t>
 
-<figure title="Network Inventory and Network Topology Models Relationship" anchor="fig-inventory"><artwork><![CDATA[
-                         +-------------------------+
-                         | Abstract Network Model  |
-                         +-------------------------+
-                                      |
-                              +-------+-------+
-                              |               |
-                              V               V
-                       +------------+  ..............
-                       |  Abstract  |  : Inventory  :
-                       |  Topology  |  :  Model(s)  :
-                       |   Model    |  :            :
-                       +------------+  ''''''''''''''
-]]></artwork></figure>
+<t>TBD: add some overview of the tree (network-inventory, rooms and network-elements lists)</t>
 
-<t>The YANG data model for network inventory follows the same approach of <xref target="RFC8348"/> and reports the network
-inventory as a list of components of different types (e.g., chassis, module, port).</t>
+<t>Note: review in future versions of this document whether network inventory should be defined as an augmentation of the network model defined in <xref target="RFC8345"/> instead of under a new network-inventory root</t>
 
-<t>TBD whether the component list is under the network or under the node container</t>
+<t>TBD: add some overview of the tree of the equiment rooms</t>
 
-<t>TBD whether to re-use definitions from <xref target="RFC8348"/> or use schema-mount</t>
+<t>The YANG data model for network inventory follows the same approach of <xref target="RFC8348"/> and reports the network inventory as a list of components of different types (e.g., chassis, module, port).</t>
 
-<t>While <xref target="RFC8348"/> is used to manage the hardware of a single server (e.g., a Network Element), the Network
-Inventory YANG data model is used to retrieve the network inventory information that a controller that discovers it  from multiple Network Elements it controls.</t>
+<t>TBD: add some overview of the tree of the component list</t>
+
+<t>Note: review in future versions of this document whether the component list should be under the network-inventory instead of under the network-element container</t>
+
+<t>While <xref target="RFC8348"/> is used to manage the hardware of a single server (e.g., a Network Element), the Network Inventory YANG data model is used to retrieve the network inventory information that a controller discovers from multiple Network Elements under its control.</t>
+
+<t>However, the YANG data model defined in <xref target="RFC8348"/> has been used as a reference for defining the YANG network inventory data model.</t>
+
+<t>Note: review in future versions of this document which attributes from <xref target="RFC8348"/> are required also for network inventory and whether there attributes not defined in <xref target="RFC8348"/>which are required for network inventory</t>
+
+<t>Note: review in future versions of this document whether to re-use definitions from <xref target="RFC8348"/> or use schema-mount</t>
 
 <t>The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.</t>
 
-<t>Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks.</t>
+<t>Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are tecnology-spefic for optical networks.</t>
 
 </section>
 </section>
-<section anchor="inventory-tree" title="Optical Network Inventory Tree Diagram">
+<section anchor="ni-tree"><name>Optical Network Inventory Tree Diagram</name>
+
+<t>TBA</t>
 
 </section>
-<section anchor="inventory-yang" title="YANG Model for Optical Network Inventory">
+<section anchor="ni-yang"><name>YANG Model for Optical Network Inventory</name>
+
+<t>TBA</t>
 
 </section>
-<section anchor="manageability-considerations" title="Manageability Considerations">
+<section anchor="manageability-considerations"><name>Manageability Considerations</name>
 
-<t>TBD.</t>
+<t>&lt;Add any manageability considerations&gt;</t>
 
 </section>
-<section anchor="security-considerations" title="Security Considerations">
+<section anchor="security-considerations"><name>Security Considerations</name>
 
 <t>&lt;Add any security considerations&gt;</t>
 
 </section>
-<section anchor="iana-considerations" title="IANA Considerations">
+<section anchor="iana-considerations"><name>IANA Considerations</name>
 
 <t>&lt;Add any IANA considerations&gt;</t>
 
@@ -245,20 +257,18 @@ Inventory YANG data model is used to retrieve the network inventory information 
 
 
 
-<reference anchor='RFC8345' target='https://www.rfc-editor.org/info/rfc8345'>
+<reference anchor='RFC8348' target='https://www.rfc-editor.org/info/rfc8348'>
 <front>
-<title>A YANG Data Model for Network Topologies</title>
-<author fullname='A. Clemm' initials='A.' surname='Clemm'><organization/></author>
-<author fullname='J. Medved' initials='J.' surname='Medved'><organization/></author>
-<author fullname='R. Varga' initials='R.' surname='Varga'><organization/></author>
-<author fullname='N. Bahadur' initials='N.' surname='Bahadur'><organization/></author>
-<author fullname='H. Ananthakrishnan' initials='H.' surname='Ananthakrishnan'><organization/></author>
-<author fullname='X. Liu' initials='X.' surname='Liu'><organization/></author>
+<title>A YANG Data Model for Hardware Management</title>
+<author fullname='A. Bierman' initials='A.' surname='Bierman'><organization/></author>
+<author fullname='M. Bjorklund' initials='M.' surname='Bjorklund'><organization/></author>
+<author fullname='J. Dong' initials='J.' surname='Dong'><organization/></author>
+<author fullname='D. Romascanu' initials='D.' surname='Romascanu'><organization/></author>
 <date month='March' year='2018'/>
-<abstract><t>This document defines an abstract (generic, or base) YANG data model for network/service topologies and inventories.  The data model serves as a base model that is augmented with technology-specific details in other, more specific topology and inventory data models.</t></abstract>
+<abstract><t>This document defines a YANG data model for the management of hardware on a single server.</t></abstract>
 </front>
-<seriesInfo name='RFC' value='8345'/>
-<seriesInfo name='DOI' value='10.17487/RFC8345'/>
+<seriesInfo name='RFC' value='8348'/>
+<seriesInfo name='DOI' value='10.17487/RFC8348'/>
 </reference>
 
 
@@ -357,18 +367,79 @@ Inventory YANG data model is used to retrieve the network inventory information 
 
 
 
-<reference anchor='RFC8348' target='https://www.rfc-editor.org/info/rfc8348'>
+
+    </references>
+
+    <references title='Informative References'>
+
+<reference anchor="ONF_TR-547" target="https://opennetworking.org/wp-content/uploads/2020/08/TR-547-TAPI-v2.1.3-Reference-Implementation-Agreement-1.pdf">
+  <front>
+    <title>TAPI v2.1.3 Reference Implementation Agreement</title>
+    <author >
+      <organization>Open Networking Foundation (ONF)</organization>
+    </author>
+    <date year="2020" month="July"/>
+  </front>
+  <seriesInfo name="ONF TR-547 TAPI RIA v1.0" value=""/>
+</reference>
+
+
+
+<reference anchor='I-D.ietf-teas-actn-poi-applicability'>
+   <front>
+      <title>Applicability of Abstraction and Control of Traffic Engineered Networks (ACTN) to Packet Optical Integration (POI)</title>
+      <author fullname='Fabio Peruzzini'>
+	 <organization>TIM</organization>
+      </author>
+      <author fullname='Jean-Francois Bouquier'>
+	 <organization>Vodafone</organization>
+      </author>
+      <author fullname='Italo Busi'>
+	 <organization>Huawei</organization>
+      </author>
+      <author fullname='Daniel King'>
+	 <organization>Old Dog Consulting</organization>
+      </author>
+      <author fullname='Daniele Ceccarelli'>
+	 <organization>Ericsson</organization>
+      </author>
+      <date day='12' month='July' year='2021'/>
+      <abstract>
+	 <t>   This document considers the applicability of Abstraction and Control
+   of TE Networks (ACTN) architecture to Packet Optical Integration
+   (POI)in the context of IP/MPLS and Optical internetworking. It
+   identifies the YANG data models being defined by the IETF to support
+   this deployment architecture and specific scenarios relevant for
+   Service Providers.
+
+   Existing IETF protocols and data models are identified for each
+   multi-layer (packet over optical) scenario with a specific focus on
+   the MPI (Multi-Domain Service Coordinator to Provisioning Network
+   Controllers Interface)in the ACTN architecture.
+
+	 </t>
+      </abstract>
+   </front>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-teas-actn-poi-applicability-03'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-teas-actn-poi-applicability-03.txt' type='TXT'/>
+</reference>
+
+
+
+<reference anchor='RFC8345' target='https://www.rfc-editor.org/info/rfc8345'>
 <front>
-<title>A YANG Data Model for Hardware Management</title>
-<author fullname='A. Bierman' initials='A.' surname='Bierman'><organization/></author>
-<author fullname='M. Bjorklund' initials='M.' surname='Bjorklund'><organization/></author>
-<author fullname='J. Dong' initials='J.' surname='Dong'><organization/></author>
-<author fullname='D. Romascanu' initials='D.' surname='Romascanu'><organization/></author>
+<title>A YANG Data Model for Network Topologies</title>
+<author fullname='A. Clemm' initials='A.' surname='Clemm'><organization/></author>
+<author fullname='J. Medved' initials='J.' surname='Medved'><organization/></author>
+<author fullname='R. Varga' initials='R.' surname='Varga'><organization/></author>
+<author fullname='N. Bahadur' initials='N.' surname='Bahadur'><organization/></author>
+<author fullname='H. Ananthakrishnan' initials='H.' surname='Ananthakrishnan'><organization/></author>
+<author fullname='X. Liu' initials='X.' surname='Liu'><organization/></author>
 <date month='March' year='2018'/>
-<abstract><t>This document defines a YANG data model for the management of hardware on a single server.</t></abstract>
+<abstract><t>This document defines an abstract (generic, or base) YANG data model for network/service topologies and inventories.  The data model serves as a base model that is augmented with technology-specific details in other, more specific topology and inventory data models.</t></abstract>
 </front>
-<seriesInfo name='RFC' value='8348'/>
-<seriesInfo name='DOI' value='10.17487/RFC8348'/>
+<seriesInfo name='RFC' value='8345'/>
+<seriesInfo name='DOI' value='10.17487/RFC8345'/>
 </reference>
 
 
@@ -377,8 +448,9 @@ Inventory YANG data model is used to retrieve the network inventory information 
     </references>
 
 
+<section numbered="false" anchor="acknowledgments"><name>Acknowledgments</name>
 
-<section numbered="false" anchor="acknowledgments" title="Acknowledgments">
+<t>The authors of this document would like to thank the authors of <xref target="I-D.ietf-teas-actn-poi-applicability"/> for having identified the gap and requirements to trigger this work.</t>
 
 <t>This document was prepared using kramdown.</t>
 
@@ -388,58 +460,74 @@ Inventory YANG data model is used to retrieve the network inventory information 
   </back>
 
 <!-- ##markdown-source:
-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
+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
+kMjQlifRvwEhpVKFaCEAAA==
 
 -->
 
