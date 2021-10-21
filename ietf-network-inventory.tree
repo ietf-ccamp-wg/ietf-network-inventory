@@ -1,29 +1,34 @@
 module: ietf-network-inventory
-   +--rw inventory-info
-      +--rw equipment-rooms
-      |  +--rw equipment-room* [name]
-      |     +--rw name         string
-      |     +--rw location?    string
-      |     +--rw rack-list* [name]
-      |        +--rw name           leafref
-      |        +--rw rack-number?   int32
-      |        +--rw row-number?    int32
-      |        +--rw shelves* [name]
-      |           +--rw name            leafref
-      |           +--rw shelf-number?   int8
-      |           +--rw ne-ref?         leafref
-      |           +--rw chassis-ref?    leafref
-      +--rw network-elements
-         +--rw network-element-list* [name]
-            +--rw name          string
-            +--rw components
-               +--rw component-instances* [uuid]
-                  +--rw uuid              yang-types:uuid
-                  +--rw name?             string
-                  +--rw class?            identityref
-                  +--rw parent-rel-pos?   int32
-                  +--rw description?      string
-                  +--rw children* [name]
-                  |  +--rw name    leafref
-                  +--rw parent
-                     +--rw name?   leafref
+  +--rw network-inventory
+     +--rw equipment-rooms
+     |  +--rw equipment-room* [uuid]
+     |     +--rw uuid        yang:uuid
+     |     +--rw name?       string
+     |     +--rw location?   string
+     |     +--rw rack* [uuid]
+     |        +--rw uuid           yang:uuid
+     |        +--rw name?          string
+     |        +--rw row-number?    uint32
+     |        +--rw rack-number?   uint32
+     |        +--rw shelves* [uuid]
+     |           +--rw uuid            yang:uuid
+     |           +--rw name?           string
+     |           +--rw shelf-number?   uint8
+     |           +--rw chassis-ref
+     |              +--rw ne-ref?          leafref
+     |              +--rw component-ref?   leafref
+     +--rw network-elements
+        +--rw network-element* [uuid]
+           +--rw uuid          yang:uuid
+           +--rw name?         string
+           +--rw components
+              +--rw component* [uuid]
+                 +--rw uuid              yang:uuid
+                 +--rw name?             string
+                 +--rw description?      string
+                 +--rw class?            identityref
+                 +--rw parent-rel-pos?   int32
+                 +--rw children* [child-ref]
+                 |  +--rw child-ref    -> ../../../../uuid
+                 +--rw parent
+                    +--rw parent-ref?   -> ../../../../uuid
