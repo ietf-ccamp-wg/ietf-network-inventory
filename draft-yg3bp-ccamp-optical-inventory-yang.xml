@@ -10,7 +10,7 @@
 <?rfc symrefs="yes"?>
 <?rfc comments="yes"?>
 
-<rfc ipr="trust200902" docName="draft-xx-ccamp-optical-inventory-yang-00" category="std">
+<rfc ipr="trust200902" docName="draft-yg3bp-ccamp-optical-inventory-yang-00" category="std">
 
   <front>
     <title abbrev="Optical Inventory YANG">A YANG Data Model for Optical Network Inventory</title>
@@ -52,7 +52,7 @@
       </address>
     </author>
 
-    <date year="2021" month="October" day="20"/>
+    <date year="2021" month="October" day="22"/>
 
     
     <workgroup>CCAMP Working Group</workgroup>
@@ -130,22 +130,24 @@
 <t>The terminology for describing YANG data models is found in
   <xref target="RFC7950"/>.</t>
 
-<t>TBD: Recap the concept of chassis/slot/component/board/... in TMF.</t>
+<t>TBD: Recap the concept of chassis/slot/component/board/... in <xref target="TMF-MTOSI"/>.</t>
 
 <t>Following terms are used for representation of the hierarchies in the 
   optical network inventory.</t>
 
-<t>Network Element:</t>
+<t>Network Element: a device installed on one or several shelves and can afford some specific transmission function independently.</t>
 
-<t>Cabinet：a combination of rack, chassis and shelf.</t>
+<t>Cabinet: a holder of device and provides power supply for the device in it</t>
 
-<t>Chassis:</t>
+<t>Chassis:  a holder of device installation</t>
 
-<t>Slot:</t>
+<t>Slot: a holder of board</t>
 
-<t>Component:</t>
+<t>Component: holders and equipments of network element, includes rack, shelf, slot, subslot, board and port</t>
 
-<t>Board/Card:</t>
+<t>Board/Card: a  pluggable equipment  on network element and can afford a specific transmission function independently.</t>
+
+<t>Port: an interface on board</t>
 
 </section>
 <section anchor="tree-diagram"><name>Tree Diagram</name>
@@ -162,14 +164,17 @@ The meaning of the symbols in these diagrams is defined in <xref target="RFC8340
 
 <texttable title="Prefixes and corresponding YANG modules" anchor="tab-prefixes">
       <ttcol align='left'>Prefix</ttcol>
-      <ttcol align='left'>YANG module</ttcol>
+      <ttcol align='left'>Yang Module</ttcol>
       <ttcol align='left'>Reference</ttcol>
       <c>ianahw</c>
       <c>iana-hardware</c>
       <c><xref target="RFC8348"/></c>
       <c>ni</c>
       <c>ietf-network-inventory</c>
-      <c>RFCXXXX</c>
+      <c>RFCXXX</c>
+      <c>yang</c>
+      <c>ietf-yang-types</c>
+      <c><xref target="RFC6991"/></c>
 </texttable>
 
 <t>RFC Editor Note:
@@ -182,13 +187,62 @@ Please remove this note.</t>
 
 <section anchor="yang-model-overview"><name>YANG Model Overview</name>
 
-<t>The YANG model for optical network inventory ...</t>
+<t>Based on TMF classification in <xref target="TMF-MTOSI"/>, inventory objects can be divided into two groups, holder group and equipment group. The holder group contains rack, shelf, slot, subslot while the equipment group contains network-element, board and port. With the requirement of GIS and on-demand domain controller selection  raised,  equipment room becomes a new inventory object to be managed besides TMF classification.</t>
+
+<t>Logically,  the relationship between these inventory objects can be described by <xref target="fig-inventory-object-relationship"/> below:</t>
+
+<figure title="Relationship between inventory objects" anchor="fig-inventory-object-relationship"><artwork><![CDATA[
+                    +-------------+
+                    |  inventory  |
+                    +-------------+
+                         ||
+                         || 1:N
+                         \/
+                 +----------------+
+                 | equipment room |
+                 +----------------+
+                         ||
+                         || 
+      _______1:N_________||_______1:M___________
+      ||—————————————————  ———————————————————||
+      ||                                      || 
+      \/                                      \/
++------------+                        +-----------------+ 
+|    rack    | /__________M:N________\| network element |
++------------+ \---------------------/+-----------------+
+      ||                                 ||   ||
+      || 1:N                             ||   ||
+      \/                                 ||   ||
++------------+ /__________1:M____________||   ||
+|   shelf    | \--------------------------|   ||   
++------------+                                ||
+      ||__________________  __________________||
+      |-------------------||-------------------|
+      _________1:N________||________1:M_________
+      ||------------------  ------------------||
+      \/                                      \/
++--------------+                         +-----------+
+| slot/subslot |                         |   board   |
++--------------+                         +-----------+
+                                              ||
+                                              ||
+                                              \/
+                                         +-----------+
+                                         |    port   |
+                                         +-----------+
+]]></artwork></figure>
+
+<t>In <xref target="RFC8348"/>, rack, shelf, slot, subslot, board and port are defined as component of network element with generic attributes.</t>
+
+<t>While <xref target="RFC8348"/> is used to manage the hardware of a single server (e.g., a Network Element), the Network Inventory YANG data model is used to retrieve the network inventory information that a controller discovers from multiple Network Elements under its control.</t>
+
+<t>However, the YANG data model defined in <xref target="RFC8348"/> has been used as a reference for defining the YANG network inventory data model. This approach can simplify the implementation of this network inventory model when the controller uses the YANG data model defined in <xref target="RFC8348"/> to retrieve the hardware configuration from the network elements under its control.</t>
+
+<t>Note: review in future versions of this document which attributes from <xref target="RFC8348"/> are required also for network inventory and whether there attributes not defined in <xref target="RFC8348"/>which are required for network inventory</t>
+
+<t>Note: review in future versions of this document whether to re-use definitions from <xref target="RFC8348"/> or use schema-mount</t>
 
 <t>TBD: add some overview of the tree (network-inventory, rooms and network-elements lists)</t>
-
-<t>Note: review in future versions of this document whether network inventory should be defined as an augmentation of the network model defined in <xref target="RFC8345"/> instead of under a new network-inventory root</t>
-
-<t>TBD: add some overview of the tree of the equiment rooms</t>
 
 <t>The YANG data model for network inventory follows the same approach of <xref target="RFC8348"/> and reports the network inventory as a list of components of different types (e.g., chassis, module, port).</t>
 
@@ -196,13 +250,11 @@ Please remove this note.</t>
 
 <t>Note: review in future versions of this document whether the component list should be under the network-inventory instead of under the network-element container</t>
 
-<t>While <xref target="RFC8348"/> is used to manage the hardware of a single server (e.g., a Network Element), the Network Inventory YANG data model is used to retrieve the network inventory information that a controller discovers from multiple Network Elements under its control.</t>
+<t>However, considering there are some special scenario, the relationship between rack and network element is not 1 to 1. Network element cannot be the direct parent node of rack. So there should be a rack list under the equipment room and acts to be a brother node of network element list. And the shelfs in the rack should have some reference information to the component.</t>
 
-<t>However, the YANG data model defined in <xref target="RFC8348"/> has been used as a reference for defining the YANG network inventory data model.</t>
+<t>Note that in <xref target="RFC8345"/>, topology and inventory are two subsets of network information. However, considering the complexity of the existing topology models and to have a better extension capability, we define a separate root for inventory model. We will consider some other ways to do some associations between topology model and inventory model in the future.</t>
 
-<t>Note: review in future versions of this document which attributes from <xref target="RFC8348"/> are required also for network inventory and whether there attributes not defined in <xref target="RFC8348"/>which are required for network inventory</t>
-
-<t>Note: review in future versions of this document whether to re-use definitions from <xref target="RFC8348"/> or use schema-mount</t>
+<t>Note: review in future versions of this document whether network inventory should be defined as an augmentation of the network model defined in <xref target="RFC8345"/> instead of under a new network-inventory root</t>
 
 <t>The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.</t>
 
@@ -212,12 +264,337 @@ Please remove this note.</t>
 </section>
 <section anchor="ni-tree"><name>Optical Network Inventory Tree Diagram</name>
 
-<t>TBA</t>
+<t><xref target="fig-ni-tree"/> below shows the tree diagram of the YANG data model defined in module ietf-network-inventory.yang (<xref target="ni-yang"/>).</t>
+
+<figure title="Network inventory tree diagram" anchor="fig-ni-tree"><artwork><![CDATA[
+module: ietf-network-inventory
+  +--ro network-inventory
+     +--ro equipment-rooms
+     |  +--ro equipment-room* [uuid]
+     |     +--ro uuid        yang:uuid
+     |     +--ro name?       string
+     |     +--ro location?   string
+     |     +--ro rack* [uuid]
+     |        +--ro uuid           yang:uuid
+     |        +--ro name?          string
+     |        +--ro row-number?    uint32
+     |        +--ro rack-number?   uint32
+     |        +--ro shelves* [uuid]
+     |           +--ro uuid            yang:uuid
+     |           +--ro name?           string
+     |           +--ro shelf-number?   uint8
+     |           +--ro chassis-ref
+     |              +--ro ne-ref?          leafref
+     |              +--ro component-ref?   leafref
+     +--ro network-elements
+        +--ro network-element* [uuid]
+           +--ro uuid          yang:uuid
+           +--ro name?         string
+           +--ro components
+              +--ro component* [uuid]
+                 +--ro uuid              yang:uuid
+                 +--ro name?             string
+                 +--ro description?      string
+                 +--ro class?            identityref
+                 +--ro parent-rel-pos?   int32
+                 +--ro children* [child-ref]
+                 |  +--ro child-ref    -> ../../../../uuid
+                 +--ro parent
+                    +--ro parent-ref?   -> ../../../../uuid
+]]></artwork></figure>
 
 </section>
 <section anchor="ni-yang"><name>YANG Model for Optical Network Inventory</name>
 
-<t>TBA</t>
+<figure title="Network inventory YANG module" anchor="fig-ni-yang"><artwork><![CDATA[
+<CODE BEGINS> file "ietf-network-inventory@2021-10-22.yang"
+module ietf-network-inventory {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-network-inventory";
+  prefix ni;
+
+  import ietf-yang-types {
+    prefix yang;
+    reference
+      "RFC6991: Common YANG Data Types.";
+  }
+  
+  import iana-hardware {
+    prefix ianahw;
+    reference
+      "RFC 8348: A YANG Data Model for Hardware Management.";
+  }
+  
+  organization
+    "IETF CCAMP Working Group";
+  contact
+    "WG Web:   <https://datatracker.ietf.org/wg/ccamp/>
+     WG List:  <mailto:ccamp@ietf.org>
+
+     Editor:   Chaode Yu
+               <yuchaode@huawei.com>
+
+     Editor:   Italo Busi
+               <italo.busi@huawei.com>
+
+     Editor:   Aihua Guo
+               <aihuaguo.ietf@gmail.com>
+
+     Editor:   Sergio Belotti
+               <sergio.belotti@nokia.com>
+
+     Editor:   Jean-Francois Bouquier
+               <jeff.bouquier@vodafone.com>
+
+     Editor:   Fabio Peruzzini
+               <fabio.peruzzini@telecomitalia.it>";
+
+  description
+    "This module defines a model for retrieving network inventory.
+
+    The model fully conforms to the Network Management 
+    Datastore Architecture (NMDA).
+    
+    Copyright (c) 2021 IETF Trust and the persons
+    identified as authors of the code.  All rights reserved.
+
+    Redistribution and use in source and binary forms, with or
+    without modification, is permitted pursuant to, and subject
+    to the license terms contained in, the Simplified BSD License
+    set forth in Section 4.c of the IETF Trust's Legal Provisions
+    Relating to IETF Documents
+    (https://trustee.ietf.org/license-info).
+
+    This version of this YANG module is part of RFC XXXX; see
+    the RFC itself for full legal notices.
+
+    The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+    NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+    'MAY', and 'OPTIONAL' in this document are to be interpreted as
+    described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+    they appear in all capitals, as shown here.";
+
+  // RFC Ed.: replace XXXX with actual RFC number and remove this
+  // note.
+  // RFC Ed.: update the date below with the date of RFC publication
+  // and remove this note.
+
+  revision 2021-10-22 {
+    description
+      "Initial revision.";
+    reference
+      "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
+      Model for Optical Network Inventory.";
+  }
+  
+  container network-inventory {
+    description
+      "The top-level container for the network inventory
+      information.";
+    config false;
+    uses equipment-rooms-grouping;
+    uses network-elements-grouping;
+  }
+  
+  grouping common-entity-attributes {
+    description
+      "A set of attributes which are common to all the entities
+      (e.g., component, equipment room) defined in this module.";
+    leaf uuid {
+      type yang:uuid;
+      description
+        "Uniquely identifies an entity (e.g., component).";
+    }
+    leaf name {
+      type string;
+      description
+        "A name for the an entity (e.g., component), as specified by
+        a network manager, that provides a non-volatile 'handle'
+        for the entity and that can be modified anytime during the
+        entity lifetime.
+
+        If no configured value exists, the server MAY set the value
+        of this node to a locally unique value in the operational
+        state.";
+    }
+  }
+  grouping network-elements-grouping {
+    description
+      "The attributes of the network elements.";
+    container network-elements {
+      description
+        "The container for the list of network elements.";
+      list network-element {
+        key uuid;
+        description
+          "The list of network elements within the network.";
+        uses common-entity-attributes;
+        uses components-grouping;
+      }
+    }
+  }
+  
+  grouping equipment-rooms-grouping {
+    description
+      "The attributes of the equipment rooms.";
+    container equipment-rooms {
+      description
+        "The container for the list of equipment rooms.";
+      list equipment-room {
+        key uuid;
+        description
+          "The list of equipment rooms within the network.";
+        uses common-entity-attributes;
+        leaf location {
+          type string;
+          description
+            "compared with the location information of the other
+            inventory objects, a GIS address is preferred for
+            equipment room";
+        }
+        list rack {
+          key uuid;
+          description
+            "The list of racks within an equipment room.";
+          uses common-entity-attributes;
+          leaf row-number {
+            type uint32;
+            description
+              "Identifies the row within the equipment room where
+              the rack is located.";
+          }
+          leaf rack-number {
+            type uint32;
+            description
+              "Identifies the physical location of the rack within
+              the row.";
+          }
+          list shelves {
+            key uuid;
+            description
+              "The list of shelves within a rack.";
+            uses common-entity-attributes;
+            leaf shelf-number {
+              type uint8;
+              description
+                "Identifies the location of the shelf within the
+                rack.";
+            }
+            container chassis-ref {
+              description
+                "The reference to the network element component
+                representing this shelf.";
+              leaf ne-ref {
+                type leafref {
+                  path "/ni:network-inventory/ni:network-elements"
+                    + "/ni:network-element/ni:uuid";
+                }
+                description
+                  "The reference to the network element containing
+                  the component.";
+              }
+              leaf component-ref {
+                type leafref {
+                  path "/ni:network-inventory/ni:network-elements"
+                     + "/ni:network-element[ni:uuid"
+                     + "=current()/../ne-ref]/ni:components"
+                     + "/ni:component/ni:uuid";
+                }
+                description
+                  "The reference to the component within the network
+                  element.";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  grouping components-grouping {
+    description
+      "The attributes of the hardware components.";
+    container components {
+      description
+        "The container for the list of components.";
+      list component {
+        key uuid;
+        description
+          "The list of components within a network element.";
+        uses common-entity-attributes;
+        leaf description {
+          type string;
+          description
+            "A textual description of the component.";
+          reference
+            "RFC 8348: A YANG Data Model for Hardware Management.";
+        }
+        leaf class {
+          type identityref {
+            base ianahw:hardware-class;
+          }
+          description
+            "An indication of the general hardware type of the
+             component.";
+          reference
+            "RFC 8348: A YANG Data Model for Hardware Management.";
+        }
+        leaf  parent-rel-pos {
+          type int32 {
+            range "0 .. 2147483647";
+          }
+          description
+            "An indication of the relative position of this child
+             component among all its sibling components.  Sibling
+             components are defined as components that:
+
+               o share the same value of the 'parent' node and
+
+               o share a common base identity for the 'class' node.";
+          reference
+            "RFC 8348: A YANG Data Model for Hardware Management.";
+        }
+        list children {
+          key child-ref;
+          description
+            "The child components that are physically contained by
+            this component.";
+          
+          leaf child-ref {
+            type leafref {
+              path "../../../../ni:uuid";
+            }
+            description
+              "The reference to the child component.";
+          }
+        }
+        container parent {
+          description
+            "The parent component that physically contains this
+             component.
+
+             If this container is not instantiated, it indicates
+             that this component is not contained in any other
+             component.
+
+             In the event that a physical component is contained by
+             more than one physical component (e.g., double-wide
+             modules), this container contains the data of one of
+             these components.  An implementation MUST use the same
+             component every time this container is instantiated.";
+          leaf parent-ref {
+            type leafref {
+              path "../../../../ni:uuid";
+            }
+            description
+              "The reference to the parent component.";
+          }
+        }
+      }
+    }
+  }
+}
+]]></artwork></figure>
 
 </section>
 <section anchor="manageability-considerations"><name>Manageability Considerations</name>
@@ -243,7 +620,7 @@ Please remove this note.</t>
 
     <references title='Normative References'>
 
-<reference anchor="TMF-MTOSI_4.0" target="https://www.tmforum.org/resources/suite/mtosi-4-0/">
+<reference anchor="TMF-MTOSI" target="https://www.tmforum.org/resources/suite/mtosi-4-0/">
   <front>
     <title>TMF MTOSI 4.0 Equipment Model</title>
     <author >
@@ -367,6 +744,19 @@ Please remove this note.</t>
 
 
 
+<reference anchor='RFC6991' target='https://www.rfc-editor.org/info/rfc6991'>
+<front>
+<title>Common YANG Data Types</title>
+<author fullname='J. Schoenwaelder' initials='J.' role='editor' surname='Schoenwaelder'><organization/></author>
+<date month='July' year='2013'/>
+<abstract><t>This document introduces a collection of common data types to be used with the YANG data modeling language.  This document obsoletes RFC 6021.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='6991'/>
+<seriesInfo name='DOI' value='10.17487/RFC6991'/>
+</reference>
+
+
+
 
     </references>
 
@@ -460,74 +850,151 @@ Please remove this note.</t>
   </back>
 
 <!-- ##markdown-source:
-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
-kMjQlifRvwEhpVKFaCEAAA==
+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
 
 -->
 

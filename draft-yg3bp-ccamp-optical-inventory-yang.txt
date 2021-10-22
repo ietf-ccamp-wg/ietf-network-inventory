@@ -5,7 +5,7 @@
 CCAMP Working Group                                                C. Yu
 Internet-Draft                                                   I. Busi
 Intended status: Standards Track                     Huawei Technologies
-Expires: 23 April 2022                                            A. Guo
+Expires: 25 April 2022                                            A. Guo
                                                   Futurewei Technologies
                                                               S. Belotti
                                                                    Nokia
@@ -13,11 +13,11 @@ Expires: 23 April 2022                                            A. Guo
                                                                 Vodafone
                                                             F. Peruzzini
                                                                      TIM
-                                                         20 October 2021
+                                                         22 October 2021
 
 
             A YANG Data Model for Optical Network Inventory
-                draft-xx-ccamp-optical-inventory-yang-00
+              draft-yg3bp-ccamp-optical-inventory-yang-00
 
 Abstract
 
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2022.
+   This Internet-Draft will expire on 25 April 2022.
 
 
 
 
 
 
-Yu, et al.                Expires 23 April 2022                 [Page 1]
+Yu, et al.                Expires 25 April 2022                 [Page 1]
 
 Internet-Draft           Optical Inventory YANG             October 2021
 
@@ -76,20 +76,20 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Terminology and Notations . . . . . . . . . . . . . . . .   3
-     1.2.  Tree Diagram  . . . . . . . . . . . . . . . . . . . . . .   4
-     1.3.  Prefix in Data Node Names . . . . . . . . . . . . . . . .   4
+     1.2.  Tree Diagram  . . . . . . . . . . . . . . . . . . . . . .   5
+     1.3.  Prefix in Data Node Names . . . . . . . . . . . . . . . .   5
    2.  YANG Data Model for Optical Network Inventory . . . . . . . .   5
      2.1.  YANG Model Overview . . . . . . . . . . . . . . . . . . .   5
-   3.  Optical Network Inventory Tree Diagram  . . . . . . . . . . .   6
-   4.  YANG Model for Optical Network Inventory  . . . . . . . . . .   6
-   5.  Manageability Considerations  . . . . . . . . . . . . . . . .   6
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   7
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+   3.  Optical Network Inventory Tree Diagram  . . . . . . . . . . .   8
+   4.  YANG Model for Optical Network Inventory  . . . . . . . . . .   9
+   5.  Manageability Considerations  . . . . . . . . . . . . . . . .  15
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  15
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  16
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  16
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Yu, et al.                Expires 23 April 2022                 [Page 2]
+Yu, et al.                Expires 25 April 2022                 [Page 2]
 
 Internet-Draft           Optical Inventory YANG             October 2021
 
@@ -165,7 +165,7 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 23 April 2022                 [Page 3]
+Yu, et al.                Expires 25 April 2022                 [Page 3]
 
 Internet-Draft           Optical Inventory YANG             October 2021
 
@@ -190,22 +190,41 @@ Internet-Draft           Optical Inventory YANG             October 2021
    The terminology for describing YANG data models is found in
    [RFC7950].
 
-   TBD: Recap the concept of chassis/slot/component/board/... in TMF.
+   TBD: Recap the concept of chassis/slot/component/board/... in
+   [TMF-MTOSI].
 
    Following terms are used for representation of the hierarchies in the
    optical network inventory.
 
-   Network Element:
+   Network Element: a device installed on one or several shelves and can
+   afford some specific transmission function independently.
 
-   Cabinet&#65306;a combination of rack, chassis and shelf.
+   Cabinet: a holder of device and provides power supply for the device
+   in it
 
-   Chassis:
+   Chassis: a holder of device installation
 
-   Slot:
+   Slot: a holder of board
 
-   Component:
+   Component: holders and equipments of network element, includes rack,
+   shelf, slot, subslot, board and port
 
-   Board/Card:
+   Board/Card: a pluggable equipment on network element and can afford a
+   specific transmission function independently.
+
+   Port: an interface on board
+
+
+
+
+
+
+
+
+Yu, et al.                Expires 25 April 2022                 [Page 4]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
 
 1.2.  Tree Diagram
 
@@ -219,19 +238,14 @@ Internet-Draft           Optical Inventory YANG             October 2021
    are prefixed using the standard prefix associated with the
    corresponding YANG imported modules, as shown in the following table.
 
-
-
-Yu, et al.                Expires 23 April 2022                 [Page 4]
-
-Internet-Draft           Optical Inventory YANG             October 2021
-
-
               +========+========================+===========+
-              | Prefix | YANG module            | Reference |
+              | Prefix | Yang Module            | Reference |
               +========+========================+===========+
               | ianahw | iana-hardware          | [RFC8348] |
               +--------+------------------------+-----------+
-              | ni     | ietf-network-inventory | RFCXXXX   |
+              | ni     | ietf-network-inventory | RFCXXX    |
+              +--------+------------------------+-----------+
+              | yang   | ietf-yang-types        | [RFC6991] |
               +--------+------------------------+-----------+
 
                   Table 1: Prefixes and corresponding YANG
@@ -244,16 +258,103 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 2.1.  YANG Model Overview
 
-   The YANG model for optical network inventory ...
+   Based on TMF classification in [TMF-MTOSI], inventory objects can be
+   divided into two groups, holder group and equipment group.  The
+   holder group contains rack, shelf, slot, subslot while the equipment
+   group contains network-element, board and port.  With the requirement
+   of GIS and on-demand domain controller selection raised, equipment
+   room becomes a new inventory object to be managed besides TMF
+   classification.
+
+   Logically, the relationship between these inventory objects can be
+   described by Figure 1 below:
+
+
+
+
+
+
+
+
+
+Yu, et al.                Expires 25 April 2022                 [Page 5]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
+                       +-------------+
+                       |  inventory  |
+                       +-------------+
+                            ||
+                            || 1:N
+                            \/
+                    +----------------+
+                    | equipment room |
+                    +----------------+
+                            ||
+                            ||
+         _______1:N_________||_______1:M___________
+         ||—————————————————  ———————————————————||
+         ||                                      ||
+         \/                                      \/
+   +------------+                        +-----------------+
+   |    rack    | /__________M:N________\| network element |
+   +------------+ \---------------------/+-----------------+
+         ||                                 ||   ||
+         || 1:N                             ||   ||
+         \/                                 ||   ||
+   +------------+ /__________1:M____________||   ||
+   |   shelf    | \--------------------------|   ||
+   +------------+                                ||
+         ||__________________  __________________||
+         |-------------------||-------------------|
+         _________1:N________||________1:M_________
+         ||------------------  ------------------||
+         \/                                      \/
+   +--------------+                         +-----------+
+   | slot/subslot |                         |   board   |
+   +--------------+                         +-----------+
+                                                 ||
+                                                 ||
+                                                 \/
+                                            +-----------+
+                                            |    port   |
+                                            +-----------+
+
+              Figure 1: Relationship between inventory objects
+
+   In [RFC8348], rack, shelf, slot, subslot, board and port are defined
+   as component of network element with generic attributes.
+
+   While [RFC8348] is used to manage the hardware of a single server
+   (e.g., a Network Element), the Network Inventory YANG data model is
+   used to retrieve the network inventory information that a controller
+   discovers from multiple Network Elements under its control.
+
+
+
+Yu, et al.                Expires 25 April 2022                 [Page 6]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
+   However, the YANG data model defined in [RFC8348] has been used as a
+   reference for defining the YANG network inventory data model.  This
+   approach can simplify the implementation of this network inventory
+   model when the controller uses the YANG data model defined in
+   [RFC8348] to retrieve the hardware configuration from the network
+   elements under its control.
+
+   Note: review in future versions of this document which attributes
+   from [RFC8348] are required also for network inventory and whether
+   there attributes not defined in [RFC8348]which are required for
+   network inventory
+
+   Note: review in future versions of this document whether to re-use
+   definitions from [RFC8348] or use schema-mount
 
    TBD: add some overview of the tree (network-inventory, rooms and
    network-elements lists)
-
-   Note: review in future versions of this document whether network
-   inventory should be defined as an augmentation of the network model
-   defined in [RFC8345] instead of under a new network-inventory root
-
-   TBD: add some overview of the tree of the equiment rooms
 
    The YANG data model for network inventory follows the same approach
    of [RFC8348] and reports the network inventory as a list of
@@ -265,33 +366,33 @@ Internet-Draft           Optical Inventory YANG             October 2021
    component list should be under the network-inventory instead of under
    the network-element container
 
-   While [RFC8348] is used to manage the hardware of a single server
-   (e.g., a Network Element), the Network Inventory YANG data model is
-   used to retrieve the network inventory information that a controller
-   discovers from multiple Network Elements under its control.
+   However, considering there are some special scenario, the
+   relationship between rack and network element is not 1 to 1.  Network
+   element cannot be the direct parent node of rack.  So there should be
+   a rack list under the equipment room and acts to be a brother node of
+   network element list.  And the shelfs in the rack should have some
+   reference information to the component.
 
-   However, the YANG data model defined in [RFC8348] has been used as a
-   reference for defining the YANG network inventory data model.
+   Note that in [RFC8345], topology and inventory are two subsets of
+   network information.  However, considering the complexity of the
+   existing topology models and to have a better extension capability,
+   we define a separate root for inventory model.  We will consider some
+   other ways to do some associations between topology model and
+   inventory model in the future.
 
-
-
-
-
-Yu, et al.                Expires 23 April 2022                 [Page 5]
-
-Internet-Draft           Optical Inventory YANG             October 2021
-
-
-   Note: review in future versions of this document which attributes
-   from [RFC8348] are required also for network inventory and whether
-   there attributes not defined in [RFC8348]which are required for
-   network inventory
-
-   Note: review in future versions of this document whether to re-use
-   definitions from [RFC8348] or use schema-mount
+   Note: review in future versions of this document whether network
+   inventory should be defined as an augmentation of the network model
+   defined in [RFC8345] instead of under a new network-inventory root
 
    The proposed YANG data model has been analysed to cover the
    requirements and use cases for Optical Network Inventory.
+
+
+
+Yu, et al.                Expires 25 April 2022                 [Page 7]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
 
    Further analysis of requirements and use cases is needed to extend
    the applicability of this YANG data model to other types of networks
@@ -300,11 +401,395 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 3.  Optical Network Inventory Tree Diagram
 
-   TBA
+   Figure 2 below shows the tree diagram of the YANG data model defined
+   in module ietf-network-inventory.yang (Section 4).
+
+   module: ietf-network-inventory
+     +--ro network-inventory
+        +--ro equipment-rooms
+        |  +--ro equipment-room* [uuid]
+        |     +--ro uuid        yang:uuid
+        |     +--ro name?       string
+        |     +--ro location?   string
+        |     +--ro rack* [uuid]
+        |        +--ro uuid           yang:uuid
+        |        +--ro name?          string
+        |        +--ro row-number?    uint32
+        |        +--ro rack-number?   uint32
+        |        +--ro shelves* [uuid]
+        |           +--ro uuid            yang:uuid
+        |           +--ro name?           string
+        |           +--ro shelf-number?   uint8
+        |           +--ro chassis-ref
+        |              +--ro ne-ref?          leafref
+        |              +--ro component-ref?   leafref
+        +--ro network-elements
+           +--ro network-element* [uuid]
+              +--ro uuid          yang:uuid
+              +--ro name?         string
+              +--ro components
+                 +--ro component* [uuid]
+                    +--ro uuid              yang:uuid
+                    +--ro name?             string
+                    +--ro description?      string
+                    +--ro class?            identityref
+                    +--ro parent-rel-pos?   int32
+                    +--ro children* [child-ref]
+                    |  +--ro child-ref    -> ../../../../uuid
+                    +--ro parent
+                       +--ro parent-ref?   -> ../../../../uuid
+
+                  Figure 2: Network inventory tree diagram
+
+
+
+
+
+Yu, et al.                Expires 25 April 2022                 [Page 8]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
 
 4.  YANG Model for Optical Network Inventory
 
-   TBA
+   <CODE BEGINS> file "ietf-network-inventory@2021-10-22.yang"
+   module ietf-network-inventory {
+     yang-version 1.1;
+     namespace "urn:ietf:params:xml:ns:yang:ietf-network-inventory";
+     prefix ni;
+
+     import ietf-yang-types {
+       prefix yang;
+       reference
+         "RFC6991: Common YANG Data Types.";
+     }
+
+     import iana-hardware {
+       prefix ianahw;
+       reference
+         "RFC 8348: A YANG Data Model for Hardware Management.";
+     }
+
+     organization
+       "IETF CCAMP Working Group";
+     contact
+       "WG Web:   <https://datatracker.ietf.org/wg/ccamp/>
+        WG List:  <mailto:ccamp@ietf.org>
+
+        Editor:   Chaode Yu
+                  <yuchaode@huawei.com>
+
+        Editor:   Italo Busi
+                  <italo.busi@huawei.com>
+
+        Editor:   Aihua Guo
+                  <aihuaguo.ietf@gmail.com>
+
+        Editor:   Sergio Belotti
+                  <sergio.belotti@nokia.com>
+
+        Editor:   Jean-Francois Bouquier
+                  <jeff.bouquier@vodafone.com>
+
+        Editor:   Fabio Peruzzini
+                  <fabio.peruzzini@telecomitalia.it>";
+
+     description
+       "This module defines a model for retrieving network inventory.
+
+       The model fully conforms to the Network Management
+
+
+
+Yu, et al.                Expires 25 April 2022                 [Page 9]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
+       Datastore Architecture (NMDA).
+
+       Copyright (c) 2021 IETF Trust and the persons
+       identified as authors of the code.  All rights reserved.
+
+       Redistribution and use in source and binary forms, with or
+       without modification, is permitted pursuant to, and subject
+       to the license terms contained in, the Simplified BSD License
+       set forth in Section 4.c of the IETF Trust's Legal Provisions
+       Relating to IETF Documents
+       (https://trustee.ietf.org/license-info).
+
+       This version of this YANG module is part of RFC XXXX; see
+       the RFC itself for full legal notices.
+
+       The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+       NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+       'MAY', and 'OPTIONAL' in this document are to be interpreted as
+       described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+       they appear in all capitals, as shown here.";
+
+     // RFC Ed.: replace XXXX with actual RFC number and remove this
+     // note.
+     // RFC Ed.: update the date below with the date of RFC publication
+     // and remove this note.
+
+     revision 2021-10-22 {
+       description
+         "Initial revision.";
+       reference
+         "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
+         Model for Optical Network Inventory.";
+     }
+
+     container network-inventory {
+       description
+         "The top-level container for the network inventory
+         information.";
+       config false;
+       uses equipment-rooms-grouping;
+       uses network-elements-grouping;
+     }
+
+     grouping common-entity-attributes {
+       description
+         "A set of attributes which are common to all the entities
+         (e.g., component, equipment room) defined in this module.";
+       leaf uuid {
+
+
+
+Yu, et al.                Expires 25 April 2022                [Page 10]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
+         type yang:uuid;
+         description
+           "Uniquely identifies an entity (e.g., component).";
+       }
+       leaf name {
+         type string;
+         description
+           "A name for the an entity (e.g., component), as specified by
+           a network manager, that provides a non-volatile 'handle'
+           for the entity and that can be modified anytime during the
+           entity lifetime.
+
+           If no configured value exists, the server MAY set the value
+           of this node to a locally unique value in the operational
+           state.";
+       }
+     }
+     grouping network-elements-grouping {
+       description
+         "The attributes of the network elements.";
+       container network-elements {
+         description
+           "The container for the list of network elements.";
+         list network-element {
+           key uuid;
+           description
+             "The list of network elements within the network.";
+           uses common-entity-attributes;
+           uses components-grouping;
+         }
+       }
+     }
+
+     grouping equipment-rooms-grouping {
+       description
+         "The attributes of the equipment rooms.";
+       container equipment-rooms {
+         description
+           "The container for the list of equipment rooms.";
+         list equipment-room {
+           key uuid;
+           description
+             "The list of equipment rooms within the network.";
+           uses common-entity-attributes;
+           leaf location {
+             type string;
+             description
+               "compared with the location information of the other
+
+
+
+Yu, et al.                Expires 25 April 2022                [Page 11]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
+               inventory objects, a GIS address is preferred for
+               equipment room";
+           }
+           list rack {
+             key uuid;
+             description
+               "The list of racks within an equipment room.";
+             uses common-entity-attributes;
+             leaf row-number {
+               type uint32;
+               description
+                 "Identifies the row within the equipment room where
+                 the rack is located.";
+             }
+             leaf rack-number {
+               type uint32;
+               description
+                 "Identifies the physical location of the rack within
+                 the row.";
+             }
+             list shelves {
+               key uuid;
+               description
+                 "The list of shelves within a rack.";
+               uses common-entity-attributes;
+               leaf shelf-number {
+                 type uint8;
+                 description
+                   "Identifies the location of the shelf within the
+                   rack.";
+               }
+               container chassis-ref {
+                 description
+                   "The reference to the network element component
+                   representing this shelf.";
+                 leaf ne-ref {
+                   type leafref {
+                     path "/ni:network-inventory/ni:network-elements"
+                       + "/ni:network-element/ni:uuid";
+                   }
+                   description
+                     "The reference to the network element containing
+                     the component.";
+                 }
+                 leaf component-ref {
+                   type leafref {
+                     path "/ni:network-inventory/ni:network-elements"
+                        + "/ni:network-element[ni:uuid"
+
+
+
+Yu, et al.                Expires 25 April 2022                [Page 12]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
+                        + "=current()/../ne-ref]/ni:components"
+                        + "/ni:component/ni:uuid";
+                   }
+                   description
+                     "The reference to the component within the network
+                     element.";
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+
+     grouping components-grouping {
+       description
+         "The attributes of the hardware components.";
+       container components {
+         description
+           "The container for the list of components.";
+         list component {
+           key uuid;
+           description
+             "The list of components within a network element.";
+           uses common-entity-attributes;
+           leaf description {
+             type string;
+             description
+               "A textual description of the component.";
+             reference
+               "RFC 8348: A YANG Data Model for Hardware Management.";
+           }
+           leaf class {
+             type identityref {
+               base ianahw:hardware-class;
+             }
+             description
+               "An indication of the general hardware type of the
+                component.";
+             reference
+               "RFC 8348: A YANG Data Model for Hardware Management.";
+           }
+           leaf  parent-rel-pos {
+             type int32 {
+               range "0 .. 2147483647";
+             }
+             description
+               "An indication of the relative position of this child
+
+
+
+Yu, et al.                Expires 25 April 2022                [Page 13]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
+                component among all its sibling components.  Sibling
+                components are defined as components that:
+
+                  o share the same value of the 'parent' node and
+
+                  o share a common base identity for the 'class' node.";
+             reference
+               "RFC 8348: A YANG Data Model for Hardware Management.";
+           }
+           list children {
+             key child-ref;
+             description
+               "The child components that are physically contained by
+               this component.";
+
+             leaf child-ref {
+               type leafref {
+                 path "../../../../ni:uuid";
+               }
+               description
+                 "The reference to the child component.";
+             }
+           }
+           container parent {
+             description
+               "The parent component that physically contains this
+                component.
+
+                If this container is not instantiated, it indicates
+                that this component is not contained in any other
+                component.
+
+                In the event that a physical component is contained by
+                more than one physical component (e.g., double-wide
+                modules), this container contains the data of one of
+                these components.  An implementation MUST use the same
+                component every time this container is instantiated.";
+             leaf parent-ref {
+               type leafref {
+                 path "../../../../ni:uuid";
+               }
+               description
+                 "The reference to the parent component.";
+             }
+           }
+         }
+       }
+     }
+
+
+
+Yu, et al.                Expires 25 April 2022                [Page 14]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
+   }
+   <CODE ENDS>
+
+                  Figure 3: Network inventory YANG module
 
 5.  Manageability Considerations
 
@@ -327,16 +812,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
               (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
               <https://www.rfc-editor.org/info/rfc6241>.
 
-
-
-
-
-
-
-Yu, et al.                Expires 23 April 2022                 [Page 6]
-
-Internet-Draft           Optical Inventory YANG             October 2021
-
+   [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
+              RFC 6991, DOI 10.17487/RFC6991, July 2013,
+              <https://www.rfc-editor.org/info/rfc6991>.
 
    [RFC7446]  Lee, Y., Ed., Bernstein, G., Ed., Li, D., and W. Imajuku,
               "Routing and Wavelength Assignment Information Model for
@@ -354,6 +832,16 @@ Internet-Draft           Optical Inventory YANG             October 2021
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
               <https://www.rfc-editor.org/info/rfc7950>.
 
+
+
+
+
+
+Yu, et al.                Expires 25 April 2022                [Page 15]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
+
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/info/rfc8340>.
@@ -368,7 +856,7 @@ Internet-Draft           Optical Inventory YANG             October 2021
               DOI 10.17487/RFC8348, March 2018,
               <https://www.rfc-editor.org/info/rfc8348>.
 
-   [TMF-MTOSI_4.0]
+   [TMF-MTOSI]
               TM Forum (TMF), "TMF MTOSI 4.0 Equipment Model", TMF
               SD2-20_EquipmentModel , 2008,
               <https://www.tmforum.org/resources/suite/mtosi-4-0/>.
@@ -383,16 +871,6 @@ Internet-Draft           Optical Inventory YANG             October 2021
               draft-ietf-teas-actn-poi-applicability-03, 12 July 2021,
               <https://www.ietf.org/archive/id/draft-ietf-teas-actn-poi-
               applicability-03.txt>.
-
-
-
-
-
-
-Yu, et al.                Expires 23 April 2022                 [Page 7]
-
-Internet-Draft           Optical Inventory YANG             October 2021
-
 
    [ONF_TR-547]
               Open Networking Foundation (ONF), "TAPI v2.1.3 Reference
@@ -411,6 +889,14 @@ Acknowledgments
    The authors of this document would like to thank the authors of
    [I-D.ietf-teas-actn-poi-applicability] for having identified the gap
    and requirements to trigger this work.
+
+
+
+
+Yu, et al.                Expires 25 April 2022                [Page 16]
+
+Internet-Draft           Optical Inventory YANG             October 2021
+
 
    This document was prepared using kramdown.
 
@@ -440,16 +926,6 @@ Authors' Addresses
    Email: sergio.belotti@nokia.com
 
 
-
-
-
-
-
-Yu, et al.                Expires 23 April 2022                 [Page 8]
-
-Internet-Draft           Optical Inventory YANG             October 2021
-
-
    Jean-Francois Bouquier
    Vodafone
 
@@ -473,32 +949,4 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Yu, et al.                Expires 23 April 2022                 [Page 9]
+Yu, et al.                Expires 25 April 2022                [Page 17]

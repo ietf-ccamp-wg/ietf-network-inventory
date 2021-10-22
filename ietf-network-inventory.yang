@@ -69,7 +69,7 @@ module ietf-network-inventory {
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
 
-  revision 2021-10-21 {
+  revision 2021-10-22 {
     description
       "Initial revision.";
     reference
@@ -81,6 +81,7 @@ module ietf-network-inventory {
     description
       "The top-level container for the network inventory
       information.";
+    config false;
     uses equipment-rooms-grouping;
     uses network-elements-grouping;
   }
