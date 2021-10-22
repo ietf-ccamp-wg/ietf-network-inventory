@@ -178,7 +178,7 @@ Internet-Draft           Optical Inventory YANG             October 2021
    However, further analysis of requirements and use cases is needed to
    extend the applicability of this YANG data model to other types of
    networks (IP and microwave) and to identify which aspects are generic
-   and which aspects are tecnology-spefic for optical networks.
+   and which aspects are technology-specific for optical networks.
 
    This document defines one YANG module: ietf-network-inventory.yang
    (Section 4).

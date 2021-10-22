@@ -105,7 +105,7 @@ For optical network inventory, the network inventory YANG data model should supp
 
 The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.
 
-Being based on {{!RFC8348}}, this data model should be a good starting point toward a generic data model and applicable to any technology. However, further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are tecnology-spefic for optical networks.
+Being based on {{!RFC8348}}, this data model should be a good starting point toward a generic data model and applicable to any technology. However, further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical networks.
 
 This document defines one YANG module: ietf-network-inventory.yang ({{ni-yang}}).
 
