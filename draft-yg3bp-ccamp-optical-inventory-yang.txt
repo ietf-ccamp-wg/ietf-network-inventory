@@ -17,11 +17,13 @@ Expires: 28 April 2022                                            A. Guo
                                                               Telefonica
                                                                 V. Lopez
                                                                    Nokia
+                                                                H. Zheng
+                                                     Huawei Technologies
                                                          25 October 2021
 
 
             A YANG Data Model for Optical Network Inventory
-              draft-yg3bp-ccamp-optical-inventory-yang-00
+              draft-yg3bp-ccamp-optical-inventory-yang-01
 
 Abstract
 
@@ -46,8 +48,6 @@ Status of This Memo
    Task Force (IETF).  Note that other groups may also distribute
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at https://datatracker.ietf.org/drafts/current/.
-
-
 
 
 
@@ -1052,10 +1052,10 @@ Internet-Draft           Optical Inventory YANG             October 2021
    Email: victor.lopez@nokia.com
 
 
+   Haomian Zheng
+   Huawei Technologies
 
-
-
-
+   Email: zhenghaomian@huawei.com
 
 
 

@@ -4,7 +4,7 @@ coding: utf-8
 title: A YANG Data Model for Optical Network Inventory
 
 abbrev: Optical Inventory YANG
-docname: draft-yg3bp-ccamp-optical-inventory-yang-00
+docname: draft-yg3bp-ccamp-optical-inventory-yang-01
 workgroup: CCAMP Working Group
 category: std
 ipr: trust200902
@@ -46,6 +46,10 @@ author:
     name: Victor Lopez
     org: Nokia
     email: victor.lopez@nokia.com
+  -
+    name: Haomian Zheng
+    org: Huawei Technologies
+    email: zhenghaomian@huawei.com
 
 #contributor:
 #  -
