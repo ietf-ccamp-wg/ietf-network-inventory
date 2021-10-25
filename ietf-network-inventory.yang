@@ -69,7 +69,7 @@ module ietf-network-inventory {
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
 
-  revision 2021-10-22 {
+  revision 2021-10-25 {
     description
       "Initial revision.";
     reference
@@ -78,10 +78,10 @@ module ietf-network-inventory {
   }
   
   container network-inventory {
+    config false;
     description
       "The top-level container for the network inventory
       information.";
-    config false;
     uses equipment-rooms-grouping;
     uses network-elements-grouping;
   }
@@ -98,7 +98,7 @@ module ietf-network-inventory {
     leaf name {
       type string;
       description
-        "A name for the an entity (e.g., component), as specified by
+        "A name for an entity (e.g., component), as specified by
         a network manager, that provides a non-volatile 'handle'
         for the entity and that can be modified anytime during the
         entity lifetime.
