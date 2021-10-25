@@ -39,6 +39,17 @@ author:
     org: TIM
     email: fabio.peruzzini@telecomitalia.it
 
+  -
+    name: Oscar Gonzalez de Dios
+    org: Telefonica
+    email: oscar.gonzalezdedios@telefonica.com
+
+  -
+    name: Victor Lopez
+    org: Nokia
+    email: victor.lopez@nokia.com
+
+
 #contributor:
 #  -
 
@@ -74,10 +85,10 @@ The YANG data model defined in this document conforms to the Network Management 
 
 Network inventory management is a key component in operators' OSS architectures.
 
-  Network inventory is a foundamental functionality in network management
-  and was specified many years ago. Given the emerging of data model and 
-  their deployment in operator's management system, the traditional function
-  is also requested to be defined as data model for inventory management. 
+  Network inventory is a fundamental functionality in network management
+  and was specified many years ago. Given the emerging of data models and 
+  their deployment in operator's management system, the traditional function of inventory management
+  is also requested to be defined as a data model. 
 
   Network inventory management and monitoring is a critical part of 
   ensuring the network stays healthy, well-planned, and functioning 
@@ -87,15 +98,15 @@ Network inventory management is a key component in operators' OSS architectures.
 
   The network inventory management also helps the operator to know when 
   to acquire new assets and what is needed, or to decommission old ones, 
-  which can help improving network performance and capacity planning.
+  which can help to improve network performance and capacity planning.
 
-In {{?I-D.ietf-teas-actn-poi-applicability}} a gap was identified regarding the lack of a YANG data model that could be used at ACTN MPI interface level to report whole/partial hardware inventory information available at PNC level towards north bound systems (e.g., MDSC or OSS layer).
+In {{?I-D.ietf-teas-actn-poi-applicability}} a gap was identified regarding the lack of a YANG data model that could be used at ACTN MPI interface level to report whole/partial hardware inventory information available at PNC level towards north-bound systems (e.g., MDSC or OSS layer).
 
-{{?RFC8345}} initial goal was to make possible the augmentation of the YANG data model with network inventory data model but this was never developped and the scope was kept limited to network topology data only.
+{{?RFC8345}} initial goal was to make possible the augmentation of the YANG data model with network inventory data model but this was never developed and the scope was kept limited to network topology data only.
 
-It is key for operators to drive the industry towards the use of standard YANG data model for network inventory data instead of using vendors proprietary APIs (e.g., REST API).
+It is key for operators to drive the industry towards the use of a standard YANG data model for network inventory data instead of using vendors proprietary APIs (e.g., REST API).
 
-In the ACTN architecture this would bring also clear benefits at MDSC level for packet over optical integration scenarios since this would enable to correlate the inventory information with the links information reported in the network topology model.
+In the ACTN architecture, this would bring also clear benefits at MDSC level for packet over optical integration scenarios since this would enable the correlation of the inventory information with the links information reported in the network topology model.
 
 The intention is to define a generic YANG data model that would be as much as possible technology agnostic (valid for IP, optical and microwave networks) and that could be augmented, when required, to include some technology-specific inventory details.
 
@@ -141,20 +152,20 @@ The YANG data model defined in this document conforms to the Network Management 
 
   TBD: Recap the concept of chassis/slot/component/board/... in {{TMF-MTOSI}}.
 
-  Following terms are used for representation of the hierarchies in the 
+  Following terms are used for the representation of the hierarchies in the 
   optical network inventory. 
 
   Network Element: a device installed on one or several shelves and can afford some specific transmission function independently.
 
-  Cabinet: a holder of device and provides power supply for the device in it
+  Cabinet: a holder of the device and provides power supply for the device in it.
 
-  Chassis:  a holder of device installation
+  Chassis:  a holder of the device installation.
 
-  Slot: a holder of board
+  Slot: a holder of the board.
 
-  Component: holders and equipments of network element, includes rack, shelf, slot, subslot, board and port
+  Component: holders and equipments of the network element, including rack, shelf, slot, subslot, board and port.
 
-  Board/Card: a  pluggable equipment  on network element and can afford a specific transmission function independently.
+  Board/Card: a pluggable equipment on the network element and can afford a specific transmission function independently.
 
   Port: an interface on board
 
@@ -184,7 +195,7 @@ Please remove this note.
 
 ## YANG Model Overview
 
-Based on TMF classification in {{TMF-MTOSI}}, inventory objects can be divided into two groups, holder group and equipment group. The holder group contains rack, shelf, slot, subslot while the equipment group contains network-element, board and port. With the requirement of GIS and on-demand domain controller selection  raised,  equipment room becomes a new inventory object to be managed besides TMF classification.
+Based on TMF classification in {{TMF-MTOSI}}, inventory objects can be divided into two groups, holder group and equipment group. The holder group contains rack, shelf, slot, subslot while the equipment group contains network-element, board and port. With the requirement of GIS and on-demand domain controller selection raised, the equipment room becomes a new inventory object to be managed besides TMF classification.
 
 Logically,  the relationship between these inventory objects can be described by {{fig-inventory-object-relationship}} below:
 
@@ -230,7 +241,7 @@ Logically,  the relationship between these inventory objects can be described by
 ~~~~
 {: #fig-inventory-object-relationship title="Relationship between inventory objects"}
 
-In {{!RFC8348}}, rack, shelf, slot, subslot, board and port are defined as component of network element with generic attributes.
+In {{!RFC8348}}, rack, shelf, slot, subslot, board and port are defined as components of network elements with generic attributes.
 
 While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a Network Element), the Network Inventory YANG data model is used to retrieve the network inventory information that a controller discovers from multiple Network Elements under its control.
 
@@ -248,15 +259,15 @@ TBD: add some overview of the tree of the component list
 
 Note: review in future versions of this document whether the component list should be under the network-inventory instead of under the network-element container
 
-However, considering there are some special scenario, the relationship between rack and network element is not 1 to 1. Network element cannot be the direct parent node of rack. So there should be a rack list under the equipment room and acts to be a brother node of network element list. And the shelfs in the rack should have some reference information to the component.
+However, considering there are some special scenarios, the relationship between the rack and network elements is not 1 to 1. The network element cannot be the direct parent node of the rack. So there should be a rack list under the equipment room and acts to be a brother node of the network element list. And the shelves in the rack should have some reference information to the component.
 
-Note that in {{?RFC8345}}, topology and inventory are two subsets of network information. However, considering the complexity of the existing topology models and to have a better extension capability, we define a separate root for inventory model. We will consider some other ways to do some associations between topology model and inventory model in the future.
+Note that in {{?RFC8345}}, topology and inventory are two subsets of network information. However, considering the complexity of the existing topology models and to have a better extension capability, we define a separate root for the inventory model. We will consider some other ways to do some associations between the topology model and inventory model in the future.
 
-Note: review in future versions of this document whether network inventory should be defined as an augmentation of the network model defined in {{?RFC8345}} instead of under a new network-inventory root
+Note: review in future versions of this document whether network inventory should be defined as an augmentation of the network model defined in {{?RFC8345}} instead of under a new network-inventory root.
 
 The proposed YANG data model has been analysed to cover the requirements and use cases for Optical Network Inventory.
 
-Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are tecnology-spefic for optical networks.
+Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical networks.
 
 {: #ni-tree}
 
