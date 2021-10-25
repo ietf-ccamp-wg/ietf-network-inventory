@@ -371,7 +371,7 @@ Internet-Draft           Optical Inventory YANG             October 2021
    | slot/su-bslot |                        |   board   |
    +---------------+                        +-----------+
                                                  ||
-                                                 ||
+                                                 || 1:N
                                                  \/
                                             +-----------+
                                             |    port   |
@@ -467,11 +467,11 @@ Internet-Draft           Optical Inventory YANG             October 2021
    the network-element container
 
    However, considering there are some special scenarios, the
-   relationship between the rack and network elements is not 1 to 1.
-   The network element cannot be the direct parent node of the rack.  So
-   there should be a rack list under the equipment room and acts to be a
-   brother node of the network element list.  And the shelves in the
-   rack should have some reference information to the component.
+   relationship between the rack and network elements is not 1 to 1 nor
+   1 to n.  The network element cannot be the direct parent node of the
+   rack.  So there should be n to m relationship between racks and
+   network elements.  And the shelves in the rack should have some
+   reference information to the component.
 
    Note that in [RFC8345], topology and inventory are two subsets of
    network information.  However, considering the complexity of the

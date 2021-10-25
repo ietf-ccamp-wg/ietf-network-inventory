@@ -230,7 +230,7 @@ Logically,  the relationship between these inventory objects can be described by
 | slot/su-bslot |                        |   board   |
 +---------------+                        +-----------+
                                               ||
-                                              ||
+                                              || 1:N
                                               \/
                                          +-----------+
                                          |    port   |
@@ -291,7 +291,8 @@ The YANG data model for network inventory follows the same approach of {{!RFC834
 
 Note: review in future versions of this document whether the component list should be under the network-inventory instead of under the network-element container
 
-However, considering there are some special scenarios, the relationship between the rack and network elements is not 1 to 1. The network element cannot be the direct parent node of the rack. So there should be a rack list under the equipment room and acts to be a brother node of the network element list. And the shelves in the rack should have some reference information to the component.
+However, considering there are some special scenarios, the relationship between the rack and network elements is not 1 to 1 nor 1 to n. The network element cannot be the direct parent node of the rack. So there should be n to m relationship between racks and network elements.
+And the shelves in the rack should have some reference information to the component.
 
 Note that in {{?RFC8345}}, topology and inventory are two subsets of network information. However, considering the complexity of the existing topology models and to have a better extension capability, we define a separate root for the inventory model. We will consider some other ways to do some associations between the topology model and inventory model in the future.
 
