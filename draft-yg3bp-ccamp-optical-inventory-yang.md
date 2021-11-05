@@ -40,16 +40,13 @@ author:
     email: fabio.peruzzini@telecomitalia.it
   -
     name: Oscar Gonzalez de Dios
+    ins: O. Gonzalez de Dios
     org: Telefonica
     email: oscar.gonzalezdedios@telefonica.com
   -
     name: Victor Lopez
     org: Nokia
     email: victor.lopez@nokia.com
-  -
-    name: Haomian Zheng
-    org: Huawei Technologies
-    email: zhenghaomian@huawei.com
 
 #contributor:
 #  -
@@ -156,19 +153,33 @@ The YANG data model defined in this document conforms to the Network Management 
   Following terms are used for the representation of the hierarchies in the 
   optical network inventory. 
 
-  Network Element: a device installed on one or several shelves and can afford some specific transmission function independently.
+  Network Element:
+  
+  > a device installed on one or several shelves and can afford some specific transmission function independently.
 
-  Cabinet: a holder of the device and provides power supply for the device in it.
+  Cabinet:
+  
+  > a holder of the device and provides power supply for the device in it.
 
-  Chassis:  a holder of the device installation.
+  Chassis:
+  
+  > a holder of the device installation.
 
-  Slot: a holder of the board.
+  Slot:
+  
+  > a holder of the board.
 
-  Component: holders and equipments of the network element, including rack, shelf, slot, sub-slot, board and port.
+  Component:
+  
+  > holders and equipments of the network element, including rack, shelf, slot, sub-slot, board and port.
 
-  Board/Card: a pluggable equipment on the network element and can afford a specific transmission function independently.
+  Board/Card:
+  
+  > a pluggable equipment on the network element and can afford a specific transmission function independently.
 
-  Port: an interface on board
+  Port:
+  
+  > an interface on board
 
 ## Tree Diagram
 
