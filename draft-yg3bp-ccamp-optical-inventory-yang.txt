@@ -5,7 +5,7 @@
 CCAMP Working Group                                                C. Yu
 Internet-Draft                                                   I. Busi
 Intended status: Standards Track                     Huawei Technologies
-Expires: 28 April 2022                                            A. Guo
+Expires: 14 May 2022                                              A. Guo
                                                   Futurewei Technologies
                                                               S. Belotti
                                                                    Nokia
@@ -13,13 +13,11 @@ Expires: 28 April 2022                                            A. Guo
                                                                 Vodafone
                                                             F. Peruzzini
                                                                      TIM
-                                                             O.G.d. Dios
+                                                     O. Gonzalez de Dios
                                                               Telefonica
                                                                 V. Lopez
                                                                    Nokia
-                                                                H. Zheng
-                                                     Huawei Technologies
-                                                         25 October 2021
+                                                        10 November 2021
 
 
             A YANG Data Model for Optical Network Inventory
@@ -53,9 +51,11 @@ Status of This Memo
 
 
 
-Yu, et al.                Expires 28 April 2022                 [Page 1]
+
+
+Yu, et al.                 Expires 14 May 2022                  [Page 1]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
    Internet-Drafts are draft documents valid for a maximum of six months
@@ -63,7 +63,7 @@ Internet-Draft           Optical Inventory YANG             October 2021
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 April 2022.
+   This Internet-Draft will expire on 14 May 2022.
 
 Copyright Notice
 
@@ -75,16 +75,16 @@ Copyright Notice
    license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
    and restrictions with respect to this document.  Code Components
-   extracted from this document must include Simplified BSD License text
-   as described in Section 4.e of the Trust Legal Provisions and are
-   provided without warranty as described in the Simplified BSD License.
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
 
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Terminology and Notations . . . . . . . . . . . . . . . .   4
      1.2.  Tree Diagram  . . . . . . . . . . . . . . . . . . . . . .   5
-     1.3.  Prefix in Data Node Names . . . . . . . . . . . . . . . .   5
+     1.3.  Prefix in Data Node Names . . . . . . . . . . . . . . . .   6
    2.  YANG Data Model for Optical Network Inventory . . . . . . . .   6
      2.1.  YANG Model Overview . . . . . . . . . . . . . . . . . . .   6
    3.  Optical Network Inventory Tree Diagram  . . . . . . . . . . .   9
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Yu, et al.                Expires 28 April 2022                 [Page 2]
+Yu, et al.                 Expires 14 May 2022                  [Page 2]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
    Network inventory is a fundamental functionality in network
@@ -165,9 +165,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                 [Page 3]
+Yu, et al.                 Expires 14 May 2022                  [Page 3]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
    For optical network inventory, the network inventory YANG data model
@@ -221,9 +221,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                 [Page 4]
+Yu, et al.                 Expires 14 May 2022                  [Page 4]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
    The terminology for describing YANG data models is found in
@@ -235,23 +235,37 @@ Internet-Draft           Optical Inventory YANG             October 2021
    Following terms are used for the representation of the hierarchies in
    the optical network inventory.
 
-   Network Element: a device installed on one or several shelves and can
-   afford some specific transmission function independently.
+   Network Element:
 
-   Cabinet: a holder of the device and provides power supply for the
-   device in it.
+      a device installed on one or several shelves and can afford some
+      specific transmission function independently.
 
-   Chassis: a holder of the device installation.
+   Cabinet:
 
-   Slot: a holder of the board.
+      a holder of the device and provides power supply for the device in
+      it.
 
-   Component: holders and equipments of the network element, including
-   rack, shelf, slot, sub-slot, board and port.
+   Chassis:
 
-   Board/Card: a pluggable equipment on the network element and can
-   afford a specific transmission function independently.
+      a holder of the device installation.
 
-   Port: an interface on board
+   Slot:
+
+      a holder of the board.
+
+   Component:
+
+      holders and equipments of the network element, including rack,
+      shelf, slot, sub-slot, board and port.
+
+   Board/Card:
+
+      a pluggable equipment on the network element and can afford a
+      specific transmission function independently.
+
+   Port:
+
+      an interface on board
 
 1.2.  Tree Diagram
 
@@ -259,28 +273,20 @@ Internet-Draft           Optical Inventory YANG             October 2021
    Section 3 of this document.  The meaning of the symbols in these
    diagrams is defined in [RFC8340].
 
+
+
+
+
+Yu, et al.                 Expires 14 May 2022                  [Page 5]
+
+Internet-Draft           Optical Inventory YANG            November 2021
+
+
 1.3.  Prefix in Data Node Names
 
    In this document, names of data nodes and other data model objects
    are prefixed using the standard prefix associated with the
    corresponding YANG imported modules, as shown in the following table.
-
-
-
-
-
-
-
-
-
-
-
-
-
-Yu, et al.                Expires 28 April 2022                 [Page 5]
-
-Internet-Draft           Optical Inventory YANG             October 2021
-
 
               +========+========================+===========+
               | Prefix | Yang Module            | Reference |
@@ -327,55 +333,44 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-
-
-
-
-
-
-Yu, et al.                Expires 28 April 2022                 [Page 6]
+Yu, et al.                 Expires 14 May 2022                  [Page 6]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
-                       +-------------+
-                       |  inventory  |
-                       +-------------+
-                            ||
-                            || 1:N
-                            \/
-                    +----------------+
-                    | equipment room |
-                    +----------------+
-                            ||
-                            ||
-         _______1:N_________||_______1:M___________
-         ||—————————————————  ———————————————————||
-         ||                                      ||
-         \/                                      \/
-   +------------+                        +-----------------+
-   |    rack    | /__________M:N________\| network element |
-   +------------+ \---------------------/+-----------------+
-         ||                                 ||   ||
-         || 1:N                             ||   ||
-         \/                                 ||   ||
-   +------------+ /__________1:M____________||   ||
-   |   shelf    | \--------------------------|   ||
-   +------------+                                ||
-         ||__________________  __________________||
-         |-------------------||-------------------|
-         _________1:N________||________1:M_________
-         ||------------------  ------------------||
-         \/                                      \/
-   +---------------+                        +-----------+
-   | slot/su-bslot |                        |   board   |
-   +---------------+                        +-----------+
-                                                 ||
-                                                 || 1:N
-                                                 \/
-                                            +-----------+
-                                            |    port   |
-                                            +-----------+
+                   +-------------+
+                   |  inventory  |
+                   +-------------+
+                       // \\
+                 1:N  //   \\ 1:M
+                     //     \\
+     +----------------+     +-----------------+
+     | equipment room |     | network element |
+     +----------------+     +-----------------+
+             ||                     ||
+             || 1:N                 ||
+             \/                     ||
+       +------------+               ||1:M
+       |    rack    |               ||
+       +------------+               ||
+             ||                     ||
+             || 1:N                 \/
+             ||______________\+------------+
+             |---------------/|   shelf    |
+                              +------------+
+                                    ||
+                     ______1:N______||_____1:M_______
+                     ||------------------ ---------||
+                     \/                            \/
+              +--------------+               +-----------+
+              | slot/subslot |               |   board   |
+              +--------------+               +-----------+
+                                                   ||
+                                                   ||1:N
+                                                   \/
+                                             +-----------+
+                                             |    port   |
+                                             +-----------+
 
               Figure 1: Relationship between inventory objects
 
@@ -389,9 +384,14 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                 [Page 7]
+
+
+
+
+
+Yu, et al.                 Expires 14 May 2022                  [Page 7]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
    However, the YANG data model defined in [RFC8348] has been used as a
@@ -445,9 +445,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                 [Page 8]
+Yu, et al.                 Expires 14 May 2022                  [Page 8]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
      +--ro components
@@ -458,9 +458,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
            +--ro class?            identityref
            +--ro parent-rel-pos?   int32
            +--ro children* [child-ref]
-           |  +--ro child-ref    -> ../../../../uuid
+           |  +--ro child-ref    -> ../../uuid
            +--ro parent
-              +--ro parent-ref?   -> ../../../../uuid
+              +--ro parent-ref?   -> ../../uuid
 
    Note: review in future versions of this document whether the
    component list should be under the network-inventory instead of under
@@ -501,9 +501,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                 [Page 9]
+Yu, et al.                 Expires 14 May 2022                  [Page 9]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
    module: ietf-network-inventory
@@ -537,9 +537,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
                     +--ro class?            identityref
                     +--ro parent-rel-pos?   int32
                     +--ro children* [child-ref]
-                    |  +--ro child-ref    -> ../../../../uuid
+                    |  +--ro child-ref    -> ../../uuid
                     +--ro parent
-                       +--ro parent-ref?   -> ../../../../uuid
+                       +--ro parent-ref?   -> ../../uuid
 
                   Figure 2: Network inventory tree diagram
 
@@ -557,9 +557,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 10]
+Yu, et al.                 Expires 14 May 2022                 [Page 10]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
          "RFC6991: Common YANG Data Types.";
@@ -613,9 +613,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 11]
+Yu, et al.                 Expires 14 May 2022                 [Page 11]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
        This version of this YANG module is part of RFC XXXX; see
@@ -632,11 +632,12 @@ Internet-Draft           Optical Inventory YANG             October 2021
      // RFC Ed.: update the date below with the date of RFC publication
      // and remove this note.
 
-     revision 2021-10-25 {
+
+     revision 2021-11-10 {
        description
          "Initial revision.";
        reference
-         "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
+         "draft-yg3bp-ccamp-optical-inventory-yang-01: A YANG Data
          Model for Optical Network Inventory.";
      }
 
@@ -668,10 +669,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-
-Yu, et al.                Expires 28 April 2022                [Page 12]
+Yu, et al.                 Expires 14 May 2022                 [Page 12]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
            If no configured value exists, the server MAY set the value
@@ -725,9 +725,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 13]
+Yu, et al.                 Expires 14 May 2022                 [Page 13]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
                  the rack is located.";
@@ -781,9 +781,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 14]
+Yu, et al.                 Expires 14 May 2022                 [Page 14]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
      }
@@ -837,9 +837,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 15]
+Yu, et al.                 Expires 14 May 2022                 [Page 15]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
                "The child components that are physically contained by
@@ -847,7 +847,7 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
              leaf child-ref {
                type leafref {
-                 path "../../../../ni:uuid";
+                 path "../../ni:uuid";
                }
                description
                  "The reference to the child component.";
@@ -869,7 +869,7 @@ Internet-Draft           Optical Inventory YANG             October 2021
                 component every time this container is instantiated.";
              leaf parent-ref {
                type leafref {
-                 path "../../../../ni:uuid";
+                 path "../../ni:uuid";
                }
                description
                  "The reference to the parent component.";
@@ -893,9 +893,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 16]
+Yu, et al.                 Expires 14 May 2022                 [Page 16]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
 6.  Security Considerations
@@ -949,9 +949,9 @@ Internet-Draft           Optical Inventory YANG             October 2021
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 17]
+Yu, et al.                 Expires 14 May 2022                 [Page 17]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
    [RFC8348]  Bierman, A., Bjorklund, M., Dong, J., and D. Romascanu, "A
@@ -1005,9 +1005,9 @@ Authors' Addresses
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 18]
+Yu, et al.                 Expires 14 May 2022                 [Page 18]
 
-Internet-Draft           Optical Inventory YANG             October 2021
+Internet-Draft           Optical Inventory YANG            November 2021
 
 
    Italo Busi
@@ -1052,13 +1052,13 @@ Internet-Draft           Optical Inventory YANG             October 2021
    Email: victor.lopez@nokia.com
 
 
-   Haomian Zheng
-   Huawei Technologies
-
-   Email: zhenghaomian@huawei.com
 
 
 
 
 
-Yu, et al.                Expires 28 April 2022                [Page 19]
+
+
+
+
+Yu, et al.                 Expires 14 May 2022                 [Page 19]

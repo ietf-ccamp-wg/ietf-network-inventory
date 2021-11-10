@@ -40,16 +40,13 @@ author:
     email: fabio.peruzzini@telecomitalia.it
   -
     name: Oscar Gonzalez de Dios
+    ins: O. Gonzalez de Dios
     org: Telefonica
     email: oscar.gonzalezdedios@telefonica.com
   -
     name: Victor Lopez
     org: Nokia
     email: victor.lopez@nokia.com
-  -
-    name: Haomian Zheng
-    org: Huawei Technologies
-    email: zhenghaomian@huawei.com
 
 #contributor:
 #  -
@@ -156,19 +153,33 @@ The YANG data model defined in this document conforms to the Network Management 
   Following terms are used for the representation of the hierarchies in the 
   optical network inventory. 
 
-  Network Element: a device installed on one or several shelves and can afford some specific transmission function independently.
+  Network Element:
 
-  Cabinet: a holder of the device and provides power supply for the device in it.
+  > a device installed on one or several shelves and can afford some specific transmission function independently.
 
-  Chassis:  a holder of the device installation.
+  Cabinet:
 
-  Slot: a holder of the board.
+  > a holder of the device and provides power supply for the device in it.
 
-  Component: holders and equipments of the network element, including rack, shelf, slot, sub-slot, board and port.
+  Chassis:
 
-  Board/Card: a pluggable equipment on the network element and can afford a specific transmission function independently.
+  > a holder of the device installation.
 
-  Port: an interface on board
+  Slot:
+
+  > a holder of the board.
+
+  Component:
+
+  > holders and equipments of the network element, including rack, shelf, slot, sub-slot, board and port.
+
+  Board/Card:
+
+  > a pluggable equipment on the network element and can afford a specific transmission function independently.
+
+  Port:
+
+  > an interface on board
 
 ## Tree Diagram
 
@@ -201,44 +212,40 @@ Based on TMF classification in {{TMF-MTOSI}}, inventory objects can be divided i
 Logically,  the relationship between these inventory objects can be described by {{fig-inventory-object-relationship}} below:
 
 ~~~~
-                    +-------------+
-                    |  inventory  |
-                    +-------------+
-                         ||
-                         || 1:N
-                         \/
-                 +----------------+
-                 | equipment room |
-                 +----------------+
-                         ||
-                         || 
-      _______1:N_________||_______1:M___________
-      ||—————————————————  ———————————————————||
-      ||                                      || 
-      \/                                      \/
-+------------+                        +-----------------+ 
-|    rack    | /__________M:N________\| network element |
-+------------+ \---------------------/+-----------------+
-      ||                                 ||   ||
-      || 1:N                             ||   ||
-      \/                                 ||   ||
-+------------+ /__________1:M____________||   ||
-|   shelf    | \--------------------------|   ||   
-+------------+                                ||
-      ||__________________  __________________||
-      |-------------------||-------------------|
-      _________1:N________||________1:M_________
-      ||------------------  ------------------||
-      \/                                      \/
-+---------------+                        +-----------+
-| slot/su-bslot |                        |   board   |
-+---------------+                        +-----------+
-                                              ||
-                                              || 1:N
-                                              \/
-                                         +-----------+
-                                         |    port   |
-                                         +-----------+
+                +-------------+
+                |  inventory  |
+                +-------------+
+                    // \\
+              1:N  //   \\ 1:M
+                  //     \\                             
+  +----------------+     +-----------------+ 
+  | equipment room |     | network element |
+  +----------------+     +-----------------+
+          ||                     ||
+          || 1:N                 ||
+          \/                     || 
+    +------------+               ||1:M
+    |    rack    |               ||
+    +------------+               ||
+          ||                     ||
+          || 1:N                 \/
+          ||______________\+------------+
+          |---------------/|   shelf    |
+                           +------------+
+                                 ||
+                  ______1:N______||_____1:M_______
+                  ||------------------ ---------||
+                  \/                            \/      
+           +--------------+               +-----------+
+           | slot/subslot |               |   board   |
+           +--------------+               +-----------+
+                                                ||
+                                                ||1:N
+                                                \/
+                                          +-----------+ 
+                                          |    port   |
+                                          +-----------+
+
 ~~~~
 {: #fig-inventory-object-relationship title="Relationship between inventory objects"}
 
@@ -288,9 +295,9 @@ The YANG data model for network inventory follows the same approach of {{!RFC834
         +--ro class?            identityref
         +--ro parent-rel-pos?   int32
         +--ro children* [child-ref]
-        |  +--ro child-ref    -> ../../../../uuid
+        |  +--ro child-ref    -> ../../uuid
         +--ro parent
-           +--ro parent-ref?   -> ../../../../uuid
+           +--ro parent-ref?   -> ../../uuid
 ~~~~
 
 Note: review in future versions of this document whether the component list should be under the network-inventory instead of under the network-element container
