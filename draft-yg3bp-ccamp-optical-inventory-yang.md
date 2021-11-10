@@ -329,7 +329,7 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 # YANG Model for Optical Network Inventory
 
 ~~~~
-<CODE BEGINS> file "ietf-network-inventory@2021-10-25.yang"
+<CODE BEGINS> file "ietf-network-inventory@2021-11-10.yang"
 {::include ./ietf-network-inventory.yang}
 ~~~~
 {: #fig-ni-yang title="Network inventory YANG module"}

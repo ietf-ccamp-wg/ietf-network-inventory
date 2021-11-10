@@ -545,7 +545,7 @@ Internet-Draft           Optical Inventory YANG            November 2021
 
 4.  YANG Model for Optical Network Inventory
 
-   <CODE BEGINS> file "ietf-network-inventory@2021-10-25.yang"
+   <CODE BEGINS> file "ietf-network-inventory@2021-11-10.yang"
    module ietf-network-inventory {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-network-inventory";
