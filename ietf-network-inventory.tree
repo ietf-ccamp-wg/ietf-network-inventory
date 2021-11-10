@@ -29,6 +29,6 @@ module: ietf-network-inventory
                  +--ro class?            identityref
                  +--ro parent-rel-pos?   int32
                  +--ro children* [child-ref]
-                 |  +--ro child-ref    -> ../../../../uuid
+                 |  +--ro child-ref    -> ../../uuid
                  +--ro parent
-                    +--ro parent-ref?   -> ../../../../uuid
+                    +--ro parent-ref?   -> ../../uuid
