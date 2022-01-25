@@ -1,19 +1,24 @@
-# YANG Data Model for Network Inventory
+# A YANG Data Model for Optical Network Inventory
 
 ## Scope
 
 This repository is to facilitate the work on the new Individual Internet-Draft, "YANG Data Model for Network Inventory".
 
-# Abstract
+This repository is to facilitate the work on the [IETF CCAMP](https://datatracker.ietf.org/wg/ccamp/documents/) Individual Internet-Draft, "[A YANG Data Model for Optical Network Inventory](https://datatracker.ietf.org/doc/html/draft-yg3bp-ccamp-optical-inventory-yang/)".
 
-   Network inventory is a foundamental functionality in network management
-   and was specified many years ago. Given the emerging of data model and 
-   their deployment in operator's management system, the traditional function
-   is also requested to be defined as data model for inventory management. 
+Diff editor copy vs published version:
+- [Side-by-side diff](https://www.ietf.org/rfcdiff?url1=draft-yg3bp-ccamp-optical-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-yg3bp-ccamp-optical-inventory-yang.txt)
+- [Before-after diff](https://www.ietf.org/rfcdiff?difftype=--abdiff&url1=draft-yg3bp-ccamp-optical-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-yg3bp-ccamp-optical-inventory-yang.txt)
+- [Changebars](https://www.ietf.org/rfcdiff?difftype=--chbars&url1=draft-yg3bp-ccamp-optical-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-yg3bp-ccamp-optical-inventory-yang.txt)
+- [Html wdiff](https://www.ietf.org/rfcdiff?difftype=--hwdiff&url1=draft-yg3bp-ccamp-optical-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-yg3bp-ccamp-optical-inventory-yang.txt)
 
-   This document defines the YANG data model for optical network inventory
-   information. It augments the generic YANG model entities and can be used
-   for resource management. 
+## Abstract
+
+This document defines a YANG data model for optical network inventory data information.
+
+The YANG data model presented in this document is intended to be used as the basis toward a generic YANG data model for network inventory data information which can be augmented, when required, with technology-specific (e.g., optical) inventory data, to be defined either in a future version of this document or in another document.
+
+The YANG data model defined in this document conforms to the Network Management Datastore Architecture (NMDA).
 
 ## Contributing
 
@@ -35,9 +40,21 @@ subject to a Simplified BSD License) in Contributions.
 
 ### Weekly Calls
 
-The contributors on this draft has weekly informal conference calls at 2:30pm CEST, starting from October 6, 2021
-- [Calendar](https://github.com/italobusi/ietf-network-inventory/blob/main/minutes/Network%20Inventory%20YANG%20model.ics)
-- [Join Meeting](https://nokiameetings.webex.com/join/sergio.belotti)
+The contributors on this draft has weekly informal conference calls at 3:00pm CET, starting from January 26, 2021
+- [Calendar](https://github.com/italobusi/ietf-network-inventory/blob/main/minutes/Network%20Inventory%20YANG%20data%20model.ics)
+- [Join Meeting](https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZWUxYzc0MzItNzVjMy00M2E1LWFmMDktODAxNzgwNDNlMTRk%40thread.v2/0?context=%7b%22Tid%22%3a%2268283f3b-8487-4c86-adb3-a5228f18b893%22%2c%22Oid%22%3a%2242bd9f8c-0160-4ee4-a2f9-0385317dd1bb%22%7d)
 - Draft minutes taken during the call: https://demo.hedgedoc.org/G0vMerovQUu1kH7LR_Gyiw
 
 The official minutes of these calls are available in this repository: https://github.com/italobusi/ietf-network-inventory/tree/master/minutes
+
+### Other Resources
+
+Discussion of this work occurs on the
+[CCAMP working group mailing list](https://mailarchive.ietf.org/arch/browse/ccamp/)
+([subscribe](https://www.ietf.org/mailman/listinfo/ccamp)). In addition to contributions in GitHub, you are encouraged to participate in discussions there.
+
+**Note**: Some working groups adopt a policy whereby substantive discussion of
+technical issues needs to occur on the mailing list.
+
+You might also like to familiarize yourself with other
+[working group documents](https://datatracker.ietf.org/wg/ccamp/documents/).

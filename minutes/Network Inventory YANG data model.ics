@@ -1,0 +1,196 @@
+BEGIN:VCALENDAR
+PRODID:-//Microsoft Corporation//Outlook 15.0 MIMEDIR//EN
+VERSION:2.0
+METHOD:REQUEST
+X-MS-OLK-FORCEINSPECTOROPEN:TRUE
+BEGIN:VTIMEZONE
+TZID:Romance Standard Time
+BEGIN:STANDARD
+DTSTART:16011028T030000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:16010325T020000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+ATTENDEE;CN="Italo Busi";RSVP=TRUE:mailto:Italo.Busi@huawei.com
+ATTENDEE;CN=yuchaode;RSVP=TRUE:mailto:yuchaode@huawei.com
+ATTENDEE;CN="Belotti, Sergio (Nokia - IT/Vimercate)";RSVP=TRUE:mailto:sergi
+	o.belotti@nokia.com
+ATTENDEE;CN="Aihua Guo";RSVP=TRUE:mailto:aihuaguo@futurewei.com
+ATTENDEE;CN="Peruzzini Fabio";RSVP=TRUE:mailto:fabio.peruzzini@telecomitali
+	a.it
+ATTENDEE;CN="Lopez, Victor (Nokia - ES/Madrid)";RSVP=TRUE:mailto:victor.lop
+	ez@nokia.com
+ATTENDEE;CN="Paolo Volpato";RSVP=TRUE:mailto:paolo.volpato@huawei.com
+ATTENDEE;CN=Zhenghaomian;RSVP=TRUE:mailto:zhenghaomian@huawei.com
+ATTENDEE;CN="Zheng Yanlei";RSVP=TRUE:mailto:zhengyanlei@chinaunicom.cn
+ATTENDEE;CN="Oscar González de Dios";RSVP=TRUE:mailto:oscar.gonzalezdedios
+	@telefonica.com
+ATTENDEE;CN="Anton Snizar (asnizar)";RSVP=TRUE:mailto:asnizar@cisco.com
+CLASS:PUBLIC
+CREATED:20220125T222144Z
+DESCRIPTION:Dear all\,\n\nHere is the new recurrent call at 15h (CET) as ag
+	reed between us from January\, 26th onwards.\n\nPlease check the distribut
+	ion list and let me know if I need to add some additional people I could h
+	ave missed.\n\nThank you.\n\nKind regards\,\n\nJeff\n_____________________
+	___________________________________________________________\nReunión de M
+	icrosoft Teams\nÚnase a través de su PC o aplicación móvil\nHaga clic 
+	aquí para unirse a la reunión<https://teams.microsoft.com/l/meetup-join/
+	19%3ameeting_ZWUxYzc0MzItNzVjMy00M2E1LWFmMDktODAxNzgwNDNlMTRk%40thread.v2/
+	0?context=%7b%22Tid%22%3a%2268283f3b-8487-4c86-adb3-a5228f18b893%22%2c%22O
+	id%22%3a%2242bd9f8c-0160-4ee4-a2f9-0385317dd1bb%22%7d>\nUnirse con un disp
+	ositivo de videoconferencia\nteams@vroom.vodafone.com<mailto:teams@vroom.v
+	odafone.com>\nId. de conferencia VTC: 123 683 270 4\nInstrucciones alterna
+	tivas de VTC<https://join.vroom.vodafone.com/teams/?conf=1236832704&ivr=te
+	ams&d=vroom.vodafone.com&test=test_call&w>\nO llame (solo audio)\n&#43\;34
+	 910 38 81 11\,\,998354459#<tel:+34910388111\,\,998354459#>   Spain\, Madr
+	id\nId. de conferencia de teléfono: 998 354 459#\nBuscar un número local
+	<https://dialin.teams.microsoft.com/d8d060bc-1c7d-4360-befb-562456209125?i
+	d=998354459> | Restablecer PIN<https://mysettings.lync.com/pstnconferencin
+	g>\nDisclaimer: This online meeting may be recorded by one or more of the 
+	attendees and the meeting content\, including the voice and / or the image
+	 of the meeting participants\, will be captured in any recordings.\nInfór
+	mese<https://aka.ms/JoinTeamsMeeting> | Opciones de reunión<https://teams
+	.microsoft.com/meetingOptions/?organizerId=42bd9f8c-0160-4ee4-a2f9-0385317
+	dd1bb&tenantId=68283f3b-8487-4c86-adb3-a5228f18b893&threadId=19_meeting_ZW
+	UxYzc0MzItNzVjMy00M2E1LWFmMDktODAxNzgwNDNlMTRk@thread.v2&messageId=0&langu
+	age=es-ES>\n______________________________________________________________
+	__________________\n\n
+DTEND;TZID="Romance Standard Time":20220126T160000
+DTSTAMP:20220112T145842Z
+DTSTART;TZID="Romance Standard Time":20220126T150000
+LAST-MODIFIED:20220125T222144Z
+LOCATION:Reunión de Microsoft Teams
+ORGANIZER;CN="BOUQUIER, JEAN-FRANCOIS, Vodafone":mailto:jeff.bouquier@vodaf
+	one.com
+PRIORITY:5
+RRULE:FREQ=WEEKLY;COUNT=23;BYDAY=WE
+SEQUENCE:0
+SUMMARY;LANGUAGE=it:Network Inventory YANG data model
+TRANSP:OPAQUE
+UID:040000008200E00074C5B7101A82E00800000000F0F8F2E8CC07D801000000000000000
+	010000000AABACC5486F1FB4381B8CF5F6E3B3155
+X-ALT-DESC;FMTTYPE=text/html:<html xmlns:v="urn:schemas-microsoft-com:vml" 
+	xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-mic
+	rosoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/
+	12/omml" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="C
+	ontent-Type" content="text/html\; charset=iso-8859-1"><meta name="Generato
+	r" content="Microsoft Word 15 (filtered medium)"><style><!--\n/* Font Defi
+	nitions */\n@font-face\n	{font-family:"Cambria Math"\;\n	panose-1:2 4 5 3 
+	5 4 6 3 2 4\;}\n@font-face\n	{font-family:Calibri\;\n	panose-1:2 15 5 2 2 
+	2 4 3 2 4\;}\n@font-face\n	{font-family:"Segoe UI"\;\n	panose-1:2 11 5 2 4
+	 2 4 2 2 3\;}\n@font-face\n	{font-family:"Segoe UI Semibold"\;\n	panose-1:
+	2 11 7 2 4 2 4 2 2 3\;}\n/* Style Definitions */\np.MsoNormal\, li.MsoNorm
+	al\, div.MsoNormal\n	{margin:0cm\;\n	font-size:11.0pt\;\n	font-family:"Cal
+	ibri"\,sans-serif\;\n	mso-fareast-language:EN-US\;}\na:link\, span.MsoHype
+	rlink\n	{mso-style-priority:99\;\n	color:#0563C1\;\n	text-decoration:under
+	line\;}\n.MsoChpDefault\n	{mso-style-type:export-only\;\n	font-size:10.0pt
+	\;}\n@page WordSection1\n	{size:612.0pt 792.0pt\;\n	margin:70.85pt 3.0cm 7
+	0.85pt 3.0cm\;}\ndiv.WordSection1\n	{page:WordSection1\;}\n--></Style><!--
+	[if gte mso 9]><xml>\n<o:shapedefaults v:ext="edit" spidmax="1026" />\n</x
+	ml><![endif]--><!--[if gte mso 9]><xml>\n<o:shapelayout v:ext="edit">\n<o:
+	idmap v:ext="edit" data="1" />\n</o:shapelayout></xml><![endif]--></Head><
+	body lang="ES" link="#0563C1" vlink="#954F72" style="word-wrap:break-word"
+	><div class="WordSection1"><p class="MsoNormal">Dear all\,<o:p></o:p></P><
+	p class="MsoNormal"><o:p> </o:p></P><p class="MsoNormal"><span lang="EN-GB
+	">Here is the new recurrent call at 15h (CET) as agreed between us from Ja
+	nuary\, 26<sup>th</Sup> onwards.<o:p></o:p></Span></P><p class="MsoNormal"
+	><span lang="EN-GB"><o:p> </o:p></Span></P><p class="MsoNormal"><span lang
+	="EN-GB">Please check the distribution list and let me know if I need to a
+	dd some additional people I could have missed.<o:p></o:p></Span></P><p cla
+	ss="MsoNormal"><span lang="EN-GB"><o:p> </o:p></Span></P><p class="MsoNorm
+	al"><span lang="EN-GB">Thank you.<o:p></o:p></Span></P><p class="MsoNormal
+	"><span lang="EN-GB"><o:p> </o:p></Span></P><p class="MsoNormal"><span lan
+	g="EN-GB">Kind regards\,<o:p></o:p></Span></P><p class="MsoNormal"><span l
+	ang="EN-GB"><o:p> </o:p></Span></P><p class="MsoNormal"><span lang="EN-GB"
+	>Jeff<o:p></o:p></Span></P><div><p class="MsoNormal"><span lang="EN-GB" st
+	yle="color:#5F5F5F">______________________________________________________
+	__________________________</Span><span lang="EN-GB"> <o:p></o:p></Span></P
+	></Div><div><div style="margin-top:18.0pt\;margin-bottom:15.0pt"><p class=
+	"MsoNormal"><span style="font-size:18.0pt\;font-family:"Segoe UI"\,sans-se
+	rif\;color:#252424">Reunión de Microsoft Teams</Span><span style="font-fa
+	mily:"Segoe UI"\,sans-serif\;color:#252424"> <o:p></o:p></Span></P></Div><
+	div style="margin-bottom:15.0pt"><div><p class="MsoNormal"><b><span style=
+	"font-size:10.5pt\;font-family:"Segoe UI"\,sans-serif\;color:#252424">Úna
+	se a través de su PC o aplicación móvil</Span></B><b><span style="font-
+	family:"Segoe UI"\,sans-serif\;color:#252424"> <o:p></o:p></Span></B></P><
+	/Div><p class="MsoNormal"><span style="font-family:"Segoe UI"\,sans-serif\
+	;color:#252424"><a href="https://teams.microsoft.com/l/meetup-join/19%3ame
+	eting_ZWUxYzc0MzItNzVjMy00M2E1LWFmMDktODAxNzgwNDNlMTRk%40thread.v2/0?conte
+	xt=%7b%22Tid%22%3a%2268283f3b-8487-4c86-adb3-a5228f18b893%22%2c%22Oid%22%3
+	a%2242bd9f8c-0160-4ee4-a2f9-0385317dd1bb%22%7d" target="_blank"><span styl
+	e="font-size:10.5pt\;font-family:"Segoe UI Semibold"\,sans-serif\;color:#6
+	264A7">Haga clic aquí para unirse a la reunión</Span></A> <o:p></o:p></S
+	pan></P></Div><div style="margin-bottom:3.0pt"><p class="MsoNormal"><b><sp
+	an style="font-size:10.5pt\;font-family:"Segoe UI"\,sans-serif\;color:#252
+	424">Unirse con un dispositivo de videoconferencia</Span></B><span style="
+	font-family:"Segoe UI"\,sans-serif\;color:#252424"> <o:p></o:p></Span></P>
+	</Div><div><p class="MsoNormal"><span style="font-size:10.5pt\;font-family
+	:"Segoe UI"\,sans-serif\;color:#252424"><a href="mailto:teams@vroom.vodafo
+	ne.com">teams@vroom.vodafone.com</A> <o:p></o:p></Span></P></Div><div><p c
+	lass="MsoNormal"><span style="font-size:10.5pt\;font-family:"Segoe UI"\,sa
+	ns-serif\;color:#252424">Id. de conferencia VTC: </Span><span style="font-
+	size:12.0pt\;font-family:"Segoe UI"\,sans-serif\;color:#252424">123 683 27
+	0 4 </Span><span style="font-family:"Segoe UI"\,sans-serif\;color:#252424"
+	><o:p></o:p></Span></P></Div><div style="margin-bottom:15.0pt"><p class="M
+	soNormal"><span style="font-size:10.5pt\;font-family:"Segoe UI"\,sans-seri
+	f\;color:#252424"><a href="https://join.vroom.vodafone.com/teams/?conf=123
+	6832704&ivr=teams&d=vroom.vodafone.com&test=test_call&w"><span style="colo
+	r:#6264A7">Instrucciones alternativas de VTC</Span></A> <o:p></o:p></Span>
+	</P></Div><div style="margin-bottom:3.0pt"><div style="margin-bottom:3.0pt
+	"><p class="MsoNormal"><b><span style="font-size:10.5pt\;font-family:"Sego
+	e UI"\,sans-serif\;color:#252424">O llame (solo audio)</Span></B><span sty
+	le="font-family:"Segoe UI"\,sans-serif\;color:#252424"> <o:p></o:p></Span>
+	</P></Div><div style="margin-bottom:3.0pt"><p class="MsoNormal"><span styl
+	e="font-family:"Segoe UI"\,sans-serif\;color:#252424"><a href="tel:+349103
+	88111\,\,998354459# "><span style="font-size:10.5pt\;color:#6264A7">&#43\;
+	34 910 38 81 11\,\,998354459#</Span></A> </Span><span style="font-size:10.
+	5pt\;font-family:"Segoe UI"\,sans-serif\;color:#252424">  Spain\, Madrid <
+	/Span><span style="font-family:"Segoe UI"\,sans-serif\;color:#252424"><o:p
+	></o:p></Span></P></Div></Div><p class="MsoNormal"><span style="font-size:
+	10.5pt\;font-family:"Segoe UI"\,sans-serif\;color:#252424">Id. de conferen
+	cia de teléfono: </Span><span style="font-size:12.0pt\;font-family:"Segoe
+	 UI"\,sans-serif\;color:#252424">998 354 459# </Span><span style="font-fam
+	ily:"Segoe UI"\,sans-serif\;color:#252424"><o:p></o:p></Span></P><div styl
+	e="margin-bottom:15.0pt"><p class="MsoNormal"><span style="font-family:"Se
+	goe UI"\,sans-serif\;color:#252424"><a href="https://dialin.teams.microsof
+	t.com/d8d060bc-1c7d-4360-befb-562456209125?id=998354459" target="_blank"><
+	span style="font-size:10.5pt\;color:#6264A7">Buscar un número local</Span
+	></A> | <a href="https://mysettings.lync.com/pstnconferencing" target="_bl
+	ank"><span style="font-size:10.5pt\;color:#6264A7">Restablecer PIN</Span><
+	/A> <o:p></o:p></Span></P></Div><div style="margin-bottom:3.0pt"><p class=
+	"MsoNormal"><span lang="EN-GB" style="font-size:10.5pt\;font-family:"Segoe
+	 UI"\,sans-serif\;color:#252424">Disclaimer: This online meeting may be re
+	corded by one or more of the attendees and the meeting content\, including
+	 the voice and / or the image of the meeting participants\, will be captur
+	ed in any recordings. <o:p></o:p></Span></P></Div><div style="margin-top:1
+	5.0pt\;margin-bottom:18.0pt"><p class="MsoNormal"><span style="font-family
+	:"Segoe UI"\,sans-serif\;color:#252424"><a href="https://aka.ms/JoinTeamsM
+	eeting" target="_blank"><span style="font-size:10.5pt\;color:#6264A7">Inf
+	órmese</Span></A> | <a href="https://teams.microsoft.com/meetingOptions/?
+	organizerId=42bd9f8c-0160-4ee4-a2f9-0385317dd1bb&tenantId=68283f3b-8487-4c
+	86-adb3-a5228f18b893&threadId=19_meeting_ZWUxYzc0MzItNzVjMy00M2E1LWFmMDktO
+	DAxNzgwNDNlMTRk@thread.v2&messageId=0&language=es-ES" target="_blank"><spa
+	n style="font-size:10.5pt\;color:#6264A7">Opciones de reunión</Span></A> 
+	<o:p></o:p></Span></P></Div></Div><div><p class="MsoNormal"><span style="c
+	olor:#5F5F5F">____________________________________________________________
+	____________________</Span> <o:p></o:p></P></Div><p class="MsoNormal"><o:p
+	> </o:p></P></Div></Body></Html>
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR
