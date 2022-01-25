@@ -2,8 +2,6 @@
 
 ## Scope
 
-This repository is to facilitate the work on the new Individual Internet-Draft, "YANG Data Model for Network Inventory".
-
 This repository is to facilitate the work on the [IETF CCAMP](https://datatracker.ietf.org/wg/ccamp/documents/) Individual Internet-Draft, "[A YANG Data Model for Optical Network Inventory](https://datatracker.ietf.org/doc/html/draft-yg3bp-ccamp-optical-inventory-yang/)".
 
 Diff editor copy vs published version:
