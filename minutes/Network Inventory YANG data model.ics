@@ -19,21 +19,6 @@ TZOFFSETTO:+0200
 END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
-ATTENDEE;CN="Italo Busi";RSVP=TRUE:mailto:Italo.Busi@huawei.com
-ATTENDEE;CN=yuchaode;RSVP=TRUE:mailto:yuchaode@huawei.com
-ATTENDEE;CN="Belotti, Sergio (Nokia - IT/Vimercate)";RSVP=TRUE:mailto:sergi
-	o.belotti@nokia.com
-ATTENDEE;CN="Aihua Guo";RSVP=TRUE:mailto:aihuaguo@futurewei.com
-ATTENDEE;CN="Peruzzini Fabio";RSVP=TRUE:mailto:fabio.peruzzini@telecomitali
-	a.it
-ATTENDEE;CN="Lopez, Victor (Nokia - ES/Madrid)";RSVP=TRUE:mailto:victor.lop
-	ez@nokia.com
-ATTENDEE;CN="Paolo Volpato";RSVP=TRUE:mailto:paolo.volpato@huawei.com
-ATTENDEE;CN=Zhenghaomian;RSVP=TRUE:mailto:zhenghaomian@huawei.com
-ATTENDEE;CN="Zheng Yanlei";RSVP=TRUE:mailto:zhengyanlei@chinaunicom.cn
-ATTENDEE;CN="Oscar González de Dios";RSVP=TRUE:mailto:oscar.gonzalezdedios
-	@telefonica.com
-ATTENDEE;CN="Anton Snizar (asnizar)";RSVP=TRUE:mailto:asnizar@cisco.com
 CLASS:PUBLIC
 CREATED:20220125T222144Z
 DESCRIPTION:Dear all\,\n\nHere is the new recurrent call at 15h (CET) as ag
