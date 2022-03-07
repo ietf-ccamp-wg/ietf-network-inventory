@@ -10,10 +10,10 @@ module: ietf-network-inventory
      |        +--ro name?          string
      |        +--ro row-number?    uint32
      |        +--ro rack-number?   uint32
-     |        +--ro shelves* [uuid]
-     |           +--ro uuid            yang:uuid
-     |           +--ro name?           string
-     |           +--ro shelf-number?   uint8
+     |        +--ro chassis* [uuid]
+     |           +--ro uuid              yang:uuid
+     |           +--ro name?             string
+     |           +--ro chassis-number?   uint8
      |           +--ro chassis-ref
      |              +--ro ne-ref?          leafref
      |              +--ro component-ref?   leafref

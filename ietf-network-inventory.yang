@@ -68,14 +68,13 @@ module ietf-network-inventory {
   // note.
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
-
-
-  revision 2021-11-10 {
+  
+  revision 2022-03-04 {
     description
       "Initial revision.";
     reference
-      "draft-yg3bp-ccamp-optical-inventory-yang-01: A YANG Data
-      Model for Optical Network Inventory.";
+      "draft-yg3bp-ccamp-inventory-yang-00: A YANG Data
+      Model for Network Inventory.";
   }
   
   container network-inventory {
@@ -160,21 +159,21 @@ module ietf-network-inventory {
               "Identifies the physical location of the rack within
               the row.";
           }
-          list shelves {
+          list chassis {
             key uuid;
             description
-              "The list of shelves within a rack.";
+              "The list of chassis within a rack.";
             uses common-entity-attributes;
-            leaf shelf-number {
+            leaf chassis-number {
               type uint8;
               description
-                "Identifies the location of the shelf within the
+                "Identifies the location of the chassis within the
                 rack.";
             }
             container chassis-ref {
               description
                 "The reference to the network element component
-                representing this shelf.";
+                representing this chassis.";
               leaf ne-ref {
                 type leafref {
                   path "/ni:network-inventory/ni:network-elements"
@@ -230,7 +229,7 @@ module ietf-network-inventory {
           reference
             "RFC 8348: A YANG Data Model for Hardware Management.";
         }
-        leaf  parent-rel-pos {
+        leaf parent-rel-pos {
           type int32 {
             range "0 .. 2147483647";
           }
