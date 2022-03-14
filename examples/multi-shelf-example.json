@@ -1,0 +1,319 @@
+{
+  "ietf-network-inventory:network-inventory": {
+    "equipment-rooms": {
+      "equipment-room": [
+        {
+          "uuid": "a9362faf-7f69-44ff-8965-5904b6e7055b",
+          "name": "Wuhan Central EQ room",
+          "location": "No.207 Jiufeng 3rd Road, Jiangxia District, Wuhan",
+          "contained-racks": [
+            "1a603eef-ee49-4c61-8436-14c9400b9454"
+          ]
+        }
+      ]
+    },
+    "racks": {
+      "rack": [
+        {
+          "uuid": "1a603eef-ee49-4c61-8436-14c9400b9454",
+          "name": "/equipment-room=Wuhan Central EQ room/rack=1-2",
+          "row-number": 1,
+          "rack-number": 2,
+          "contained-chassis": [
+            "056abf0c-50a8-4812-8f3e-febd10461b40",
+            "da61aa9e-2969-4bd8-829f-d44ffdc2310a"
+          ]
+        }
+      ]
+    },
+    "chassis-list": {
+      "chassis": [
+        {
+          "uuid": "056abf0c-50a8-4812-8f3e-febd10461b40",
+          "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=3",
+          "chassis-number-in-rack": 3,
+          "position-in-ne": {
+            "ne-name": "Ne(115-50)",
+            "rack-id": 1,
+            "chassis-id": 0
+          },
+          "contained-slots": [
+            "15299577-fcbf-49ed-8767-dd6608171f62",
+            "ab3d83d0-68b3-404e-ae2c-a301734878fd"
+          ]
+        },
+        {
+          "uuid": "da61aa9e-2969-4bd8-829f-d44ffdc2310a",
+          "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=0/subchassis=2",
+          "chassis-number-in-rack": 2,
+          "position-in-ne": {
+            "ne-name": "Ne(115-50)",
+            "rack-id": 1,
+            "chassis-id": 0,
+            "sub-chassis-id": 1
+          },
+          "contained-slots": [
+            "ad0fecfd-6a8b-46ea-8ab0-1b760acd0452",
+            "daebe452-1429-46a0-a412-ddb6d4f5097e"
+          ]
+        }
+      ]
+    },
+    "slots": {
+      "slot": [
+        {
+          "uuid": "15299577-fcbf-49ed-8767-dd6608171f62",
+          "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=0/slot=1",
+          "position-in-ne": {
+            "ne-name": "Ne(115-50)",
+            "rack-id": 1,
+            "chassis-id": 0,
+            "slot-id": 1
+          },
+          "board-info": {
+            "network-element-uuid": "148356ae-c7af-48b2-9f28-89b66f9dbf29",
+            "board-uuid": "86c71cdc-814a-4988-98b5-0d40d33e3778"
+          },
+          "contained-ports": [
+            "d5d0163f-2da6-47be-88df-981480b24def",
+            "208a4c01-6ecb-4051-98a5-d20e86aeb96d",
+            "cbb19f83-585f-4b31-836b-c86340b58efe",
+            "bf3dac81-80a9-4c34-993b-681fec702550"
+          ]
+        },
+        {
+          "uuid": "ab3d83d0-68b3-404e-ae2c-a301734878fd",
+          "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=3/slot=2",
+          "position-in-ne": {
+            "ne-name": "Ne(115-50)",
+            "rack-id": 1,
+            "chassis-id": 0,
+            "slot-id": 2
+          },
+          "board-info": {
+            "network-element-uuid": "148356ae-c7af-48b2-9f28-89b66f9dbf29",
+            "board-uuid": "bb733e8f-e833-11eb-a0dd-286ed4d37adb"
+          },
+          "subslots": [
+            "bb733e97-e833-11eb-a0dd-286ed4d37adb"
+          ],
+          "contained-ports": [
+            "0a729744-74a7-49ee-a83a-0faf90195466"
+          ]
+        },
+        {
+          "uuid": "bb733e97-e833-11eb-a0dd-286ed4d37adb",
+          "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=3/slot=2/subslot=1",
+          "position-in-ne": {
+            "ne-name": "Ne(115-50)",
+            "rack-id": 1,
+            "chassis-id": 0,
+            "slot-id": 2,
+            "sub-slot-id": 1
+          },
+          "board-info": {
+            "network-element-uuid": "148356ae-c7af-48b2-9f28-89b66f9dbf29",
+            "board-uuid": "74b45f30-5492-44cc-98cd-258612b4277e"
+          },
+          "contained-ports": [
+            "025bb266-6cf4-49b9-9b35-f68a8ad225f0"
+          ]
+        },
+        {
+          "uuid": "ad0fecfd-6a8b-46ea-8ab0-1b760acd0452",
+          "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=2/slot=1",
+          "position-in-ne": {
+            "ne-name": "Ne(115-50)",
+            "rack-id": 1,
+            "chassis-id": 0,
+            "sub-chassis-id": 1,
+            "slot-id": 1
+          }
+        },
+        {
+          "uuid": "daebe452-1429-46a0-a412-ddb6d4f5097e",
+          "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=2/slot=2",
+          "position-in-ne": {
+            "ne-name": "Ne(115-50)",
+            "rack-id": 1,
+            "chassis-id": 0,
+            "sub-chassis-id": 1,
+            "slot-id": 2
+          }
+        }
+      ]
+    },
+    "network-elements": {
+      "network-element": [
+        {
+          "uuid": "148356ae-c7af-48b2-9f28-89b66f9dbf29",
+          "name": "Ne(115-50)",
+          "chassis": [
+            "056abf0c-50a8-4812-8f3e-febd10461b40",
+            "da61aa9e-2969-4bd8-829f-d44ffdc2310a"
+          ],
+          "boards": {
+            "board": [
+              {
+                "uuid": "86c71cdc-814a-4988-98b5-0d40d33e3778",
+                "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=3/slot=1/board=TNV5T404",
+                "board-name": "TNV5T404",
+                "position-in-ne": {
+                  "ne-name": "Ne(115-50)",
+                  "rack-id": 1,
+                  "chassis-id": 0,
+                  "slot-id": 1
+                }
+              },
+              {
+                "uuid": "bb733e8f-e833-11eb-a0dd-286ed4d37adb",
+                "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=3/slot=2/board=TNZ5UNS4",
+                "board-name": "TNZ5UNS4",
+                "position-in-ne": {
+                  "ne-name": "Ne(115-50)",
+                  "rack-id": 1,
+                  "chassis-id": 0,
+                  "slot-id": 2
+                }
+              },
+              {
+                "uuid": "74b45f30-5492-44cc-98cd-258612b4277e",
+                "name": "/equipment-room=Wuhan Central EQ room/rack=1-2/chassis=3/slot=2/subslot=1/board=SL64D",
+                "board-name": "SL64D",
+                "position-in-ne": {
+                  "ne-name": "Ne(115-50)",
+                  "rack-id": 1,
+                  "chassis-id": 0,
+                  "slot-id": 2,
+                  "sub-slot-id": 1
+                }
+              }
+            ]
+          },
+          "ports": {
+            "port": [
+              {
+                "uuid": "d5d0163f-2da6-47be-88df-981480b24def",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=1/port=1",
+                "location": {
+                  "equipment-room-name": "Wuhan Central EQ room",
+                  "rack-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2",
+                  "chassis-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3",
+                  "slot-number": 1,
+                  "port-number": 1
+                },
+                "transceiver-inserted": "01a65c72-1fc9-11ec-a0dd-286ed4d37adb"
+              },
+              {
+                "uuid": "208a4c01-6ecb-4051-98a5-d20e86aeb96d",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=1/port=2",
+                "location": {
+                  "equipment-room-name": "Wuhan Central EQ room",
+                  "rack-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2",
+                  "chassis-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3",
+                  "slot-number": 1,
+                  "port-number": 2
+                },
+                "transceiver-inserted": "1b4a9056-8650-4c62-a68e-f7ce99136651"
+              },
+              {
+                "uuid": "cbb19f83-585f-4b31-836b-c86340b58efe",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=1/port=3",
+                "location": {
+                  "equipment-room-name": "Wuhan Central EQ room",
+                  "rack-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2",
+                  "chassis-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3",
+                  "slot-number": 1,
+                  "port-number": 3
+                },
+                "transceiver-inserted": "a7a799ca-e499-11eb-a0dd-286ed4d37adb"
+              },
+              {
+                "uuid": "bf3dac81-80a9-4c34-993b-681fec702550",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=1/port=4",
+                "location": {
+                  "equipment-room-name": "Wuhan Central EQ room",
+                  "rack-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2",
+                  "chassis-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3",
+                  "slot-number": 1,
+                  "port-number": 4
+                },
+                "transceiver-inserted": "09306846-badb-41eb-8d77-1d50c88d6661"
+              },
+              {
+                "uuid": "0a729744-74a7-49ee-a83a-0faf90195466",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=2/port=1",
+                "location": {
+                  "equipment-room-name": "Wuhan Central EQ room",
+                  "rack-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2",
+                  "chassis-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3",
+                  "slot-number": 2,
+                  "port-number": 1
+                },
+                "transceiver-inserted": "7032b7e6-1a80-43c8-b42e-0f499ddd24b2"
+              },
+              {
+                "uuid": "025bb266-6cf4-49b9-9b35-f68a8ad225f0",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=2/sub-slot=1/port=1",
+                "location": {
+                  "equipment-room-name": "Wuhan Central EQ room",
+                  "rack-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2",
+                  "chassis-name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3",
+                  "slot-number": 2,
+                  "sub-slot-number": 1,
+                  "port-number": 1
+                },
+                "transceiver-inserted": "0c3d9b4c-84e9-4a60-9d2c-8fdc78d932d5"
+              }
+            ]
+          },
+          "transceivers": {
+            "transceiver": [
+              {
+                "uuid": "01a65c72-1fc9-11ec-a0dd-286ed4d37adb",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=1/port=1"
+              },
+              {
+                "uuid": "1b4a9056-8650-4c62-a68e-f7ce99136651",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=1/port=2"
+              },
+              {
+                "uuid": "a7a799ca-e499-11eb-a0dd-286ed4d37adb",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=1/port=3"
+              },
+              {
+                "uuid": "09306846-badb-41eb-8d77-1d50c88d6661",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=1/port=4"
+              },
+              {
+                "uuid": "7032b7e6-1a80-43c8-b42e-0f499ddd24b2",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=2/port=1"
+              },
+              {
+                "uuid": "0c3d9b4c-84e9-4a60-9d2c-8fdc78d932d5",
+                "name": "/equipment-room=Wuhan Central EQ room/NE=Ne(115-50)/rack=1-2/chassis=3/slot=2/sub-slot=1/port=1"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "fibres": {
+      "fibre": [
+        {
+          "uuid": "a7a799ce-e499-11eb-a0dd-286ed4d37adb",
+          "name": "f-1",
+          "source": {
+            "ne-uuid": "148356ae-c7af-48b2-9f28-89b66f9dbf29",
+            "port-uuid": "d5d0163f-2da6-47be-88df-981480b24def"
+          },
+          "destination": {
+            "ne-uuid": "",
+            "port-uuid": ""
+          },
+          "length": 10
+        }
+      ]
+    }
+  }
+}
