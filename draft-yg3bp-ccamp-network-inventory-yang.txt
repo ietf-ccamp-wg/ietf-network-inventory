@@ -5,7 +5,7 @@
 CCAMP Working Group                                                C. Yu
 Internet-Draft                                                   I. Busi
 Intended status: Standards Track                     Huawei Technologies
-Expires: 5 September 2022                                         A. Guo
+Expires: 15 September 2022                                        A. Guo
                                                   Futurewei Technologies
                                                               S. Belotti
                                                                    Nokia
@@ -17,11 +17,11 @@ Expires: 5 September 2022                                         A. Guo
                                                               Telefonica
                                                                 V. Lopez
                                                                    Nokia
-                                                            4 March 2022
+                                                           14 March 2022
 
 
             A YANG Data Model for Network Hardware Inventory
-              draft-yg3bp-ccamp-network-inventory-yang-00
+              draft-yg3bp-ccamp-network-inventory-yang-01
 
 Abstract
 
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 1]
+Yu, et al.              Expires 15 September 2022               [Page 1]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    Internet-Drafts are draft documents valid for a maximum of six months
@@ -63,7 +63,7 @@ Internet-Draft               Inventory YANG                   March 2022
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 September 2022.
+   This Internet-Draft will expire on 15 September 2022.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 2]
+Yu, et al.              Expires 15 September 2022               [Page 2]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    Network inventory is a fundamental functionality in network
@@ -165,9 +165,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 3]
+Yu, et al.              Expires 15 September 2022               [Page 3]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    For optical network hardware inventory, the network inventory YANG
@@ -221,9 +221,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 4]
+Yu, et al.              Expires 15 September 2022               [Page 4]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    TBD: Recap the concept of chassis/slot/component/board/... in
@@ -269,17 +269,17 @@ Internet-Draft               Inventory YANG                   March 2022
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in BCP
-   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
 
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 5]
+Yu, et al.              Expires 15 September 2022               [Page 5]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
 1.3.  Tree Diagram
@@ -333,9 +333,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 6]
+Yu, et al.              Expires 15 September 2022               [Page 6]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
                    +-------------+
@@ -389,9 +389,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 7]
+Yu, et al.              Expires 15 September 2022               [Page 7]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    inventory model when the controller uses the YANG data model defined
@@ -445,9 +445,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 8]
+Yu, et al.              Expires 15 September 2022               [Page 8]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
      +--ro components
@@ -501,23 +501,22 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022                [Page 9]
+Yu, et al.              Expires 15 September 2022               [Page 9]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    Considering relational database is widely used by traditional OSS
    systems and part of PNCs, the inventory objects are probably saved in
    different tables.  If the generic model is adopted, when doing a full
-   amount synchronization, PNC needs to convert all inventory objects of
-   each NE into component objects and mix them together into a list, and
-   then construct a response and send to OSS or MDSC.  The OSS or MDSC
-   needs to classify the component list and devide them into different
-   groups, in order to save them in different tables.  The mixing-
-   regrouping steps are actually waste of effort.
-
-   And this efficiency issue will be more serious in a larger scale of
-   network.
+   synchronization, PNC needs to convert all inventory objects of each
+   NE into component objects and combine them together into a single
+   list, and then construct a response and send to OSS or MDSC.  The OSS
+   or MDSC needs to classify the component list and divide them into
+   different groups, in order to save them in different tables.  The
+   combining-regrouping steps are impacting the PNC & OSS/MDSC
+   processing, which may result in efficiency issue in large scale
+   networks.
 
 3.  Network Hardware Inventory Tree Diagram
 
@@ -557,9 +556,10 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 10]
+
+Yu, et al.              Expires 15 September 2022              [Page 10]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    module: ietf-network-inventory
@@ -613,9 +613,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 11]
+Yu, et al.              Expires 15 September 2022              [Page 11]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
          "RFC6991: Common YANG Data Types.";
@@ -669,9 +669,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 12]
+Yu, et al.              Expires 15 September 2022              [Page 12]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
        This version of this YANG module is part of RFC XXXX; see
@@ -725,9 +725,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 13]
+Yu, et al.              Expires 15 September 2022              [Page 13]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
            If no configured value exists, the server MAY set the value
@@ -781,9 +781,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 14]
+Yu, et al.              Expires 15 September 2022              [Page 14]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
                  the rack is located.";
@@ -837,9 +837,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 15]
+Yu, et al.              Expires 15 September 2022              [Page 15]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
      }
@@ -893,9 +893,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 16]
+Yu, et al.              Expires 15 September 2022              [Page 16]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
                "The child components that are physically contained by
@@ -949,9 +949,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 17]
+Yu, et al.              Expires 15 September 2022              [Page 17]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
 6.  Security Considerations
@@ -1005,9 +1005,9 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 18]
+Yu, et al.              Expires 15 September 2022              [Page 18]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    [TMF-MTOSI]
@@ -1022,9 +1022,9 @@ Internet-Draft               Inventory YANG                   March 2022
               Ceccarelli, "Applicability of Abstraction and Control of
               Traffic Engineered Networks (ACTN) to Packet Optical
               Integration (POI)", Work in Progress, Internet-Draft,
-              draft-ietf-teas-actn-poi-applicability-04, 17 January
-              2022, <https://www.ietf.org/archive/id/draft-ietf-teas-
-              actn-poi-applicability-04.txt>.
+              draft-ietf-teas-actn-poi-applicability-06, 7 March 2022,
+              <https://www.ietf.org/archive/id/draft-ietf-teas-actn-poi-
+              applicability-06.txt>.
 
    [ONF_TR-547]
               Open Networking Foundation (ONF), "TAPI v2.1.3 Reference
@@ -1061,9 +1061,9 @@ Authors' Addresses
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 19]
+Yu, et al.              Expires 15 September 2022              [Page 19]
 
-Internet-Draft               Inventory YANG                   March 2022
+Internet-Draft           Network Inventory YANG               March 2022
 
 
    Aihua Guo
@@ -1117,4 +1117,4 @@ Internet-Draft               Inventory YANG                   March 2022
 
 
 
-Yu, et al.              Expires 5 September 2022               [Page 20]
+Yu, et al.              Expires 15 September 2022              [Page 20]

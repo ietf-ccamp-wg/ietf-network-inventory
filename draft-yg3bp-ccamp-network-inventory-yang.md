@@ -3,8 +3,8 @@ coding: utf-8
 
 title: A YANG Data Model for Network Hardware Inventory
 
-abbrev: Inventory YANG
-docname: draft-yg3bp-ccamp-network-inventory-yang-00
+abbrev: Network Inventory YANG
+docname: draft-yg3bp-ccamp-network-inventory-yang-01
 workgroup: CCAMP Working Group
 category: std
 ipr: trust200902
@@ -181,11 +181,7 @@ The YANG data model defined in this document conforms to the Network Management 
 
 ## Requirements Notation
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 {{!RFC2119}} {{!RFC8174}} when, and only when, they appear in all
-   capitals, as shown here.
+{::boilerplate bcp14}
 
 ## Tree Diagram
 
@@ -217,7 +213,7 @@ Based on TMF classification in {{TMF-MTOSI}}, inventory objects can be divided i
 
 Logically,  the relationship between these inventory objects can be described by {{fig-inventory-object-relationship}} below:
 
-~~~~
+~~~~ ascii-art
                 +-------------+
                 |  inventory  |
                 +-------------+
@@ -265,7 +261,7 @@ Note: review in future versions of this document which attributes from {{!RFC834
 
 Note: review in future versions of this document whether to re-use definitions from {{!RFC8348}} or use schema-mount.
 
-~~~~
+~~~~ ascii-art
   +--ro network-inventory
      +--ro equipment-rooms
      |  +--ro equipment-room* [uuid]
@@ -292,7 +288,7 @@ Note: review in future versions of this document whether to re-use definitions f
 
 The YANG data model for network hardware inventory follows the same approach of {{!RFC8348}} and reports the network hardware inventory as a list of components with different types (e.g., chassis, module, port).
 
-~~~~
+~~~~ ascii-art
   +--ro components
      +--ro component* [uuid]
         +--ro uuid              yang:uuid
@@ -323,9 +319,7 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 
 During doing the design of integration with OSS, some efficiency issues have been discovered.  More discussion is needed to be done in the future to address this issue.
 
-Considering relational database is widely used by traditional OSS systems and part of PNCs, the inventory objects are probably saved in different tables. If the generic model is adopted, when doing a  full amount synchronization, PNC needs to convert all inventory objects of each NE into component objects and mix them together into a list, and then construct a response and send to OSS or MDSC. The OSS or MDSC needs to classify the component list and devide them into different groups, in order to save them in different tables. The mixing-regrouping steps are actually waste of effort.
-
-And this efficiency issue will be more serious in a larger scale of network.
+Considering relational database is widely used by traditional OSS systems and part of PNCs, the inventory objects are probably saved in different tables. If the generic model is adopted, when doing a  full synchronization, PNC needs to convert all inventory objects of each NE into component objects and combine them together into a single list, and then construct a response and send to OSS or MDSC. The OSS or MDSC needs to classify the component list and divide them into different groups, in order to save them in different tables. The combining-regrouping steps are impacting the PNC & OSS/MDSC processing, which may result in efficiency issue in large scale networks.
 
 {: #ni-tree}
 
@@ -333,20 +327,21 @@ And this efficiency issue will be more serious in a larger scale of network.
 
 {{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module ietf-network-inventory.yang ({{ni-yang}}).
 
-~~~~
+~~~~ ascii-art
 {::include ./ietf-network-inventory.tree}
 ~~~~
-{: #fig-ni-tree title="Network inventory tree diagram"}
+{: #fig-ni-tree title="Network inventory tree diagram"
+artwork-name="ietf-network-inventory.tree"}
 
 {: #ni-yang}
 
 # YANG Model for Network Hardware Inventory
 
-~~~~
-<CODE BEGINS> file "ietf-network-inventory@2022-03-04.yang"
+~~~~ yang
 {::include ./ietf-network-inventory.yang}
 ~~~~
-{: #fig-ni-yang title="Network inventory YANG module"}
+{: #fig-ni-yang title="Network inventory YANG module"
+sourcecode-markers="true" sourcecode-name="ietf-network-inventory@2022-03-04.yang"}
 
 # Manageability Considerations
 
