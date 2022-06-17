@@ -15,6 +15,10 @@ module ietf-network-inventory {
       "RFC 8348: A YANG Data Model for Hardware Management.";
   }
   
+  import ietf-inet-types {
+    prefix inet;
+  } 
+  
   organization
     "IETF CCAMP Working Group";
   contact
@@ -69,12 +73,36 @@ module ietf-network-inventory {
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
   
+  revision 2022-06-14 {
+    description
+      "version 3.0.0";
+    reference
+      "draft-yg3bp-ccamp-inventory-yang-01: A YANG Data
+      Model for Network Inventory.";
+  }
+  
   revision 2022-03-04 {
     description
-      "Initial revision.";
+      "version 3.0.0";
     reference
       "draft-yg3bp-ccamp-inventory-yang-00: A YANG Data
       Model for Network Inventory.";
+  }
+  
+  revision 2021-11-09 {
+    description
+      "version 2.0.0";
+    reference
+      "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
+      Model for Optical Network Inventory.";
+  }
+
+  revision 2021-10-25 {
+    description
+      "Initial revision.";
+    reference
+      "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
+      Model for Optical Network Inventory.";
   }
   
   container network-inventory {
@@ -107,7 +135,19 @@ module ietf-network-inventory {
         of this node to a locally unique value in the operational
         state.";
     }
+	leaf description {
+	  type string;
+	  description "a textual description of inventory object";
+	}
+	leaf alias {
+	  type string;
+	  description 
+	  "a alias name of inventory objects. This alias name can be 
+	  specified by network manager.";
+	}
+
   }
+ 
   grouping network-elements-grouping {
     description
       "The attributes of the network elements.";
@@ -119,9 +159,61 @@ module ietf-network-inventory {
         description
           "The list of network elements within the network.";
         uses common-entity-attributes;
+		container ne-location {
+		  leaf-list equipment-room-name {
+		    type leafref {
+			  path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:name";
+			}
+		  }
+		}
+		uses ne-specific-info-grouping;
         uses components-grouping;
       }
     }
+  }
+  
+  grouping ne-specific-info-grouping {
+	leaf hardware-rev {
+	  type string;
+	  description "The vendor-specific hardware revision string for the NE.";
+	}
+	
+	leaf firmware-rev {
+	  type string;
+	  description "The vendor-specific firmware revision string for the NE.";
+	}
+	
+	leaf software-rev {
+	  type string;
+	  description "The vendor-specific software revision string for the NE.";
+	}
+	
+	leaf mfg-name {
+	  type string;
+	  description "The name of the manufacturer of this NE";
+	}
+	
+	leaf mfg-date {
+	  type yang:date-and-time;
+	  description "The date of manufacturing of the NE.";
+	}
+	
+	leaf model-name {
+	  type string;
+	  description "The vendor-specific model name identifier string associated
+	  with this NE.  The preferred value is the customer-visible 
+	  part number, which may be printed on the NE itself.";
+	}
+	
+	leaf serial-number {
+	  type string;
+	  description "The vendor-specific serial number string for the NE";
+	}	
+  
+    leaf product-name {
+	  type string;
+	  description "indicates the vendor-spefic device type infomation.";
+	}
   }
   
   grouping equipment-rooms-grouping {
@@ -142,63 +234,86 @@ module ietf-network-inventory {
             inventory objects, a GIS address is preferred for
             equipment room";
         }
+		container racks {
         list rack {
           key uuid;
           description
             "The list of racks within an equipment room.";
           uses common-entity-attributes;
-          leaf row-number {
-            type uint32;
-            description
-              "Identifies the row within the equipment room where
-              the rack is located.";
-          }
-          leaf rack-number {
-            type uint32;
-            description
-              "Identifies the physical location of the rack within
-              the row.";
-          }
-          list chassis {
-            key uuid;
+          uses rack-specific-info-grouping;
+          list contained-chassis {
+            key "ne-ref component-ref";
             description
               "The list of chassis within a rack.";
-            uses common-entity-attributes;
-            leaf chassis-number {
-              type uint8;
-              description
-                "Identifies the location of the chassis within the
-                rack.";
-            }
-            container chassis-ref {
-              description
-                "The reference to the network element component
-                representing this chassis.";
-              leaf ne-ref {
-                type leafref {
-                  path "/ni:network-inventory/ni:network-elements"
-                    + "/ni:network-element/ni:uuid";
-                }
-                description
-                  "The reference to the network element containing
-                  the component.";
-              }
-              leaf component-ref {
-                type leafref {
-                  path "/ni:network-inventory/ni:network-elements"
-                     + "/ni:network-element[ni:uuid"
-                     + "=current()/../ne-ref]/ni:components"
-                     + "/ni:component/ni:uuid";
-                }
-                description
-                  "The reference to the component within the network
-                  element.";
-              }
-            }
+            leaf ne-ref {
+			  type leafref {
+			    path "/ni:network-inventory/ni:network-elements"
+				  + "/ni:network-element/ni:uuid";
+			  }
+			  description
+			    "The reference to the network element containing
+			    the component.";
+		    }
+		    leaf component-ref {
+			  type leafref {
+			    path "/ni:network-inventory/ni:network-elements"
+				   + "/ni:network-element[ni:uuid"
+				   + "=current()/../ne-ref]/ni:components"
+				   + "/ni:component/ni:uuid";
+			  }
+			  description
+			    "The reference to the component within the network
+			    element.";
+		    }
           }
         }
+		}
       }
     }
+  }
+  
+  grouping rack-specific-info-grouping {
+    container rack-location {
+	  leaf equipment-room-name {
+	    type leafref {
+		  path "/ni:network-inventory/ni:equipment-rooms"
+		  + "/ni:equipment-room/ni:name";
+		}
+	  }
+      leaf row-number {
+	    type uint32;
+	    description
+	      "Identifies the row within the equipment room where
+	      the rack is located.";
+      }
+      leaf column-number {
+	    type uint32;
+	    description
+	      "Identifies the physical location of the rack within
+	      the column.";
+      }	  
+	}
+	
+	leaf rack-number {
+	  type uint32;
+	}
+  
+	leaf height {
+	  type uint16;
+	  units millimeter;
+	}
+	leaf width {
+	  type uint16;
+	  units millimeter;
+	}
+	leaf depth {
+	  type uint16;
+	  units millimeter;
+	}
+	leaf max-voltage {
+	  type uint16;
+	  units volt;
+	}
   }
 
   grouping components-grouping {
@@ -212,13 +327,9 @@ module ietf-network-inventory {
         description
           "The list of components within a network element.";
         uses common-entity-attributes;
-        leaf description {
-          type string;
-          description
-            "A textual description of the component.";
-          reference
-            "RFC 8348: A YANG Data Model for Hardware Management.";
-        }
+
+		uses location-grouping;
+
         leaf class {
           type identityref {
             base ianahw:hardware-class;
@@ -229,58 +340,423 @@ module ietf-network-inventory {
           reference
             "RFC 8348: A YANG Data Model for Hardware Management.";
         }
-        leaf parent-rel-pos {
-          type int32 {
-            range "0 .. 2147483647";
-          }
+        leaf-list contained-child {
+		  type leafref {
+		    path "../ni:uuid";
+		  }
           description
-            "An indication of the relative position of this child
-             component among all its sibling components.  Sibling
-             components are defined as components that:
-
-               o share the same value of the 'parent' node and
-
-               o share a common base identity for the 'class' node.";
-          reference
-            "RFC 8348: A YANG Data Model for Hardware Management.";
+            "The child components' identifier that are physically contained by
+            this component.";          
         }
-        list children {
-          key child-ref;
-          description
-            "The child components that are physically contained by
-            this component.";
+        container parent-references {
+          leaf equipment-room-uuid {
+	        type leafref {
+		      path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:uuid";
+		    }
+	      }
+          leaf ne-uuid {
+            type leafref {
+        	  path "/ni:network-inventory/ni:network-elements/ni:network-element/ni:uuid";
+        	}
+          }
+          leaf rack-uuid {
+            type leafref {
+        	  path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:racks/ni:rack/ni:uuid";
+        	}
+          }
+		  container component-references {
+		    list component-reference {
+			  key index;
+			  
+			  description "this list object is used to indicate its hiarchical parent components' identifier.
+			  This hiarchical relation can be found by index parameter. The topest parent component should be 0-index.";
+			  
+			  leaf index {
+			    type uint8;
+			  }
+			  leaf class {
+			    type leafref {
+				  path "../../../../ni:class";
+				}
+			  }
+			  leaf uuid {
+			    type leafref {
+				  path "../../../../ni:uuid";
+				}
+			  }
+			}
+		  }
+        }
+		
+		leaf hardware-rev {
+          type string;
           
-          leaf child-ref {
-            type leafref {
-              path "../../ni:uuid";
-            }
-            description
-              "The reference to the child component.";
-          }
-        }
-        container parent {
           description
-            "The parent component that physically contains this
-             component.
-
-             If this container is not instantiated, it indicates
-             that this component is not contained in any other
-             component.
-
-             In the event that a physical component is contained by
-             more than one physical component (e.g., double-wide
-             modules), this container contains the data of one of
-             these components.  An implementation MUST use the same
-             component every time this container is instantiated.";
-          leaf parent-ref {
-            type leafref {
-              path "../../ni:uuid";
-            }
-            description
-              "The reference to the parent component.";
-          }
+            "The vendor-specific hardware revision string for the
+             component.  The preferred value is the hardware revision
+             identifier actually printed on the component itself (if
+             present).";
+          reference
+            "RFC 6933: Entity MIB (Version 4) -
+                       entPhysicalHardwareRev";
         }
+
+        leaf firmware-rev {
+          type string;
+          
+          description
+            "The vendor-specific firmware revision string for the
+             component.";
+          reference
+            "RFC 6933: Entity MIB (Version 4) -
+                       entPhysicalFirmwareRev";
+        }
+
+        leaf software-rev {
+          type string;
+          
+          description
+            "The vendor-specific software revision string for the
+             component.";
+          reference
+            "RFC 6933: Entity MIB (Version 4) -
+                       entPhysicalSoftwareRev";
+        }
+
+        leaf serial-num {
+          type string;
+          
+          description
+            "The vendor-specific serial number string for the
+             component.  The preferred value is the serial number
+             string actually printed on the component itself (if
+             present).";
+          reference
+            "RFC 6933: Entity MIB (Version 4) - entPhysicalSerialNum";
+        }
+
+        leaf mfg-name {
+          type string;
+          
+          description
+            "The name of the manufacturer of this physical component.
+             The preferred value is the manufacturer name string
+             actually printed on the component itself (if present).
+
+             Note that comparisons between instances of the
+             'model-name', 'firmware-rev', 'software-rev', and
+             'serial-num' nodes are only meaningful amongst components
+             with the same value of 'mfg-name'.
+
+             If the manufacturer name string associated with the
+             physical component is unknown to the server, then this
+             node is not instantiated.";
+          reference
+            "RFC 6933: Entity MIB (Version 4) - entPhysicalMfgName";
+        }
+
+        leaf part-number {
+          type string;
+          
+          description
+            "The vendor-specific model name identifier string
+             associated with this physical component.  The preferred
+             value is the customer-visible part number, which may be
+             printed on the component itself.
+
+             If the model name string associated with the physical
+             component is unknown to the server, then this node is not
+             instantiated.";
+          reference
+            "RFC 6933: Entity MIB (Version 4) - entPhysicalModelName";
+        }
+
+
+        leaf asset-id {
+          type string;
+          
+          description
+            "This node is a user-assigned asset tracking identifier for
+             the component.
+
+             A server implementation MAY map this leaf to the
+             entPhysicalAssetID MIB object.  Such an implementation
+             needs to use some mechanism to handle the differences in
+             size and characters allowed between this leaf and
+             entPhysicalAssetID.  The definition of such a mechanism is
+             outside the scope of this document.";
+          reference
+            "RFC 6933: Entity MIB (Version 4) - entPhysicalAssetID";
+        }
+
+        leaf is-fru {
+          type boolean;
+          
+          description
+            "This node indicates whether or not this component is
+             considered a 'field-replaceable unit' by the vendor.  If
+             this node contains the value 'true', then this component
+             identifies a field-replaceable unit.  For all components
+             that are permanently contained within a field-replaceable
+             unit, the value 'false' should be returned for this
+             node.";
+          reference
+            "RFC 6933: Entity MIB (Version 4) - entPhysicalIsFRU";
+        }
+
+        leaf mfg-date {
+          type yang:date-and-time;
+          
+          description
+            "The date of manufacturing of the managed component.";
+          reference
+            "RFC 6933: Entity MIB (Version 4) - entPhysicalMfgDate";
+        }
+
+        leaf-list uri {
+          type inet:uri;
+          
+          description
+            "This node contains identification information about the
+             component.";
+          reference
+            "RFC 6933: Entity MIB (Version 4) - entPhysicalUris";
+        }
+		
+		uses component-specific-info-grouping;
       }
     }
   }
+  
+  grouping component-specific-info-grouping {
+    choice component-class {
+	  case chassis {
+	    when "../class = ianahw:chassis";
+		container chassis-specific-info {
+		  uses chassis-specific-info-grouping;
+		}
+	  }
+	  case container {
+	    when "../class = ianahw:container";
+		container slot-specific-info {
+		  uses slot-specific-info-grouping;
+		}
+	  }
+	  case module {
+	    when "../class = ianahw:module";
+		container board-specific-info {
+		  uses board-specific-info-grouping;
+		}
+	  }
+	  case port {
+	    when "../class = ianahw:port";
+	    container port-specific-info {
+		  uses port-specific-info-grouping;
+		}
+	  }
+	  //TO BE ADDED: transceiver
+	}
+  }
+  
+  grouping chassis-specific-info-grouping {
+  	
+
+  }
+  
+  grouping slot-specific-info-grouping {
+	
+
+  }
+  
+  grouping board-specific-info-grouping {
+	
+  }
+  
+  grouping port-specific-info-grouping {
+	
+
+  }
+  
+  grouping location-grouping {
+    container location {
+	  leaf equipment-room-name {
+	    type leafref {
+		  path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:name";
+		}
+	  }
+	  leaf ne-name {
+	    type leafref {
+		  path "/ni:network-inventory/ni:network-elements/ni:network-element/ni:name";
+		}
+	  }
+	  leaf rack-number {
+	    type leafref {
+		  path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:racks/ni:rack/ni:rack-number";
+		}
+	  }
+	  leaf chassis-index {
+	    type uint16;
+		when "../../ni:class=ianahw:chassis
+		or ../../ni:class=ianahw:container
+		or ../../ni:class=ianahw:module 
+		or ../../ni:class=ianahw:port";
+	  }
+	  leaf slot-index {
+	    type uint16;
+		when "../../ni:class=ianahw:container
+		or ../../ni:class=ianahw:module 
+		or ../../ni:class=ianahw:port";
+	  }
+	  leaf port-index {
+	    type uint16;
+		when "../../ni:class=ianahw:port";
+	  }
+	}
+  }
+  
+  typedef admin-state {
+    type enumeration {
+      enum unknown {
+        value 1;
+        description
+          "The resource is unable to report administrative state.";
+      }
+      enum locked {
+        value 2;
+        description
+          "The resource is administratively prohibited from use.";
+      }
+      enum shutting-down {
+        value 3;
+        description
+          "The resource usage is administratively limited to current
+           instances of use.";
+      }
+      enum unlocked {
+        value 4;
+        description
+          "The resource is not administratively prohibited from use.";
+      }
+    }
+    description
+      "Represents the various possible administrative states.";
+    reference
+        "RFC 8348 admin-state";
+  }
+  
+  typedef oper-state {
+    type enumeration {
+      enum unknown {
+        value 1;
+        description
+          "The resource is unable to report its operational state.";
+      }
+      enum disabled {
+        value 2;
+        description
+          "The resource is totally inoperable.";
+      }
+      enum enabled {
+        value 3;   
+        description
+          "The resource is partially or fully operable.";
+      }
+      enum testing {
+        value 4;
+        description
+        "The resource is currently being tested and cannot
+           therefore report whether or not it is operational.";
+      }	
+    }
+    description
+      "Represents the possible values of operational states.";
+    reference
+      "RFC 8348 oper-state";	
+  }
+  
+    typedef alarm-state {
+      type bits {
+        bit unknown {
+          position 0;
+          description
+            "The resource is unable to report alarm state.";
+        }
+        bit under-repair {
+          position 1;
+          description
+            "The resource is currently being repaired, which, depending
+             on the implementation, may make the other values in this
+             bit string not meaningful.";
+        }
+        bit critical {
+          position 2;
+          description
+            "One or more critical alarms are active against the
+             resource.";
+        }
+        bit major {
+          position 3;
+          description
+            "One or more major alarms are active against the
+             resource.";
+        }
+        bit minor {
+          position 4;
+          description
+            "One or more minor alarms are active against the
+             resource.";
+        }
+        bit warning {
+          position 5;
+          description
+            "One or more warning alarms are active against the
+             resource.";
+        }
+        bit indeterminate {
+          position 6;
+          description
+            "One or more alarms of whose perceived severity cannot be
+             determined are active against this resource.";
+        }
+      }
+      description
+        "Represents the possible values of alarm states.  An alarm is a
+         persistent indication of an error or warning condition.
+         When no bits of this attribute are set, then no active alarms
+         are known against this component and it is not under repair.";
+      reference
+        "RFC 4268: Entity State MIB - EntityAlarmStatus";
+    }
+
+    typedef usage-state {
+      type enumeration {
+        enum unknown {
+          value 1;
+          description
+            "The resource is unable to report usage state.";
+        }
+        enum idle {
+          value 2;
+          description
+            "The resource is servicing no users.";
+        }
+        enum active {
+          value 3;
+          description
+            "The resource is currently in use, and it has sufficient
+             spare capacity to provide for additional users.";
+        }
+        enum busy {
+          value 4;
+          description
+            "The resource is currently in use, but it currently has no
+             spare capacity to provide for additional users.";
+        }
+      }
+      description
+        "Represents the possible values of usage states.";
+      reference
+        "RFC 4268: Entity State MIB -  EntityUsageState";
+    }	
+	
 }
