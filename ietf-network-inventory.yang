@@ -73,7 +73,7 @@ module ietf-network-inventory {
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
   
-  revision 2022-06-14 {
+  revision 2022-07-06 {
     description
       "version 3.0.0";
     reference
@@ -164,6 +164,9 @@ module ietf-network-inventory {
 		    type leafref {
 			  path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:name";
 			}
+		    description
+		    "Names of equipment rooms where the NE is located. Please 
+		    note that a NE could be located in several equipment rooms.";
 		  }
 		}
 		uses ne-specific-info-grouping;
@@ -198,7 +201,7 @@ module ietf-network-inventory {
 	  description "The date of manufacturing of the NE.";
 	}
 	
-	leaf model-name {
+	leaf part-number {
 	  type string;
 	  description "The vendor-specific model name identifier string associated
 	  with this NE.  The preferred value is the customer-visible 
@@ -234,7 +237,7 @@ module ietf-network-inventory {
             inventory objects, a GIS address is preferred for
             equipment room";
         }
-		container racks {
+      container racks {
         list rack {
           key uuid;
           description
@@ -252,7 +255,7 @@ module ietf-network-inventory {
 			  }
 			  description
 			    "The reference to the network element containing
-			    the component.";
+			    the chassis component.";
 		    }
 		    leaf component-ref {
 			  type leafref {
@@ -262,8 +265,8 @@ module ietf-network-inventory {
 				   + "/ni:component/ni:uuid";
 			  }
 			  description
-			    "The reference to the component within the network
-			    element.";
+			    "The reference to the chassis component within 
+			    the network element and contained by the rack.";
 		    }
           }
         }
@@ -279,6 +282,8 @@ module ietf-network-inventory {
 		  path "/ni:network-inventory/ni:equipment-rooms"
 		  + "/ni:equipment-room/ni:name";
 		}
+	    description 
+	    "Name of equipment room where this rack is located.";
 	  }
       leaf row-number {
 	    type uint32;
@@ -296,6 +301,8 @@ module ietf-network-inventory {
 	
 	leaf rack-number {
 	  type uint32;
+	  description
+	  "An integer identifier of rack.";
 	}
   
 	leaf height {
@@ -313,6 +320,7 @@ module ietf-network-inventory {
 	leaf max-voltage {
 	  type uint16;
 	  units volt;
+	  description "The maximum voltage could be supported by the rack.";
 	}
   }
 
@@ -529,28 +537,46 @@ module ietf-network-inventory {
   }
   
   grouping component-specific-info-grouping {
+    description 
+    "In case if there are some missing attributes of component not 
+    defined by RFC8348. These attributes could be component specific.
+    Here we provide a extension structure for all the components we 
+    recognized. We will enrich these component specifc containers in
+    the future.";
     choice component-class {
 	  case chassis {
 	    when "../class = ianahw:chassis";
 		container chassis-specific-info {
+		  description 
+		  "This container container some attributes belong to
+		  chassis only.";
 		  uses chassis-specific-info-grouping;
 		}
 	  }
 	  case container {
 	    when "../class = ianahw:container";
 		container slot-specific-info {
+		  description 
+		  "This container container some attributes belong to
+		  slot or sub-slot only.";
 		  uses slot-specific-info-grouping;
 		}
 	  }
 	  case module {
 	    when "../class = ianahw:module";
 		container board-specific-info {
+		  description 
+		  "This container container some attributes belong to
+		  board only.";		
 		  uses board-specific-info-grouping;
 		}
 	  }
 	  case port {
 	    when "../class = ianahw:port";
 	    container port-specific-info {
+		  description 
+		  "This container container some attributes belong to
+		  port only.";	    
 		  uses port-specific-info-grouping;
 		}
 	  }
@@ -559,21 +585,21 @@ module ietf-network-inventory {
   }
   
   grouping chassis-specific-info-grouping {
-  	
+  //To be enriched in the future.	
 
   }
   
   grouping slot-specific-info-grouping {
-	
+  //To be enriched in the future.
 
   }
   
   grouping board-specific-info-grouping {
-	
+  //To be enriched in the future.
   }
   
   grouping port-specific-info-grouping {
-	
+  //To be enriched in the future.
 
   }
   
@@ -581,182 +607,38 @@ module ietf-network-inventory {
     container location {
 	  leaf equipment-room-name {
 	    type leafref {
-		  path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:name";
-		}
+		    path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:name";
+		  }
 	  }
 	  leaf ne-name {
 	    type leafref {
-		  path "/ni:network-inventory/ni:network-elements/ni:network-element/ni:name";
-		}
+		    path "/ni:network-inventory/ni:network-elements/ni:network-element/ni:name";
+		  }
 	  }
 	  leaf rack-number {
 	    type leafref {
-		  path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:racks/ni:rack/ni:rack-number";
-		}
+		    path "/ni:network-inventory/ni:equipment-rooms/ni:equipment-room/ni:racks/ni:rack/ni:rack-number";
+		  }
 	  }
 	  leaf chassis-index {
 	    type uint16;
-		when "../../ni:class=ianahw:chassis
-		or ../../ni:class=ianahw:container
-		or ../../ni:class=ianahw:module 
-		or ../../ni:class=ianahw:port";
+		  when "../../ni:class=ianahw:chassis
+		      or ../../ni:class=ianahw:container
+		      or ../../ni:class=ianahw:module 
+		      or ../../ni:class=ianahw:port";
 	  }
 	  leaf slot-index {
 	    type uint16;
-		when "../../ni:class=ianahw:container
-		or ../../ni:class=ianahw:module 
-		or ../../ni:class=ianahw:port";
+		  when "../../ni:class=ianahw:container
+		      or ../../ni:class=ianahw:module 
+	      	or ../../ni:class=ianahw:port";
 	  }
 	  leaf port-index {
 	    type uint16;
-		when "../../ni:class=ianahw:port";
+		  when "../../ni:class=ianahw:port";
 	  }
 	}
   }
   
-  typedef admin-state {
-    type enumeration {
-      enum unknown {
-        value 1;
-        description
-          "The resource is unable to report administrative state.";
-      }
-      enum locked {
-        value 2;
-        description
-          "The resource is administratively prohibited from use.";
-      }
-      enum shutting-down {
-        value 3;
-        description
-          "The resource usage is administratively limited to current
-           instances of use.";
-      }
-      enum unlocked {
-        value 4;
-        description
-          "The resource is not administratively prohibited from use.";
-      }
-    }
-    description
-      "Represents the various possible administrative states.";
-    reference
-        "RFC 8348 admin-state";
-  }
-  
-  typedef oper-state {
-    type enumeration {
-      enum unknown {
-        value 1;
-        description
-          "The resource is unable to report its operational state.";
-      }
-      enum disabled {
-        value 2;
-        description
-          "The resource is totally inoperable.";
-      }
-      enum enabled {
-        value 3;   
-        description
-          "The resource is partially or fully operable.";
-      }
-      enum testing {
-        value 4;
-        description
-        "The resource is currently being tested and cannot
-           therefore report whether or not it is operational.";
-      }	
-    }
-    description
-      "Represents the possible values of operational states.";
-    reference
-      "RFC 8348 oper-state";	
-  }
-  
-    typedef alarm-state {
-      type bits {
-        bit unknown {
-          position 0;
-          description
-            "The resource is unable to report alarm state.";
-        }
-        bit under-repair {
-          position 1;
-          description
-            "The resource is currently being repaired, which, depending
-             on the implementation, may make the other values in this
-             bit string not meaningful.";
-        }
-        bit critical {
-          position 2;
-          description
-            "One or more critical alarms are active against the
-             resource.";
-        }
-        bit major {
-          position 3;
-          description
-            "One or more major alarms are active against the
-             resource.";
-        }
-        bit minor {
-          position 4;
-          description
-            "One or more minor alarms are active against the
-             resource.";
-        }
-        bit warning {
-          position 5;
-          description
-            "One or more warning alarms are active against the
-             resource.";
-        }
-        bit indeterminate {
-          position 6;
-          description
-            "One or more alarms of whose perceived severity cannot be
-             determined are active against this resource.";
-        }
-      }
-      description
-        "Represents the possible values of alarm states.  An alarm is a
-         persistent indication of an error or warning condition.
-         When no bits of this attribute are set, then no active alarms
-         are known against this component and it is not under repair.";
-      reference
-        "RFC 4268: Entity State MIB - EntityAlarmStatus";
-    }
-
-    typedef usage-state {
-      type enumeration {
-        enum unknown {
-          value 1;
-          description
-            "The resource is unable to report usage state.";
-        }
-        enum idle {
-          value 2;
-          description
-            "The resource is servicing no users.";
-        }
-        enum active {
-          value 3;
-          description
-            "The resource is currently in use, and it has sufficient
-             spare capacity to provide for additional users.";
-        }
-        enum busy {
-          value 4;
-          description
-            "The resource is currently in use, but it currently has no
-             spare capacity to provide for additional users.";
-        }
-      }
-      description
-        "Represents the possible values of usage states.";
-      reference
-        "RFC 4268: Entity State MIB -  EntityUsageState";
-    }	
 	
 }
