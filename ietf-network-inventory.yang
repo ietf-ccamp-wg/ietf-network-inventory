@@ -215,12 +215,12 @@ module ietf-network-inventory {
       type string;
       description
         "The vendor-specific serial number string for the NE";
-    }	
+    }
     leaf product-name {
       type string;
       description
         "indicates the vendor-spefic device type infomation.";
-	  }
+    }
   }
   
   grouping equipment-rooms-grouping {
@@ -306,8 +306,8 @@ module ietf-network-inventory {
         description
           "Identifies the physical location of the rack within
           the column.";
-      }	  
-	  }
+      }
+    }
     leaf rack-number {
       type uint32;
       description
@@ -362,7 +362,7 @@ module ietf-network-inventory {
               [/s_sl=<s_sl_index> ...]][/p=<p_index> …]]'
             ";
         }
-    		uses location-grouping;
+        uses location-grouping;
         leaf class {
           type identityref {
             base ianahw:hardware-class;
@@ -401,12 +401,12 @@ module ietf-network-inventory {
             }
             description
               "To be added.";
-	        }
+          }
           leaf ne-uuid {
             type leafref {
               path "/ni:network-inventory/ni:network-elements/" +
                    "ni:network-element/ni:uuid";
-        	  }
+            }
             description
               "To be added.";
           }
@@ -451,7 +451,7 @@ module ietf-network-inventory {
             }
           }
         }
-		    leaf hardware-rev {
+        leaf hardware-rev {
           type string;
           description
             "The vendor-specific hardware revision string for the
@@ -567,7 +567,7 @@ module ietf-network-inventory {
           reference
             "RFC 6933: Entity MIB (Version 4) - entPhysicalUris";
         }
-    		uses component-specific-info-grouping;
+        uses component-specific-info-grouping;
       }
     }
   }
@@ -606,7 +606,7 @@ module ietf-network-inventory {
         container board-specific-info {
           description 
             "This container container some attributes belong to
-            board only.";		
+            board only.";
           uses board-specific-info-grouping;
         }
       }
@@ -615,16 +615,16 @@ module ietf-network-inventory {
         container port-specific-info {
           description 
             "This container container some attributes belong to
-            port only.";	    
+            port only.";
           uses port-specific-info-grouping;
         }
       }
-	  //TO BE ADDED: transceiver
-  	}
+    //TO BE ADDED: transceiver
+    }
   }
   
   grouping chassis-specific-info-grouping {
-  //To be enriched in the future.	
+  //To be enriched in the future.
     description
       "To be added.";
   }
