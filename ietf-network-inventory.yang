@@ -73,7 +73,7 @@ module ietf-network-inventory {
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
   
-  revision 2022-07-06 {
+  revision 2022-07-11 {
     description
       "version 3.0.0";
     reference
@@ -362,7 +362,6 @@ module ietf-network-inventory {
               [/s_sl=<s_sl_index> ...]][/p=<p_index> …]]'
             ";
         }
-        uses location-grouping;
         leaf class {
           type identityref {
             base ianahw:hardware-class;
@@ -424,9 +423,9 @@ module ietf-network-inventory {
             list component-reference {
               key index;
               description
-                "this list object is used to indicate its hiarchical 
-                parent components' identifier.
-                This hiarchical relation can be found by index 
+                "this list object is used to indicate its
+                hierarchial parent components' identifier.
+                This hierarchial relation can be found by index 
                 parameter. The topest parent component should be 
                 0-index.";
               leaf index {
@@ -587,7 +586,7 @@ module ietf-network-inventory {
         when "./class = 'ianahw:chassis'";
         container chassis-specific-info {
           description 
-            "This container container some attributes belong to
+            "This container contains some attributes belong to
             chassis only.";
           uses chassis-specific-info-grouping;
         }
@@ -596,7 +595,7 @@ module ietf-network-inventory {
         when "./class = 'ianahw:container'";
         container slot-specific-info {
           description 
-            "This container container some attributes belong to
+            "This container contains some attributes belong to
             slot or sub-slot only.";
           uses slot-specific-info-grouping;
         }
@@ -605,7 +604,7 @@ module ietf-network-inventory {
         when "./ni:class = 'ianahw:module'";
         container board-specific-info {
           description 
-            "This container container some attributes belong to
+            "This container contains some attributes belong to
             board only.";
           uses board-specific-info-grouping;
         }
@@ -614,7 +613,7 @@ module ietf-network-inventory {
         when "./ni:class = 'ianahw:port'";
         container port-specific-info {
           description 
-            "This container container some attributes belong to
+            "This container contains some attributes belong to
             port only.";
           uses port-specific-info-grouping;
         }

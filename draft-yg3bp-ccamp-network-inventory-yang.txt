@@ -954,7 +954,7 @@ Yu, et al.               Expires 12 January 2023               [Page 17]
 Internet-Draft           Network Inventory YANG                July 2022
 
 
-   <CODE BEGINS> file "ietf-network-inventory@2022-07-06.yang"
+   <CODE BEGINS> file "ietf-network-inventory@2022-07-11.yang"
    module ietf-network-inventory {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-network-inventory";
@@ -1037,7 +1037,7 @@ Internet-Draft           Network Inventory YANG                July 2022
      // RFC Ed.: update the date below with the date of RFC publication
      // and remove this note.
 
-     revision 2022-07-06 {
+     revision 2022-07-11 {
        description
          "version 3.0.0";
        reference
@@ -1374,7 +1374,6 @@ Internet-Draft           Network Inventory YANG                July 2022
                  [/s_sl=<s_sl_index> ...]][/p=<p_index> …]]'
                ";
            }
-           uses location-grouping;
            leaf class {
              type identityref {
                base ianahw:hardware-class;
@@ -1394,6 +1393,7 @@ Internet-Draft           Network Inventory YANG                July 2022
                contained by this component.";
            }
            leaf parent-rel-pos {
+             type int32 {
 
 
 
@@ -1402,7 +1402,6 @@ Yu, et al.               Expires 12 January 2023               [Page 25]
 Internet-Draft           Network Inventory YANG                July 2022
 
 
-             type int32 {
                range "0 .. 2147483647";
              }
              description
@@ -1444,12 +1443,13 @@ Internet-Draft           Network Inventory YANG                July 2022
                list component-reference {
                  key index;
                  description
-                   "this list object is used to indicate its hiarchical
-                   parent components' identifier.
-                   This hiarchical relation can be found by index
+                   "this list object is used to indicate its
+                   hierarchial parent components' identifier.
+                   This hierarchial relation can be found by index
                    parameter. The topest parent component should be
                    0-index.";
                  leaf index {
+                   type uint8;
 
 
 
@@ -1458,7 +1458,6 @@ Yu, et al.               Expires 12 January 2023               [Page 26]
 Internet-Draft           Network Inventory YANG                July 2022
 
 
-                   type uint8;
                    description
                      "To be added.";
                  }
@@ -1506,6 +1505,7 @@ Internet-Draft           Network Inventory YANG                July 2022
                 component.";
              reference
                "RFC 6933: Entity MIB (Version 4) -
+                          entPhysicalSoftwareRev";
 
 
 
@@ -1514,7 +1514,6 @@ Yu, et al.               Expires 12 January 2023               [Page 27]
 Internet-Draft           Network Inventory YANG                July 2022
 
 
-                          entPhysicalSoftwareRev";
            }
            leaf serial-num {
              type string;
@@ -1562,6 +1561,7 @@ Internet-Draft           Network Inventory YANG                July 2022
            }
            leaf asset-id {
              type string;
+             description
 
 
 
@@ -1570,7 +1570,6 @@ Yu, et al.               Expires 12 January 2023               [Page 28]
 Internet-Draft           Network Inventory YANG                July 2022
 
 
-             description
                "This node is a user-assigned asset tracking identifier
                 for the component.
 
@@ -1618,6 +1617,7 @@ Internet-Draft           Network Inventory YANG                July 2022
 
      grouping component-specific-info-grouping {
        description
+         "In case if there are some missing attributes of component not
 
 
 
@@ -1626,7 +1626,6 @@ Yu, et al.               Expires 12 January 2023               [Page 29]
 Internet-Draft           Network Inventory YANG                July 2022
 
 
-         "In case if there are some missing attributes of component not
          defined by RFC8348. These attributes could be
          component-specific.
          Here we provide a extension structure for all the components
@@ -1639,7 +1638,7 @@ Internet-Draft           Network Inventory YANG                July 2022
            when "./class = 'ianahw:chassis'";
            container chassis-specific-info {
              description
-               "This container container some attributes belong to
+               "This container contains some attributes belong to
                chassis only.";
              uses chassis-specific-info-grouping;
            }
@@ -1648,7 +1647,7 @@ Internet-Draft           Network Inventory YANG                July 2022
            when "./class = 'ianahw:container'";
            container slot-specific-info {
              description
-               "This container container some attributes belong to
+               "This container contains some attributes belong to
                slot or sub-slot only.";
              uses slot-specific-info-grouping;
            }
@@ -1657,7 +1656,7 @@ Internet-Draft           Network Inventory YANG                July 2022
            when "./ni:class = 'ianahw:module'";
            container board-specific-info {
              description
-               "This container container some attributes belong to
+               "This container contains some attributes belong to
                board only.";
              uses board-specific-info-grouping;
            }
@@ -1666,7 +1665,7 @@ Internet-Draft           Network Inventory YANG                July 2022
            when "./ni:class = 'ianahw:port'";
            container port-specific-info {
              description
-               "This container container some attributes belong to
+               "This container contains some attributes belong to
                port only.";
              uses port-specific-info-grouping;
            }
@@ -1674,6 +1673,7 @@ Internet-Draft           Network Inventory YANG                July 2022
        //TO BE ADDED: transceiver
        }
      }
+
 
 
 
