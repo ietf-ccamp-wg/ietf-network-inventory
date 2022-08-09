@@ -4,7 +4,7 @@ coding: utf-8
 title: A YANG Data Model for Network Hardware Inventory
 
 abbrev: Network Inventory YANG
-docname: draft-yg3bp-ccamp-network-inventory-yang-02
+docname: draft-yg3bp-ccamp-network-inventory-yang-01
 submissiontype: IETF
 workgroup: CCAMP Working Group
 category: std
@@ -89,17 +89,17 @@ Network hardware inventory management is a key component in operators' OSS archi
   their deployment in operator's management and control systems, the traditional function of inventory management
   is also requested to be defined as a data model. 
 
-  Network inventory management and monitoring is a critical part for 
+  Network inventory management and monitoring is a critical part of 
   ensuring the network stays healthy, well-planned, and functioning 
   in the operator's network. Network inventory management allows the
   operator to keep track of what physical network devices are staying
-  in the network including relevant software and hardware versions.
+  in the network including relevant software and hardware.
 
   The network inventory management also helps the operator to know when 
   to acquire new assets and what is needed, or to decommission old or faulty ones, 
   which can help to improve network performance and capacity planning.
 
-In {{?I-D.ietf-teas-actn-poi-applicability}} a gap was identified regarding the lack of a YANG data model that could be used at ACTN MPI interface level to report whole/partial network hardware inventory information available at domain controller level towards north-bound systems (e.g., MDSC or OSS layer).
+In {{?I-D.ietf-teas-actn-poi-applicability}} a gap was identified regarding the lack of a YANG data model that could be used at ACTN MPI interface level to report whole/partial hardware inventory information available at PNC level towards north-bound systems (e.g., MDSC or OSS layer).
 
 {{?RFC8345}} initial goal was to make possible the augmentation of the YANG data model with network inventory data model but this was never developed and the scope was kept limited to network topology data only.
 
@@ -109,11 +109,11 @@ In the ACTN architecture, this would bring also clear benefits at MDSC level for
 
 The intention is to define a generic YANG data model that would be as much as possible technology agnostic (valid for IP, optical and microwave networks) and that could be augmented, when required, to include some technology-specific inventory details.
 
-{{!RFC8348}} defines a YANG data model for the management of the hardware on a single server and therefore it is more applicable to the domain controller South Bound Interface (SBI) towards the network elements rather than at the domain controller's northbound. However, the YANG data model defined in {{!RFC8348}} has been used as a reference for defining the YANG network hardware inventory data model presented in this draft.
+{{!RFC8348}} defines a YANG data model for the management of the hardware on a single server and therefore it is more applicable to the PNC South Bound Interface (SBI) towards the network elements rather than at the PNC MPI. However, the YANG data model defined in {{!RFC8348}} has been used as a reference for defining the YANG network hardware inventory data model.
 
-For optical network hardware inventory, the network inventory YANG data model should support the use cases (4a and 4b) and requirements as defined in {{ONF_TR-547}}, in order to guarantee a seamless integration at MDSC/OSS/orchestration layers.
+For optical network hardware inventory, the network inventory YANG data model should support the use cases (4a and 4b) and requirements defined in {{ONF_TR-547}}, in order to guarantee a seamless integration at MDSC/OSS/orchestration layers.
 
-The proposed YANG data model has been analysed at the present stage to cover the requirements and use cases for Optical Network Hardware Inventory.
+The proposed YANG data model has been analyzed to cover the requirements and use cases for Optical Network Hardware Inventory.
 
 Being based on {{!RFC8348}}, this data model should be a good starting point toward a generic data model and applicable to any technology. However, further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical networks.
 
@@ -187,7 +187,7 @@ The YANG data model defined in this document conforms to the Network Management 
 ## Tree Diagram
 
 A simplified graphical representation of the data model is used in {{ni-tree}} of this document.
-The meaning of the symbols in this diagram is defined in {{!RFC8340}}.
+The meaning of the symbols in these diagrams is defined in {{!RFC8340}}.
 
 ## Prefix in Data Node Names
 
@@ -254,11 +254,14 @@ Logically,  the relationship between these inventory objects can be described by
 
 In {{!RFC8348}}, rack, chassis, slot, sub-slot, board and port are defined as components of network elements with generic attributes.
 
-Considering there are some special scenarios, there is no direct relationship between the rack and network element. In some cases, one network element contains multiple racks while in other cases one rack contains several shelves belonging to one or more network elements.
+Considering there are some special scenarios, the relationship between the rack and network elements is not 1 to 1 nor 1 to n. The network element cannot be the direct parent node of the rack. So there should be n to m relationship between racks and network elements.
+And the chassis in the rack should have some reference information to the component.
 
-While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a network element), the Network Inventory YANG data model is used to retrieve the network hardware inventory information that a controller discovers from all the network elements under its control.
+While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a Network Element), the Network Inventory YANG data model is used to retrieve the network hardware inventory information that a controller discovers from multiple Network Elements under its control.
 
 However, the YANG data model defined in {{!RFC8348}} has been used as a reference for defining the YANG network inventory data model. This approach can simplify the implementation of this network hardware inventory model when the controller uses the YANG data model defined in {{!RFC8348}} to retrieve the hardware  from the network elements under its control.
+
+Note: review in future versions of this document which attributes from {{!RFC8348}} are required also for network hardware inventory and whether there are attributes not defined in {{!RFC8348}} which are required for network hardware inventory
 
 Note: review in future versions of this document whether to re-use definitions from {{!RFC8348}} or use schema-mount.
 
@@ -290,15 +293,15 @@ Note: review in future versions of this document whether to re-use definitions f
 
 For all the inventory objects, there are some common attributes existing. Such as:
 
-Identifier: here we suggest to use uuid format which is widely implemented with systems. It is guaranteed to be globally unique.
+Identifier: here we suggest to use uuid format which is widely used by development of systems. It could be globally unique easily.
 
 Name: name is a human-readable label information which could be used to present on GUI. This name is suggested to be provided by server.
 
 Alias: alias is also a human-readable label information which could be modified by user. It could also be present on GUI instead of name.
 
-Description: description is a human-readable information which could be also input by user. Description provides more detailed information to prompt users when performing maintenance operations.
+Description: description is a human-readable information which could be also input by user. Description provides more detailed information to prompt users when maintaining.
 
-Location: location is a common management requirement of operators. This location could be an absolute position (e.g. mail address), or a relative position (e.g. port index). Different types of inventory objects may require different types of position.
+Location: location is a common management requirement of operators. This location could be absolute position, e.g. address, or relative position, e.g. port index. Different types of inventory objects require different types of position.
 
 ~~~~ ascii-art
 module: ietf-network-inventory
@@ -365,13 +368,13 @@ The YANG data model for network hardware inventory mainly follows the same appro
         +--ro uri*              inet:uri
 ~~~~
 
-But we re-defined some attributes listed in {{!RFC8348}}, based on some integration experience for network wide inventory data.
+But we refined some attributes in {{!RFC8348}}, based on some integration experience we had.
 
-### Changes with respect to RFC8348
+### Refinement of RFC8348
 
 #### New Parent Identifiers' Reference
 
-{{!RFC8348}} provided a "parent-ref" attribute, which was an identifier reference to its parent component. When the MDSC or OSS systems want to find this component's grandparent or higher level component in the hierarchy, they need to retrieve this parent-ref step by step. To reduce this iterative work, we decided to provide a list of hierarchical parent components' identifier references.
+{{!RFC8348}} provided an "parent-ref" attribute, which was an identifier reference to its parent component. When the MDSC or OSS systems want to find this component's grandparent or higher hierarchal level component, they need to retrieve this parent-ref step by step. To reduce this duplicated work, we tend to provide a list of hierarchical parent components' identifier reference.
 
 ~~~~ ascii-art
   +--ro components
@@ -389,11 +392,11 @@ But we re-defined some attributes listed in {{!RFC8348}}, based on some integrat
         ...................................
 ~~~~
 
-The hierarchical components' identifier could be found by the "component-reference" list. The "index" attribute is used to order the list by the hierarchical relationship from topmost component (with the "index" set to 0) to bottom component.
+The hierarchical components' identifier could be found by the "component-reference" list. The "index" in this list which starts from 0 is sort by the hierarchical relationship from topmost component to bottom component.
 
 #### Component-Specific Info Design
 
-According to the management requirements from operators, some important attributes are not defined in {{!RFC8348}}. These attributes could be component-specific and are not suitable to define under the component list node. So, we defined a choice-case structure for this component-specific extension, as follows:
+According to the management requirements from operators, some important attributes are not defined in {{!RFC8348}}. These attributes could be component specific and are not suitable to define under the component list node. So we define a choice-case structure for this component-specific extension, which is:
 
 ~~~~ ascii-art
   +--ro components
@@ -411,11 +414,11 @@ According to the management requirements from operators, some important attribut
         ...................................
 ~~~~
 
-Note: The detail of each *-specific-info YANG container is still under discussion, and the leaf attributes will be defined in future.
+Note: The *-specific-info container is still under discussing, will be enriched in future.
 
 #### Part Number
 
-According to the description in {{!RFC8348}}, the attribute named "model-name" under the component, is preferred to have a customer-visible part number value. "Model-name" is not straightforward to understand and we suggest to rename it as "part-number" directly.
+According to the description in {{!RFC8348}}, the attribute named "model-name" under the component, is preferred to have a customer-visible part number value. Model-name is not quite recognized and we suggest to refine it to part number directly.
 
 ~~~~ ascii-art
   +--ro components
@@ -431,8 +434,8 @@ Note: add some more attributes about equipment room in the future.
 
 ### Rack
 
-Besides the common attributes mentioned in above section, rack could have some specific attributes, such as appearance-related attributes and electricity-related attributes.
-The height, depth and width are described by the figure below (please consider that the door of the rack is facing the user):
+Besides the common attribute mentioned in above section, rack could have some specific attributes, such as attributes about appearance-related attributes and electricity-related attributes.
+The height, depth and width are described by the figure below (please imaged that the door of rack face to the user):
 
 ~~~~ ascii-art
 
@@ -468,9 +471,9 @@ The height, depth and width are described by the figure below (please consider t
              |               |
 
 ~~~~
-{: #fig-rack-appearance title="height, width and depth of rack"}
+{: #fig-rack-appearance title="height, width and width of rack"}
 
-The rack attributes include:
+The attributes for rack includes:
 
 ~~~~ ascii-art
    +--ro racks
@@ -483,7 +486,7 @@ The rack attributes include:
          ...................................
 ~~~~
 
-Max-voltage: the maximum voltage supported by the rack.
+Max-voltage: the maximum voltage could be supported by the rack.
 
 ### Network Element
 
@@ -504,30 +507,30 @@ We consider that some attributes defined in {{?RFC8348}} for components are also
             ...................................
 ~~~~
 
-Note: the attributes of network element are still under discussion.
+Note: the attributes of network element are still under discussing.
 
 ## Efficiency Issue
 
-During  the integration with OSS in some operators, some efficiency/scalability concerns have been discovered when synchronizing network inventory data for big networks.  More discussions are needed to address these concerns.
+During doing the design of integration with OSS, some efficiency issues have been discovered.  More discussion is needed to be done in the future to address this issue.
 
-Considering that relational databases are widely used by traditional OSS systems and also by some network controllers, the inventory objects are most likely to be saved in different tables. With the model defined in current draft, when doing a full synchronization, network controller needs to convert all inventory objects of each NE into component objects and combine them together into a single list, and then construct a response and send to OSS or MDSC. The OSS or MDSC needs to classify the component list and divide them into different groups, in order to save them in different tables. The combining-regrouping steps are impacting the network controller & OSS/MDSC processing, which may result in efficiency/scalability limitations in large scale networks.
+Considering relational database is widely used by traditional OSS systems and part of PNCs, the inventory objects are probably saved in different tables. If the generic model is adopted, when doing a full synchronization, PNC needs to convert all inventory objects of each NE into component objects and combine them together into a single list, and then construct a response and send to OSS or MDSC. The OSS or MDSC needs to classify the component list and divide them into different groups, in order to save them in different tables. The combining-regrouping steps are impacting the PNC & OSS/MDSC processing, which may result in efficiency issue in large scale networks.
 
-An alternative YANG model structure, which defines the inventory objects directly, instead of defining generic components, has also been analyzed. However, also with this model, there still could be some scalability limitations when synchronizing full inventory resources in large scale of networks. This scalability limitation is caused by the limited transmission capabilities of HTTP protocol. We think that this scalability limitation should be solved at protocol level rather than data model level.
+We also designed a YANG model which defines the inventory objects directly instead of defining with generic components. There still could be some scalability issues when synchronizing full inventory resource in large scale of networks. This scalability issue is caused by the small transmission capability of HTTP protocol. We think that this scalability should be solved on protocol level instead of some specific data model.
 
-In case there are some other special types of inventory objects that could be used in other technologies and have not been considered by us, we would like to provide a generic model. If we define the inventory objects directly and give them fix hierarchical relationships in YANG model, once there is a new type of inventory object that needs to be introduced into the model, we need to break down our YANG model and insert the new one, this is not a backward compatible change and therefore is not an acceptable approach for implementation. With a generic model, we only need to augment a new component class and extend some specific attributes for this new inventory component class, which is more flexible. We consider this compatible issue is prior to the efficiency issue mentioned above, therefore, we continue to work on the current model.
+In case there are some other special types of inventory objects could be used in other technologies and have not been recognized by us, we would like to provide a generic model. If we define the inventory objects directly and give them fix hierarchical relationships in YANG model, once there is a new type of inventory object needs to be introduced into the model, we need to break down our YANG model and insert the new one, this is incompatible change which is unacceptable by the developer to implement. In comparison, we only need to augment a new component class and extend some specific attributes for this new inventory if we adopt generic model, which is more acceptable. We think this compatible issue is prior to the efficiency issue mentioned above, therefore, we continue to work on generic component model.
 
 
 ## Some Other Considerations
 
-Note: review in future versions of this document whether the component list should be under the network-inventory instead of the network-element container.
+Note: review in future versions of this document whether the component list should be under the network-inventory instead of under the network-element container
 
-Note that in {{?RFC8345}}, topology and inventory are two subsets of network information. However, considering the complexity of the existing topology models and having a better extension capability, we define a separate root for the inventory model. We will consider some other ways to do some associations between the topology model and inventory model in the future.
+Note that in {{?RFC8345}}, topology and inventory are two subsets of network information. However, considering the complexity of the existing topology models and to have a better extension capability, we define a separate root for the inventory model. We will consider some other ways to do some associations between the topology model and inventory model in the future.
 
 Note: review in future versions of this document whether network hardware inventory should be defined as an augmentation of the network model defined in {{?RFC8345}} instead of under a new network-inventory root.
 
-The proposed YANG data model has been analysed so far to cover the requirements and use cases for Optical Network Inventory.
+The proposed YANG data model has been analyzed to cover the requirements and use cases for Optical Network Inventory.
 
-Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical.
+Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical networks.
 
 {: #ni-tree}
 
