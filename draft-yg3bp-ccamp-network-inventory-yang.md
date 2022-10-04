@@ -4,7 +4,7 @@ coding: utf-8
 title: A YANG Data Model for Network Hardware Inventory
 
 abbrev: Network Inventory YANG
-docname: draft-yg3bp-ccamp-network-inventory-yang-02
+docname: draft-yg3bp-ccamp-network-inventory-yang-01
 submissiontype: IETF
 workgroup: CCAMP Working Group
 category: std
@@ -487,7 +487,7 @@ Max-voltage: the maximum voltage supported by the rack.
 
 ### Network Element
 
-We consider that some attributes defined in {{?RFC8348}} for components are also applicable for network element. Includes:
+We consider that some of the attributes defined in {{?RFC8348}} for components are also applicable for network element. These attributes include:
 
 ~~~~ ascii-art
       +--ro network-elements
@@ -504,7 +504,7 @@ We consider that some attributes defined in {{?RFC8348}} for components are also
             ...................................
 ~~~~
 
-Note: the attributes of network element are still under discussion.
+Note: Not all the attributes defined in {{?RFC8348}} are applicable for network element. And there could also be some missing attributes which are not recognized by {{?RFC8348}}. We will do some more extensions after the missing attributes are fully discussed.
 
 ## Efficiency Issue
 
@@ -514,8 +514,7 @@ Considering that relational databases are widely used by traditional OSS systems
 
 An alternative YANG model structure, which defines the inventory objects directly, instead of defining generic components, has also been analyzed. However, also with this model, there still could be some scalability limitations when synchronizing full inventory resources in large scale of networks. This scalability limitation is caused by the limited transmission capabilities of HTTP protocol. We think that this scalability limitation should be solved at protocol level rather than data model level.
 
-In case there are some other special types of inventory objects that could be used in other technologies and have not been considered by us, we would like to provide a generic model. If we define the inventory objects directly and give them fix hierarchical relationships in YANG model, once there is a new type of inventory object that needs to be introduced into the model, we need to break down our YANG model and insert the new one, this is not a backward compatible change and therefore is not an acceptable approach for implementation. With a generic model, we only need to augment a new component class and extend some specific attributes for this new inventory component class, which is more flexible. We consider this compatible issue is prior to the efficiency issue mentioned above, therefore, we continue to work on the current model.
-
+In case there are some other special types of inventory objects that could be used in other technologies and have not been considered by us, we would like to provide a generic model. If we define the inventory objects directly and give them fix hierarchical relationships in YANG model, once there is a new type of inventory object that needs to be introduced into the model, we need to break down our YANG model and insert the new one, this is not a backward compatible change and therefore is not an acceptable approach for implementation. With a generic model, we only need to augment a new component class and extend some specific attributes for this new inventory component class, which is more flexible. We consider that this generic data model, enabling a flexible and backward compatible approach for other technologies, represents the main scope of this draft. Solution description to efficiency/scalability limitations mentioned above is considered as out-of-scope.
 
 ## Some Other Considerations
 
