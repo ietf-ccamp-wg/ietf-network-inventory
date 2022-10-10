@@ -5,7 +5,7 @@
 CCAMP Working Group                                                C. Yu
 Internet-Draft                                                   I. Busi
 Intended status: Standards Track                     Huawei Technologies
-Expires: 7 April 2023                                             A. Guo
+Expires: 13 April 2023                                            A. Guo
                                                   Futurewei Technologies
                                                               S. Belotti
                                                                    Nokia
@@ -17,7 +17,7 @@ Expires: 7 April 2023                                             A. Guo
                                                               Telefonica
                                                                 V. Lopez
                                                                    Nokia
-                                                          4 October 2022
+                                                         10 October 2022
 
 
             A YANG Data Model for Network Hardware Inventory
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 1]
+Yu, et al.                Expires 13 April 2023                 [Page 1]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -63,7 +63,7 @@ Internet-Draft           Network Inventory YANG             October 2022
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 April 2023.
+   This Internet-Draft will expire on 13 April 2023.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 2]
+Yu, et al.                Expires 13 April 2023                 [Page 2]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -165,7 +165,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 3]
+Yu, et al.                Expires 13 April 2023                 [Page 3]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -221,7 +221,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 4]
+Yu, et al.                Expires 13 April 2023                 [Page 4]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -277,7 +277,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 5]
+Yu, et al.                Expires 13 April 2023                 [Page 5]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -333,7 +333,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 6]
+Yu, et al.                Expires 13 April 2023                 [Page 6]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -389,7 +389,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 7]
+Yu, et al.                Expires 13 April 2023                 [Page 7]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -445,7 +445,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 8]
+Yu, et al.                Expires 13 April 2023                 [Page 8]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -459,9 +459,9 @@ Internet-Draft           Network Inventory YANG             October 2022
    information to prompt users when performing maintenance operations.
 
    Location: location is a common management requirement of operators.
-   This location could be an absolute position (e.g. mail address), or a
-   relative position (e.g. port index).  Different types of inventory
-   objects may require different types of position.
+   This location could be an absolute position (e.g. mailing address),
+   or a relative position (e.g. port index).  Different types of
+   inventory objects may require different types of position.
 
 
 
@@ -501,7 +501,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                  [Page 9]
+Yu, et al.                Expires 13 April 2023                 [Page 9]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -557,7 +557,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 10]
+Yu, et al.                Expires 13 April 2023                [Page 10]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -613,7 +613,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 11]
+Yu, et al.                Expires 13 April 2023                [Page 11]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -669,7 +669,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 12]
+Yu, et al.                Expires 13 April 2023                [Page 12]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -725,7 +725,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 13]
+Yu, et al.                Expires 13 April 2023                [Page 13]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -762,8 +762,9 @@ Internet-Draft           Network Inventory YANG             October 2022
 
    Note: Not all the attributes defined in [RFC8348] are applicable for
    network element.  And there could also be some missing attributes
-   which are not recognized by [RFC8348].  We will do some more
-   extensions after the missing attributes are fully discussed.
+   which are not recognized by [RFC8348].  More extensions could be
+   introduced in later revisions after the missing attributes are fully
+   discussed.
 
 2.2.  Efficiency Issue
 
@@ -777,15 +778,15 @@ Internet-Draft           Network Inventory YANG             October 2022
    objects are most likely to be saved in different tables.  With the
    model defined in current draft, when doing a full synchronization,
    network controller needs to convert all inventory objects of each NE
-   into component objects and combine them together into a single list,
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 14]
+Yu, et al.                Expires 13 April 2023                [Page 14]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
+   into component objects and combine them together into a single list,
    and then construct a response and send to OSS or MDSC.  The OSS or
    MDSC needs to classify the component list and divide them into
    different groups, in order to save them in different tables.  The
@@ -802,16 +803,15 @@ Internet-Draft           Network Inventory YANG             October 2022
    think that this scalability limitation should be solved at protocol
    level rather than data model level.
 
-   In case there are some other special types of inventory objects that
-   could be used in other technologies and have not been considered by
-   us, we would like to provide a generic model.  If we define the
-   inventory objects directly and give them fix hierarchical
-   relationships in YANG model, once there is a new type of inventory
-   object that needs to be introduced into the model, we need to break
-   down our YANG model and insert the new one, this is not a backward
+   The model proposed by this draft is designed to be as generic as
+   possible so to cover future special types of inventory objects that
+   could be used in other technologies, that have not been identified
+   yet.  If the inventory objects were to be defined directly with fixed
+   hierarchical relationships in YANG model, this new type of inventory
+   objects needs to be manually defined, which is not a backward
    compatible change and therefore is not an acceptable approach for
-   implementation.  With a generic model, we only need to augment a new
-   component class and extend some specific attributes for this new
+   implementation.  With a generic model, it is only needed to augment a
+   new component class and extend some specific attributes for this new
    inventory component class, which is more flexible.  We consider that
    this generic data model, enabling a flexible and backward compatible
    approach for other technologies, represents the main scope of this
@@ -837,7 +837,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 15]
+Yu, et al.                Expires 13 April 2023                [Page 15]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -893,7 +893,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 16]
+Yu, et al.                Expires 13 April 2023                [Page 16]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -949,7 +949,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 17]
+Yu, et al.                Expires 13 April 2023                [Page 17]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1005,7 +1005,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 18]
+Yu, et al.                Expires 13 April 2023                [Page 18]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1061,7 +1061,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 19]
+Yu, et al.                Expires 13 April 2023                [Page 19]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1117,7 +1117,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 20]
+Yu, et al.                Expires 13 April 2023                [Page 20]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1173,7 +1173,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 21]
+Yu, et al.                Expires 13 April 2023                [Page 21]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1229,7 +1229,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 22]
+Yu, et al.                Expires 13 April 2023                [Page 22]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1285,7 +1285,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 23]
+Yu, et al.                Expires 13 April 2023                [Page 23]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1341,7 +1341,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 24]
+Yu, et al.                Expires 13 April 2023                [Page 24]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1397,7 +1397,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 25]
+Yu, et al.                Expires 13 April 2023                [Page 25]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1453,7 +1453,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 26]
+Yu, et al.                Expires 13 April 2023                [Page 26]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1509,7 +1509,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 27]
+Yu, et al.                Expires 13 April 2023                [Page 27]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1565,7 +1565,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 28]
+Yu, et al.                Expires 13 April 2023                [Page 28]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1621,7 +1621,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 29]
+Yu, et al.                Expires 13 April 2023                [Page 29]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1677,7 +1677,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 30]
+Yu, et al.                Expires 13 April 2023                [Page 30]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1733,7 +1733,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 31]
+Yu, et al.                Expires 13 April 2023                [Page 31]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1789,7 +1789,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 32]
+Yu, et al.                Expires 13 April 2023                [Page 32]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1845,7 +1845,7 @@ Authors' Addresses
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 33]
+Yu, et al.                Expires 13 April 2023                [Page 33]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -1901,4 +1901,4 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 7 April 2023                 [Page 34]
+Yu, et al.                Expires 13 April 2023                [Page 34]
