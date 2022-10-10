@@ -298,7 +298,7 @@ Alias: alias is also a human-readable label information which could be modified 
 
 Description: description is a human-readable information which could be also input by user. Description provides more detailed information to prompt users when performing maintenance operations.
 
-Location: location is a common management requirement of operators. This location could be an absolute position (e.g. mail address), or a relative position (e.g. port index). Different types of inventory objects may require different types of position.
+Location: location is a common management requirement of operators. This location could be an absolute position (e.g. mailing address), or a relative position (e.g. port index). Different types of inventory objects may require different types of position.
 
 ~~~~ ascii-art
 module: ietf-network-inventory
@@ -504,7 +504,7 @@ We consider that some of the attributes defined in {{?RFC8348}} for components a
             ...................................
 ~~~~
 
-Note: Not all the attributes defined in {{?RFC8348}} are applicable for network element. And there could also be some missing attributes which are not recognized by {{?RFC8348}}. We will do some more extensions after the missing attributes are fully discussed.
+Note: Not all the attributes defined in {{?RFC8348}} are applicable for network element. And there could also be some missing attributes which are not recognized by {{?RFC8348}}. More extensions could be introduced in later revisions after the missing attributes are fully discussed.
 
 ## Efficiency Issue
 
@@ -514,7 +514,7 @@ Considering that relational databases are widely used by traditional OSS systems
 
 An alternative YANG model structure, which defines the inventory objects directly, instead of defining generic components, has also been analyzed. However, also with this model, there still could be some scalability limitations when synchronizing full inventory resources in large scale of networks. This scalability limitation is caused by the limited transmission capabilities of HTTP protocol. We think that this scalability limitation should be solved at protocol level rather than data model level.
 
-In case there are some other special types of inventory objects that could be used in other technologies and have not been considered by us, we would like to provide a generic model. If we define the inventory objects directly and give them fix hierarchical relationships in YANG model, once there is a new type of inventory object that needs to be introduced into the model, we need to break down our YANG model and insert the new one, this is not a backward compatible change and therefore is not an acceptable approach for implementation. With a generic model, we only need to augment a new component class and extend some specific attributes for this new inventory component class, which is more flexible. We consider that this generic data model, enabling a flexible and backward compatible approach for other technologies, represents the main scope of this draft. Solution description to efficiency/scalability limitations mentioned above is considered as out-of-scope.
+The model proposed by this draft is designed to be as generic as possible so to cover future special types of inventory objects that could be used in other technologies, that have not been identified yet. If the inventory objects were to be defined directly with fixed hierarchical relationships in YANG model, this new type of inventory objects needs to be manually defined, which is not a backward compatible change and therefore is not an acceptable approach for implementation. With a generic model, it is only needed to augment a new component class and extend some specific attributes for this new inventory component class, which is more flexible. We consider that this generic data model, enabling a flexible and backward compatible approach for other technologies, represents the main scope of this draft. Solution description to efficiency/scalability limitations mentioned above is considered as out-of-scope.
 
 ## Some Other Considerations
 
