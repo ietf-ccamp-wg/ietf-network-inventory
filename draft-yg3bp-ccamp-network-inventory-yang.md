@@ -341,6 +341,7 @@ module: ietf-network-inventory
                   ...................................
 ~~~~
 
+{{reference-RFC8348}}
 ### Reference from RFC8348
 
 The YANG data model for network hardware inventory mainly follows the same approach of {{!RFC8348}} and reports the network hardware inventory as a list of components with different types (e.g., chassis, module, port).
@@ -352,8 +353,7 @@ The YANG data model for network hardware inventory mainly follows the same appro
         +--ro name?             string
         +--ro description?      string
         +--ro class?            identityref
-        +--ro children* [child-ref]
-        |  +--ro child-ref    leafref
+        +--ro contained-child*  -> ../uuid
         +--ro hardware-rev?     string
         +--ro firmware-rev?     string
         +--ro software-rev?     string
@@ -365,7 +365,9 @@ The YANG data model for network hardware inventory mainly follows the same appro
         +--ro uri*              inet:uri
 ~~~~
 
-But we re-defined some attributes listed in {{!RFC8348}}, based on some integration experience for network wide inventory data.
+For state data like admin-state, oper-state and so on, we consider they are more logic related and out of scope of our draft. Same to the sensor-data, it should be define in some other performance monitoring data models instead of inventory data model.
+
+We re-defined some attributes listed in {{!RFC8348}}, based on some integration experience for network wide inventory data.
 
 ### Changes with respect to RFC8348
 
@@ -515,6 +517,61 @@ Considering that relational databases are widely used by traditional OSS systems
 An alternative YANG model structure, which defines the inventory objects directly, instead of defining generic components, has also been analyzed. However, also with this model, there still could be some scalability limitations when synchronizing full inventory resources in large scale of networks. This scalability limitation is caused by the limited transmission capabilities of HTTP protocol. We think that this scalability limitation should be solved at protocol level rather than data model level.
 
 The model proposed by this draft is designed to be as generic as possible so to cover future special types of inventory objects that could be used in other technologies, that have not been identified yet. If the inventory objects were to be defined directly with fixed hierarchical relationships in YANG model, this new type of inventory objects needs to be manually defined, which is not a backward compatible change and therefore is not an acceptable approach for implementation. With a generic model, it is only needed to augment a new component class and extend some specific attributes for this new inventory component class, which is more flexible. We consider that this generic data model, enabling a flexible and backward compatible approach for other technologies, represents the main scope of this draft. Solution description to efficiency/scalability limitations mentioned above is considered as out-of-scope.
+
+## Comparison With Openconfig-platform Data Model
+
+Since more and more devices can be managed by domain controller through OpenConfig. To avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the openconfig-platform.yang which is the data model used to manage inventory information in OpenConfig.
+
+Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to ietf-hardware model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between openconfig-platform and our model directly , which is stated below:
+
+| Attributes in oc-platform  | Attributes in our model  | remark                   |
+| -------------------------- | ------------------------ | ------------------------ |
+| name                       | name                     |                          |
+| type                       | class                    |                          |
+| id                         | uuid                     |                          |
+| location                   | location                 |                          |
+| description                | description              |                          |
+| mfg-name                   | mfg-name                 |                          |
+| mfg-date                   | mfg-date                 |                          |
+| hardware-version           | hardware-rev             |                          |
+| firmware-version           | firmware-rev             |                          |
+| software-version           | software-rev             |                          |
+| serial-no                  | serial-num               |                          |
+| part-no                    | part-number              |                          |
+| clei-code                  |                          | TBD                      |
+| removable                  | is-fru                   |                          |
+| oper-status                |                          | state data               |
+| empty                      | contained-child?         | If there is no contained child, it is empty.  |
+| parent                     | parent-references        |                          |
+| redundant-role             |                          | TBD                      |
+| last-switchover-reason     |                          | state data               |
+| last-switchover-time       |                          | state data               |
+| last-reboot-reason         |                          | state data               |
+| last-reboot-time           |                          | state data               |
+| switchover-ready           |                          | state data               |
+| temperature                |                          | performance data         |
+| memory                     |                          | performance data         |
+| allocated-power            |                          | TBD                      |
+| used-power                 |                          | TBD                      |
+| pcie                       |                          | alarm  data              |
+| properties                 |                          | TBD                      |
+| subcomponents              | contained-child          |                          |
+| chassis                    | chassis-specific-info    |                          |
+| port                       | port-specific-info       |                          |
+| power-supply               |                          | TBD                      |
+| fan                        |                          | Fan is considered as a specific board. And no need to define as a single component  |
+| fabric                     |                          | TBD                      |
+| storage                    |                          | For Optical and IP technology, no need to manage storage on network element |
+| cpu                        |                          | For Optical and IP technology, no need to manage CPU on network element  |
+| integrated-circuit         | board-specific-info      |                          |
+| backplane                  |                          | Backplane is considered as a part of board. And no need to define as a single component  |
+| software-module            |                          | TBD                      |
+| controller-card            |                          | Controller card is considered as a specific functional board. And no need to define as a single component  |
+{: #tab-prefixes title="Comparison between openconfig-platform and inventory data model"}
+
+As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same to alarm data and should be defined in some other alarm data model separately. And for some component specific structures in openconfig-platform, we consider some of them contained by our existing structure, such as fan, backplane, and controller-card. And for some of them, there is no need to manage them for operators, such as storage and cpu.
+
+Mostly, our inventory data model can cover the attributes from OpenConfig.
 
 ## Some Other Considerations
 
