@@ -341,7 +341,8 @@ module: ietf-network-inventory
                   ...................................
 ~~~~
 
-{{reference-RFC8348}}
+{: #reference-RFC8348}
+
 ### Reference from RFC8348
 
 The YANG data model for network hardware inventory mainly follows the same approach of {{!RFC8348}} and reports the network hardware inventory as a list of components with different types (e.g., chassis, module, port).
@@ -365,7 +366,7 @@ The YANG data model for network hardware inventory mainly follows the same appro
         +--ro uri*              inet:uri
 ~~~~
 
-For state data like admin-state, oper-state and so on, we consider they are more logic related and out of scope of our draft. Same to the sensor-data, it should be define in some other performance monitoring data models instead of inventory data model.
+For state data like admin-state, oper-state and so on, we consider they are related to device hardware management and not hardware inventory. Therefore, they are outside of scope of this document. Same for the sensor-data, they should be defined in some other performance monitoring data models instead of inventory data model.
 
 We re-defined some attributes listed in {{!RFC8348}}, based on some integration experience for network wide inventory data.
 
@@ -520,7 +521,7 @@ The model proposed by this draft is designed to be as generic as possible so to 
 
 ## Comparison With Openconfig-platform Data Model
 
-Since more and more devices can be managed by domain controller through OpenConfig. To avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the openconfig-platform.yang which is the data model used to manage inventory information in OpenConfig.
+Since more and more devices can be managed by domain controller through OpenConfig, to avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the openconfig-platform.yang which is the data model used to manage inventory information in OpenConfig.
 
 Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to ietf-hardware model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between openconfig-platform and our model directly , which is stated below:
 
@@ -567,9 +568,9 @@ Openconfig-platform data model is NE-level and uses a generic component concept 
 | backplane                  |                          | Backplane is considered as a part of board. And no need to define as a single component  |
 | software-module            |                          | TBD                      |
 | controller-card            |                          | Controller card is considered as a specific functional board. And no need to define as a single component  |
-{: #tab-prefixes title="Comparison between openconfig-platform and inventory data model"}
+{: #tab-oc title="Comparison between openconfig-platform and inventory data model"}
 
-As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same to alarm data and should be defined in some other alarm data model separately. And for some component specific structures in openconfig-platform, we consider some of them contained by our existing structure, such as fan, backplane, and controller-card. And for some of them, there is no need to manage them for operators, such as storage and cpu.
+As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same for alarm data and it should be defined in some other alarm data models separately. And for some component specific structures in openconfig-platform, we consider some of them can be contained by our existing structure, such as fan, backplane, and controller-card. And for some of them, there is no need to manage for operators, such as storage and cpu.
 
 Mostly, our inventory data model can cover the attributes from OpenConfig.
 
