@@ -4,7 +4,7 @@ coding: utf-8
 title: A YANG Data Model for Network Hardware Inventory
 
 abbrev: Network Inventory YANG
-docname: draft-yg3bp-ccamp-network-inventory-yang-01
+docname: draft-yg3bp-ccamp-network-inventory-yang-02
 submissiontype: IETF
 workgroup: CCAMP Working Group
 category: std
@@ -84,20 +84,11 @@ The YANG data model defined in this document conforms to the Network Management 
 
 Network hardware inventory management is a key component in operators' OSS architectures.
 
-  Network inventory is a fundamental functionality in network management
-  and was specified many years ago. Given the emerging of data models and 
-  their deployment in operator's management and control systems, the traditional function of inventory management
-  is also requested to be defined as a data model. 
+Network inventory is a fundamental functionality in network management and was specified many years ago. Given the emerging of data models and their deployment in operator's management and control systems, the traditional function of inventory management is also requested to be defined as a data model.
 
-  Network inventory management and monitoring is a critical part for 
-  ensuring the network stays healthy, well-planned, and functioning 
-  in the operator's network. Network inventory management allows the
-  operator to keep track of what physical network devices are staying
-  in the network including relevant software and hardware versions.
+Network inventory management and monitoring is a critical part for ensuring the network stays healthy, well-planned, and functioning in the operator's network. Network inventory management allows the operator to keep track of what physical network devices are staying  in the network including relevant software and hardware versions.
 
-  The network inventory management also helps the operator to know when 
-  to acquire new assets and what is needed, or to decommission old or faulty ones, 
-  which can help to improve network performance and capacity planning.
+  The network inventory management also helps the operator to know when to acquire new assets and what is needed, or to decommission old or faulty ones, which can help to improve network performance and capacity planning.
 
 In {{?I-D.ietf-teas-actn-poi-applicability}} a gap was identified regarding the lack of a YANG data model that could be used at ACTN MPI interface level to report whole/partial network hardware inventory information available at domain controller level towards north-bound systems (e.g., MDSC or OSS layer).
 
@@ -123,7 +114,7 @@ Note: review in future versions of this document the related modules, depending 
 
 The YANG data model defined in this document conforms to the Network Management Datastore Architecture {{!RFC8342}}.
 
-## Terminology and Notations 
+## Terminology and Notations
 
   The following terms are defined in {{!RFC7950}} and are not
   redefined here:
@@ -150,7 +141,7 @@ The YANG data model defined in this document conforms to the Network Management 
 
   TBD: Recap the concept of chassis/slot/component/board/... in {{TMF-MTOSI}}.
 
-  Following terms are used for the representation of the hierarchies in the network hardware inventory. 
+  Following terms are used for the representation of the hierarchies in the network hardware inventory.
 
   Network Element:
 
@@ -206,7 +197,7 @@ RFC Editor Note:
 Please replace XXXX with the RFC number assigned to this document.
 Please remove this note.
 
-# YANG Data Model for Network Hardware Inventory 
+# YANG Data Model for Network Hardware Inventory
 
 ## YANG Model Overview
 
@@ -220,7 +211,7 @@ Logically,  the relationship between these inventory objects can be described by
                 +-------------+
                     // \\
               1:N  //   \\ 1:M
-                  //     \\                             
+                  //     \\
   +----------------+     +-----------------+ 
   | equipment room |     | network element |
   +----------------+     +-----------------+
@@ -341,6 +332,8 @@ module: ietf-network-inventory
                   ...................................
 ~~~~
 
+{: #reference-RFC8348}
+
 ### Reference from RFC8348
 
 The YANG data model for network hardware inventory mainly follows the same approach of {{!RFC8348}} and reports the network hardware inventory as a list of components with different types (e.g., chassis, module, port).
@@ -352,8 +345,7 @@ The YANG data model for network hardware inventory mainly follows the same appro
         +--ro name?             string
         +--ro description?      string
         +--ro class?            identityref
-        +--ro children* [child-ref]
-        |  +--ro child-ref    leafref
+        +--ro contained-child*  -> ../uuid
         +--ro hardware-rev?     string
         +--ro firmware-rev?     string
         +--ro software-rev?     string
@@ -365,7 +357,9 @@ The YANG data model for network hardware inventory mainly follows the same appro
         +--ro uri*              inet:uri
 ~~~~
 
-But we re-defined some attributes listed in {{!RFC8348}}, based on some integration experience for network wide inventory data.
+For state data like admin-state, oper-state and so on, we consider they are related to device hardware management and not hardware inventory. Therefore, they are outside of scope of this document. Same for the sensor-data, they should be defined in some other performance monitoring data models instead of inventory data model.
+
+We re-defined some attributes listed in {{!RFC8348}}, based on some integration experience for network wide inventory data.
 
 ### Changes with respect to RFC8348
 
@@ -563,6 +557,63 @@ sourcecode-markers="true" sourcecode-name="ietf-network-inventory@2022-07-11.yan
   \<Add any IANA considerations>
 
 --- back
+
+# Appendix
+
+## Comparison With Openconfig-platform Data Model
+
+Since more and more devices can be managed by domain controller through OpenConfig, to avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the openconfig-platform.yang which is the data model used to manage inventory information in OpenConfig.
+
+Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to ietf-hardware model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between openconfig-platform and our model directly , which is stated below:
+
+| Attributes in oc-platform  | Attributes in our model  | remark                   |
+| -------------------------- | ------------------------ | ------------------------ |
+| name                       | name                     |                          |
+| type                       | class                    |                          |
+| id                         | uuid                     |                          |
+| location                   | location                 |                          |
+| description                | description              |                          |
+| mfg-name                   | mfg-name                 |                          |
+| mfg-date                   | mfg-date                 |                          |
+| hardware-version           | hardware-rev             |                          |
+| firmware-version           | firmware-rev             |                          |
+| software-version           | software-rev             |                          |
+| serial-no                  | serial-num               |                          |
+| part-no                    | part-number              |                          |
+| clei-code                  |                          | TBD                      |
+| removable                  | is-fru                   |                          |
+| oper-status                |                          | state data               |
+| empty                      | contained-child?         | If there is no contained child, it is empty.  |
+| parent                     | parent-references        |                          |
+| redundant-role             |                          | TBD                      |
+| last-switchover-reason     |                          | state data               |
+| last-switchover-time       |                          | state data               |
+| last-reboot-reason         |                          | state data               |
+| last-reboot-time           |                          | state data               |
+| switchover-ready           |                          | state data               |
+| temperature                |                          | performance data         |
+| memory                     |                          | performance data         |
+| allocated-power            |                          | TBD                      |
+| used-power                 |                          | TBD                      |
+| pcie                       |                          | alarm  data              |
+| properties                 |                          | TBD                      |
+| subcomponents              | contained-child          |                          |
+| chassis                    | chassis-specific-info    |                          |
+| port                       | port-specific-info       |                          |
+| power-supply               |                          | TBD                      |
+| fan                        |                          | Fan is considered as a specific board. And no need to define as a single component  |
+| fabric                     |                          | TBD                      |
+| storage                    |                          | For Optical and IP technology, no need to manage storage on network element |
+| cpu                        |                          | For Optical and IP technology, no need to manage CPU on network element  |
+| integrated-circuit         | board-specific-info      |                          |
+| backplane                  |                          | Backplane is considered as a part of board. And no need to define as a single component  |
+| software-module            |                          | TBD                      |
+| controller-card            |                          | Controller card is considered as a specific functional board. And no need to define as a single component  |
+{: #tab-oc title="Comparison between openconfig-platform and inventory data model"}
+
+As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same for alarm data and it should be defined in some other alarm data models separately. And for some component specific structures in openconfig-platform, we consider some of them can be contained by our existing structure, such as fan, backplane, and controller-card. And for some of them, there is no need to manage for operators, such as storage and cpu.
+
+Mostly, our inventory data model can cover the attributes from OpenConfig.
 
 {: numbered="false"}
 
