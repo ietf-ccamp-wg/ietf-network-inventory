@@ -5,7 +5,7 @@
 CCAMP Working Group                                                C. Yu
 Internet-Draft                                                   I. Busi
 Intended status: Standards Track                     Huawei Technologies
-Expires: 24 April 2023                                            A. Guo
+Expires: 27 April 2023                                            A. Guo
                                                   Futurewei Technologies
                                                               S. Belotti
                                                                    Nokia
@@ -17,11 +17,11 @@ Expires: 24 April 2023                                            A. Guo
                                                               Telefonica
                                                                 V. Lopez
                                                                    Nokia
-                                                         21 October 2022
+                                                         24 October 2022
 
 
             A YANG Data Model for Network Hardware Inventory
-              draft-yg3bp-ccamp-network-inventory-yang-01
+              draft-yg3bp-ccamp-network-inventory-yang-02
 
 Abstract
 
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Yu, et al.                Expires 24 April 2023                 [Page 1]
+Yu, et al.                Expires 27 April 2023                 [Page 1]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -63,7 +63,7 @@ Internet-Draft           Network Inventory YANG             October 2022
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2023.
+   This Internet-Draft will expire on 27 April 2023.
 
 Copyright Notice
 
@@ -87,33 +87,34 @@ Table of Contents
      1.3.  Tree Diagram  . . . . . . . . . . . . . . . . . . . . . .   6
      1.4.  Prefix in Data Node Names . . . . . . . . . . . . . . . .   6
    2.  YANG Data Model for Network Hardware Inventory  . . . . . . .   6
-     2.1.  YANG Model Overview . . . . . . . . . . . . . . . . . . .   6
-       2.1.1.  Common Design for All Inventory Objects . . . . . . .   8
+     2.1.  YANG Model Overview . . . . . . . . . . . . . . . . . . .   7
+       2.1.1.  Common Design for All Inventory Objects . . . . . . .   9
        2.1.2.  Reference from RFC8348  . . . . . . . . . . . . . . .  10
        2.1.3.  Changes with respect to RFC8348 . . . . . . . . . . .  11
        2.1.4.  Equipment Room  . . . . . . . . . . . . . . . . . . .  13
        2.1.5.  Rack  . . . . . . . . . . . . . . . . . . . . . . . .  13
        2.1.6.  Network Element . . . . . . . . . . . . . . . . . . .  15
      2.2.  Efficiency Issue  . . . . . . . . . . . . . . . . . . . .  15
-     2.3.  Comparison With Openconfig-platform Data Model  . . . . .  16
-     2.4.  Some Other Considerations . . . . . . . . . . . . . . . .  19
-   3.  Network Hardware Inventory Tree Diagram . . . . . . . . . . .  20
-   4.  YANG Model for Network Hardware Inventory . . . . . . . . . .  22
-   5.  Manageability Considerations  . . . . . . . . . . . . . . . .  35
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  35
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  35
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  35
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  35
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  36
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  37
+     2.3.  Some Other Considerations . . . . . . . . . . . . . . . .  16
+   3.  Network Hardware Inventory Tree Diagram . . . . . . . . . . .  17
+   4.  YANG Model for Network Hardware Inventory . . . . . . . . . .  18
+   5.  Manageability Considerations  . . . . . . . . . . . . . . . .  32
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  32
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  32
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  32
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  32
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  33
+   Appendix A.  Appendix . . . . . . . . . . . . . . . . . . . . . .  34
+     A.1.  Comparison With Openconfig-platform Data Model  . . . . .  34
 
 
 
-Yu, et al.                Expires 24 April 2023                 [Page 2]
+Yu, et al.                Expires 27 April 2023                 [Page 2]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  37
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  37
 
 1.  Introduction
@@ -158,17 +159,21 @@ Internet-Draft           Network Inventory YANG             October 2022
    would enable the correlation of the inventory information with the
    links information reported in the network topology model.
 
+
+
+
+
+
+
+Yu, et al.                Expires 27 April 2023                 [Page 3]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
+
    The intention is to define a generic YANG data model that would be as
    much as possible technology agnostic (valid for IP, optical and
    microwave networks) and that could be augmented, when required, to
    include some technology-specific inventory details.
-
-
-
-Yu, et al.                Expires 24 April 2023                 [Page 3]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
 
    [RFC8348] defines a YANG data model for the management of the
    hardware on a single server and therefore it is more applicable to
@@ -214,17 +219,16 @@ Internet-Draft           Network Inventory YANG             October 2022
 
    *  augment
 
-   *  data model
-
-   *  data node
 
 
-
-
-Yu, et al.                Expires 24 April 2023                 [Page 4]
+Yu, et al.                Expires 27 April 2023                 [Page 4]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
+
+   *  data model
+
+   *  data node
 
    The following terms are defined in [RFC6241] and are not redefined
    here:
@@ -271,16 +275,16 @@ Internet-Draft           Network Inventory YANG             October 2022
       sub-slots and can afford a specific transmission function
       independently.
 
-   Port:
-
-      an interface on board
 
 
-
-Yu, et al.                Expires 24 April 2023                 [Page 5]
+Yu, et al.                Expires 27 April 2023                 [Page 5]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
+
+   Port:
+
+      an interface on board
 
 1.2.  Requirements Notation
 
@@ -320,6 +324,20 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 2.  YANG Data Model for Network Hardware Inventory
 
+
+
+
+
+
+
+
+
+
+Yu, et al.                Expires 27 April 2023                 [Page 6]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
+
 2.1.  YANG Model Overview
 
    Based on TMF classification in [TMF-MTOSI], inventory objects can be
@@ -329,14 +347,6 @@ Internet-Draft           Network Inventory YANG             October 2022
    requirement of GIS and on-demand domain controller selection raised,
    the equipment room becomes a new inventory object to be managed
    besides TMF classification.
-
-
-
-
-Yu, et al.                Expires 24 April 2023                 [Page 6]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
 
    Logically, the relationship between these inventory objects can be
    described by Figure 1 below:
@@ -377,6 +387,13 @@ Internet-Draft           Network Inventory YANG             October 2022
 
               Figure 1: Relationship between inventory objects
 
+
+
+Yu, et al.                Expires 27 April 2023                 [Page 7]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
+
    In [RFC8348], rack, chassis, slot, sub-slot, board and port are
    defined as components of network elements with generic attributes.
 
@@ -385,14 +402,6 @@ Internet-Draft           Network Inventory YANG             October 2022
    one network element contains multiple racks while in other cases one
    rack contains several shelves belonging to one or more network
    elements.
-
-
-
-
-Yu, et al.                Expires 24 April 2023                 [Page 7]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
 
    While [RFC8348] is used to manage the hardware of a single server
    (e.g., a network element), the Network Inventory YANG data model is
@@ -430,6 +439,17 @@ Internet-Draft           Network Inventory YANG             October 2022
                     +--ro uuid              yang:uuid
                     ...................................
 
+
+
+
+
+
+
+Yu, et al.                Expires 27 April 2023                 [Page 8]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
+
 2.1.1.  Common Design for All Inventory Objects
 
    For all the inventory objects, there are some common attributes
@@ -440,15 +460,6 @@ Internet-Draft           Network Inventory YANG             October 2022
 
    Name: name is a human-readable label information which could be used
    to present on GUI.  This name is suggested to be provided by server.
-
-
-
-
-
-Yu, et al.                Expires 24 April 2023                 [Page 8]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
 
    Alias: alias is also a human-readable label information which could
    be modified by user.  It could also be present on GUI instead of
@@ -490,18 +501,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Yu, et al.                Expires 24 April 2023                 [Page 9]
+Yu, et al.                Expires 27 April 2023                 [Page 9]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -557,7 +557,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 10]
+Yu, et al.                Expires 27 April 2023                [Page 10]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -613,7 +613,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 11]
+Yu, et al.                Expires 27 April 2023                [Page 11]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -669,7 +669,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 12]
+Yu, et al.                Expires 27 April 2023                [Page 12]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -725,7 +725,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 13]
+Yu, et al.                Expires 27 April 2023                [Page 13]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -781,7 +781,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 14]
+Yu, et al.                Expires 27 April 2023                [Page 14]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -837,7 +837,7 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 15]
+Yu, et al.                Expires 27 April 2023                [Page 15]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
@@ -863,180 +863,7 @@ Internet-Draft           Network Inventory YANG             October 2022
    draft.  Solution description to efficiency/scalability limitations
    mentioned above is considered as out-of-scope.
 
-2.3.  Comparison With Openconfig-platform Data Model
-
-   Since more and more devices can be managed by domain controller
-   through OpenConfig, to avoid that our inventory data model cannot
-   cover these devices' inventory data, we have compared our inventory
-   data model with the openconfig-platform.yang which is the data model
-   used to manage inventory information in OpenConfig.
-
-   Openconfig-platform data model is NE-level and uses a generic
-   component concept to describe its inner devices and containers, which
-   is similar to ietf-hardware model in [RFC8348].  Since we have also
-   reused the component concept of [RFC8348] in our inventory data
-   model, we can compare the component's attributes between openconfig-
-   platform and our model directly , which is stated below:
-
-   +========================+=======================+=================+
-   | Attributes in oc-      | Attributes in our     | remark          |
-   | platform               | model                 |                 |
-   +========================+=======================+=================+
-   | name                   | name                  |                 |
-   +------------------------+-----------------------+-----------------+
-   | type                   | class                 |                 |
-   +------------------------+-----------------------+-----------------+
-   | id                     | uuid                  |                 |
-   +------------------------+-----------------------+-----------------+
-   | location               | location              |                 |
-   +------------------------+-----------------------+-----------------+
-
-
-
-Yu, et al.                Expires 24 April 2023                [Page 16]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
-
-   | description            | description           |                 |
-   +------------------------+-----------------------+-----------------+
-   | mfg-name               | mfg-name              |                 |
-   +------------------------+-----------------------+-----------------+
-   | mfg-date               | mfg-date              |                 |
-   +------------------------+-----------------------+-----------------+
-   | hardware-version       | hardware-rev          |                 |
-   +------------------------+-----------------------+-----------------+
-   | firmware-version       | firmware-rev          |                 |
-   +------------------------+-----------------------+-----------------+
-   | software-version       | software-rev          |                 |
-   +------------------------+-----------------------+-----------------+
-   | serial-no              | serial-num            |                 |
-   +------------------------+-----------------------+-----------------+
-   | part-no                | part-number           |                 |
-   +------------------------+-----------------------+-----------------+
-   | clei-code              |                       | TBD             |
-   +------------------------+-----------------------+-----------------+
-   | removable              | is-fru                |                 |
-   +------------------------+-----------------------+-----------------+
-   | oper-status            |                       | state data      |
-   +------------------------+-----------------------+-----------------+
-   | empty                  | contained-child?      | If there is no  |
-   |                        |                       | contained       |
-   |                        |                       | child, it is    |
-   |                        |                       | empty.          |
-   +------------------------+-----------------------+-----------------+
-   | parent                 | parent-references     |                 |
-   +------------------------+-----------------------+-----------------+
-   | redundant-role         |                       | TBD             |
-   +------------------------+-----------------------+-----------------+
-   | last-switchover-reason |                       | state data      |
-   +------------------------+-----------------------+-----------------+
-   | last-switchover-time   |                       | state data      |
-   +------------------------+-----------------------+-----------------+
-   | last-reboot-reason     |                       | state data      |
-   +------------------------+-----------------------+-----------------+
-   | last-reboot-time       |                       | state data      |
-   +------------------------+-----------------------+-----------------+
-   | switchover-ready       |                       | state data      |
-   +------------------------+-----------------------+-----------------+
-   | temperature            |                       | performance     |
-   |                        |                       | data            |
-   +------------------------+-----------------------+-----------------+
-   | memory                 |                       | performance     |
-   |                        |                       | data            |
-   +------------------------+-----------------------+-----------------+
-   | allocated-power        |                       | TBD             |
-
-
-
-Yu, et al.                Expires 24 April 2023                [Page 17]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
-
-   +------------------------+-----------------------+-----------------+
-   | used-power             |                       | TBD             |
-   +------------------------+-----------------------+-----------------+
-   | pcie                   |                       | alarm data      |
-   +------------------------+-----------------------+-----------------+
-   | properties             |                       | TBD             |
-   +------------------------+-----------------------+-----------------+
-   | subcomponents          | contained-child       |                 |
-   +------------------------+-----------------------+-----------------+
-   | chassis                | chassis-specific-info |                 |
-   +------------------------+-----------------------+-----------------+
-   | port                   | port-specific-info    |                 |
-   +------------------------+-----------------------+-----------------+
-   | power-supply           |                       | TBD             |
-   +------------------------+-----------------------+-----------------+
-   | fan                    |                       | Fan is          |
-   |                        |                       | considered as a |
-   |                        |                       | specific board. |
-   |                        |                       | And no need to  |
-   |                        |                       | define as a     |
-   |                        |                       | single          |
-   |                        |                       | component       |
-   +------------------------+-----------------------+-----------------+
-   | fabric                 |                       | TBD             |
-   +------------------------+-----------------------+-----------------+
-   | storage                |                       | For Optical and |
-   |                        |                       | IP technology,  |
-   |                        |                       | no need to      |
-   |                        |                       | manage storage  |
-   |                        |                       | on network      |
-   |                        |                       | element         |
-   +------------------------+-----------------------+-----------------+
-   | cpu                    |                       | For Optical and |
-   |                        |                       | IP technology,  |
-   |                        |                       | no need to      |
-   |                        |                       | manage CPU on   |
-   |                        |                       | network element |
-   +------------------------+-----------------------+-----------------+
-   | integrated-circuit     | board-specific-info   |                 |
-   +------------------------+-----------------------+-----------------+
-   | backplane              |                       | Backplane is    |
-   |                        |                       | considered as a |
-   |                        |                       | part of board.  |
-   |                        |                       | And no need to  |
-   |                        |                       | define as a     |
-   |                        |                       | single          |
-   |                        |                       | component       |
-   +------------------------+-----------------------+-----------------+
-
-
-
-Yu, et al.                Expires 24 April 2023                [Page 18]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
-
-   | software-module        |                       | TBD             |
-   +------------------------+-----------------------+-----------------+
-   | controller-card        |                       | Controller card |
-   |                        |                       | is considered   |
-   |                        |                       | as a specific   |
-   |                        |                       | functional      |
-   |                        |                       | board.  And no  |
-   |                        |                       | need to define  |
-   |                        |                       | as a single     |
-   |                        |                       | component       |
-   +------------------------+-----------------------+-----------------+
-
-      Table 2: Comparison between openconfig-platform and inventory
-                                data model
-
-   As it mentioned in Section 2.1.2 that state data and performance data
-   are out of scope of our data model, it is same for alarm data and it
-   should be defined in some other alarm data models separately.  And
-   for some component specific structures in openconfig-platform, we
-   consider some of them can be contained by our existing structure,
-   such as fan, backplane, and controller-card.  And for some of them,
-   there is no need to manage for operators, such as storage and cpu.
-
-   Mostly, our inventory data model can cover the attributes from
-   OpenConfig.
-
-2.4.  Some Other Considerations
+2.3.  Some Other Considerations
 
    Note: review in future versions of this document whether the
    component list should be under the network-inventory instead of the
@@ -1057,19 +884,19 @@ Internet-Draft           Network Inventory YANG             October 2022
    The proposed YANG data model has been analysed so far to cover the
    requirements and use cases for Optical Network Inventory.
 
-
-
-
-
-Yu, et al.                Expires 24 April 2023                [Page 19]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
-
    Further analysis of requirements and use cases is needed to extend
    the applicability of this YANG data model to other types of networks
    (IP and microwave) and to identify which aspects are generic and
    which aspects are technology-specific for optical.
+
+
+
+
+
+Yu, et al.                Expires 27 April 2023                [Page 16]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
 
 3.  Network Hardware Inventory Tree Diagram
 
@@ -1114,19 +941,19 @@ Internet-Draft           Network Inventory YANG             October 2022
               +--ro hardware-rev?    string
               +--ro firmware-rev?    string
               +--ro software-rev?    string
-
-
-
-Yu, et al.                Expires 24 April 2023                [Page 20]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
-
               +--ro mfg-name?        string
               +--ro mfg-date?        yang:date-and-time
               +--ro part-number?     string
               +--ro serial-number?   string
               +--ro product-name?    string
+
+
+
+Yu, et al.                Expires 27 April 2023                [Page 17]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
+
               +--ro components
                  +--ro component* [uuid]
                     +--ro uuid                           yang:uuid
@@ -1169,16 +996,19 @@ Internet-Draft           Network Inventory YANG             October 2022
 
                   Figure 3: Network inventory tree diagram
 
+4.  YANG Model for Network Hardware Inventory
 
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 21]
+
+
+
+
+Yu, et al.                Expires 27 April 2023                [Page 18]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
-
-4.  YANG Model for Network Hardware Inventory
 
    <CODE BEGINS> file "ietf-network-inventory@2022-07-11.yang"
    module ietf-network-inventory {
@@ -1226,16 +1056,15 @@ Internet-Draft           Network Inventory YANG             October 2022
         Editor:   Fabio Peruzzini
                   <fabio.peruzzini@telecomitalia.it>";
 
+     description
+       "This module defines a model for retrieving network inventory.
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 22]
+Yu, et al.                Expires 27 April 2023                [Page 19]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
-
-     description
-       "This module defines a model for retrieving network inventory.
 
        The model fully conforms to the Network Management
        Datastore Architecture (NMDA).
@@ -1282,17 +1111,17 @@ Internet-Draft           Network Inventory YANG             October 2022
 
      revision 2021-11-09 {
        description
+         "version 2.0.0";
+       reference
+         "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 23]
+Yu, et al.                Expires 27 April 2023                [Page 20]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-         "version 2.0.0";
-       reference
-         "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
          Model for Optical Network Inventory.";
      }
 
@@ -1338,17 +1167,17 @@ Internet-Draft           Network Inventory YANG             October 2022
          type string;
          description "a textual description of inventory object";
        }
+       leaf alias {
+         type string;
+         description
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 24]
+Yu, et al.                Expires 27 April 2023                [Page 21]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-       leaf alias {
-         type string;
-         description
          "a alias name of inventory objects. This alias name can be
          specified by network manager.";
        }
@@ -1394,17 +1223,17 @@ Internet-Draft           Network Inventory YANG             October 2022
            "The vendor-specific hardware revision string for the NE.";
        }
        leaf firmware-rev {
+         type string;
+         description
+           "The vendor-specific firmware revision string for the NE.";
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 25]
+Yu, et al.                Expires 27 April 2023                [Page 22]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-         type string;
-         description
-           "The vendor-specific firmware revision string for the NE.";
        }
        leaf software-rev {
          type string;
@@ -1450,17 +1279,17 @@ Internet-Draft           Network Inventory YANG             October 2022
              "The list of equipment rooms within the network.";
            uses common-entity-attributes;
            leaf location {
+             type string;
+             description
+               "compared with the location information of the other
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 26]
+Yu, et al.                Expires 27 April 2023                [Page 23]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-             type string;
-             description
-               "compared with the location information of the other
                inventory objects, a GIS address is preferred for
                equipment room";
            }
@@ -1506,17 +1335,17 @@ Internet-Draft           Network Inventory YANG             October 2022
 
      grouping rack-specific-info-grouping {
        description
+         "To be added.";
+       container rack-location {
+         description
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 27]
+Yu, et al.                Expires 27 April 2023                [Page 24]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-         "To be added.";
-       container rack-location {
-         description
            "To be added.";
          leaf equipment-room-name {
            type leafref {
@@ -1562,17 +1391,17 @@ Internet-Draft           Network Inventory YANG             October 2022
          description
            "To be added.";
        }
+       leaf max-voltage {
+         type uint16;
+         units volt;
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 28]
+Yu, et al.                Expires 27 April 2023                [Page 25]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-       leaf max-voltage {
-         type uint16;
-         units volt;
          description
            "The maximum voltage could be supported by the rack.";
        }
@@ -1618,17 +1447,17 @@ Internet-Draft           Network Inventory YANG             October 2022
              description
                "The child components' identifier that are physically
                contained by this component.";
+           }
+           leaf parent-rel-pos {
+             type int32 {
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 29]
+Yu, et al.                Expires 27 April 2023                [Page 26]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-           }
-           leaf parent-rel-pos {
-             type int32 {
                range "0 .. 2147483647";
              }
              description
@@ -1674,17 +1503,17 @@ Internet-Draft           Network Inventory YANG             October 2022
                    hierarchial parent components' identifier.
                    This hierarchial relation can be found by index
                    parameter. The topest parent component should be
+                   0-index.";
+                 leaf index {
+                   type uint8;
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 30]
+Yu, et al.                Expires 27 April 2023                [Page 27]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-                   0-index.";
-                 leaf index {
-                   type uint8;
                    description
                      "To be added.";
                  }
@@ -1730,17 +1559,17 @@ Internet-Draft           Network Inventory YANG             October 2022
              description
                "The vendor-specific software revision string for the
                 component.";
+             reference
+               "RFC 6933: Entity MIB (Version 4) -
+                          entPhysicalSoftwareRev";
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 31]
+Yu, et al.                Expires 27 April 2023                [Page 28]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-             reference
-               "RFC 6933: Entity MIB (Version 4) -
-                          entPhysicalSoftwareRev";
            }
            leaf serial-num {
              type string;
@@ -1786,17 +1615,17 @@ Internet-Draft           Network Inventory YANG             October 2022
                "RFC 6933: Entity MIB (Version 4) -
                entPhysicalModelName";
            }
+           leaf asset-id {
+             type string;
+             description
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 32]
+Yu, et al.                Expires 27 April 2023                [Page 29]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-           leaf asset-id {
-             type string;
-             description
                "This node is a user-assigned asset tracking identifier
                 for the component.
 
@@ -1842,17 +1671,17 @@ Internet-Draft           Network Inventory YANG             October 2022
        }
      }
 
+     grouping component-specific-info-grouping {
+       description
+         "In case if there are some missing attributes of component not
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 33]
+Yu, et al.                Expires 27 April 2023                [Page 30]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
-     grouping component-specific-info-grouping {
-       description
-         "In case if there are some missing attributes of component not
          defined by RFC8348. These attributes could be
          component-specific.
          Here we provide a extension structure for all the components
@@ -1898,16 +1727,16 @@ Internet-Draft           Network Inventory YANG             October 2022
            }
          }
        //TO BE ADDED: transceiver
+       }
+     }
 
 
 
-Yu, et al.                Expires 24 April 2023                [Page 34]
+
+Yu, et al.                Expires 27 April 2023                [Page 31]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
-
-       }
-     }
 
      grouping chassis-specific-info-grouping {
      //To be enriched in the future.
@@ -1953,19 +1782,17 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 8.1.  Normative References
 
-
-
-
-
-Yu, et al.                Expires 24 April 2023                [Page 35]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+Yu, et al.                Expires 27 April 2023                [Page 32]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
 
    [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
               and A. Bierman, Ed., "Network Configuration Protocol
@@ -2010,17 +1837,18 @@ Internet-Draft           Network Inventory YANG             October 2022
               Ceccarelli, "Applicability of Abstraction and Control of
               Traffic Engineered Networks (ACTN) to Packet Optical
               Integration (POI)", Work in Progress, Internet-Draft,
-
-
-
-Yu, et al.                Expires 24 April 2023                [Page 36]
-
-Internet-Draft           Network Inventory YANG             October 2022
-
-
               draft-ietf-teas-actn-poi-applicability-07, 10 July 2022,
               <https://www.ietf.org/archive/id/draft-ietf-teas-actn-poi-
               applicability-07.txt>.
+
+
+
+
+
+Yu, et al.                Expires 27 April 2023                [Page 33]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
 
    [ONF_TR-547]
               Open Networking Foundation (ONF), "TAPI v2.1.3 Reference
@@ -2033,6 +1861,181 @@ Internet-Draft           Network Inventory YANG             October 2022
               Ananthakrishnan, H., and X. Liu, "A YANG Data Model for
               Network Topologies", RFC 8345, DOI 10.17487/RFC8345, March
               2018, <https://www.rfc-editor.org/info/rfc8345>.
+
+Appendix A.  Appendix
+
+A.1.  Comparison With Openconfig-platform Data Model
+
+   Since more and more devices can be managed by domain controller
+   through OpenConfig, to avoid that our inventory data model cannot
+   cover these devices' inventory data, we have compared our inventory
+   data model with the openconfig-platform.yang which is the data model
+   used to manage inventory information in OpenConfig.
+
+   Openconfig-platform data model is NE-level and uses a generic
+   component concept to describe its inner devices and containers, which
+   is similar to ietf-hardware model in [RFC8348].  Since we have also
+   reused the component concept of [RFC8348] in our inventory data
+   model, we can compare the component's attributes between openconfig-
+   platform and our model directly , which is stated below:
+
+   +========================+=======================+=================+
+   | Attributes in oc-      | Attributes in our     | remark          |
+   | platform               | model                 |                 |
+   +========================+=======================+=================+
+   | name                   | name                  |                 |
+   +------------------------+-----------------------+-----------------+
+   | type                   | class                 |                 |
+   +------------------------+-----------------------+-----------------+
+   | id                     | uuid                  |                 |
+   +------------------------+-----------------------+-----------------+
+   | location               | location              |                 |
+   +------------------------+-----------------------+-----------------+
+   | description            | description           |                 |
+   +------------------------+-----------------------+-----------------+
+   | mfg-name               | mfg-name              |                 |
+   +------------------------+-----------------------+-----------------+
+   | mfg-date               | mfg-date              |                 |
+   +------------------------+-----------------------+-----------------+
+   | hardware-version       | hardware-rev          |                 |
+
+
+
+Yu, et al.                Expires 27 April 2023                [Page 34]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
+
+   +------------------------+-----------------------+-----------------+
+   | firmware-version       | firmware-rev          |                 |
+   +------------------------+-----------------------+-----------------+
+   | software-version       | software-rev          |                 |
+   +------------------------+-----------------------+-----------------+
+   | serial-no              | serial-num            |                 |
+   +------------------------+-----------------------+-----------------+
+   | part-no                | part-number           |                 |
+   +------------------------+-----------------------+-----------------+
+   | clei-code              |                       | TBD             |
+   +------------------------+-----------------------+-----------------+
+   | removable              | is-fru                |                 |
+   +------------------------+-----------------------+-----------------+
+   | oper-status            |                       | state data      |
+   +------------------------+-----------------------+-----------------+
+   | empty                  | contained-child?      | If there is no  |
+   |                        |                       | contained       |
+   |                        |                       | child, it is    |
+   |                        |                       | empty.          |
+   +------------------------+-----------------------+-----------------+
+   | parent                 | parent-references     |                 |
+   +------------------------+-----------------------+-----------------+
+   | redundant-role         |                       | TBD             |
+   +------------------------+-----------------------+-----------------+
+   | last-switchover-reason |                       | state data      |
+   +------------------------+-----------------------+-----------------+
+   | last-switchover-time   |                       | state data      |
+   +------------------------+-----------------------+-----------------+
+   | last-reboot-reason     |                       | state data      |
+   +------------------------+-----------------------+-----------------+
+   | last-reboot-time       |                       | state data      |
+   +------------------------+-----------------------+-----------------+
+   | switchover-ready       |                       | state data      |
+   +------------------------+-----------------------+-----------------+
+   | temperature            |                       | performance     |
+   |                        |                       | data            |
+   +------------------------+-----------------------+-----------------+
+   | memory                 |                       | performance     |
+   |                        |                       | data            |
+   +------------------------+-----------------------+-----------------+
+   | allocated-power        |                       | TBD             |
+   +------------------------+-----------------------+-----------------+
+   | used-power             |                       | TBD             |
+   +------------------------+-----------------------+-----------------+
+   | pcie                   |                       | alarm data      |
+   +------------------------+-----------------------+-----------------+
+   | properties             |                       | TBD             |
+   +------------------------+-----------------------+-----------------+
+
+
+
+Yu, et al.                Expires 27 April 2023                [Page 35]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
+
+   | subcomponents          | contained-child       |                 |
+   +------------------------+-----------------------+-----------------+
+   | chassis                | chassis-specific-info |                 |
+   +------------------------+-----------------------+-----------------+
+   | port                   | port-specific-info    |                 |
+   +------------------------+-----------------------+-----------------+
+   | power-supply           |                       | TBD             |
+   +------------------------+-----------------------+-----------------+
+   | fan                    |                       | Fan is          |
+   |                        |                       | considered as a |
+   |                        |                       | specific board. |
+   |                        |                       | And no need to  |
+   |                        |                       | define as a     |
+   |                        |                       | single          |
+   |                        |                       | component       |
+   +------------------------+-----------------------+-----------------+
+   | fabric                 |                       | TBD             |
+   +------------------------+-----------------------+-----------------+
+   | storage                |                       | For Optical and |
+   |                        |                       | IP technology,  |
+   |                        |                       | no need to      |
+   |                        |                       | manage storage  |
+   |                        |                       | on network      |
+   |                        |                       | element         |
+   +------------------------+-----------------------+-----------------+
+   | cpu                    |                       | For Optical and |
+   |                        |                       | IP technology,  |
+   |                        |                       | no need to      |
+   |                        |                       | manage CPU on   |
+   |                        |                       | network element |
+   +------------------------+-----------------------+-----------------+
+   | integrated-circuit     | board-specific-info   |                 |
+   +------------------------+-----------------------+-----------------+
+   | backplane              |                       | Backplane is    |
+   |                        |                       | considered as a |
+   |                        |                       | part of board.  |
+   |                        |                       | And no need to  |
+   |                        |                       | define as a     |
+   |                        |                       | single          |
+   |                        |                       | component       |
+   +------------------------+-----------------------+-----------------+
+   | software-module        |                       | TBD             |
+   +------------------------+-----------------------+-----------------+
+   | controller-card        |                       | Controller card |
+   |                        |                       | is considered   |
+   |                        |                       | as a specific   |
+   |                        |                       | functional      |
+   |                        |                       | board.  And no  |
+
+
+
+Yu, et al.                Expires 27 April 2023                [Page 36]
+
+Internet-Draft           Network Inventory YANG             October 2022
+
+
+   |                        |                       | need to define  |
+   |                        |                       | as a single     |
+   |                        |                       | component       |
+   +------------------------+-----------------------+-----------------+
+
+      Table 2: Comparison between openconfig-platform and inventory
+                                data model
+
+   As it mentioned in Section 2.1.2 that state data and performance data
+   are out of scope of our data model, it is same for alarm data and it
+   should be defined in some other alarm data models separately.  And
+   for some component specific structures in openconfig-platform, we
+   consider some of them can be contained by our existing structure,
+   such as fan, backplane, and controller-card.  And for some of them,
+   there is no need to manage for operators, such as storage and cpu.
+
+   Mostly, our inventory data model can cover the attributes from
+   OpenConfig.
 
 Acknowledgments
 
@@ -2064,16 +2067,15 @@ Authors' Addresses
    Email: sergio.belotti@nokia.com
 
 
-   Jean-Francois Bouquier
-   Vodafone
 
 
-
-Yu, et al.                Expires 24 April 2023                [Page 37]
+Yu, et al.                Expires 27 April 2023                [Page 37]
 
 Internet-Draft           Network Inventory YANG             October 2022
 
 
+   Jean-Francois Bouquier
+   Vodafone
    Email: jeff.bouquier@vodafone.com
 
 
@@ -2123,6 +2125,4 @@ Internet-Draft           Network Inventory YANG             October 2022
 
 
 
-
-
-Yu, et al.                Expires 24 April 2023                [Page 38]
+Yu, et al.                Expires 27 April 2023                [Page 38]
