@@ -43,7 +43,7 @@ The contributors on this draft has weekly informal conference calls at 3:00pm CE
 - [Join Meeting](https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZWUxYzc0MzItNzVjMy00M2E1LWFmMDktODAxNzgwNDNlMTRk%40thread.v2/0?context=%7b%22Tid%22%3a%2268283f3b-8487-4c86-adb3-a5228f18b893%22%2c%22Oid%22%3a%2242bd9f8c-0160-4ee4-a2f9-0385317dd1bb%22%7d)
 - Draft minutes taken during the call: https://demo.hedgedoc.org/G0vMerovQUu1kH7LR_Gyiw
 
-The official minutes of these calls are available in this repository: https://github.com/italobusi/ietf-network-inventory/tree/master/minutes
+The official minutes of these calls are available in this repository: https://github.com/italobusi/ietf-network-inventory/tree/main/minutes
 
 ### Other Resources
 
