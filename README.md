@@ -2,13 +2,13 @@
 
 ## Scope
 
-This repository is to facilitate the work on the [IETF CCAMP](https://datatracker.ietf.org/wg/ccamp/documents/) Individual Internet-Draft, "[A YANG Data Model for Optical Network Inventory](https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-network-inventory-yang/)".
+This repository is to facilitate the work on the [IETF CCAMP](https://datatracker.ietf.org/wg/ccamp/documents/) Individual Internet-Draft, "[A YANG Data Model for Network Hardware Inventory](https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-network-inventory-yang/)".
 
 Diff editor copy vs published version:
-- [Side-by-side diff](https://www.ietf.org/rfcdiff?url1=draft-yg3bp-ccamp-network-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-ietf-ccamp-network-inventory-yang.txt)
-- [Before-after diff](https://www.ietf.org/rfcdiff?difftype=--abdiff&url1=draft-yg3bp-ccamp-network-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-ietf-ccamp-network-inventory-yang.txt)
-- [Changebars](https://www.ietf.org/rfcdiff?difftype=--chbars&url1=draft-yg3bp-ccamp-network-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-ietf-ccamp-network-inventory-yang.txt)
-- [Html wdiff](https://www.ietf.org/rfcdiff?difftype=--hwdiff&url1=draft-yg3bp-ccamp-network-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-ietf-ccamp-network-inventory-yang.txt)
+- [Side-by-side diff](https://www.ietf.org/rfcdiff?url1=draft-ietf-ccamp-network-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-ietf-ccamp-network-inventory-yang.txt)
+- [Before-after diff](https://www.ietf.org/rfcdiff?difftype=--abdiff&url1=draft-ietf-ccamp-network-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-ietf-ccamp-network-inventory-yang.txt)
+- [Changebars](https://www.ietf.org/rfcdiff?difftype=--chbars&url1=draft-ietf-ccamp-network-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-ietf-ccamp-network-inventory-yang.txt)
+- [Html wdiff](https://www.ietf.org/rfcdiff?difftype=--hwdiff&url1=draft-ietf-ccamp-network-inventory-yang&url2=https://raw.githubusercontent.com/italobusi/ietf-network-inventory/main/draft-ietf-ccamp-network-inventory-yang.txt)
 
 ## Abstract
 
