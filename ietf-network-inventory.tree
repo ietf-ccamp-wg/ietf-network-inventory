@@ -1,0 +1,82 @@
+module: ietf-network-inventory
+  +--ro network-inventory
+     +--ro equipment-rooms
+     |  +--ro equipment-room* [uuid]
+     |     +--ro uuid           yang:uuid
+     |     +--ro name?          string
+     |     +--ro description?   string
+     |     +--ro alias?         string
+     |     +--ro location?      string
+     |     +--ro racks
+     |        +--ro rack* [uuid]
+     |           +--ro uuid                 yang:uuid
+     |           +--ro name?                string
+     |           +--ro description?         string
+     |           +--ro alias?               string
+     |           +--ro rack-location
+     |           |  +--ro equipment-room-name?   leafref
+     |           |  +--ro row-number?            uint32
+     |           |  +--ro column-number?         uint32
+     |           +--ro rack-number?         uint32
+     |           +--ro height?              uint16
+     |           +--ro width?               uint16
+     |           +--ro depth?               uint16
+     |           +--ro max-voltage?         uint16
+     |           +--ro contained-chassis* [ne-ref component-ref]
+     |              +--ro ne-ref           leafref
+     |              +--ro component-ref    leafref
+     +--ro network-elements
+        +--ro network-element* [uuid]
+           +--ro uuid             yang:uuid
+           +--ro name?            string
+           +--ro description?     string
+           +--ro alias?           string
+           +--ro ne-location
+           |  +--ro equipment-room-name*   leafref
+           +--ro hardware-rev?    string
+           +--ro firmware-rev?    string
+           +--ro software-rev?    string
+           +--ro mfg-name?        string
+           +--ro mfg-date?        yang:date-and-time
+           +--ro part-number?     string
+           +--ro serial-number?   string
+           +--ro product-name?    string
+           +--ro components
+              +--ro component* [uuid]
+                 +--ro uuid                           yang:uuid
+                 +--ro name?                          string
+                 +--ro description?                   string
+                 +--ro alias?                         string
+                 +--ro location?                      string
+                 +--ro class?                         identityref
+                 +--ro contained-child*               -> ../uuid
+                 +--ro parent-rel-pos?                int32
+                 +--ro parent-references
+                 |  +--ro equipment-room-uuid?    leafref
+                 |  +--ro ne-uuid?                leafref
+                 |  +--ro rack-uuid?              leafref
+                 |  +--ro component-references
+                 |     +--ro component-reference* [index]
+                 |        +--ro index    uint8
+                 |        +--ro class?   -> ../../../../class
+                 |        +--ro uuid?    -> ../../../../uuid
+                 +--ro hardware-rev?                  string
+                 +--ro firmware-rev?                  string
+                 +--ro software-rev?                  string
+                 +--ro serial-num?                    string
+                 +--ro mfg-name?                      string
+                 +--ro part-number?                   string
+                 +--ro asset-id?                      string
+                 +--ro is-fru?                        boolean
+                 +--ro mfg-date?
+                 |       yang:date-and-time
+                 +--ro uri*                           inet:uri
+                 +--ro (component-class)?
+                    +--:(chassis)
+                    |  +--ro chassis-specific-info
+                    +--:(container)
+                    |  +--ro slot-specific-info
+                    +--:(module)
+                    |  +--ro board-specific-info
+                    +--:(port)
+                       +--ro port-specific-info
