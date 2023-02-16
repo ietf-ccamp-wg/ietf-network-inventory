@@ -1,4 +1,4 @@
-# A YANG Data Model for Optical Network Inventory
+# A YANG Data Model for Network Hardware Inventory
 
 ## Scope
 
