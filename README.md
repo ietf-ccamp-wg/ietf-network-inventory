@@ -39,7 +39,7 @@ subject to a Simplified BSD License) in Contributions.
 ### Weekly Calls
 
 The contributors on this draft has weekly informal conference calls at 3:00pm CET, starting from January 26, 2021
-- [Calendar](https://github.com/italobusi/ietf-network-inventory/blob/main/minutes/Network%20Inventory%20YANG%20data%20model.ics)
+- [Calendar](https://github.com/ietf-ccamp-wg/ietf-network-inventory/blob/main/minutes/Network%20Inventory%20YANG%20data%20model.ics)
 - [Join Meeting](https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZWUxYzc0MzItNzVjMy00M2E1LWFmMDktODAxNzgwNDNlMTRk%40thread.v2/0?context=%7b%22Tid%22%3a%2268283f3b-8487-4c86-adb3-a5228f18b893%22%2c%22Oid%22%3a%2242bd9f8c-0160-4ee4-a2f9-0385317dd1bb%22%7d)
 - Draft minutes taken during the call: https://demo.hedgedoc.org/G0vMerovQUu1kH7LR_Gyiw
 
