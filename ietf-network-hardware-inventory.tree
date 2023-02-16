@@ -1,5 +1,5 @@
 module: ietf-network-hardware-inventory
-  +--ro network-inventory
+  +--ro network-hardware-inventory
      +--ro equipment-rooms
      |  +--ro equipment-room* [uuid]
      |     +--ro uuid           yang:uuid
