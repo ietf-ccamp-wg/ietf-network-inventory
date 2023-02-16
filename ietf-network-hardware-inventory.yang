@@ -85,7 +85,7 @@ module ietf-network-hardware-inventory {
       //information and remove this note
   }
     
-  container network-inventory {
+  container network-hardware-inventory {
     config false;
     description
       "The top-level container for the network inventory
