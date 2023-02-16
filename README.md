@@ -12,9 +12,9 @@ Diff editor copy vs published version:
 
 ## Abstract
 
-This document defines a YANG data model for optical network inventory data information.
+This document defines a YANG data model for network hardware inventory data information.
 
-The YANG data model presented in this document is intended to be used as the basis toward a generic YANG data model for network inventory data information which can be augmented, when required, with technology-specific (e.g., optical) inventory data, to be defined either in a future version of this document or in another document.
+The YANG data model presented in this document is intended to be used as the basis toward a generic YANG data model for network hardware inventory data information which can be augmented, when required, with technology-specific (e.g., optical) inventory data, to be defined either in a future version of this document or in another document.
 
 The YANG data model defined in this document conforms to the Network Management Datastore Architecture (NMDA).
 
