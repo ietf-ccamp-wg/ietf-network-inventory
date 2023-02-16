@@ -43,7 +43,7 @@ The contributors on this draft has weekly informal conference calls at 3:00pm CE
 - [Join Meeting](https://ietf.webex.com/ietf/j.php?MTID=m8d59f4cb9dba00f72a762370292c9bf8)
 - Draft minutes taken during the call: https://demo.hedgedoc.org/G0vMerovQUu1kH7LR_Gyiw
 
-The official minutes of these calls are available in this repository: https://github.com/italobusi/ietf-network-inventory/tree/main/minutes
+The official minutes of these calls are available in this repository: https://github.com/ietf-ccamp-wg/ietf-network-inventory/tree/main/minutes
 
 ### Other Resources
 
