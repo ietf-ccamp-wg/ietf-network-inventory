@@ -160,7 +160,7 @@ module ietf-network-hardware-inventory {
   
   grouping ne-specific-info-grouping {
     description
-      "Attributes applicable for network element";
+      "Attributes applicable to network elements.";
     leaf hardware-rev {
       type string;
       description
@@ -263,12 +263,11 @@ module ietf-network-hardware-inventory {
   
   grouping rack-specific-info-grouping {
     description
-      "Attributes applis for rack only.";
+      "Attributes applicable to racks only.";
     container rack-location {
       description
-        "Location information of rack, this location infomation is
-        consist of equipment room's name and its row number and 
-        column number.";
+        "The location information of the rack, which comprises the 
+        name of the equipment room, row number, and column number.";
       leaf equipment-room-name {
         type leafref {
           path "/nhi:network-inventory/nhi:equipment-rooms"
@@ -294,19 +293,19 @@ module ietf-network-hardware-inventory {
       type uint16;
       units millimeter;
       description
-        "Height of rack.";
+        "Rack height.";
     }
     leaf width {
       type uint16;
       units millimeter;
       description
-        "Width of rack.";
+        "Rack width.";
     }
     leaf depth {
       type uint16;
       units millimeter;
       description
-        "Depth of rack.";
+        "Rack depth.";
     }
     leaf max-voltage {
       type uint16;
@@ -353,7 +352,8 @@ module ietf-network-hardware-inventory {
             path "../nhi:uuid";
           }
           description
-            "The child components' identifier that are physically 
+            "The list of the identifiers of the child components 
+            physically contained within this component.";
             contained by this component.";          
         }
         leaf parent-rel-pos {
@@ -361,8 +361,8 @@ module ietf-network-hardware-inventory {
             range "0 .. 2147483647";
           }
           description
-            "An indication of the relative posistion of this child
-            component among all this sibling component.";
+            "The relative position with respect to the parent
+            component among all the sibling components.";
           reference
             "RFC 6933: Entity MIB (Version 4) -
                        entPhysicalParentRelPos";
@@ -370,22 +370,22 @@ module ietf-network-hardware-inventory {
         
         container parent-component-references {
           description
-            "Identifier of this component's hierarchial parent
-            components.";
+              "The top level container for the list of the 
+              identifiers of the parents of this component in a 
+              hierarchy.";
           list component-reference {
             key index;
             description
-              "this list object is used to indicate its
-              hierarchial parent components' identifier.
-              This hierarchial relation can be found by index 
-              parameter. The topest parent component should be 
-              0-index.";
+              "The list of the identifiers of the parents of this 
+              component in a hierarchy.
+              
+              The index parameter defines the hierarchy: the topmost 
+              parent has an index of 0.";
             leaf index {
               type uint8;
               description
-                "This index is used to indicate the order of hier-
-                archical parent components. The top level parent component
-                should be of low index value. The index start from 0.";
+                "The index of the parent with respect to the 
+                hierarchy.";
             }
             leaf class {
               type leafref {
@@ -399,7 +399,8 @@ module ietf-network-hardware-inventory {
                 path "../../../../nhi:uuid";
               }
               description
-                "The identifier of the hierarchial parent component.";
+                "The identifier of the parent's component in the 
+                hierarchy.";
             }
           }
         }
@@ -535,7 +536,8 @@ module ietf-network-hardware-inventory {
       containers in the future.";
     choice component-class {
       description
-        "This extension differs with different component class.";
+        "This extension differs between different component 
+        classes.";
       case chassis {
         when "./class = 'ianahw:chassis'";
         container chassis-specific-info {
@@ -579,24 +581,24 @@ module ietf-network-hardware-inventory {
   grouping chassis-specific-info-grouping {
   //To be enriched in the future.
     description
-      "Some attributes belong to chassis only.";
+      "Specific attributes applicable to chassis only.";
   }
   
   grouping slot-specific-info-grouping {
   //To be enriched in the future.
     description
-      "Some attributes belong to slot only.";
+      "Specific attributes applicable to slots only.";
   }
   
   grouping board-specific-info-grouping {
   //To be enriched in the future.
     description
-      "Some attributes belong to board only.";
+      "Specific attributes applicable to boards only.";
   }
   
   grouping port-specific-info-grouping {
   //To be enriched in the future.
     description
-      "Some attributes belong to port only.";
+      "Specific attributes applicable to ports only.";
   }
 }
