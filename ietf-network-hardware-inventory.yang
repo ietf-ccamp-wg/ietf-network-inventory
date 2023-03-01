@@ -354,7 +354,6 @@ module ietf-network-hardware-inventory {
           description
             "The list of the identifiers of the child components 
             physically contained within this component.";
-            contained by this component.";          
         }
         leaf parent-rel-pos {
           type int32 {
