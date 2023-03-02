@@ -1,6 +1,7 @@
 module ietf-network-hardware-inventory {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-network-hardware-inventory";
+  namespace 
+    "urn:ietf:params:xml:ns:yang:ietf-network-hardware-inventory";
   prefix nhi;
 
   import ietf-yang-types {
@@ -143,8 +144,8 @@ module ietf-network-hardware-inventory {
             "The location information of this network element.";
           leaf-list equipment-room-name {
             type leafref {
-              path "/nhi:network-inventory/nhi:equipment-rooms/" +
-                   "ni:equipment-room/nhi:name";
+              path "/nhi:network-hardware-inventory/nhi:equipment-rooms/" +
+                   "nhi:equipment-room/nhi:name";
             }
             description
               "Names of equipment rooms where the NE is located. 
@@ -231,8 +232,9 @@ module ietf-network-hardware-inventory {
                 "The list of chassis within a rack.";
               leaf ne-ref {
                 type leafref {
-                  path "/nhi:network-inventory/nhi:network-elements"
-                  + "/nhi:network-element/nhi:uuid";
+                  path "/nhi:network-hardware-inventory"
+                  + "/nhi:network-elements/nhi:network-element"
+                  + "/nhi:uuid";
                 }
                 description
                   "The reference to the network element containing
@@ -240,9 +242,9 @@ module ietf-network-hardware-inventory {
               }
               leaf component-ref {
                 type leafref {
-                  path "/nhi:network-inventory/nhi:network-elements"
-                  + "/nhi:network-element[ni:uuid"
-                  + "=current()/../ne-ref]/nhi:components"
+                  path "/nhi:network-hardware-inventory"
+                  + "/nhi:network-elements/nhi:network-element"
+                  + "[nhi:uuid=current()/../ne-ref]/nhi:components"
                   + "/nhi:component/nhi:uuid";
                 }
                 description
@@ -270,7 +272,7 @@ module ietf-network-hardware-inventory {
         name of the equipment room, row number, and column number.";
       leaf equipment-room-name {
         type leafref {
-          path "/nhi:network-inventory/nhi:equipment-rooms"
+          path "/nhi:network-hardware-inventory/nhi:equipment-rooms"
           + "/nhi:equipment-room/nhi:name";
         }
         description 
@@ -388,14 +390,14 @@ module ietf-network-hardware-inventory {
             }
             leaf class {
               type leafref {
-                path "../../../../nhi:class";
+                path "../../../nhi:class";
               }
               description
                 "Class of the hierarchial parent component.";
             }
             leaf uuid {
               type leafref {
-                path "../../../../nhi:uuid";
+                path "../../../nhi:uuid";
               }
               description
                 "The identifier of the parent's component in the 
