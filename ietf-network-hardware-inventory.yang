@@ -144,8 +144,8 @@ module ietf-network-hardware-inventory {
             "The location information of this network element.";
           leaf-list equipment-room-name {
             type leafref {
-              path "/nhi:network-hardware-inventory/nhi:equipment-rooms/" +
-                   "nhi:equipment-room/nhi:name";
+              path "/nhi:network-hardware-inventory/" +
+                   "nhi:equipment-rooms/nhi:equipment-room/nhi:name";
             }
             description
               "Names of equipment rooms where the NE is located. 
