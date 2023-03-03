@@ -22,9 +22,9 @@ module: ietf-network-hardware-inventory
      |           +--ro depth?               uint16
      |           +--ro max-voltage?         uint16
      |           +--ro contained-chassis* [ne-ref component-ref]
-     |              +--ro ne-ref           leafref
-     |              +--ro component-ref    leafref
-     |              +--ro relative-position            uint8
+     |              +--ro ne-ref               leafref
+     |              +--ro component-ref        leafref
+     |              +--ro relative-position?   uint8
      +--ro network-elements
         +--ro network-element* [uuid]
            +--ro uuid             yang:uuid
@@ -53,8 +53,8 @@ module: ietf-network-hardware-inventory
                  +--ro parent-component-references
                  |  +--ro component-reference* [index]
                  |     +--ro index    uint8
-                 |     +--ro class?   -> ../../../../class
-                 |     +--ro uuid?    -> ../../../../uuid
+                 |     +--ro class?   -> ../../../class
+                 |     +--ro uuid?    -> ../../../uuid
                  +--ro hardware-rev?                  string
                  +--ro firmware-rev?                  string
                  +--ro software-rev?                  string
