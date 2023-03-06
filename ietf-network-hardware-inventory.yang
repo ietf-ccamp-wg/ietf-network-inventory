@@ -1,7 +1,8 @@
-module ietf-network-inventory {
+module ietf-network-hardware-inventory {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-network-inventory";
-  prefix ni;
+  namespace 
+    "urn:ietf:params:xml:ns:yang:ietf-network-hardware-inventory";
+  prefix nhi;
 
   import ietf-yang-types {
     prefix yang;
@@ -12,11 +13,13 @@ module ietf-network-inventory {
   import iana-hardware {
     prefix ianahw;
     reference
-      "RFC 8348: A YANG Data Model for Hardware Management.";
+      "https://www.iana.org/assignments/yang-parameters";
   }
   
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC6991: Common YANG Data Types.";
   } 
   
   organization
@@ -44,7 +47,8 @@ module ietf-network-inventory {
                <fabio.peruzzini@telecomitalia.it>";
 
   description
-    "This module defines a model for retrieving network inventory.
+    "This module defines a model for retrieving network hardware
+    inventory.
 
     The model fully conforms to the Network Management 
     Datastore Architecture (NMDA).
@@ -73,39 +77,16 @@ module ietf-network-inventory {
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
   
-  revision 2022-07-11 {
+  revision 2023-01-16 {
     description
-      "version 3.0.0";
+      "Initial version";
     reference
-      "draft-yg3bp-ccamp-inventory-yang-01: A YANG Data
-      Model for Network Inventory.";
+      "RFC XXXX: A YANG Data Model for Network Hardware Inventory.";
+      //RFC Editor: replace XXXX with actual RFC number, update date
+      //information and remove this note
   }
-  
-  revision 2022-03-04 {
-    description
-      "version 3.0.0";
-    reference
-      "draft-yg3bp-ccamp-inventory-yang-00: A YANG Data
-      Model for Network Inventory.";
-  }
-  
-  revision 2021-11-09 {
-    description
-      "version 2.0.0";
-    reference
-      "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
-      Model for Optical Network Inventory.";
-  }
-
-  revision 2021-10-25 {
-    description
-      "Initial revision.";
-    reference
-      "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
-      Model for Optical Network Inventory.";
-  }
-  
-  container network-inventory {
+    
+  container network-hardware-inventory {
     config false;
     description
       "The top-level container for the network inventory
@@ -160,11 +141,11 @@ module ietf-network-inventory {
         uses common-entity-attributes;
         container ne-location {
           description
-            "To be added.";
+            "The location information of this network element.";
           leaf-list equipment-room-name {
             type leafref {
-              path "/ni:network-inventory/ni:equipment-rooms/" +
-                   "ni:equipment-room/ni:name";
+              path "/nhi:network-hardware-inventory/" +
+                   "nhi:equipment-rooms/nhi:equipment-room/nhi:name";
             }
             description
               "Names of equipment rooms where the NE is located. 
@@ -180,16 +161,11 @@ module ietf-network-inventory {
   
   grouping ne-specific-info-grouping {
     description
-      "To be added.";
+      "Attributes applicable to network elements.";
     leaf hardware-rev {
       type string;
       description
         "The vendor-specific hardware revision string for the NE.";
-    }
-    leaf firmware-rev {
-      type string;
-      description
-        "The vendor-specific firmware revision string for the NE.";
     }
     leaf software-rev {
       type string;
@@ -243,7 +219,7 @@ module ietf-network-inventory {
         }
         container racks {
           description
-            "To be added.";
+            "Top level container for the list of racks.";
           list rack {
             key uuid;
             description
@@ -256,8 +232,9 @@ module ietf-network-inventory {
                 "The list of chassis within a rack.";
               leaf ne-ref {
                 type leafref {
-                  path "/ni:network-inventory/ni:network-elements"
-                  + "/ni:network-element/ni:uuid";
+                  path "/nhi:network-hardware-inventory"
+                  + "/nhi:network-elements/nhi:network-element"
+                  + "/nhi:uuid";
                 }
                 description
                   "The reference to the network element containing
@@ -265,14 +242,19 @@ module ietf-network-inventory {
               }
               leaf component-ref {
                 type leafref {
-                  path "/ni:network-inventory/ni:network-elements"
-                  + "/ni:network-element[ni:uuid"
-                  + "=current()/../ne-ref]/ni:components"
-                  + "/ni:component/ni:uuid";
+                  path "/nhi:network-hardware-inventory"
+                  + "/nhi:network-elements/nhi:network-element"
+                  + "[nhi:uuid=current()/../ne-ref]/nhi:components"
+                  + "/nhi:component/nhi:uuid";
                 }
                 description
                   "The reference to the chassis component within 
                   the network element and contained by the rack.";
+              }
+              leaf relative-position {
+                type uint8;
+                description "A relative position of chassis within
+                the rack";
               }
             }
           }
@@ -283,14 +265,15 @@ module ietf-network-inventory {
   
   grouping rack-specific-info-grouping {
     description
-      "To be added.";
+      "Attributes applicable to racks only.";
     container rack-location {
       description
-        "To be added.";
+        "The location information of the rack, which comprises the 
+        name of the equipment room, row number, and column number.";
       leaf equipment-room-name {
         type leafref {
-          path "/ni:network-inventory/ni:equipment-rooms"
-          + "/ni:equipment-room/ni:name";
+          path "/nhi:network-hardware-inventory/nhi:equipment-rooms"
+          + "/nhi:equipment-room/nhi:name";
         }
         description 
         "Name of equipment room where this rack is located.";
@@ -308,28 +291,23 @@ module ietf-network-inventory {
           the column.";
       }
     }
-    leaf rack-number {
-      type uint32;
-      description
-        "An integer identifier of rack.";
-    }
     leaf height {
       type uint16;
       units millimeter;
       description
-        "To be added.";
+        "Rack height.";
     }
     leaf width {
       type uint16;
       units millimeter;
       description
-        "To be added.";
+        "Rack width.";
     }
     leaf depth {
       type uint16;
       units millimeter;
       description
-        "To be added.";
+        "Rack depth.";
     }
     leaf max-voltage {
       type uint16;
@@ -353,8 +331,7 @@ module ietf-network-inventory {
         leaf location {
           type string;
           description
-            "To be added.
-            
+            "A relative location information of this component.
             In optical transport network, the location string is 
             using the following pattern: 
               '/ne=<nw-ne-name>[/r=<r_index>][/sh=<sh_index>
@@ -374,82 +351,61 @@ module ietf-network-inventory {
         }
         leaf-list contained-child {
           type leafref {
-            path "../ni:uuid";
+            path "../nhi:uuid";
           }
           description
-            "The child components' identifier that are physically 
-            contained by this component.";          
+            "The list of the identifiers of the child components 
+            physically contained within this component.";
         }
         leaf parent-rel-pos {
           type int32 {
             range "0 .. 2147483647";
           }
           description
-            "To be added.";
+            "The relative position with respect to the parent
+            component among all the sibling components.";
           reference
             "RFC 6933: Entity MIB (Version 4) -
                        entPhysicalParentRelPos";
         }
-        container parent-references {
+        
+        container parent-component-references {
           description
-            "To be added.";
-          leaf equipment-room-uuid {
-            type leafref {
-              path "/ni:network-inventory/ni:equipment-rooms/" +
-                   "ni:equipment-room/ni:uuid";
-            }
+              "The top level container for the list of the 
+              identifiers of the parents of this component in a 
+              hierarchy.";
+          list component-reference {
+            key index;
             description
-              "To be added.";
-          }
-          leaf ne-uuid {
-            type leafref {
-              path "/ni:network-inventory/ni:network-elements/" +
-                   "ni:network-element/ni:uuid";
-            }
-            description
-              "To be added.";
-          }
-          leaf rack-uuid {
-            type leafref {
-              path "/ni:network-inventory/ni:equipment-rooms/" +
-                   "ni:equipment-room/ni:racks/ni:rack/ni:uuid";
-            }
-            description
-              "To be added.";
-          }
-          container component-references {
-            description
-              "To be added.";
-            list component-reference {
-              key index;
+              "The list of the identifiers of the parents of this 
+              component in a hierarchy.
+              
+              The index parameter defines the hierarchy: the topmost 
+              parent has an index of 0.";
+            leaf index {
+              type uint8;
               description
-                "this list object is used to indicate its
-                hierarchial parent components' identifier.
-                This hierarchial relation can be found by index 
-                parameter. The topest parent component should be 
-                0-index.";
-              leaf index {
-                type uint8;
-                description
-                  "To be added.";
+                "The index of the parent with respect to the 
+                hierarchy.";
+            }
+            leaf class {
+              type leafref {
+                path "../../../nhi:class";
               }
-              leaf class {
-                type leafref {
-                  path "../../../../ni:class";
-                }
-                description
-                  "To be added.";
+              description
+                "Class of the hierarchial parent component.";
+            }
+            leaf uuid {
+              type leafref {
+                path "../../../nhi:uuid";
               }
-              leaf uuid {
-                type leafref {
-                  path "../../../../ni:uuid";
-                }
-                description
-                  "To be added.";
-              }
+              description
+                "The identifier of the parent's component in the 
+                hierarchy.";
             }
           }
         }
+
         leaf hardware-rev {
           type string;
           description
@@ -581,7 +537,8 @@ module ietf-network-inventory {
       containers in the future.";
     choice component-class {
       description
-        "To be added.";
+        "This extension differs between different component 
+        classes.";
       case chassis {
         when "./class = 'ianahw:chassis'";
         container chassis-specific-info {
@@ -601,7 +558,7 @@ module ietf-network-inventory {
         }
       }
       case module {
-        when "./ni:class = 'ianahw:module'";
+        when "./nhi:class = 'ianahw:module'";
         container board-specific-info {
           description 
             "This container contains some attributes belong to
@@ -610,7 +567,7 @@ module ietf-network-inventory {
         }
       }
       case port {
-        when "./ni:class = 'ianahw:port'";
+        when "./nhi:class = 'ianahw:port'";
         container port-specific-info {
           description 
             "This container contains some attributes belong to
@@ -625,24 +582,24 @@ module ietf-network-inventory {
   grouping chassis-specific-info-grouping {
   //To be enriched in the future.
     description
-      "To be added.";
+      "Specific attributes applicable to chassis only.";
   }
   
   grouping slot-specific-info-grouping {
   //To be enriched in the future.
     description
-      "To be added.";
+      "Specific attributes applicable to slots only.";
   }
   
   grouping board-specific-info-grouping {
   //To be enriched in the future.
     description
-      "To be added.";
+      "Specific attributes applicable to boards only.";
   }
   
   grouping port-specific-info-grouping {
   //To be enriched in the future.
     description
-      "To be added.";
+      "Specific attributes applicable to ports only.";
   }
 }
