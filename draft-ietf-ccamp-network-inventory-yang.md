@@ -37,8 +37,8 @@ author:
     email: phbedard@cisco.com
 
 
-#contributor:
-#  -
+contributor:
+  -
     name: Italo Busi
     org: Huawei Technologies
     email: italo.busi@huawei.com
@@ -74,12 +74,6 @@ normative:
     target: https://www.tmforum.org/resources/suite/mtosi-4-0/
 
   RFC6933:
-    title: Entity MIB (Version 4)
-    author: Andy, B., Dan, R., Jurfen, Q. and Mouli, C.
-      org: The Internet Engineering Task Force (IETF)
-    date:  May 2013
-    seriesinfo: DOI 10.17487/RFC6993
-    target: https://www.rfc-editor.org/rfc/rfc6933.html
 
 informative:
   ONF_TR-547:
@@ -577,20 +571,20 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 {{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module ietf-network-inventory.yang ({{ni-yang}}).
 
 ~~~~ ascii-art
-{::include ./ietf-network-inventory.tree}
+{::include ./ietf-network-hardware-inventory.tree}
 ~~~~
 {: #fig-ni-tree title="Network inventory tree diagram"
-artwork-name="ietf-network-inventory.tree"}
+artwork-name="ietf-network-hardware-inventory.tree"}
 
 {: #ni-yang}
 
 # YANG Model for Network Hardware Inventory
 
 ~~~~ yang
-{::include ./ietf-network-inventory.yang}
+{::include ./ietf-network-hardware-inventory.yang}
 ~~~~
 {: #fig-ni-yang title="Network inventory YANG module"
-sourcecode-markers="true" sourcecode-name="ietf-network-inventory@2022-07-11.yang"}
+sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-01-16.yang"}
 
 # Manageability Considerations
 
