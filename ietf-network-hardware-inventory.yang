@@ -89,7 +89,7 @@ module ietf-network-hardware-inventory {
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
   
-  revision 2023-01-16 {
+  revision 2023-03-07 {
     description
       "Initial version";
     reference
@@ -617,41 +617,36 @@ module ietf-network-hardware-inventory {
  
   augment "/nw:networks/nw:network/nw:node" {
     description 
-	  "identifier of network element from which the node is 
-	  abstracted";
-	  
-	  leaf inventory-id {
-	    type leafref {
-	      path "/nhi:network-hardware-inventory/nhi:network-elements"
-	      + "/nhi:network-element/nhi:uuid";
-	    }
-	  }
-  }
-  
-  augment "/nw:networks/nw:network/nw:node" {
-    description 
-      "identifier of network element from which the node is 
-      abstracted";
-      
+      "Information that allows the navigation between this node and 
+      the Network Element (NE) from which this node is abstracted in 
+      the network hardware inventory model.";
     leaf inventory-id {
       type leafref {
-        path "/nhi:network-hardware-inventory/nhi:network-elements"
-        + "/nhi:network-element/nhi:uuid";
+        path  "/nhi:network-hardware-inventory/nhi:network-elements"
+            + "/nhi:network-element/nhi:uuid";
       }
+      config false;
+      description
+        "The identifier of the Network Element (NE) from which this 
+        node is abstracted";
     }
   }
   
   augment "/nw:networks/nw:network/nw:node/nt:termination-point" {
     description 
-      "identifier of port component from which the node is 
-      abstracted";
-      
+      "Information that allows the navigation between this Link 
+      Termination Point (LTP) and the port component from which this 
+      LTP is abstracted in the network hardware inventory model.";
     leaf inventory-id {
       type leafref {
-        path "/nhi:network-hardware-inventory/nhi:network-elements"
-        + "/nhi:network-element/nhi:components/nhi:component"
-        + "/nhi:uuid";
+        path  "/nhi:network-hardware-inventory/nhi:network-elements"
+            + "/nhi:network-element/nhi:components/nhi:component"
+            + "/nhi:uuid";
       }
+      config false;
+      description
+        "The identifier of the port component from which this Link 
+        Termination Point (LTP) is abstracted";
     }
   }
 }

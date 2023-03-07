@@ -122,7 +122,7 @@ The proposed YANG data model has been analysed at the present stage to cover the
 
 Being based on {{!RFC8348}}, this data model should be a good starting point toward a generic data model and applicable to any technology. However, further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical networks.
 
-This document defines one YANG module: ietf-network-inventory.yang ({{ni-yang}}).
+This document defines one YANG module: ietf-network-inventory ({{ni-yang}}).
 
 Note: review in future versions of this document the related modules, depending on the augmentation relationship.
 
@@ -568,7 +568,7 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 
 # Network Hardware Inventory Tree Diagram
 
-{{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module ietf-network-inventory.yang ({{ni-yang}}).
+{{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module ietf-network-inventory ({{ni-yang}}).
 
 ~~~~ ascii-art
 {::include ./ietf-network-hardware-inventory.tree}
@@ -584,7 +584,7 @@ artwork-name="ietf-network-hardware-inventory.tree"}
 {::include ./ietf-network-hardware-inventory.yang}
 ~~~~
 {: #fig-ni-yang title="Network inventory YANG module"
-sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-01-16.yang"}
+sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-03-07.yang"}
 
 # Manageability Considerations
 
@@ -604,7 +604,7 @@ sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-
 
 ## Comparison With Openconfig-platform Data Model
 
-Since more and more devices can be managed by domain controller through OpenConfig, to avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the openconfig-platform.yang which is the data model used to manage inventory information in OpenConfig.
+Since more and more devices can be managed by domain controller through OpenConfig, to avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the YANG module openconfig-platform which is the data model used to manage inventory information in OpenConfig.
 
 Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to ietf-hardware model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between openconfig-platform and our model directly , which is stated below:
 
