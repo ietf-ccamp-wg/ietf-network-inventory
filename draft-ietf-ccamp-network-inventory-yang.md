@@ -4,7 +4,7 @@ coding: utf-8
 title: A YANG Data Model for Network Hardware Inventory
 
 abbrev: Network Inventory YANG
-docname: draft-ietf-ccamp-network-inventory-yang-00
+docname: draft-ietf-ccamp-network-inventory-yang-01
 submissiontype: IETF
 workgroup: CCAMP Working Group
 category: std
@@ -19,14 +19,6 @@ author:
     org: Huawei Technologies
     email: yuchaode@huawei.com
   -
-    name: Italo Busi
-    org: Huawei Technologies
-    email: italo.busi@huawei.com
-  -
-    name: Aihua Guo
-    org: Futurewei Technologies
-    email: aihuaguo.ietf@gmail.com
-  -
     name: Sergio Belotti
     org: Nokia
     email: sergio.belotti@nokia.com
@@ -40,17 +32,37 @@ author:
     org: TIM
     email: fabio.peruzzini@telecomitalia.it
   -
-    name: Oscar Gonzalez de Dios
-    ins: O. Gonzalez de Dios
-    org: Telefonica
-    email: oscar.gonzalezdedios@telefonica.com
+    name: Phil Bedard
+    org: Cisco
+    email: phbedard@cisco.com
+
+
+#contributor:
+#  -
+    name: Italo Busi
+    org: Huawei Technologies
+    email: italo.busi@huawei.com
+  -
+    name: Aihua Guo
+    org: Futurewei Technologies
+    email: aihuaguo.ietf@gmail.com、
   -
     name: Victor Lopez
     org: Nokia
     email: victor.lopez@nokia.com
-
-#contributor:
-#  -
+  -
+    name: Bo Wu
+    org: Huawei Technologies
+    email: lana.wubo@huawei.com
+  -
+    name: Chenfang Zhang
+    org: China Unicom
+    email: zhangcf80@chinaunicom.cn
+  -
+    name: Oscar Gonzalez de Dios
+    ins: O. Gonzalez de Dios
+    org: Telefonica
+    email: oscar.gonzalezdedios@telefonica.com
 
 normative:
   TMF-MTOSI:
@@ -60,6 +72,14 @@ normative:
     date:  2008
     seriesinfo: TMF SD2-20_EquipmentModel
     target: https://www.tmforum.org/resources/suite/mtosi-4-0/
+
+  RFC6933:
+    title: Entity MIB (Version 4)
+    author: Andy, B., Dan, R., Jurfen, Q. and Mouli, C.
+      org: The Internet Engineering Task Force (IETF)
+    date:  May 2013
+    seriesinfo: DOI 10.17487/RFC6993
+    target: https://www.rfc-editor.org/rfc/rfc6933.html
 
 informative:
   ONF_TR-547:
@@ -191,6 +211,8 @@ The meaning of the symbols in this diagram is defined in {{!RFC8340}}.
 | ianahw | iana-hardware          | {{!RFC8348}} |
 | ni     | ietf-network-inventory | RFC XXXX     |
 | yang   | ietf-yang-types        | {{!RFC6991}} |
+| inet   | ietf-inet-types        | {{!RFC6991}} |
+| ianahw   | iana-hardware        | https://www.iana.org/assignments/yang-parameters |
 {: #tab-prefixes title="Prefixes and corresponding YANG modules"}
 
 RFC Editor Note:
@@ -499,6 +521,32 @@ We consider that some of the attributes defined in {{?RFC8348}} for components a
 ~~~~
 
 Note: Not all the attributes defined in {{?RFC8348}} are applicable for network element. And there could also be some missing attributes which are not recognized by {{?RFC8348}}. More extensions could be introduced in later revisions after the missing attributes are fully discussed.
+
+### Travelling of Inventory and Topology
+
+Network topology is a logical abstraction based on hardware inventory objects. The abstraction may be based on technology perspective or some requirements perspective. So that the abstracted objects in network topology can better reflect connection-related properties to serve for path computation or service provisioning .etc.
+
+The mapping relationship between hardware inventory object and network topology object can be 1: N (N>=1). We call this mapping relationship as travelling.
+
+Taking the Optical technology as example, an OTN NE can be installed with several kinds of boards, including an Ethernet client signal switching board, a line board which is used for OTN layer switching. This line board may also be used as a start point of WDM layer. In terms of technologies, this OTN NE supports multi-layer network topology connections, so that it should appear in L0, L1 and L2 network topology.
+
+Currently, we have not seen a scenario that multiple hardware inventory objects are abstracted as a single object in network topology.
+
+It is important to describe this travelling relationship in the sake of network Operation and Maintenance (O&M). For example, the actual path of a connection is described by the objects in network topology. When there is an accident happened on this connection, the O&M engineer are more concerned with the physical location information behind the network objects for trouble shooting.
+
+Generally speaking, node object in network topology is corresponded to network element object in hardware inventory. Termination point (TP) object in network topology is corresponded to port component in network element. Some parts of link objects can be corresponded to fiber/cable object in hardware inventory.
+//NOTE: take fiber&cable object into scope in the future version.
+
+Compared with network topology, hardware inventory objects are the most basic elements of network. Therefore, from the automation integration perspective, the MDSC or OSS systems would integrate with hardware inventory data before network topology data. It is nor reasonable to exist any network topology related information in the hardware inventory data. On the contrary, the hardware inventory objects related information should be reflected in network topology data.
+
+So we do some extensions in the network topology data model, to provide hardware inventory objects' identifier references for node, TP and link. Where there are needs for hardware inventory objects' information, it is easy to retrieve by these identifiers.
+
+~~~~ ascii-art
+augment /nw:networks/nw:network/nw:node:
+   +--rw inventory-id?   leafref
+augment /nw:networks/nw:network/nw:node/nt:termination-point:
+   +--rw inventory-id?   leafref
+~~~~
 
 ## Efficiency Issue
 
