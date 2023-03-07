@@ -75,3 +75,7 @@ module: ietf-network-hardware-inventory
                     |  +--ro board-specific-info
                     +--:(port)
                        +--ro port-specific-info
+augment /nw:networks/nw:network/nw:node:
+   +--rw inventory-id?   leafref
+augment /nw:networks/nw:network/nw:node/nt:termination-point:
+   +--rw inventory-id?   leafref
