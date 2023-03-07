@@ -237,7 +237,7 @@ Internet-Draft           Network Inventory YANG               March 2023
    [RFC7950].
 
    TBD: Recap the concept of chassis/slot/component/board/... in
-   [TMF-MTOSI].
+   [TMF_SD2-20].
 
    Following terms are used for the representation of the hierarchies in
    the network hardware inventory.
@@ -340,7 +340,7 @@ Internet-Draft           Network Inventory YANG               March 2023
 
 2.1.  YANG Model Overview
 
-   Based on TMF classification in [TMF-MTOSI], inventory objects can be
+   Based on TMF classification in [TMF_SD2-20], inventory objects can be
    divided into two groups, holder group and equipment group.  The
    holder group contains rack, chassis, slot, sub-slot while the
    equipment group contains network-element, board and port.  With the
@@ -1906,9 +1906,9 @@ Yu, et al.              Expires 9 September 2023               [Page 34]
 Internet-Draft           Network Inventory YANG               March 2023
 
 
-   [TMF-MTOSI]
-              TM Forum (TMF), "TMF MTOSI 4.0 Equipment Model", TMF
-              SD2-20_EquipmentModel , 2008,
+   [TMF_SD2-20]
+              TM Forum, "SD2-20_Equipment Model", TMF MTOSI 4.0, Network
+              Resource Fulfilment (NRF), SD2-20 , May 2008,
               <https://www.tmforum.org/resources/suite/mtosi-4-0/>.
 
 8.2.  Informative References

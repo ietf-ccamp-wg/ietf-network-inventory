@@ -65,12 +65,12 @@ contributor:
     email: oscar.gonzalezdedios@telefonica.com
 
 normative:
-  TMF-MTOSI:
-    title: TMF MTOSI 4.0 Equipment Model
+  TMF_SD2-20:
+    title: SD2-20_Equipment Model
     author:
-      org: TM Forum (TMF)
-    date:  2008
-    seriesinfo: TMF SD2-20_EquipmentModel
+      org: TM Forum
+    date:  May 2008
+    seriesinfo: TMF MTOSI 4.0, Network Resource Fulfilment (NRF), SD2-20
     target: https://www.tmforum.org/resources/suite/mtosi-4-0/
 
   RFC6933:
@@ -153,7 +153,7 @@ The YANG data model defined in this document conforms to the Network Management 
   The terminology for describing YANG data models is found in
   {{!RFC7950}}.
 
-  TBD: Recap the concept of chassis/slot/component/board/... in {{TMF-MTOSI}}.
+  TBD: Recap the concept of chassis/slot/component/board/... in {{TMF_SD2-20}}.
 
   Following terms are used for the representation of the hierarchies in the network hardware inventory.
 
@@ -217,7 +217,7 @@ Please remove this note.
 
 ## YANG Model Overview
 
-Based on TMF classification in {{TMF-MTOSI}}, inventory objects can be divided into two groups, holder group and equipment group. The holder group contains rack, chassis, slot, sub-slot while the equipment group contains network-element, board and port. With the requirement of GIS and on-demand domain controller selection raised, the equipment room becomes a new inventory object to be managed besides TMF classification.
+Based on TMF classification in {{TMF_SD2-20}}, inventory objects can be divided into two groups, holder group and equipment group. The holder group contains rack, chassis, slot, sub-slot while the equipment group contains network-element, board and port. With the requirement of GIS and on-demand domain controller selection raised, the equipment room becomes a new inventory object to be managed besides TMF classification.
 
 Logically,  the relationship between these inventory objects can be described by {{fig-inventory-object-relationship}} below:
 
