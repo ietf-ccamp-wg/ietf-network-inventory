@@ -1,5 +1,5 @@
-module: ietf-network-inventory
-  +--ro network-inventory
+module: ietf-network-hardware-inventory
+  +--ro network-hardware-inventory
      +--ro equipment-rooms
      |  +--ro equipment-room* [uuid]
      |     +--ro uuid           yang:uuid
@@ -17,14 +17,14 @@ module: ietf-network-inventory
      |           |  +--ro equipment-room-name?   leafref
      |           |  +--ro row-number?            uint32
      |           |  +--ro column-number?         uint32
-     |           +--ro rack-number?         uint32
      |           +--ro height?              uint16
      |           +--ro width?               uint16
      |           +--ro depth?               uint16
      |           +--ro max-voltage?         uint16
      |           +--ro contained-chassis* [ne-ref component-ref]
-     |              +--ro ne-ref           leafref
-     |              +--ro component-ref    leafref
+     |              +--ro ne-ref               leafref
+     |              +--ro component-ref        leafref
+     |              +--ro relative-position?   uint8
      +--ro network-elements
         +--ro network-element* [uuid]
            +--ro uuid             yang:uuid
@@ -34,7 +34,6 @@ module: ietf-network-inventory
            +--ro ne-location
            |  +--ro equipment-room-name*   leafref
            +--ro hardware-rev?    string
-           +--ro firmware-rev?    string
            +--ro software-rev?    string
            +--ro mfg-name?        string
            +--ro mfg-date?        yang:date-and-time
@@ -51,15 +50,11 @@ module: ietf-network-inventory
                  +--ro class?                         identityref
                  +--ro contained-child*               -> ../uuid
                  +--ro parent-rel-pos?                int32
-                 +--ro parent-references
-                 |  +--ro equipment-room-uuid?    leafref
-                 |  +--ro ne-uuid?                leafref
-                 |  +--ro rack-uuid?              leafref
-                 |  +--ro component-references
-                 |     +--ro component-reference* [index]
-                 |        +--ro index    uint8
-                 |        +--ro class?   -> ../../../../class
-                 |        +--ro uuid?    -> ../../../../uuid
+                 +--ro parent-component-references
+                 |  +--ro component-reference* [index]
+                 |     +--ro index    uint8
+                 |     +--ro class?   -> ../../../class
+                 |     +--ro uuid?    -> ../../../uuid
                  +--ro hardware-rev?                  string
                  +--ro firmware-rev?                  string
                  +--ro software-rev?                  string
