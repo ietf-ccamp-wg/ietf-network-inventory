@@ -22,6 +22,18 @@ module ietf-network-hardware-inventory {
       "RFC6991: Common YANG Data Types.";
   } 
   
+  import ietf-network {
+    prefix nw;
+    reference
+      "RFC8345: A YANG Data Model for Network Topologies";
+  }
+  
+  import ietf-network-topology {
+    prefix nt;
+    reference
+      "RFC8345: A YANG Data Model for Network Topologies";
+  }
+  
   organization
     "IETF CCAMP Working Group";
   contact
@@ -601,5 +613,45 @@ module ietf-network-hardware-inventory {
   //To be enriched in the future.
     description
       "Specific attributes applicable to ports only.";
+  }
+ 
+  augment "/nw:networks/nw:network/nw:node" {
+    description 
+	  "identifier of network element from which the node is 
+	  abstracted";
+	  
+	  leaf inventory-id {
+	    type leafref {
+	      path "/nhi:network-hardware-inventory/nhi:network-elements"
+	      + "/nhi:network-element/nhi:uuid";
+	    }
+	  }
+  }
+  
+  augment "/nw:networks/nw:network/nw:node" {
+    description 
+      "identifier of network element from which the node is 
+      abstracted";
+      
+    leaf inventory-id {
+      type leafref {
+        path "/nhi:network-hardware-inventory/nhi:network-elements"
+        + "/nhi:network-element/nhi:uuid";
+      }
+    }
+  }
+  
+  augment "/nw:networks/nw:network/nw:node/nt:termination-point" {
+    description 
+      "identifier of port component from which the node is 
+      abstracted";
+      
+    leaf inventory-id {
+      type leafref {
+        path "/nhi:network-hardware-inventory/nhi:network-elements"
+        + "/nhi:network-element/nhi:components/nhi:component"
+        + "/nhi:uuid";
+      }
+    }
   }
 }
