@@ -73,7 +73,11 @@ normative:
     seriesinfo: TMF MTOSI 4.0, Network Resource Fulfilment (NRF), SD2-20
     target: https://www.tmforum.org/resources/suite/mtosi-4-0/
 
-  RFC6933:
+  IANA_YANG:
+    title: YANG Parameters
+    author:
+      org: IANA
+    target: https://www.iana.org/assignments/yang-parameters
 
 informative:
   ONF_TR-547:
@@ -200,13 +204,12 @@ The meaning of the symbols in this diagram is defined in {{!RFC8340}}.
   are prefixed using the standard prefix associated with the
   corresponding YANG imported modules, as shown in the following table.
 
-| Prefix | Yang Module            | Reference    |
-| ------ | ---------------------- | ------------ |
-| ianahw | iana-hardware          | {{!RFC8348}} |
-| ni     | ietf-network-inventory | RFC XXXX     |
-| yang   | ietf-yang-types        | {{!RFC6991}} |
-| inet   | ietf-inet-types        | {{!RFC6991}} |
-| ianahw   | iana-hardware        | https://www.iana.org/assignments/yang-parameters |
+| Prefix | Yang Module            | Reference     |
+| ------ | ---------------------- | ------------- |
+| inet   | ietf-inet-types        | {{!RFC6991}}  |
+| yang   | ietf-yang-types        | {{!RFC6991}}  |
+| ianahw | iana-hardware          | {{IANA_YANG}} |
+| ni     | ietf-network-inventory | RFC XXXX      |
 {: #tab-prefixes title="Prefixes and corresponding YANG modules"}
 
 RFC Editor Note:
@@ -372,6 +375,8 @@ The YANG data model for network hardware inventory mainly follows the same appro
         +--ro mfg-date?         yang:date-and-time
         +--ro uri*              inet:uri
 ~~~~
+
+Some of the definitions taken from {{!RFC8348}} are actually based on the ENTITY-MIB {{!RFC6933}}.
 
 For state data like admin-state, oper-state and so on, we consider they are related to device hardware management and not hardware inventory. Therefore, they are outside of scope of this document. Same for the sensor-data, they should be defined in some other performance monitoring data models instead of inventory data model.
 
