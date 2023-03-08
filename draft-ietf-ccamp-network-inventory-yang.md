@@ -521,24 +521,25 @@ We consider that some of the attributes defined in {{?RFC8348}} for components a
 
 Note: Not all the attributes defined in {{?RFC8348}} are applicable for network element. And there could also be some missing attributes which are not recognized by {{?RFC8348}}. More extensions could be introduced in later revisions after the missing attributes are fully discussed.
 
-### Travelling of Inventory and Topology
+### Relationship between Hardware Inventory and Network Topology models
 
-Network topology is a logical abstraction based on hardware inventory objects. The abstraction may be based on technology perspective or some requirements perspective. So that the abstracted objects in network topology can better reflect connection-related properties to serve for path computation or service provisioning .etc.
+Network topology is a logical abstraction based on hardware inventory objects. The abstraction may be based on technology requirements (e.g., layer 0 or layer 1 resources) or on some specific requirements (e.g., for path computation or service provisioning).
 
-The mapping relationship between hardware inventory object and network topology object can be 1: N (N>=1). We call this mapping relationship as travelling.
+Therefore the relationship between hardware inventory objects and network topology objects can be 1:N (N>=1).
 
-Taking the Optical technology as example, an OTN NE can be installed with several kinds of boards, including an Ethernet client signal switching board, a line board which is used for OTN layer switching. This line board may also be used as a start point of WDM layer. In terms of technologies, this OTN NE supports multi-layer network topology connections, so that it should appear in L0, L1 and L2 network topology.
+Taking the Optical technology as example, an Optical Transport Network (OTN) Network Element (NE) can be installed with several kinds of boards, including an Ethernet client signal switching board, a line board which is used for OTN layer switching. This line board may also be used as a start point of WDM layer. In terms of technologies, this OTN NE supports multi-layer network topology connections, so that it should appear in L0, L1 and L2 network topology.
 
-Currently, we have not seen a scenario that multiple hardware inventory objects are abstracted as a single object in network topology.
+It is important to describe this relationship for the sake of network Operation and Maintenance (O&M). For example, the actual path of a connection is described by the objects in network topology. When there is a failure along this connection, the O&M engineers are more concerned with the physical location information behind the network objects for trouble shooting.
 
-It is important to describe this travelling relationship in the sake of network Operation and Maintenance (O&M). For example, the actual path of a connection is described by the objects in network topology. When there is an accident happened on this connection, the O&M engineer are more concerned with the physical location information behind the network objects for trouble shooting.
+Generally speaking, a node object in the network topology corresponds to a network element object in the hardware inventory. A Link Termination Point (LTP) object in the network topology corresponds to a port component in the hardware inventory. A link object in the network topology corresponds to a fiber/cable object in the hardware inventory.
 
-Generally speaking, node object in network topology is corresponded to network element object in hardware inventory. Termination point (TP) object in network topology is corresponded to port component in network element. Some parts of link objects can be corresponded to fiber/cable object in hardware inventory.
-//NOTE: take fiber&cable object into scope in the future version.
+NOTE: take fiber&cable object into scope in the future version.
 
-Compared with network topology, hardware inventory objects are the most basic elements of network. Therefore, from the automation integration perspective, the MDSC or OSS systems would integrate with hardware inventory data before network topology data. It is nor reasonable to exist any network topology related information in the hardware inventory data. On the contrary, the hardware inventory objects related information should be reflected in network topology data.
+Compared with network topology, hardware inventory objects are the most basic elements of network: from the automation integration perspective, the MDSC or OSS systems would integrate with hardware inventory data before network topology data.
 
-So we do some extensions in the network topology data model, to provide hardware inventory objects' identifier references for node, TP and link. Where there are needs for hardware inventory objects' information, it is easy to retrieve by these identifiers.
+Therefore it is better to keep separated the network topology information and the hardware inventory information: the ietf-hw-inventory-ref-topo YANG module provides this relationship augmenting the network topology model, when required, with references between network topology objects and corresponding hardware inventory objects.
+
+NOTE: add the figure with the relationship between the three modules (see slide from 2023-03-08 meeting)
 
 ~~~~ ascii-art
 augment /nw:networks/nw:network/nw:node:
@@ -546,6 +547,8 @@ augment /nw:networks/nw:network/nw:node:
 augment /nw:networks/nw:network/nw:node/nt:termination-point:
    +--rw inventory-id?   leafref
 ~~~~
+
+NOTE: the association between a link and a fiber&cable object has to be added in the future version.
 
 ## Efficiency Issue
 
