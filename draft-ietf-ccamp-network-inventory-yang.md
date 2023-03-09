@@ -539,13 +539,30 @@ Compared with network topology, hardware inventory objects are the most basic el
 
 Therefore it is better to keep separated the network topology information and the hardware inventory information: the ietf-hw-inventory-ref-topo YANG module provides this relationship augmenting the network topology model, when required, with references between network topology objects and corresponding hardware inventory objects.
 
-NOTE: add the figure with the relationship between the three modules (see slide from 2023-03-08 meeting)
+This figure below shows the relationship between the three modules:
 
 ~~~~ ascii-art
+     +------------------+
+     | Network topology |
+     |      module      |
+     +------------------+
+             ^
+             |
+             |
+             |
+     +------------------+          +------------------+
+     | ietf-hw-inventory|          | ietf-network-hard|
+     |   -ref-topology  |--------> |  ware-inventory  |
+     +------------------+          +------------------+
+~~~~
+{: #fig-modules-relationship title="Relationship between the three modules"}
+
+~~~~ ascii-art
+module: ietf-hw-inventory-ref-topo
 augment /nw:networks/nw:network/nw:node:
-   +--rw inventory-id?   leafref
+   +--ro inventory-id?   leafref
 augment /nw:networks/nw:network/nw:node/nt:termination-point:
-   +--rw inventory-id?   leafref
+   +--ro inventory-id?   leafref
 ~~~~
 
 NOTE: the association between a link and a fiber&cable object has to be added in the future version.
@@ -584,6 +601,14 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 {: #fig-ni-tree title="Network inventory tree diagram"
 artwork-name="ietf-network-hardware-inventory.tree"}
 
+{{fig-ref}} below shows the tree diagram of the YANG data model defined in module ietf-hw-inventory-ref-topo ({{ni-yang}}).
+
+~~~~ ascii-art
+{::include ./ietf-hw-inventory-ref-topo.tree}
+~~~~
+{: #fig-ref title="Hardware inventory topology navigation tree diagram"
+artwork-name="ietf-hw-inventory-ref-topo.tree"}
+
 {: #ni-yang}
 
 # YANG Model for Network Hardware Inventory
@@ -593,6 +618,13 @@ artwork-name="ietf-network-hardware-inventory.tree"}
 ~~~~
 {: #fig-ni-yang title="Network inventory YANG module"
 sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-03-07.yang"}
+
+~~~~ yang
+{::include ./ietf-hw-inventory-ref-topo.yang}
+~~~~
+{: #fig-ni-yang title="Hardware inventory topology navigation YANG module"
+sourcecode-markers="true" sourcecode-name="ietf-hw-inventory-ref-topo@2023-03-09.yang"}
+
 
 # Manageability Considerations
 
