@@ -622,7 +622,7 @@ sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-
 ~~~~ yang
 {::include ./ietf-hw-inventory-ref-topo.yang}
 ~~~~
-{: #fig-ni-yang title="Hardware inventory topology navigation YANG module"
+{: #fig-ref-yang title="Hardware inventory topology navigation YANG module"
 sourcecode-markers="true" sourcecode-name="ietf-hw-inventory-ref-topo@2023-03-09.yang"}
 
 
