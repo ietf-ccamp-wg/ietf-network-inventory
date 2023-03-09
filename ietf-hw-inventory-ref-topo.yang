@@ -96,9 +96,9 @@ module ietf-hw-inventory-ref-topo {
         + "/nhi:network-element/nhi:uuid";
       }
 	  
-	  description 
-	    "The identifier of the Network Element (NE) from which this
-        node is abstracted";
+	  description
+      "The identifier of the Network Element (NE) from which this
+      node is abstracted";
     }
   }
   

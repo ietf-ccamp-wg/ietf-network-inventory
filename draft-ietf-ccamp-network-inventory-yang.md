@@ -126,11 +126,9 @@ The proposed YANG data model has been analysed at the present stage to cover the
 
 Being based on {{!RFC8348}}, this data model should be a good starting point toward a generic data model and applicable to any technology. However, further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical networks.
 
-This document defines one YANG module: ietf-network-inventory ({{ni-yang}}).
+This document defines two YANG modules: "ietf-network-inventory", defined in {{ni-yang}}, and "ietf-hw-inventory-ref-topo", defined in {{ref-yang}}.
 
-Note: review in future versions of this document the related modules, depending on the augmentation relationship.
-
-The YANG data model defined in this document conforms to the Network Management Datastore Architecture {{!RFC8342}}.
+The YANG data models defined in this document conforms to the Network Management Datastore Architecture {{!RFC8342}}.
 
 ## Terminology and Notations
 
@@ -195,7 +193,7 @@ The YANG data model defined in this document conforms to the Network Management 
 
 ## Tree Diagram
 
-A simplified graphical representation of the data model is used in {{ni-tree}} of this document.
+A simplified graphical representation of the data model is used in {{tree}} of this document.
 The meaning of the symbols in this diagram is defined in {{!RFC8340}}.
 
 ## Prefix in Data Node Names
@@ -204,12 +202,13 @@ The meaning of the symbols in this diagram is defined in {{!RFC8340}}.
   are prefixed using the standard prefix associated with the
   corresponding YANG imported modules, as shown in the following table.
 
-| Prefix | Yang Module            | Reference     |
-| ------ | ---------------------- | ------------- |
-| inet   | ietf-inet-types        | {{!RFC6991}}  |
-| yang   | ietf-yang-types        | {{!RFC6991}}  |
-| ianahw | iana-hardware          | {{IANA_YANG}} |
-| ni     | ietf-network-inventory | RFC XXXX      |
+| Prefix | Yang Module                | Reference     |
+| ------ | -------------------------- | ------------- |
+| inet   | ietf-inet-types            | {{!RFC6991}}  |
+| yang   | ietf-yang-types            | {{!RFC6991}}  |
+| ianahw | iana-hardware              | {{IANA_YANG}} |
+| ni     | ietf-network-inventory     | RFC XXXX      |
+| hirt   | ietf-hw-inventory-ref-topo | RFC XXXX      |
 {: #tab-prefixes title="Prefixes and corresponding YANG modules"}
 
 RFC Editor Note:
@@ -537,7 +536,7 @@ NOTE: take fiber&cable object into scope in the future version.
 
 Compared with network topology, hardware inventory objects are the most basic elements of network: from the automation integration perspective, the MDSC or OSS systems would integrate with hardware inventory data before network topology data.
 
-Therefore it is better to keep separated the network topology information and the hardware inventory information: the ietf-hw-inventory-ref-topo YANG module provides this relationship augmenting the network topology model, when required, with references between network topology objects and corresponding hardware inventory objects.
+Therefore it is better to keep separated the network topology information and the hardware inventory information: the "ietf-hw-inventory-ref-topo" YANG module provides this relationship augmenting the network topology model, when required, with references between network topology objects and corresponding hardware inventory objects.
 
 This figure below shows the relationship between the three modules:
 
@@ -555,7 +554,7 @@ This figure below shows the relationship between the three modules:
      |   -ref-topology  |--------> |  ware-inventory  |
      +------------------+          +------------------+
 ~~~~
-{: #fig-modules-relationship title="Relationship between the three modules"}
+{: #fig-modules-relationship title="Relationship between the three YANG modules"}
 
 ~~~~ ascii-art
 module: ietf-hw-inventory-ref-topo
@@ -589,11 +588,15 @@ The proposed YANG data model has been analysed so far to cover the requirements 
 
 Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical.
 
+{: #tree}
+
+# Tree Diagrams
+
 {: #ni-tree}
 
-# Network Hardware Inventory Tree Diagram
+## Network Hardware Inventory Tree Diagram
 
-{{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module ietf-network-inventory ({{ni-yang}}).
+{{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module "ietf-network-inventory" ({{ni-yang}}).
 
 ~~~~ ascii-art
 {::include ./ietf-network-hardware-inventory.tree}
@@ -601,17 +604,25 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 {: #fig-ni-tree title="Network inventory tree diagram"
 artwork-name="ietf-network-hardware-inventory.tree"}
 
-{{fig-ref}} below shows the tree diagram of the YANG data model defined in module ietf-hw-inventory-ref-topo ({{ni-yang}}).
+{: #ref-tree}
+
+## Network Hardware Inventory Tree Diagram
+
+{{fig-ref-tree}} below shows the tree diagram of the YANG data model defined in module "ietf-hw-inventory-ref-topo" ({{ref-yang}}).
 
 ~~~~ ascii-art
 {::include ./ietf-hw-inventory-ref-topo.tree}
 ~~~~
-{: #fig-ref title="Hardware inventory topology navigation tree diagram"
+{: #fig-ref-tree title="Hardware inventory topology navigation tree diagram"
 artwork-name="ietf-hw-inventory-ref-topo.tree"}
+
+{: #yang}
+
+# YANG Data Models
 
 {: #ni-yang}
 
-# YANG Model for Network Hardware Inventory
+## YANG Data Model for Network Hardware Inventory
 
 ~~~~ yang
 {::include ./ietf-network-hardware-inventory.yang}
@@ -619,12 +630,15 @@ artwork-name="ietf-hw-inventory-ref-topo.tree"}
 {: #fig-ni-yang title="Network inventory YANG module"
 sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-03-07.yang"}
 
+{: #ref-yang}
+
+## YANG Data Model for Navigation between Topology and Network Hardware Inventory
+
 ~~~~ yang
 {::include ./ietf-hw-inventory-ref-topo.yang}
 ~~~~
 {: #fig-ref-yang title="Hardware inventory topology navigation YANG module"
 sourcecode-markers="true" sourcecode-name="ietf-hw-inventory-ref-topo@2023-03-09.yang"}
-
 
 # Manageability Considerations
 
@@ -644,9 +658,9 @@ sourcecode-markers="true" sourcecode-name="ietf-hw-inventory-ref-topo@2023-03-09
 
 ## Comparison With Openconfig-platform Data Model
 
-Since more and more devices can be managed by domain controller through OpenConfig, to avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the YANG module openconfig-platform which is the data model used to manage inventory information in OpenConfig.
+Since more and more devices can be managed by domain controller through OpenConfig, to avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the "openconfig-platform" model which is the data model used to manage inventory information in OpenConfig.
 
-Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to ietf-hardware model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between openconfig-platform and our model directly , which is stated below:
+Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to "ietf-hardware" model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between "openconfig-platform" and our model directly , which is stated below:
 
 | Attributes in oc-platform  | Attributes in our model  | remark                   |
 | -------------------------- | ------------------------ | ------------------------ |
@@ -691,9 +705,9 @@ Openconfig-platform data model is NE-level and uses a generic component concept 
 | backplane                  |                          | Backplane is considered as a part of board. And no need to define as a single component  |
 | software-module            |                          | TBD                      |
 | controller-card            |                          | Controller card is considered as a specific functional board. And no need to define as a single component  |
-{: #tab-oc title="Comparison between openconfig-platform and inventory data model"}
+{: #tab-oc title="Comparison between openconfig platform and inventory data models"}
 
-As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same for alarm data and it should be defined in some other alarm data models separately. And for some component specific structures in openconfig-platform, we consider some of them can be contained by our existing structure, such as fan, backplane, and controller-card. And for some of them, there is no need to manage for operators, such as storage and cpu.
+As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same for alarm data and it should be defined in some other alarm data models separately. And for some component specific structures in "openconfig-platform", we consider some of them can be contained by our existing structure, such as fan, backplane, and controller-card. And for some of them, there is no need to manage for operators, such as storage and cpu.
 
 Mostly, our inventory data model can cover the attributes from OpenConfig.
 
