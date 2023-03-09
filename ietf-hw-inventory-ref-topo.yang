@@ -45,7 +45,8 @@ module ietf-hw-inventory-ref-topo {
               <phbedard@cisco.com>";
 
  description
-   "This module defines a model for retrieving network inventory.
+   "This module defines a model for navigation between hardware
+   inventory data module and network topology module.
 
    The model fully conforms to the Network Management
    Datastore Architecture (NMDA).
