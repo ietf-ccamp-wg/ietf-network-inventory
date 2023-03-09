@@ -21,19 +21,7 @@ module ietf-network-hardware-inventory {
     reference
       "RFC6991: Common YANG Data Types.";
   } 
-  
-  import ietf-network {
-    prefix nw;
-    reference
-      "RFC8345: A YANG Data Model for Network Topologies";
-  }
-  
-  import ietf-network-topology {
-    prefix nt;
-    reference
-      "RFC8345: A YANG Data Model for Network Topologies";
-  }
-  
+
   organization
     "IETF CCAMP Working Group";
   contact
@@ -613,40 +601,5 @@ module ietf-network-hardware-inventory {
   //To be enriched in the future.
     description
       "Specific attributes applicable to ports only.";
-  }
- 
-  augment "/nw:networks/nw:network/nw:node" {
-    description 
-      "Information that allows the navigation between this node and 
-      the Network Element (NE) from which this node is abstracted in 
-      the network hardware inventory model.";
-    leaf inventory-id {
-      type leafref {
-        path  "/nhi:network-hardware-inventory/nhi:network-elements"
-            + "/nhi:network-element/nhi:uuid";
-      }
-      config false;
-      description
-        "The identifier of the Network Element (NE) from which this 
-        node is abstracted";
-    }
-  }
-  
-  augment "/nw:networks/nw:network/nw:node/nt:termination-point" {
-    description 
-      "Information that allows the navigation between this Link 
-      Termination Point (LTP) and the port component from which this 
-      LTP is abstracted in the network hardware inventory model.";
-    leaf inventory-id {
-      type leafref {
-        path  "/nhi:network-hardware-inventory/nhi:network-elements"
-            + "/nhi:network-element/nhi:components/nhi:component"
-            + "/nhi:uuid";
-      }
-      config false;
-      description
-        "The identifier of the port component from which this Link 
-        Termination Point (LTP) is abstracted";
-    }
   }
 }
