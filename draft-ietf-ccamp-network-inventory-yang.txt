@@ -199,9 +199,9 @@ Internet-Draft           Network Inventory YANG               March 2023
    networks (IP and microwave) and to identify which aspects are generic
    and which aspects are technology-specific for optical networks.
 
-   This document defines two YANG modules: "ietf-network-inventory",
-   defined in Section 4.1, and "ietf-hw-inventory-ref-topo", defined in
-   Section 4.2.
+   This document defines two YANG modules: "ietf-network-hardware-
+   inventory", defined in Section 4.1, and "ietf-hw-inventory-ref-topo",
+   defined in Section 4.2.
 
    The YANG data models defined in this document conforms to the Network
    Management Datastore Architecture [RFC8342].
@@ -304,21 +304,21 @@ Internet-Draft           Network Inventory YANG               March 2023
    are prefixed using the standard prefix associated with the
    corresponding YANG imported modules, as shown in the following table.
 
-           +========+============================+=============+
-           | Prefix | Yang Module                | Reference   |
-           +========+============================+=============+
-           | inet   | ietf-inet-types            | [RFC6991]   |
-           +--------+----------------------------+-------------+
-           | yang   | ietf-yang-types            | [RFC6991]   |
-           +--------+----------------------------+-------------+
-           | ianahw | iana-hardware              | [IANA_YANG] |
-           +--------+----------------------------+-------------+
-           | ni     | ietf-network-inventory     | RFC XXXX    |
-           +--------+----------------------------+-------------+
-           | hirt   | ietf-hw-inventory-ref-topo | RFC XXXX    |
-           +--------+----------------------------+-------------+
+        +========+=================================+=============+
+        | Prefix | Yang Module                     | Reference   |
+        +========+=================================+=============+
+        | inet   | ietf-inet-types                 | [RFC6991]   |
+        +--------+---------------------------------+-------------+
+        | yang   | ietf-yang-types                 | [RFC6991]   |
+        +--------+---------------------------------+-------------+
+        | ianahw | iana-hardware                   | [IANA_YANG] |
+        +--------+---------------------------------+-------------+
+        | ni     | ietf-network-hardware-inventory | RFC XXXX    |
+        +--------+---------------------------------+-------------+
+        | hirt   | ietf-hw-inventory-ref-topo      | RFC XXXX    |
+        +--------+---------------------------------+-------------+
 
-              Table 1: Prefixes and corresponding YANG modules
+             Table 1: Prefixes and corresponding YANG modules
 
    RFC Editor Note: Please replace XXXX with the RFC number assigned to
    this document.  Please remove this note.
@@ -506,7 +506,7 @@ Yu, et al.              Expires 10 September 2023               [Page 9]
 Internet-Draft           Network Inventory YANG               March 2023
 
 
-   module: ietf-network-inventory
+   module: ietf-network-hardware-inventory
       +--ro network-inventory
          +--ro equipment-rooms
          |  +--ro equipment-room* [uuid]
@@ -985,7 +985,7 @@ Internet-Draft           Network Inventory YANG               March 2023
 3.1.  Network Hardware Inventory Tree Diagram
 
    Figure 4 below shows the tree diagram of the YANG data model defined
-   in module "ietf-network-inventory" (Section 4.1).
+   in module "ietf-network-hardware-inventory" (Section 4.1).
 
    module: ietf-network-hardware-inventory
      +--ro network-hardware-inventory

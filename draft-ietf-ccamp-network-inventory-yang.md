@@ -126,7 +126,7 @@ The proposed YANG data model has been analysed at the present stage to cover the
 
 Being based on {{!RFC8348}}, this data model should be a good starting point toward a generic data model and applicable to any technology. However, further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical networks.
 
-This document defines two YANG modules: "ietf-network-inventory", defined in {{ni-yang}}, and "ietf-hw-inventory-ref-topo", defined in {{ref-yang}}.
+This document defines two YANG modules: "ietf-network-hardware-inventory", defined in {{ni-yang}}, and "ietf-hw-inventory-ref-topo", defined in {{ref-yang}}.
 
 The YANG data models defined in this document conforms to the Network Management Datastore Architecture {{!RFC8342}}.
 
@@ -202,13 +202,13 @@ The meaning of the symbols in this diagram is defined in {{!RFC8340}}.
   are prefixed using the standard prefix associated with the
   corresponding YANG imported modules, as shown in the following table.
 
-| Prefix | Yang Module                | Reference     |
-| ------ | -------------------------- | ------------- |
-| inet   | ietf-inet-types            | {{!RFC6991}}  |
-| yang   | ietf-yang-types            | {{!RFC6991}}  |
-| ianahw | iana-hardware              | {{IANA_YANG}} |
-| ni     | ietf-network-inventory     | RFC XXXX      |
-| hirt   | ietf-hw-inventory-ref-topo | RFC XXXX      |
+| Prefix | Yang Module                     | Reference     |
+| ------ | ------------------------------- | ------------- |
+| inet   | ietf-inet-types                 | {{!RFC6991}}  |
+| yang   | ietf-yang-types                 | {{!RFC6991}}  |
+| ianahw | iana-hardware                   | {{IANA_YANG}} |
+| ni     | ietf-network-hardware-inventory | RFC XXXX      |
+| hirt   | ietf-hw-inventory-ref-topo      | RFC XXXX      |
 {: #tab-prefixes title="Prefixes and corresponding YANG modules"}
 
 RFC Editor Note:
@@ -310,7 +310,7 @@ Description: description is a human-readable information which could be also inp
 Location: location is a common management requirement of operators. This location could be an absolute position (e.g. mailing address), or a relative position (e.g. port index). Different types of inventory objects may require different types of position.
 
 ~~~~ ascii-art
-module: ietf-network-inventory
+module: ietf-network-hardware-inventory
    +--ro network-inventory
       +--ro equipment-rooms
       |  +--ro equipment-room* [uuid]
@@ -596,7 +596,7 @@ Further analysis of requirements and use cases is needed to extend the applicabi
 
 ## Network Hardware Inventory Tree Diagram
 
-{{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module "ietf-network-inventory" ({{ni-yang}}).
+{{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module "ietf-network-hardware-inventory" ({{ni-yang}}).
 
 ~~~~ ascii-art
 {::include ./ietf-network-hardware-inventory.tree}
