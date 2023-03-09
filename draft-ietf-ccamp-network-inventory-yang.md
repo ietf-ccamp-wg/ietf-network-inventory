@@ -548,10 +548,10 @@ This figure below shows the relationship between the three modules:
      +------------------+
              ^
              |
-             |
+             |augments
              |
      +------------------+          +------------------+
-     | ietf-hw-inventory|          | ietf-network-hard|
+     | ietf-hw-inventory| imports  | ietf-network-hard|
      |   -ref-topology  |--------> |  ware-inventory  |
      +------------------+          +------------------+
 ~~~~
