@@ -3,25 +3,20 @@
 
 
 CCAMP Working Group                                                C. Yu
-Internet-Draft                                                   I. Busi
-Intended status: Standards Track                     Huawei Technologies
-Expires: 21 July 2023                                             A. Guo
-                                                  Futurewei Technologies
-                                                              S. Belotti
-                                                                   Nokia
+Internet-Draft                                       Huawei Technologies
+Intended status: Standards Track                              S. Belotti
+Expires: 11 September 2023                                         Nokia
                                                           J.-F. Bouquier
                                                                 Vodafone
                                                             F. Peruzzini
                                                                      TIM
-                                                     O. Gonzalez de Dios
-                                                              Telefonica
-                                                                V. Lopez
-                                                                   Nokia
-                                                         17 January 2023
+                                                               P. Bedard
+                                                                   Cisco
+                                                           10 March 2023
 
 
             A YANG Data Model for Network Hardware Inventory
-               draft-ietf-ccamp-network-inventory-yang-00
+               draft-ietf-ccamp-network-inventory-yang-01
 
 Abstract
 
@@ -48,22 +43,20 @@ Status of This Memo
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at https://datatracker.ietf.org/drafts/current/.
 
-
-
-
-
-
-Yu, et al.                Expires 21 July 2023                  [Page 1]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 July 2023.
+   This Internet-Draft will expire on 11 September 2023.
+
+
+
+
+Yu, et al.              Expires 11 September 2023               [Page 1]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
 
 Copyright Notice
 
@@ -94,50 +87,60 @@ Table of Contents
        2.1.4.  Equipment Room  . . . . . . . . . . . . . . . . . . .  13
        2.1.5.  Rack  . . . . . . . . . . . . . . . . . . . . . . . .  13
        2.1.6.  Network Element . . . . . . . . . . . . . . . . . . .  15
-     2.2.  Efficiency Issue  . . . . . . . . . . . . . . . . . . . .  15
-     2.3.  Some Other Considerations . . . . . . . . . . . . . . . .  16
-   3.  Network Hardware Inventory Tree Diagram . . . . . . . . . . .  17
-   4.  YANG Model for Network Hardware Inventory . . . . . . . . . .  18
-   5.  Manageability Considerations  . . . . . . . . . . . . . . . .  32
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  32
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  32
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  32
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  32
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  33
-   Appendix A.  Appendix . . . . . . . . . . . . . . . . . . . . . .  34
-     A.1.  Comparison With Openconfig-platform Data Model  . . . . .  34
+       2.1.7.  Relationship between Hardware Inventory and Network
+               Topology models . . . . . . . . . . . . . . . . . . .  15
+     2.2.  Efficiency Issue  . . . . . . . . . . . . . . . . . . . .  17
+     2.3.  Some Other Considerations . . . . . . . . . . . . . . . .  18
+   3.  Tree Diagrams . . . . . . . . . . . . . . . . . . . . . . . .  18
+     3.1.  Network Hardware Inventory Tree Diagram . . . . . . . . .  18
+     3.2.  Relationship between Topology and Network Inventory Tree
+           Diagram . . . . . . . . . . . . . . . . . . . . . . . . .  20
+   4.  YANG Data Models  . . . . . . . . . . . . . . . . . . . . . .  20
+     4.1.  YANG Data Model for Network Hardware Inventory  . . . . .  20
+     4.2.  YANG Data Model for Relationship between Topology and
+           Network Inventory . . . . . . . . . . . . . . . . . . . .  33
+   5.  Manageability Considerations  . . . . . . . . . . . . . . . .  36
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  36
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  36
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  36
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  36
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  37
+   Appendix A.  Appendix . . . . . . . . . . . . . . . . . . . . . .  38
 
 
 
-Yu, et al.                Expires 21 July 2023                  [Page 2]
+Yu, et al.              Expires 11 September 2023               [Page 2]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  37
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  37
+     A.1.  Comparison With Openconfig-platform Data Model  . . . . .  38
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  41
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  41
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  42
 
 1.  Introduction
 
    Network hardware inventory management is a key component in
    operators' OSS architectures.
 
-   Network inventory is a fundamental functionality in network
-   management and was specified many years ago.  Given the emerging of
+   Network hardware inventory is a fundamental functionality in network
+   management and was specified many years ago.  Given the emergence of
    data models and their deployment in operator's management and control
    systems, the traditional function of inventory management is also
    requested to be defined as a data model.
 
-   Network inventory management and monitoring is a critical part for
-   ensuring the network stays healthy, well-planned, and functioning in
-   the operator's network.  Network inventory management allows the
-   operator to keep track of what physical network devices are staying
-   in the network including relevant software and hardware versions.
+   Network hardware inventory management and monitoring is a critical
+   part for ensuring the network stays healthy, well-planned, and
+   functioning in the operator's network.  Network hardware inventory
+   management allows the operator to keep track of which physical
+   devices are deployed in the network including relevant software and
+   hardware versions.
 
-   The network inventory management also helps the operator to know when
-   to acquire new assets and what is needed, or to decommission old or
-   faulty ones, which can help to improve network performance and
-   capacity planning.
+   The network hardware inventory management also helps the operator to
+   know when to acquire new assets and what is needed, or to
+   decommission old or faulty ones, which can help to improve network
+   performance and capacity planning.
 
    In [I-D.ietf-teas-actn-poi-applicability] a gap was identified
    regarding the lack of a YANG data model that could be used at ACTN
@@ -146,13 +149,13 @@ Internet-Draft           Network Inventory YANG             January 2023
    north-bound systems (e.g., MDSC or OSS layer).
 
    [RFC8345] initial goal was to make possible the augmentation of the
-   YANG data model with network inventory data model but this was never
-   developed and the scope was kept limited to network topology data
-   only.
+   YANG data model with network hardware inventory data model but this
+   was never developed and the scope was kept limited to network
+   topology data only.
 
    It is key for operators to drive the industry towards the use of a
-   standard YANG data model for network inventory data instead of using
-   vendors proprietary APIs (e.g., REST API).
+   standard YANG data model for network hardware inventory data instead
+   of using vendors proprietary APIs (e.g., REST API).
 
    In the ACTN architecture, this would bring also clear benefits at
    MDSC level for packet over optical integration scenarios since this
@@ -162,12 +165,9 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-
-
-
-Yu, et al.                Expires 21 July 2023                  [Page 3]
+Yu, et al.              Expires 11 September 2023               [Page 3]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
    The intention is to define a generic YANG data model that would be as
@@ -183,10 +183,10 @@ Internet-Draft           Network Inventory YANG             January 2023
    for defining the YANG network hardware inventory data model presented
    in this draft.
 
-   For optical network hardware inventory, the network inventory YANG
-   data model should support the use cases (4a and 4b) and requirements
-   as defined in [ONF_TR-547], in order to guarantee a seamless
-   integration at MDSC/OSS/orchestration layers.
+   For optical network hardware inventory, the network hardware
+   inventory YANG data model should support the use cases (4a and 4b)
+   and requirements as defined in [ONF_TR-547], in order to guarantee a
+   seamless integration at MDSC/OSS/orchestration layers.
 
    The proposed YANG data model has been analysed at the present stage
    to cover the requirements and use cases for Optical Network Hardware
@@ -199,13 +199,11 @@ Internet-Draft           Network Inventory YANG             January 2023
    networks (IP and microwave) and to identify which aspects are generic
    and which aspects are technology-specific for optical networks.
 
-   This document defines one YANG module: ietf-network-inventory.yang
-   (Section 4).
+   This document defines two YANG modules: "ietf-network-hardware-
+   inventory", defined in Section 4.1, and "ietf-hw-inventory-ref-topo",
+   defined in Section 4.2.
 
-   Note: review in future versions of this document the related modules,
-   depending on the augmentation relationship.
-
-   The YANG data model defined in this document conforms to the Network
+   The YANG data models defined in this document conform to the Network
    Management Datastore Architecture [RFC8342].
 
 1.1.  Terminology and Notations
@@ -219,14 +217,14 @@ Internet-Draft           Network Inventory YANG             January 2023
 
    *  augment
 
-
-
-Yu, et al.                Expires 21 July 2023                  [Page 4]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
    *  data model
+
+
+
+Yu, et al.              Expires 11 September 2023               [Page 4]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
 
    *  data node
 
@@ -241,7 +239,7 @@ Internet-Draft           Network Inventory YANG             January 2023
    [RFC7950].
 
    TBD: Recap the concept of chassis/slot/component/board/... in
-   [TMF-MTOSI].
+   [TMF_SD2-20].
 
    Following terms are used for the representation of the hierarchies in
    the network hardware inventory.
@@ -275,14 +273,14 @@ Internet-Draft           Network Inventory YANG             January 2023
       sub-slots and can afford a specific transmission function
       independently.
 
-
-
-Yu, et al.                Expires 21 July 2023                  [Page 5]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
    Port:
+
+
+
+Yu, et al.              Expires 11 September 2023               [Page 5]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
 
       an interface on board
 
@@ -306,18 +304,21 @@ Internet-Draft           Network Inventory YANG             January 2023
    are prefixed using the standard prefix associated with the
    corresponding YANG imported modules, as shown in the following table.
 
-              +========+========================+===========+
-              | Prefix | Yang Module            | Reference |
-              +========+========================+===========+
-              | ianahw | iana-hardware          | [RFC8348] |
-              +--------+------------------------+-----------+
-              | ni     | ietf-network-inventory | RFC XXXX  |
-              +--------+------------------------+-----------+
-              | yang   | ietf-yang-types        | [RFC6991] |
-              +--------+------------------------+-----------+
+        +========+=================================+=============+
+        | Prefix | Yang Module                     | Reference   |
+        +========+=================================+=============+
+        | inet   | ietf-inet-types                 | [RFC6991]   |
+        +--------+---------------------------------+-------------+
+        | yang   | ietf-yang-types                 | [RFC6991]   |
+        +--------+---------------------------------+-------------+
+        | ianahw | iana-hardware                   | [IANA_YANG] |
+        +--------+---------------------------------+-------------+
+        | ni     | ietf-network-hardware-inventory | RFC XXXX    |
+        +--------+---------------------------------+-------------+
+        | hirt   | ietf-hw-inventory-ref-topo      | RFC XXXX    |
+        +--------+---------------------------------+-------------+
 
-                  Table 1: Prefixes and corresponding YANG
-                                  modules
+             Table 1: Prefixes and corresponding YANG modules
 
    RFC Editor Note: Please replace XXXX with the RFC number assigned to
    this document.  Please remove this note.
@@ -332,15 +333,14 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-
-Yu, et al.                Expires 21 July 2023                  [Page 6]
+Yu, et al.              Expires 11 September 2023               [Page 6]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
 2.1.  YANG Model Overview
 
-   Based on TMF classification in [TMF-MTOSI], inventory objects can be
+   Based on TMF classification in [TMF_SD2-20], inventory objects can be
    divided into two groups, holder group and equipment group.  The
    holder group contains rack, chassis, slot, sub-slot while the
    equipment group contains network-element, board and port.  With the
@@ -389,9 +389,9 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-Yu, et al.                Expires 21 July 2023                  [Page 7]
+Yu, et al.              Expires 11 September 2023               [Page 7]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
    In [RFC8348], rack, chassis, slot, sub-slot, board and port are
@@ -404,21 +404,22 @@ Internet-Draft           Network Inventory YANG             January 2023
    elements.
 
    While [RFC8348] is used to manage the hardware of a single server
-   (e.g., a network element), the Network Inventory YANG data model is
-   used to retrieve the network hardware inventory information that a
-   controller discovers from all the network elements under its control.
+   (e.g., a network element), the Network Hardware Inventory YANG data
+   model is used to retrieve the network hardware inventory information
+   that a controller discovers from all the network elements under its
+   control.
 
    However, the YANG data model defined in [RFC8348] has been used as a
-   reference for defining the YANG network inventory data model.  This
-   approach can simplify the implementation of this network hardware
-   inventory model when the controller uses the YANG data model defined
-   in [RFC8348] to retrieve the hardware from the network elements under
-   its control.
+   reference for defining the YANG network hardware inventory data
+   model.  This approach can simplify the implementation of this network
+   hardware inventory model when the controller uses the YANG data model
+   defined in [RFC8348] to retrieve the hardware from the network
+   elements under its control.
 
    Note: review in future versions of this document whether to re-use
    definitions from [RFC8348] or use schema-mount.
 
-     +--ro network-inventory
+     +--ro network-hardware-inventory
         +--ro equipment-rooms
         |  +--ro equipment-room* [uuid]
         |     +--ro uuid        yang:uuid
@@ -444,10 +445,9 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-
-Yu, et al.                Expires 21 July 2023                  [Page 8]
+Yu, et al.              Expires 11 September 2023               [Page 8]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
 2.1.1.  Common Design for All Inventory Objects
@@ -501,13 +501,13 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-Yu, et al.                Expires 21 July 2023                  [Page 9]
+Yu, et al.              Expires 11 September 2023               [Page 9]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
-   module: ietf-network-inventory
-      +--ro network-inventory
+   module: ietf-network-hardware-inventory
+      +--ro network-hardware-inventory
          +--ro equipment-rooms
          |  +--ro equipment-room* [uuid]
          |     +--ro uuid           yang:uuid
@@ -557,9 +557,9 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-Yu, et al.                Expires 21 July 2023                 [Page 10]
+Yu, et al.              Expires 11 September 2023              [Page 10]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
      +--ro components
@@ -578,6 +578,9 @@ Internet-Draft           Network Inventory YANG             January 2023
            +--ro is-fru?           boolean
            +--ro mfg-date?         yang:date-and-time
            +--ro uri*              inet:uri
+
+   Some of the definitions taken from [RFC8348] are actually based on
+   the ENTITY-MIB [RFC6933].
 
    For state data like admin-state, oper-state and so on, we consider
    they are related to device hardware management and not hardware
@@ -610,12 +613,9 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 11]
+Yu, et al.              Expires 11 September 2023              [Page 11]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
      +--ro components
@@ -669,9 +669,9 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-Yu, et al.                Expires 21 July 2023                 [Page 12]
+Yu, et al.              Expires 11 September 2023              [Page 12]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
 2.1.3.3.  Part Number
@@ -725,9 +725,9 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-Yu, et al.                Expires 21 July 2023                 [Page 13]
+Yu, et al.              Expires 11 September 2023              [Page 13]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
                     ----------------      ---
@@ -781,9 +781,9 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-Yu, et al.                Expires 21 July 2023                 [Page 14]
+Yu, et al.              Expires 11 September 2023              [Page 14]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
 2.1.6.  Network Element
@@ -811,12 +811,102 @@ Internet-Draft           Network Inventory YANG             January 2023
    introduced in later revisions after the missing attributes are fully
    discussed.
 
+2.1.7.  Relationship between Hardware Inventory and Network Topology
+        models
+
+   Network topology is a logical abstraction based on hardware inventory
+   objects.  The abstraction may be based on technology requirements
+   (e.g., layer 0 or layer 1 resources) or on some specific requirements
+   (e.g., for path computation or service provisioning).
+
+   Therefore the relationship between hardware inventory objects and
+   network topology objects can be 1:N (N>=1).
+
+   Taking the Optical technology as example, an Optical Transport
+   Network (OTN) Network Element (NE) can be installed with several
+   kinds of boards, including an Ethernet client signal switching board,
+   a line board which is used for OTN layer switching.  This line board
+   may also be used as a starting point for the WDM layer.  In terms of
+   technologies, this OTN NE supports multi-layer network topology
+   connections, so that it should appear in L0, L1 and L2 network
+   topology.
+
+   It is important to describe this relationship for the sake of network
+   Operation and Maintenance (O&M).  For example, the actual path of a
+   connection is described by the objects in network topology.  When
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 15]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
+   there is a failure along this connection, the O&M engineers are more
+   concerned with the physical location information behind the network
+   objects for troubleshooting.
+
+   Generally speaking, a node object in the network topology corresponds
+   to a network element object in the hardware inventory.  A Link
+   Termination Point (LTP) object in the network topology corresponds to
+   a port component in the hardware inventory.  A link object in the
+   network topology corresponds to a fiber/cable object in the hardware
+   inventory.
+
+   NOTE: take fiber&cable object into scope in the future version.
+
+   Compared with network topology, hardware inventory objects are the
+   most basic of the network: from an automation perspective, the MDSC
+   or OSS systems would integrate with hardware inventory data before
+   network topology data.
+
+   Therefore it is better to keep separated the network topology
+   information and the hardware inventory information: the "ietf-hw-
+   inventory-ref-topo" YANG module provides this relationship augmenting
+   the network topology model, when required, with references between
+   network topology objects and corresponding hardware inventory
+   objects.
+
+   This figure below shows the relationship between the three modules:
+
+        +------------------+
+        | Network topology |
+        |      module      |
+        +------------------+
+                ^
+                |
+                |augments
+                |
+        +------------------+          +------------------+
+        | ietf-hw-inventory| imports  | ietf-network-hard|
+        |   -ref-topo      |--------> |  ware-inventory  |
+        +------------------+          +------------------+
+
+           Figure 3: Relationship between the three YANG modules
+
+   module: ietf-hw-inventory-ref-topo
+   augment /nw:networks/nw:network/nw:node:
+      +--ro inventory-id?   leafref
+   augment /nw:networks/nw:network/nw:node/nt:termination-point:
+      +--ro inventory-id?   leafref
+
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 16]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
+   NOTE: the association between a link and a fiber&cable object has to
+   be added in the future version.
+
 2.2.  Efficiency Issue
 
    During the integration with OSS in some operators, some efficiency/
    scalability concerns have been discovered when synchronizing network
-   inventory data for big networks.  More discussions are needed to
-   address these concerns.
+   hardware inventory data for big networks.  More discussions are
+   needed to address these concerns.
 
    Considering that relational databases are widely used by traditional
    OSS systems and also by some network controllers, the inventory
@@ -834,14 +924,6 @@ Internet-Draft           Network Inventory YANG             January 2023
    An alternative YANG model structure, which defines the inventory
    objects directly, instead of defining generic components, has also
    been analyzed.  However, also with this model, there still could be
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 15]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
    some scalability limitations when synchronizing full inventory
    resources in large scale of networks.  This scalability limitation is
    caused by the limited transmission capabilities of HTTP protocol.  We
@@ -863,11 +945,20 @@ Internet-Draft           Network Inventory YANG             January 2023
    draft.  Solution description to efficiency/scalability limitations
    mentioned above is considered as out-of-scope.
 
+
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 17]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
 2.3.  Some Other Considerations
 
    Note: review in future versions of this document whether the
-   component list should be under the network-inventory instead of the
-   network-element container.
+   component list should be under the network-hardware-inventory instead
+   of the network-element container.
 
    Note that in [RFC8345], topology and inventory are two subsets of
    network information.  However, considering the complexity of the
@@ -879,32 +970,25 @@ Internet-Draft           Network Inventory YANG             January 2023
    Note: review in future versions of this document whether network
    hardware inventory should be defined as an augmentation of the
    network model defined in [RFC8345] instead of under a new network-
-   inventory root.
+   hardware-inventory root.
 
    The proposed YANG data model has been analysed so far to cover the
-   requirements and use cases for Optical Network Inventory.
+   requirements and use cases for Optical Network Hardware Inventory.
 
    Further analysis of requirements and use cases is needed to extend
    the applicability of this YANG data model to other types of networks
    (IP and microwave) and to identify which aspects are generic and
    which aspects are technology-specific for optical.
 
+3.  Tree Diagrams
 
+3.1.  Network Hardware Inventory Tree Diagram
 
+   Figure 4 below shows the tree diagram of the YANG data model defined
+   in module "ietf-network-hardware-inventory" (Section 4.1).
 
-
-Yu, et al.                Expires 21 July 2023                 [Page 16]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
-3.  Network Hardware Inventory Tree Diagram
-
-   Figure 3 below shows the tree diagram of the YANG data model defined
-   in module ietf-network-inventory.yang (Section 4).
-
-   module: ietf-network-inventory
-     +--ro network-inventory
+   module: ietf-network-hardware-inventory
+     +--ro network-hardware-inventory
         +--ro equipment-rooms
         |  +--ro equipment-room* [uuid]
         |     +--ro uuid           yang:uuid
@@ -918,18 +1002,26 @@ Internet-Draft           Network Inventory YANG             January 2023
         |           +--ro name?                string
         |           +--ro description?         string
         |           +--ro alias?               string
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 18]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
         |           +--ro rack-location
         |           |  +--ro equipment-room-name?   leafref
         |           |  +--ro row-number?            uint32
         |           |  +--ro column-number?         uint32
-        |           +--ro rack-number?         uint32
         |           +--ro height?              uint16
         |           +--ro width?               uint16
         |           +--ro depth?               uint16
         |           +--ro max-voltage?         uint16
         |           +--ro contained-chassis* [ne-ref component-ref]
-        |              +--ro ne-ref           leafref
-        |              +--ro component-ref    leafref
+        |              +--ro ne-ref               leafref
+        |              +--ro component-ref        leafref
+        |              +--ro relative-position?   uint8
         +--ro network-elements
            +--ro network-element* [uuid]
               +--ro uuid             yang:uuid
@@ -939,21 +1031,12 @@ Internet-Draft           Network Inventory YANG             January 2023
               +--ro ne-location
               |  +--ro equipment-room-name*   leafref
               +--ro hardware-rev?    string
-              +--ro firmware-rev?    string
               +--ro software-rev?    string
               +--ro mfg-name?        string
               +--ro mfg-date?        yang:date-and-time
               +--ro part-number?     string
               +--ro serial-number?   string
               +--ro product-name?    string
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 17]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
               +--ro components
                  +--ro component* [uuid]
                     +--ro uuid                           yang:uuid
@@ -964,21 +1047,25 @@ Internet-Draft           Network Inventory YANG             January 2023
                     +--ro class?                         identityref
                     +--ro contained-child*               -> ../uuid
                     +--ro parent-rel-pos?                int32
-                    +--ro parent-references
-                    |  +--ro equipment-room-uuid?    leafref
-                    |  +--ro ne-uuid?                leafref
-                    |  +--ro rack-uuid?              leafref
-                    |  +--ro component-references
-                    |     +--ro component-reference* [index]
-                    |        +--ro index    uint8
-                    |        +--ro class?   -> ../../../../class
-                    |        +--ro uuid?    -> ../../../../uuid
+                    +--ro parent-component-references
+                    |  +--ro component-reference* [index]
+                    |     +--ro index    uint8
+                    |     +--ro class?   -> ../../../class
+                    |     +--ro uuid?    -> ../../../uuid
                     +--ro hardware-rev?                  string
                     +--ro firmware-rev?                  string
                     +--ro software-rev?                  string
                     +--ro serial-num?                    string
                     +--ro mfg-name?                      string
                     +--ro part-number?                   string
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 19]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
                     +--ro asset-id?                      string
                     +--ro is-fru?                        boolean
                     +--ro mfg-date?
@@ -994,27 +1081,33 @@ Internet-Draft           Network Inventory YANG             January 2023
                        +--:(port)
                           +--ro port-specific-info
 
-                  Figure 3: Network inventory tree diagram
+             Figure 4: Network Hardware inventory tree diagram
 
-4.  YANG Model for Network Hardware Inventory
+3.2.  Relationship between Topology and Network Inventory Tree Diagram
 
+   Figure 5 below shows the tree diagram of the YANG data model defined
+   in module "ietf-hw-inventory-ref-topo" (Section 4.2).
 
+   module: ietf-hw-inventory-ref-topo
 
+     augment /nw:networks/nw:network/nw:node:
+       +--ro inventory-id?   leafref
+     augment /nw:networks/nw:network/nw:node/nt:termination-point:
+       +--ro inventory-id?   leafref
 
+       Figure 5: Relationship between Topology and Network Inventory
+                                Tree Diagram
 
+4.  YANG Data Models
 
+4.1.  YANG Data Model for Network Hardware Inventory
 
-
-Yu, et al.                Expires 21 July 2023                 [Page 18]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
-   <CODE BEGINS> file "ietf-network-inventory@2022-07-11.yang"
-   module ietf-network-inventory {
+   <CODE BEGINS> file "ietf-network-hardware-inventory@2023-03-07.yang"
+   module ietf-network-hardware-inventory {
      yang-version 1.1;
-     namespace "urn:ietf:params:xml:ns:yang:ietf-network-inventory";
-     prefix ni;
+     namespace
+       "urn:ietf:params:xml:ns:yang:ietf-network-hardware-inventory";
+     prefix nhi;
 
      import ietf-yang-types {
        prefix yang;
@@ -1022,14 +1115,23 @@ Internet-Draft           Network Inventory YANG             January 2023
          "RFC6991: Common YANG Data Types.";
      }
 
+
+
+Yu, et al.              Expires 11 September 2023              [Page 20]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
      import iana-hardware {
        prefix ianahw;
        reference
-         "RFC 8348: A YANG Data Model for Hardware Management.";
+         "https://www.iana.org/assignments/yang-parameters";
      }
 
      import ietf-inet-types {
        prefix inet;
+       reference
+         "RFC6991: Common YANG Data Types.";
      }
 
      organization
@@ -1057,14 +1159,8 @@ Internet-Draft           Network Inventory YANG             January 2023
                   <fabio.peruzzini@telecomitalia.it>";
 
      description
-       "This module defines a model for retrieving network inventory.
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 19]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
+       "This module defines a model for retrieving network hardware
+       inventory.
 
        The model fully conforms to the Network Management
        Datastore Architecture (NMDA).
@@ -1074,6 +1170,14 @@ Internet-Draft           Network Inventory YANG             January 2023
 
        Redistribution and use in source and binary forms, with or
        without modification, is permitted pursuant to, and subject
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 21]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
        to the license terms contained in, the Revised BSD License
        set forth in Section 4.c of the IETF Trust's Legal Provisions
        Relating to IETF Documents
@@ -1093,47 +1197,16 @@ Internet-Draft           Network Inventory YANG             January 2023
      // RFC Ed.: update the date below with the date of RFC publication
      // and remove this note.
 
-     revision 2022-07-11 {
+     revision 2023-03-09 {
        description
-         "version 3.0.0";
+         "Initial version";
        reference
-         "draft-yg3bp-ccamp-inventory-yang-01: A YANG Data
-         Model for Network Inventory.";
+         "RFC XXXX: A YANG Data Model for Network Hardware Inventory.";
+         //RFC Editor: replace XXXX with actual RFC number, update date
+         //information and remove this note
      }
 
-     revision 2022-03-04 {
-       description
-         "version 3.0.0";
-       reference
-         "draft-yg3bp-ccamp-inventory-yang-00: A YANG Data
-         Model for Network Inventory.";
-     }
-
-     revision 2021-11-09 {
-       description
-         "version 2.0.0";
-       reference
-         "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 20]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
-         Model for Optical Network Inventory.";
-     }
-
-     revision 2021-10-25 {
-       description
-         "Initial revision.";
-       reference
-         "draft-yg3bp-ccamp-optical-inventory-yang-00: A YANG Data
-         Model for Optical Network Inventory.";
-     }
-
-     container network-inventory {
+     container network-hardware-inventory {
        config false;
        description
          "The top-level container for the network inventory
@@ -1153,6 +1226,14 @@ Internet-Draft           Network Inventory YANG             January 2023
        }
        leaf name {
          type string;
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 22]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
          description
            "A name for an entity (e.g., component), as specified by
            a network manager, that provides a non-volatile 'handle'
@@ -1170,14 +1251,6 @@ Internet-Draft           Network Inventory YANG             January 2023
        leaf alias {
          type string;
          description
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 21]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
          "a alias name of inventory objects. This alias name can be
          specified by network manager.";
        }
@@ -1196,11 +1269,11 @@ Internet-Draft           Network Inventory YANG             January 2023
            uses common-entity-attributes;
            container ne-location {
              description
-               "To be added.";
+               "The location information of this network element.";
              leaf-list equipment-room-name {
                type leafref {
-                 path "/ni:network-inventory/ni:equipment-rooms/" +
-                      "ni:equipment-room/ni:name";
+                 path "/nhi:network-hardware-inventory/" +
+                      "nhi:equipment-rooms/nhi:equipment-room/nhi:name";
                }
                description
                  "Names of equipment rooms where the NE is located.
@@ -1209,6 +1282,14 @@ Internet-Draft           Network Inventory YANG             January 2023
              }
            }
            uses ne-specific-info-grouping;
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 23]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
            uses components-grouping;
          }
        }
@@ -1216,24 +1297,11 @@ Internet-Draft           Network Inventory YANG             January 2023
 
      grouping ne-specific-info-grouping {
        description
-         "To be added.";
+         "Attributes applicable to network elements.";
        leaf hardware-rev {
          type string;
          description
            "The vendor-specific hardware revision string for the NE.";
-       }
-       leaf firmware-rev {
-         type string;
-         description
-           "The vendor-specific firmware revision string for the NE.";
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 22]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
        }
        leaf software-rev {
          type string;
@@ -1270,6 +1338,14 @@ Internet-Draft           Network Inventory YANG             January 2023
      grouping equipment-rooms-grouping {
        description
          "The attributes of the equipment rooms.";
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 24]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
        container equipment-rooms {
          description
            "The container for the list of equipment rooms.";
@@ -1282,20 +1358,12 @@ Internet-Draft           Network Inventory YANG             January 2023
              type string;
              description
                "compared with the location information of the other
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 23]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
                inventory objects, a GIS address is preferred for
                equipment room";
            }
            container racks {
              description
-               "To be added.";
+               "Top level container for the list of racks.";
              list rack {
                key uuid;
                description
@@ -1308,8 +1376,9 @@ Internet-Draft           Network Inventory YANG             January 2023
                    "The list of chassis within a rack.";
                  leaf ne-ref {
                    type leafref {
-                     path "/ni:network-inventory/ni:network-elements"
-                     + "/ni:network-element/ni:uuid";
+                     path "/nhi:network-hardware-inventory"
+                     + "/nhi:network-elements/nhi:network-element"
+                     + "/nhi:uuid";
                    }
                    description
                      "The reference to the network element containing
@@ -1317,14 +1386,27 @@ Internet-Draft           Network Inventory YANG             January 2023
                  }
                  leaf component-ref {
                    type leafref {
-                     path "/ni:network-inventory/ni:network-elements"
-                     + "/ni:network-element[ni:uuid"
-                     + "=current()/../ne-ref]/ni:components"
-                     + "/ni:component/ni:uuid";
+                     path "/nhi:network-hardware-inventory"
+                     + "/nhi:network-elements/nhi:network-element"
+                     + "[nhi:uuid=current()/../ne-ref]/nhi:components"
+                     + "/nhi:component/nhi:uuid";
                    }
                    description
                      "The reference to the chassis component within
                      the network element and contained by the rack.";
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 25]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
+                 }
+                 leaf relative-position {
+                   type uint8;
+                   description "A relative position of chassis within
+                   the rack";
                  }
                }
              }
@@ -1335,22 +1417,15 @@ Internet-Draft           Network Inventory YANG             January 2023
 
      grouping rack-specific-info-grouping {
        description
-         "To be added.";
+         "Attributes applicable to racks only.";
        container rack-location {
          description
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 24]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
-           "To be added.";
+           "The location information of the rack, which comprises the
+           name of the equipment room, row number, and column number.";
          leaf equipment-room-name {
            type leafref {
-             path "/ni:network-inventory/ni:equipment-rooms"
-             + "/ni:equipment-room/ni:name";
+             path "/nhi:network-hardware-inventory/nhi:equipment-rooms"
+             + "/nhi:equipment-room/nhi:name";
            }
            description
            "Name of equipment room where this rack is located.";
@@ -1368,40 +1443,35 @@ Internet-Draft           Network Inventory YANG             January 2023
              the column.";
          }
        }
-       leaf rack-number {
-         type uint32;
-         description
-           "An integer identifier of rack.";
-       }
        leaf height {
          type uint16;
          units millimeter;
          description
-           "To be added.";
+           "Rack height.";
        }
        leaf width {
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 26]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
          type uint16;
          units millimeter;
          description
-           "To be added.";
+           "Rack width.";
        }
        leaf depth {
          type uint16;
          units millimeter;
          description
-           "To be added.";
+           "Rack depth.";
        }
        leaf max-voltage {
          type uint16;
          units volt;
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 25]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
          description
            "The maximum voltage could be supported by the rack.";
        }
@@ -1421,8 +1491,7 @@ Internet-Draft           Network Inventory YANG             January 2023
            leaf location {
              type string;
              description
-               "To be added.
-
+               "A relative location information of this component.
                In optical transport network, the location string is
                using the following pattern:
                  '/ne=<nw-ne-name>[/r=<r_index>][/sh=<sh_index>
@@ -1437,103 +1506,82 @@ Internet-Draft           Network Inventory YANG             January 2023
              description
                "An indication of the general hardware type of the
                 component.";
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 27]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
              reference
                "RFC 8348: A YANG Data Model for Hardware Management.";
            }
            leaf-list contained-child {
              type leafref {
-               path "../ni:uuid";
+               path "../nhi:uuid";
              }
              description
-               "The child components' identifier that are physically
-               contained by this component.";
+               "The list of the identifiers of the child components
+               physically contained within this component.";
            }
            leaf parent-rel-pos {
              type int32 {
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 26]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
                range "0 .. 2147483647";
              }
              description
-               "To be added.";
+               "The relative position with respect to the parent
+               component among all the sibling components.";
              reference
                "RFC 6933: Entity MIB (Version 4) -
                           entPhysicalParentRelPos";
            }
-           container parent-references {
+
+           container parent-component-references {
              description
-               "To be added.";
-             leaf equipment-room-uuid {
-               type leafref {
-                 path "/ni:network-inventory/ni:equipment-rooms/" +
-                      "ni:equipment-room/ni:uuid";
-               }
+                 "The top level container for the list of the
+                 identifiers of the parents of this component in a
+                 hierarchy.";
+             list component-reference {
+               key index;
                description
-                 "To be added.";
-             }
-             leaf ne-uuid {
-               type leafref {
-                 path "/ni:network-inventory/ni:network-elements/" +
-                      "ni:network-element/ni:uuid";
-               }
-               description
-                 "To be added.";
-             }
-             leaf rack-uuid {
-               type leafref {
-                 path "/ni:network-inventory/ni:equipment-rooms/" +
-                      "ni:equipment-room/ni:racks/ni:rack/ni:uuid";
-               }
-               description
-                 "To be added.";
-             }
-             container component-references {
-               description
-                 "To be added.";
-               list component-reference {
-                 key index;
+                 "The list of the identifiers of the parents of this
+                 component in a hierarchy.
+
+                 The index parameter defines the hierarchy: the topmost
+                 parent has an index of 0.";
+               leaf index {
+                 type uint8;
                  description
-                   "this list object is used to indicate its
-                   hierarchial parent components' identifier.
-                   This hierarchial relation can be found by index
-                   parameter. The topest parent component should be
-                   0-index.";
-                 leaf index {
-                   type uint8;
+                   "The index of the parent with respect to the
+                   hierarchy.";
+               }
+               leaf class {
+                 type leafref {
+                   path "../../../nhi:class";
+                 }
+                 description
+                   "Class of the hierarchial parent component.";
 
 
 
-Yu, et al.                Expires 21 July 2023                 [Page 27]
+Yu, et al.              Expires 11 September 2023              [Page 28]
 
-Internet-Draft           Network Inventory YANG             January 2023
+Internet-Draft       Network Hardware Inventory YANG          March 2023
 
 
-                   description
-                     "To be added.";
+               }
+               leaf uuid {
+                 type leafref {
+                   path "../../../nhi:uuid";
                  }
-                 leaf class {
-                   type leafref {
-                     path "../../../../ni:class";
-                   }
-                   description
-                     "To be added.";
-                 }
-                 leaf uuid {
-                   type leafref {
-                     path "../../../../ni:uuid";
-                   }
-                   description
-                     "To be added.";
-                 }
+                 description
+                   "The identifier of the parent's component in the
+                   hierarchy.";
                }
              }
            }
+
            leaf hardware-rev {
              type string;
              description
@@ -1562,14 +1610,6 @@ Internet-Draft           Network Inventory YANG             January 2023
              reference
                "RFC 6933: Entity MIB (Version 4) -
                           entPhysicalSoftwareRev";
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 28]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
            }
            leaf serial-num {
              type string;
@@ -1578,6 +1618,14 @@ Internet-Draft           Network Inventory YANG             January 2023
                 component.  The preferred value is the serial number
                 string actually printed on the component itself (if
                 present).";
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 29]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
              reference
                "RFC 6933: Entity MIB (Version 4) -
                entPhysicalSerialNum";
@@ -1618,14 +1666,6 @@ Internet-Draft           Network Inventory YANG             January 2023
            leaf asset-id {
              type string;
              description
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 29]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
                "This node is a user-assigned asset tracking identifier
                 for the component.
 
@@ -1634,6 +1674,14 @@ Internet-Draft           Network Inventory YANG             January 2023
                 needs to use some mechanism to handle the differences in
                 size and characters allowed between this leaf and
                 entPhysicalAssetID.  The definition of such a mechanism
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 30]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
                 is outside the scope of this document.";
              reference
                "RFC 6933: Entity MIB (Version 4) - entPhysicalAssetID";
@@ -1674,14 +1722,6 @@ Internet-Draft           Network Inventory YANG             January 2023
      grouping component-specific-info-grouping {
        description
          "In case if there are some missing attributes of component not
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 30]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
          defined by RFC8348. These attributes could be
          component-specific.
          Here we provide a extension structure for all the components
@@ -1689,7 +1729,16 @@ Internet-Draft           Network Inventory YANG             January 2023
          containers in the future.";
        choice component-class {
          description
-           "To be added.";
+           "This extension differs between different component
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 31]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
+           classes.";
          case chassis {
            when "./class = 'ianahw:chassis'";
            container chassis-specific-info {
@@ -1709,7 +1758,7 @@ Internet-Draft           Network Inventory YANG             January 2023
            }
          }
          case module {
-           when "./ni:class = 'ianahw:module'";
+           when "./nhi:class = 'ianahw:module'";
            container board-specific-info {
              description
                "This container contains some attributes belong to
@@ -1718,7 +1767,7 @@ Internet-Draft           Network Inventory YANG             January 2023
            }
          }
          case port {
-           when "./ni:class = 'ianahw:port'";
+           when "./nhi:class = 'ianahw:port'";
            container port-specific-info {
              description
                "This container contains some attributes belong to
@@ -1730,41 +1779,196 @@ Internet-Draft           Network Inventory YANG             January 2023
        }
      }
 
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 31]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
      grouping chassis-specific-info-grouping {
      //To be enriched in the future.
        description
-         "To be added.";
+         "Specific attributes applicable to chassis only.";
      }
 
      grouping slot-specific-info-grouping {
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 32]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
      //To be enriched in the future.
        description
-         "To be added.";
+         "Specific attributes applicable to slots only.";
      }
 
      grouping board-specific-info-grouping {
      //To be enriched in the future.
        description
-         "To be added.";
+         "Specific attributes applicable to boards only.";
      }
 
      grouping port-specific-info-grouping {
      //To be enriched in the future.
        description
-         "To be added.";
+         "Specific attributes applicable to ports only.";
      }
    }
    <CODE ENDS>
 
-                  Figure 4: Network inventory YANG module
+              Figure 6: Network Hardware inventory YANG module
+
+4.2.  YANG Data Model for Relationship between Topology and Network
+      Inventory
+
+   <CODE BEGINS> file "ietf-hw-inventory-ref-topo@2023-03-10.yang"
+   module ietf-hw-inventory-ref-topo {
+    yang-version 1.1;
+    namespace "urn:ietf:params:xml:ns:yang:ietf-hw-inventory-ref-topo";
+    prefix hirt;
+
+     import ietf-network {
+       prefix nw;
+       reference
+         "RFC8345: A YANG Data Model for Network Topologies";
+     }
+
+     import ietf-network-topology {
+       prefix nt;
+       reference
+         "RFC8345: A YANG Data Model for Network Topologies";
+     }
+
+     import ietf-network-hardware-inventory {
+       prefix nhi;
+       reference
+         "RFC XXXX: A YANG Data Model for Network Hardware Inventory.";
+         //RFC Editor: replace XXXX with actual RFC number, update date
+         //information and remove this note
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 33]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
+     }
+
+    organization
+      "IETF CCAMP Working Group";
+    contact
+      "WG Web:   <https://datatracker.ietf.org/wg/ccamp/>
+       WG List:  <mailto:ccamp@ietf.org>
+
+       Editor:   Chaode Yu
+                 <yuchaode@huawei.com>
+
+       Editor:   Sergio Belotti
+                 <sergio.belotti@nokia.com>
+
+       Editor:   Jean-Francois Bouquier
+                 <jeff.bouquier@vodafone.com>
+
+       Editor:   Fabio Peruzzini
+                 <fabio.peruzzini@telecomitalia.it>
+
+       Editor:   Phil Bedard
+                 <phbedard@cisco.com>";
+
+    description
+      "This module defines a model for navigation between hardware
+      inventory data module and network topology module.
+
+      The model fully conforms to the Network Management
+      Datastore Architecture (NMDA).
+
+      Copyright (c) 2021 IETF Trust and the persons
+      identified as authors of the code.  All rights reserved.
+
+      Redistribution and use in source and binary forms, with or
+      without modification, is permitted pursuant to, and subject
+      to the license terms contained in, the Simplified BSD License
+      set forth in Section 4.c of the IETF Trust's Legal Provisions
+      Relating to IETF Documents
+      (https://trustee.ietf.org/license-info).
+      This version of this YANG module is part of RFC XXXX; see
+      the RFC itself for full legal notices.
+
+      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+      NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+      'MAY', and 'OPTIONAL' in this document are to be interpreted as
+      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+      they appear in all capitals, as shown here.";
+
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 34]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
+    // RFC Ed.: replace XXXX with actual RFC number and remove this
+    // note.
+    // RFC Ed.: update the date below with the date of RFC publication
+    // and remove this note.
+
+     revision 2023-03-10 {
+       description
+         "Initial revision.";
+        reference
+          "RFC XXXX: A YANG Data Model for Network Hardware Inventory.";
+          //RFC Editor: replace XXXX with actual RFC number, update date
+          //information and remove this note
+     }
+
+     augment "/nw:networks/nw:network/nw:node" {
+       description
+         "Information that allows the relationship between the node in
+         the topology and the Network Element (NE) in the network
+         hardware inventory model from which the node is abstracted";
+
+       leaf inventory-id {
+       type leafref {
+         path "/nhi:network-hardware-inventory/nhi:network-elements"
+         + "/nhi:network-element/nhi:uuid";
+       }
+       config false;
+       description
+         "The identifier of the Network Element (NE) from which this
+         node is abstracted";
+       }
+     }
+
+     augment "/nw:networks/nw:network/nw:node/nt:termination-point" {
+       description
+         "Information that allows the relationship between the Link
+         Termination Point (LTP) and the port component in the network
+         hardware inventory model from which this LTP is abstracted.";
+
+       leaf inventory-id {
+       type leafref {
+         path "/nhi:network-hardware-inventory/nhi:network-elements"
+         + "/nhi:network-element/nhi:components/nhi:component"
+         + "/nhi:uuid";
+       }
+       config false;
+       description
+           "The identifier of the port component from which this Link
+           Termination Point (LTP) is abstracted";
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 35]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
+       }
+     }
+   }
+   <CODE ENDS>
+
+       Figure 7: Relationship between Topology and Network Inventory
+                                YANG module
 
 5.  Manageability Considerations
 
@@ -1782,26 +1986,37 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 8.1.  Normative References
 
+   [IANA_YANG]
+              IANA, "YANG Parameters", n.d.,
+              <https://www.iana.org/assignments/yang-parameters>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 32]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
 
    [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
               and A. Bierman, Ed., "Network Configuration Protocol
               (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
               <https://www.rfc-editor.org/info/rfc6241>.
 
+   [RFC6933]  Bierman, A., Romascanu, D., Quittek, J., and M.
+              Chandramouli, "Entity MIB (Version 4)", RFC 6933,
+              DOI 10.17487/RFC6933, May 2013,
+              <https://www.rfc-editor.org/info/rfc6933>.
+
    [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
               RFC 6991, DOI 10.17487/RFC6991, July 2013,
               <https://www.rfc-editor.org/info/rfc6991>.
+
+
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 36]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
 
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
@@ -1825,9 +2040,9 @@ Internet-Draft           Network Inventory YANG             January 2023
               DOI 10.17487/RFC8348, March 2018,
               <https://www.rfc-editor.org/info/rfc8348>.
 
-   [TMF-MTOSI]
-              TM Forum (TMF), "TMF MTOSI 4.0 Equipment Model", TMF
-              SD2-20_EquipmentModel , 2008,
+   [TMF_SD2-20]
+              TM Forum, "SD2-20_Equipment Model", TMF MTOSI 4.0, Network
+              Resource Fulfilment (NRF), SD2-20 , May 2008,
               <https://www.tmforum.org/resources/suite/mtosi-4-0/>.
 
 8.2.  Informative References
@@ -1838,17 +2053,8 @@ Internet-Draft           Network Inventory YANG             January 2023
               Traffic Engineered Networks (ACTN) to Packet Optical
               Integration (POI)", Work in Progress, Internet-Draft,
               draft-ietf-teas-actn-poi-applicability-08, 11 January
-              2023, <https://www.ietf.org/archive/id/draft-ietf-teas-
-              actn-poi-applicability-08.txt>.
-
-
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 33]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
+              2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              teas-actn-poi-applicability-08>.
 
    [ONF_TR-547]
               Open Networking Foundation (ONF), "TAPI v2.1.3 Reference
@@ -1856,6 +2062,17 @@ Internet-Draft           Network Inventory YANG             January 2023
               2020, <https://opennetworking.org/wp-
               content/uploads/2020/08/TR-547-TAPI-v2.1.3-Reference-
               Implementation-Agreement-1.pdf>.
+
+
+
+
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 37]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
 
    [RFC8345]  Clemm, A., Medved, J., Varga, R., Bahadur, N.,
               Ananthakrishnan, H., and X. Liu, "A YANG Data Model for
@@ -1867,17 +2084,17 @@ Appendix A.  Appendix
 A.1.  Comparison With Openconfig-platform Data Model
 
    Since more and more devices can be managed by domain controller
-   through OpenConfig, to avoid that our inventory data model cannot
-   cover these devices' inventory data, we have compared our inventory
-   data model with the openconfig-platform.yang which is the data model
+   through OpenConfig, to ensure that our inventory data model can cover
+   these devices' inventory data, we have compared our inventory data
+   model with the "openconfig-platform" model which is the data model
    used to manage inventory information in OpenConfig.
 
    Openconfig-platform data model is NE-level and uses a generic
    component concept to describe its inner devices and containers, which
-   is similar to ietf-hardware model in [RFC8348].  Since we have also
+   is similar to "ietf-hardware" model in [RFC8348].  Since we have also
    reused the component concept of [RFC8348] in our inventory data
-   model, we can compare the component's attributes between openconfig-
-   platform and our model directly , which is stated below:
+   model, we can compare the component's attributes between "openconfig-
+   platform" and our model directly , which is stated below:
 
    +========================+=======================+=================+
    | Attributes in oc-      | Attributes in our     | remark          |
@@ -1898,14 +2115,6 @@ A.1.  Comparison With Openconfig-platform Data Model
    | mfg-date               | mfg-date              |                 |
    +------------------------+-----------------------+-----------------+
    | hardware-version       | hardware-rev          |                 |
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 34]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
    +------------------------+-----------------------+-----------------+
    | firmware-version       | firmware-rev          |                 |
    +------------------------+-----------------------+-----------------+
@@ -1913,6 +2122,14 @@ Internet-Draft           Network Inventory YANG             January 2023
    +------------------------+-----------------------+-----------------+
    | serial-no              | serial-num            |                 |
    +------------------------+-----------------------+-----------------+
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 38]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
    | part-no                | part-number           |                 |
    +------------------------+-----------------------+-----------------+
    | clei-code              |                       | TBD             |
@@ -1954,14 +2171,6 @@ Internet-Draft           Network Inventory YANG             January 2023
    +------------------------+-----------------------+-----------------+
    | properties             |                       | TBD             |
    +------------------------+-----------------------+-----------------+
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 35]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
    | subcomponents          | contained-child       |                 |
    +------------------------+-----------------------+-----------------+
    | chassis                | chassis-specific-info |                 |
@@ -1969,6 +2178,14 @@ Internet-Draft           Network Inventory YANG             January 2023
    | port                   | port-specific-info    |                 |
    +------------------------+-----------------------+-----------------+
    | power-supply           |                       | TBD             |
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 39]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
    +------------------------+-----------------------+-----------------+
    | fan                    |                       | Fan is          |
    |                        |                       | considered as a |
@@ -2010,29 +2227,29 @@ Internet-Draft           Network Inventory YANG             January 2023
    |                        |                       | as a specific   |
    |                        |                       | functional      |
    |                        |                       | board.  And no  |
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 36]
-
-Internet-Draft           Network Inventory YANG             January 2023
-
-
    |                        |                       | need to define  |
    |                        |                       | as a single     |
    |                        |                       | component       |
    +------------------------+-----------------------+-----------------+
 
-      Table 2: Comparison between openconfig-platform and inventory
-                                data model
+      Table 2: Comparison between openconfig platform and inventory
+                               data models
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 40]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
 
    As it mentioned in Section 2.1.2 that state data and performance data
    are out of scope of our data model, it is same for alarm data and it
    should be defined in some other alarm data models separately.  And
-   for some component specific structures in openconfig-platform, we
+   for some component specific structures in "openconfig-platform", we
    consider some of them can be contained by our existing structure,
-   such as fan, backplane, and controller-card.  And for some of them,
-   there is no need to manage for operators, such as storage and cpu.
+   such as fan, backplane, and controller-card, while some others do not
+   need to be included in this network inventory model like storage and
+   cpu.
 
    Mostly, our inventory data model can cover the attributes from
    OpenConfig.
@@ -2045,12 +2262,7 @@ Acknowledgments
 
    This document was prepared using kramdown.
 
-Authors' Addresses
-
-   Chaode Yu
-   Huawei Technologies
-   Email: yuchaode@huawei.com
-
+Contributors
 
    Italo Busi
    Huawei Technologies
@@ -2059,19 +2271,48 @@ Authors' Addresses
 
    Aihua Guo
    Futurewei Technologies
-   Email: aihuaguo.ietf@gmail.com
+   Email: aihuaguo.ietf@gmail.com、
+
+
+   Victor Lopez
+   Nokia
+   Email: victor.lopez@nokia.com
+
+
+   Bo Wu
+   Huawei Technologies
+   Email: lana.wubo@huawei.com
+
+
+   Chenfang Zhang
+   China Unicom
+   Email: zhangcf80@chinaunicom.cn
+
+
+
+
+
+
+Yu, et al.              Expires 11 September 2023              [Page 41]
+
+Internet-Draft       Network Hardware Inventory YANG          March 2023
+
+
+   Oscar Gonzalez de Dios
+   Telefonica
+   Email: oscar.gonzalezdedios@telefonica.com
+
+
+Authors' Addresses
+
+   Chaode Yu
+   Huawei Technologies
+   Email: yuchaode@huawei.com
 
 
    Sergio Belotti
    Nokia
    Email: sergio.belotti@nokia.com
-
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 37]
-
-Internet-Draft           Network Inventory YANG             January 2023
 
 
    Jean-Francois Bouquier
@@ -2084,14 +2325,9 @@ Internet-Draft           Network Inventory YANG             January 2023
    Email: fabio.peruzzini@telecomitalia.it
 
 
-   Oscar Gonzalez de Dios
-   Telefonica
-   Email: oscar.gonzalezdedios@telefonica.com
-
-
-   Victor Lopez
-   Nokia
-   Email: victor.lopez@nokia.com
+   Phil Bedard
+   Cisco
+   Email: phbedard@cisco.com
 
 
 
@@ -2113,16 +2349,4 @@ Internet-Draft           Network Inventory YANG             January 2023
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Yu, et al.                Expires 21 July 2023                 [Page 38]
+Yu, et al.              Expires 11 September 2023              [Page 42]

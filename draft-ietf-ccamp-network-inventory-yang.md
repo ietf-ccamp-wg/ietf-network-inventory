@@ -3,8 +3,8 @@ coding: utf-8
 
 title: A YANG Data Model for Network Hardware Inventory
 
-abbrev: Network Inventory YANG
-docname: draft-ietf-ccamp-network-inventory-yang-00
+abbrev: Network Hardware Inventory YANG
+docname: draft-ietf-ccamp-network-inventory-yang-01
 submissiontype: IETF
 workgroup: CCAMP Working Group
 category: std
@@ -19,14 +19,6 @@ author:
     org: Huawei Technologies
     email: yuchaode@huawei.com
   -
-    name: Italo Busi
-    org: Huawei Technologies
-    email: italo.busi@huawei.com
-  -
-    name: Aihua Guo
-    org: Futurewei Technologies
-    email: aihuaguo.ietf@gmail.com
-  -
     name: Sergio Belotti
     org: Nokia
     email: sergio.belotti@nokia.com
@@ -40,26 +32,52 @@ author:
     org: TIM
     email: fabio.peruzzini@telecomitalia.it
   -
-    name: Oscar Gonzalez de Dios
-    ins: O. Gonzalez de Dios
-    org: Telefonica
-    email: oscar.gonzalezdedios@telefonica.com
+    name: Phil Bedard
+    org: Cisco
+    email: phbedard@cisco.com
+
+
+contributor:
+  -
+    name: Italo Busi
+    org: Huawei Technologies
+    email: italo.busi@huawei.com
+  -
+    name: Aihua Guo
+    org: Futurewei Technologies
+    email: aihuaguo.ietf@gmail.com、
   -
     name: Victor Lopez
     org: Nokia
     email: victor.lopez@nokia.com
-
-#contributor:
-#  -
+  -
+    name: Bo Wu
+    org: Huawei Technologies
+    email: lana.wubo@huawei.com
+  -
+    name: Chenfang Zhang
+    org: China Unicom
+    email: zhangcf80@chinaunicom.cn
+  -
+    name: Oscar Gonzalez de Dios
+    ins: O. Gonzalez de Dios
+    org: Telefonica
+    email: oscar.gonzalezdedios@telefonica.com
 
 normative:
-  TMF-MTOSI:
-    title: TMF MTOSI 4.0 Equipment Model
+  TMF_SD2-20:
+    title: SD2-20_Equipment Model
     author:
-      org: TM Forum (TMF)
-    date:  2008
-    seriesinfo: TMF SD2-20_EquipmentModel
+      org: TM Forum
+    date:  May 2008
+    seriesinfo: TMF MTOSI 4.0, Network Resource Fulfilment (NRF), SD2-20
     target: https://www.tmforum.org/resources/suite/mtosi-4-0/
+
+  IANA_YANG:
+    title: YANG Parameters
+    author:
+      org: IANA
+    target: https://www.iana.org/assignments/yang-parameters
 
 informative:
   ONF_TR-547:
@@ -84,17 +102,17 @@ The YANG data model defined in this document conforms to the Network Management 
 
 Network hardware inventory management is a key component in operators' OSS architectures.
 
-Network inventory is a fundamental functionality in network management and was specified many years ago. Given the emerging of data models and their deployment in operator's management and control systems, the traditional function of inventory management is also requested to be defined as a data model.
+Network hardware inventory is a fundamental functionality in network management and was specified many years ago. Given the emergence of data models and their deployment in operator's management and control systems, the traditional function of inventory management is also requested to be defined as a data model.
 
-Network inventory management and monitoring is a critical part for ensuring the network stays healthy, well-planned, and functioning in the operator's network. Network inventory management allows the operator to keep track of what physical network devices are staying  in the network including relevant software and hardware versions.
+Network hardware inventory management and monitoring is a critical part for ensuring the network stays healthy, well-planned, and functioning in the operator's network. Network hardware inventory management allows the operator to keep track of which physical devices are deployed in the network including relevant software and hardware versions.
 
-  The network inventory management also helps the operator to know when to acquire new assets and what is needed, or to decommission old or faulty ones, which can help to improve network performance and capacity planning.
+  The network hardware inventory management also helps the operator to know when to acquire new assets and what is needed, or to decommission old or faulty ones, which can help to improve network performance and capacity planning.
 
 In {{?I-D.ietf-teas-actn-poi-applicability}} a gap was identified regarding the lack of a YANG data model that could be used at ACTN MPI interface level to report whole/partial network hardware inventory information available at domain controller level towards north-bound systems (e.g., MDSC or OSS layer).
 
-{{?RFC8345}} initial goal was to make possible the augmentation of the YANG data model with network inventory data model but this was never developed and the scope was kept limited to network topology data only.
+{{?RFC8345}} initial goal was to make possible the augmentation of the YANG data model with network hardware inventory data model but this was never developed and the scope was kept limited to network topology data only.
 
-It is key for operators to drive the industry towards the use of a standard YANG data model for network inventory data instead of using vendors proprietary APIs (e.g., REST API).
+It is key for operators to drive the industry towards the use of a standard YANG data model for network hardware inventory data instead of using vendors proprietary APIs (e.g., REST API).
 
 In the ACTN architecture, this would bring also clear benefits at MDSC level for packet over optical integration scenarios since this would enable the correlation of the inventory information with the links information reported in the network topology model.
 
@@ -102,17 +120,15 @@ The intention is to define a generic YANG data model that would be as much as po
 
 {{!RFC8348}} defines a YANG data model for the management of the hardware on a single server and therefore it is more applicable to the domain controller South Bound Interface (SBI) towards the network elements rather than at the domain controller's northbound. However, the YANG data model defined in {{!RFC8348}} has been used as a reference for defining the YANG network hardware inventory data model presented in this draft.
 
-For optical network hardware inventory, the network inventory YANG data model should support the use cases (4a and 4b) and requirements as defined in {{ONF_TR-547}}, in order to guarantee a seamless integration at MDSC/OSS/orchestration layers.
+For optical network hardware inventory, the network hardware inventory YANG data model should support the use cases (4a and 4b) and requirements as defined in {{ONF_TR-547}}, in order to guarantee a seamless integration at MDSC/OSS/orchestration layers.
 
 The proposed YANG data model has been analysed at the present stage to cover the requirements and use cases for Optical Network Hardware Inventory.
 
 Being based on {{!RFC8348}}, this data model should be a good starting point toward a generic data model and applicable to any technology. However, further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical networks.
 
-This document defines one YANG module: ietf-network-inventory.yang ({{ni-yang}}).
+This document defines two YANG modules: "ietf-network-hardware-inventory", defined in {{ni-yang}}, and "ietf-hw-inventory-ref-topo", defined in {{ref-yang}}.
 
-Note: review in future versions of this document the related modules, depending on the augmentation relationship.
-
-The YANG data model defined in this document conforms to the Network Management Datastore Architecture {{!RFC8342}}.
+The YANG data models defined in this document conform to the Network Management Datastore Architecture {{!RFC8342}}.
 
 ## Terminology and Notations
 
@@ -139,7 +155,7 @@ The YANG data model defined in this document conforms to the Network Management 
   The terminology for describing YANG data models is found in
   {{!RFC7950}}.
 
-  TBD: Recap the concept of chassis/slot/component/board/... in {{TMF-MTOSI}}.
+  TBD: Recap the concept of chassis/slot/component/board/... in {{TMF_SD2-20}}.
 
   Following terms are used for the representation of the hierarchies in the network hardware inventory.
 
@@ -177,7 +193,7 @@ The YANG data model defined in this document conforms to the Network Management 
 
 ## Tree Diagram
 
-A simplified graphical representation of the data model is used in {{ni-tree}} of this document.
+A simplified graphical representation of the data model is used in {{tree}} of this document.
 The meaning of the symbols in this diagram is defined in {{!RFC8340}}.
 
 ## Prefix in Data Node Names
@@ -186,11 +202,13 @@ The meaning of the symbols in this diagram is defined in {{!RFC8340}}.
   are prefixed using the standard prefix associated with the
   corresponding YANG imported modules, as shown in the following table.
 
-| Prefix | Yang Module            | Reference    |
-| ------ | ---------------------- | ------------ |
-| ianahw | iana-hardware          | {{!RFC8348}} |
-| ni     | ietf-network-inventory | RFC XXXX     |
-| yang   | ietf-yang-types        | {{!RFC6991}} |
+| Prefix | Yang Module                     | Reference     |
+| ------ | ------------------------------- | ------------- |
+| inet   | ietf-inet-types                 | {{!RFC6991}}  |
+| yang   | ietf-yang-types                 | {{!RFC6991}}  |
+| ianahw | iana-hardware                   | {{IANA_YANG}} |
+| ni     | ietf-network-hardware-inventory | RFC XXXX      |
+| hirt   | ietf-hw-inventory-ref-topo      | RFC XXXX      |
 {: #tab-prefixes title="Prefixes and corresponding YANG modules"}
 
 RFC Editor Note:
@@ -201,7 +219,7 @@ Please remove this note.
 
 ## YANG Model Overview
 
-Based on TMF classification in {{TMF-MTOSI}}, inventory objects can be divided into two groups, holder group and equipment group. The holder group contains rack, chassis, slot, sub-slot while the equipment group contains network-element, board and port. With the requirement of GIS and on-demand domain controller selection raised, the equipment room becomes a new inventory object to be managed besides TMF classification.
+Based on TMF classification in {{TMF_SD2-20}}, inventory objects can be divided into two groups, holder group and equipment group. The holder group contains rack, chassis, slot, sub-slot while the equipment group contains network-element, board and port. With the requirement of GIS and on-demand domain controller selection raised, the equipment room becomes a new inventory object to be managed besides TMF classification.
 
 Logically,  the relationship between these inventory objects can be described by {{fig-inventory-object-relationship}} below:
 
@@ -247,14 +265,14 @@ In {{!RFC8348}}, rack, chassis, slot, sub-slot, board and port are defined as co
 
 Considering there are some special scenarios, there is no direct relationship between the rack and network element. In some cases, one network element contains multiple racks while in other cases one rack contains several shelves belonging to one or more network elements.
 
-While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a network element), the Network Inventory YANG data model is used to retrieve the network hardware inventory information that a controller discovers from all the network elements under its control.
+While {{!RFC8348}} is used to manage the hardware of a single server (e.g., a network element), the Network Hardware Inventory YANG data model is used to retrieve the network hardware inventory information that a controller discovers from all the network elements under its control.
 
-However, the YANG data model defined in {{!RFC8348}} has been used as a reference for defining the YANG network inventory data model. This approach can simplify the implementation of this network hardware inventory model when the controller uses the YANG data model defined in {{!RFC8348}} to retrieve the hardware  from the network elements under its control.
+However, the YANG data model defined in {{!RFC8348}} has been used as a reference for defining the YANG network hardware inventory data model. This approach can simplify the implementation of this network hardware inventory model when the controller uses the YANG data model defined in {{!RFC8348}} to retrieve the hardware  from the network elements under its control.
 
 Note: review in future versions of this document whether to re-use definitions from {{!RFC8348}} or use schema-mount.
 
 ~~~~ ascii-art
-  +--ro network-inventory
+  +--ro network-hardware-inventory
      +--ro equipment-rooms
      |  +--ro equipment-room* [uuid]
      |     +--ro uuid        yang:uuid
@@ -292,8 +310,8 @@ Description: description is a human-readable information which could be also inp
 Location: location is a common management requirement of operators. This location could be an absolute position (e.g. mailing address), or a relative position (e.g. port index). Different types of inventory objects may require different types of position.
 
 ~~~~ ascii-art
-module: ietf-network-inventory
-   +--ro network-inventory
+module: ietf-network-hardware-inventory
+   +--ro network-hardware-inventory
       +--ro equipment-rooms
       |  +--ro equipment-room* [uuid]
       |     +--ro uuid           yang:uuid
@@ -356,6 +374,8 @@ The YANG data model for network hardware inventory mainly follows the same appro
         +--ro mfg-date?         yang:date-and-time
         +--ro uri*              inet:uri
 ~~~~
+
+Some of the definitions taken from {{!RFC8348}} are actually based on the ENTITY-MIB {{!RFC6933}}.
 
 For state data like admin-state, oper-state and so on, we consider they are related to device hardware management and not hardware inventory. Therefore, they are outside of scope of this document. Same for the sensor-data, they should be defined in some other performance monitoring data models instead of inventory data model.
 
@@ -500,9 +520,55 @@ We consider that some of the attributes defined in {{?RFC8348}} for components a
 
 Note: Not all the attributes defined in {{?RFC8348}} are applicable for network element. And there could also be some missing attributes which are not recognized by {{?RFC8348}}. More extensions could be introduced in later revisions after the missing attributes are fully discussed.
 
+### Relationship between Hardware Inventory and Network Topology models
+
+Network topology is a logical abstraction based on hardware inventory objects. The abstraction may be based on technology requirements (e.g., layer 0 or layer 1 resources) or on some specific requirements (e.g., for path computation or service provisioning).
+
+Therefore the relationship between hardware inventory objects and network topology objects can be 1:N (N>=1).
+
+Taking the Optical technology as example, an Optical Transport Network (OTN) Network Element (NE) can be installed with several kinds of boards, including an Ethernet client signal switching board, a line board which is used for OTN layer switching. This line board may also be used as a starting point for the WDM layer. In terms of technologies, this OTN NE supports multi-layer network topology connections, so that it should appear in L0, L1 and L2 network topology.
+
+It is important to describe this relationship for the sake of network Operation and Maintenance (O&M). For example, the actual path of a connection is described by the objects in network topology. When there is a failure along this connection, the O&M engineers are more concerned with the physical location information behind the network objects for troubleshooting.
+
+Generally speaking, a node object in the network topology corresponds to a network element object in the hardware inventory. A Link Termination Point (LTP) object in the network topology corresponds to a port component in the hardware inventory. A link object in the network topology corresponds to a fiber/cable object in the hardware inventory.
+
+NOTE: take fiber&cable object into scope in the future version.
+
+Compared with network topology, hardware inventory objects are the most basic of the network: from an automation perspective, the MDSC or OSS systems would integrate with hardware inventory data before network topology data.
+
+Therefore it is better to keep separated the network topology information and the hardware inventory information: the "ietf-hw-inventory-ref-topo" YANG module provides this relationship augmenting the network topology model, when required, with references between network topology objects and corresponding hardware inventory objects.
+
+This figure below shows the relationship between the three modules:
+
+~~~~ ascii-art
+     +------------------+
+     | Network topology |
+     |      module      |
+     +------------------+
+             ^
+             |
+             |augments
+             |
+     +------------------+          +------------------+
+     | ietf-hw-inventory| imports  | ietf-network-hard|
+     |   -ref-topo      |--------> |  ware-inventory  |
+     +------------------+          +------------------+
+~~~~
+{: #fig-modules-relationship title="Relationship between the three YANG modules"}
+
+~~~~ ascii-art
+module: ietf-hw-inventory-ref-topo
+augment /nw:networks/nw:network/nw:node:
+   +--ro inventory-id?   leafref
+augment /nw:networks/nw:network/nw:node/nt:termination-point:
+   +--ro inventory-id?   leafref
+~~~~
+
+NOTE: the association between a link and a fiber&cable object has to be added in the future version.
+
 ## Efficiency Issue
 
-During  the integration with OSS in some operators, some efficiency/scalability concerns have been discovered when synchronizing network inventory data for big networks.  More discussions are needed to address these concerns.
+During  the integration with OSS in some operators, some efficiency/scalability concerns have been discovered when synchronizing network hardware inventory data for big networks.  More discussions are needed to address these concerns.
 
 Considering that relational databases are widely used by traditional OSS systems and also by some network controllers, the inventory objects are most likely to be saved in different tables. With the model defined in current draft, when doing a full synchronization, network controller needs to convert all inventory objects of each NE into component objects and combine them together into a single list, and then construct a response and send to OSS or MDSC. The OSS or MDSC needs to classify the component list and divide them into different groups, in order to save them in different tables. The combining-regrouping steps are impacting the network controller & OSS/MDSC processing, which may result in efficiency/scalability limitations in large scale networks.
 
@@ -512,37 +578,67 @@ The model proposed by this draft is designed to be as generic as possible so to 
 
 ## Some Other Considerations
 
-Note: review in future versions of this document whether the component list should be under the network-inventory instead of the network-element container.
+Note: review in future versions of this document whether the component list should be under the network-hardware-inventory instead of the network-element container.
 
 Note that in {{?RFC8345}}, topology and inventory are two subsets of network information. However, considering the complexity of the existing topology models and having a better extension capability, we define a separate root for the inventory model. We will consider some other ways to do some associations between the topology model and inventory model in the future.
 
-Note: review in future versions of this document whether network hardware inventory should be defined as an augmentation of the network model defined in {{?RFC8345}} instead of under a new network-inventory root.
+Note: review in future versions of this document whether network hardware inventory should be defined as an augmentation of the network model defined in {{?RFC8345}} instead of under a new network-hardware-inventory root.
 
-The proposed YANG data model has been analysed so far to cover the requirements and use cases for Optical Network Inventory.
+The proposed YANG data model has been analysed so far to cover the requirements and use cases for Optical Network Hardware Inventory.
 
 Further analysis of requirements and use cases is needed to extend the applicability of this YANG data model to other types of networks (IP and microwave) and to identify which aspects are generic and which aspects are technology-specific for optical.
 
+{: #tree}
+
+# Tree Diagrams
+
 {: #ni-tree}
 
-# Network Hardware Inventory Tree Diagram
+## Network Hardware Inventory Tree Diagram
 
-{{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module ietf-network-inventory.yang ({{ni-yang}}).
+{{fig-ni-tree}} below shows the tree diagram of the YANG data model defined in module "ietf-network-hardware-inventory" ({{ni-yang}}).
 
 ~~~~ ascii-art
-{::include ./ietf-network-inventory.tree}
+{::include ./ietf-network-hardware-inventory.tree}
 ~~~~
-{: #fig-ni-tree title="Network inventory tree diagram"
-artwork-name="ietf-network-inventory.tree"}
+{: #fig-ni-tree title="Network Hardware inventory tree diagram"
+artwork-name="ietf-network-hardware-inventory.tree"}
+
+{: #ref-tree}
+
+## Relationship between Topology and Network Inventory Tree Diagram
+
+{{fig-ref-tree}} below shows the tree diagram of the YANG data model defined in module "ietf-hw-inventory-ref-topo" ({{ref-yang}}).
+
+~~~~ ascii-art
+{::include ./ietf-hw-inventory-ref-topo.tree}
+~~~~
+{: #fig-ref-tree title="Relationship between Topology and Network Inventory Tree Diagram"
+artwork-name="ietf-hw-inventory-ref-topo.tree"}
+
+{: #yang}
+
+# YANG Data Models
 
 {: #ni-yang}
 
-# YANG Model for Network Hardware Inventory
+## YANG Data Model for Network Hardware Inventory
 
 ~~~~ yang
-{::include ./ietf-network-inventory.yang}
+{::include ./ietf-network-hardware-inventory.yang}
 ~~~~
-{: #fig-ni-yang title="Network inventory YANG module"
-sourcecode-markers="true" sourcecode-name="ietf-network-inventory@2022-07-11.yang"}
+{: #fig-ni-yang title="Network Hardware inventory YANG module"
+sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-03-07.yang"}
+
+{: #ref-yang}
+
+## YANG Data Model for Relationship between Topology and Network Inventory
+
+~~~~ yang
+{::include ./ietf-hw-inventory-ref-topo.yang}
+~~~~
+{: #fig-ref-yang title="Relationship between Topology and Network Inventory YANG module"
+sourcecode-markers="true" sourcecode-name="ietf-hw-inventory-ref-topo@2023-03-10.yang"}
 
 # Manageability Considerations
 
@@ -562,9 +658,9 @@ sourcecode-markers="true" sourcecode-name="ietf-network-inventory@2022-07-11.yan
 
 ## Comparison With Openconfig-platform Data Model
 
-Since more and more devices can be managed by domain controller through OpenConfig, to avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the openconfig-platform.yang which is the data model used to manage inventory information in OpenConfig.
+Since more and more devices can be managed by domain controller through OpenConfig, to ensure that our inventory data model can cover these devices' inventory data, we have compared our inventory data model with the "openconfig-platform" model which is the data model used to manage inventory information in OpenConfig.
 
-Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to ietf-hardware model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between openconfig-platform and our model directly , which is stated below:
+Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to "ietf-hardware" model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between "openconfig-platform" and our model directly , which is stated below:
 
 | Attributes in oc-platform  | Attributes in our model  | remark                   |
 | -------------------------- | ------------------------ | ------------------------ |
@@ -609,9 +705,9 @@ Openconfig-platform data model is NE-level and uses a generic component concept 
 | backplane                  |                          | Backplane is considered as a part of board. And no need to define as a single component  |
 | software-module            |                          | TBD                      |
 | controller-card            |                          | Controller card is considered as a specific functional board. And no need to define as a single component  |
-{: #tab-oc title="Comparison between openconfig-platform and inventory data model"}
+{: #tab-oc title="Comparison between openconfig platform and inventory data models"}
 
-As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same for alarm data and it should be defined in some other alarm data models separately. And for some component specific structures in openconfig-platform, we consider some of them can be contained by our existing structure, such as fan, backplane, and controller-card. And for some of them, there is no need to manage for operators, such as storage and cpu.
+As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same for alarm data and it should be defined in some other alarm data models separately. And for some component specific structures in "openconfig-platform", we consider some of them can be contained by our existing structure, such as fan, backplane, and controller-card, while some others do not need to be included in this network inventory model like storage and cpu.
 
 Mostly, our inventory data model can cover the attributes from OpenConfig.
 

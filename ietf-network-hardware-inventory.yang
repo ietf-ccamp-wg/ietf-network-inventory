@@ -21,7 +21,7 @@ module ietf-network-hardware-inventory {
     reference
       "RFC6991: Common YANG Data Types.";
   } 
-  
+
   organization
     "IETF CCAMP Working Group";
   contact
@@ -77,7 +77,7 @@ module ietf-network-hardware-inventory {
   // RFC Ed.: update the date below with the date of RFC publication
   // and remove this note.
   
-  revision 2023-01-16 {
+  revision 2023-03-09 {
     description
       "Initial version";
     reference

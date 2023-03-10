@@ -1,0 +1,6 @@
+module: ietf-hw-inventory-ref-topo
+
+  augment /nw:networks/nw:network/nw:node:
+    +--ro inventory-id?   leafref
+  augment /nw:networks/nw:network/nw:node/nt:termination-point:
+    +--ro inventory-id?   leafref
