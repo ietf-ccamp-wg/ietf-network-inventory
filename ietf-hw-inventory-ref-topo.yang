@@ -85,9 +85,9 @@ module ietf-hw-inventory-ref-topo {
 
   augment "/nw:networks/nw:network/nw:node" {
     description 
-      "Information that allows the navigation between this node and
-      the Network Element (NE) from which this node is abstracted in
-      the network hardware inventory model.";
+      "Information that allows the relationship between the node in 
+      the topology and the Network Element (NE) in the network 
+      hardware inventory model from which the node is abstracted";
     
     leaf inventory-id {
 	  config false;
@@ -104,9 +104,9 @@ module ietf-hw-inventory-ref-topo {
   
   augment "/nw:networks/nw:network/nw:node/nt:termination-point" {
     description 
-      "Information that allows the navigation between this Link
-      Termination Point (LTP) and the port component from which this
-      LTP is abstracted in the network hardware inventory model.";
+      "Information that allows the relationship between the Link 
+      Termination Point (LTP) and the port component in the network 
+      hardware inventory model from which this LTP is abstracted."
     
     leaf inventory-id {
 	  config false;
