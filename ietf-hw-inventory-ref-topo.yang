@@ -90,13 +90,12 @@ module ietf-hw-inventory-ref-topo {
       hardware inventory model from which the node is abstracted";
     
     leaf inventory-id {
-	  config false;
-      type leafref {
-        path "/nhi:network-hardware-inventory/nhi:network-elements"
-        + "/nhi:network-element/nhi:uuid";
-      }
-	  
-	  description
+    type leafref {
+      path "/nhi:network-hardware-inventory/nhi:network-elements"
+      + "/nhi:network-element/nhi:uuid";
+    }
+    config false;
+    description
       "The identifier of the Network Element (NE) from which this
       node is abstracted";
     }
@@ -106,16 +105,16 @@ module ietf-hw-inventory-ref-topo {
     description 
       "Information that allows the relationship between the Link 
       Termination Point (LTP) and the port component in the network 
-      hardware inventory model from which this LTP is abstracted."
+      hardware inventory model from which this LTP is abstracted.";
     
     leaf inventory-id {
-	  config false;
-      type leafref {
-        path "/nhi:network-hardware-inventory/nhi:network-elements"
-        + "/nhi:network-element/nhi:components/nhi:component"
-        + "/nhi:uuid";
-      }
-	  description 
+    type leafref {
+      path "/nhi:network-hardware-inventory/nhi:network-elements"
+      + "/nhi:network-element/nhi:components/nhi:component"
+      + "/nhi:uuid";
+    }
+    config false;
+    description 
         "The identifier of the port component from which this Link
         Termination Point (LTP) is abstracted";
     }
