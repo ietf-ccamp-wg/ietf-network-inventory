@@ -102,9 +102,9 @@ The YANG data model defined in this document conforms to the Network Management 
 
 Network hardware inventory management is a key component in operators' OSS architectures.
 
-Network hardware inventory is a fundamental functionality in network management and was specified many years ago. Given the emerging of data models and their deployment in operator's management and control systems, the traditional function of inventory management is also requested to be defined as a data model.
+Network hardware inventory is a fundamental functionality in network management and was specified many years ago. Given the emergence of data models and their deployment in operator's management and control systems, the traditional function of inventory management is also requested to be defined as a data model.
 
-Network hardware inventory management and monitoring is a critical part for ensuring the network stays healthy, well-planned, and functioning in the operator's network. Network hardware inventory management allows the operator to keep track of what physical network devices are staying  in the network including relevant software and hardware versions.
+Network hardware inventory management and monitoring is a critical part for ensuring the network stays healthy, well-planned, and functioning in the operator's network. Network hardware inventory management allows the operator to keep track of which physical devices are deployed in the network including relevant software and hardware versions.
 
   The network hardware inventory management also helps the operator to know when to acquire new assets and what is needed, or to decommission old or faulty ones, which can help to improve network performance and capacity planning.
 
@@ -128,7 +128,7 @@ Being based on {{!RFC8348}}, this data model should be a good starting point tow
 
 This document defines two YANG modules: "ietf-network-hardware-inventory", defined in {{ni-yang}}, and "ietf-hw-inventory-ref-topo", defined in {{ref-yang}}.
 
-The YANG data models defined in this document conforms to the Network Management Datastore Architecture {{!RFC8342}}.
+The YANG data models defined in this document conform to the Network Management Datastore Architecture {{!RFC8342}}.
 
 ## Terminology and Notations
 
@@ -526,15 +526,15 @@ Network topology is a logical abstraction based on hardware inventory objects. T
 
 Therefore the relationship between hardware inventory objects and network topology objects can be 1:N (N>=1).
 
-Taking the Optical technology as example, an Optical Transport Network (OTN) Network Element (NE) can be installed with several kinds of boards, including an Ethernet client signal switching board, a line board which is used for OTN layer switching. This line board may also be used as a start point of WDM layer. In terms of technologies, this OTN NE supports multi-layer network topology connections, so that it should appear in L0, L1 and L2 network topology.
+Taking the Optical technology as example, an Optical Transport Network (OTN) Network Element (NE) can be installed with several kinds of boards, including an Ethernet client signal switching board, a line board which is used for OTN layer switching. This line board may also be used as a starting point for the WDM layer. In terms of technologies, this OTN NE supports multi-layer network topology connections, so that it should appear in L0, L1 and L2 network topology.
 
-It is important to describe this relationship for the sake of network Operation and Maintenance (O&M). For example, the actual path of a connection is described by the objects in network topology. When there is a failure along this connection, the O&M engineers are more concerned with the physical location information behind the network objects for trouble shooting.
+It is important to describe this relationship for the sake of network Operation and Maintenance (O&M). For example, the actual path of a connection is described by the objects in network topology. When there is a failure along this connection, the O&M engineers are more concerned with the physical location information behind the network objects for troubleshooting.
 
 Generally speaking, a node object in the network topology corresponds to a network element object in the hardware inventory. A Link Termination Point (LTP) object in the network topology corresponds to a port component in the hardware inventory. A link object in the network topology corresponds to a fiber/cable object in the hardware inventory.
 
 NOTE: take fiber&cable object into scope in the future version.
 
-Compared with network topology, hardware inventory objects are the most basic elements of network: from the automation integration perspective, the MDSC or OSS systems would integrate with hardware inventory data before network topology data.
+Compared with network topology, hardware inventory objects are the most basic of the network: from an automation perspective, the MDSC or OSS systems would integrate with hardware inventory data before network topology data.
 
 Therefore it is better to keep separated the network topology information and the hardware inventory information: the "ietf-hw-inventory-ref-topo" YANG module provides this relationship augmenting the network topology model, when required, with references between network topology objects and corresponding hardware inventory objects.
 
@@ -551,7 +551,7 @@ This figure below shows the relationship between the three modules:
              |
      +------------------+          +------------------+
      | ietf-hw-inventory| imports  | ietf-network-hard|
-     |   -ref-topology  |--------> |  ware-inventory  |
+     |   -ref-topo      |--------> |  ware-inventory  |
      +------------------+          +------------------+
 ~~~~
 {: #fig-modules-relationship title="Relationship between the three YANG modules"}
@@ -638,7 +638,7 @@ sourcecode-markers="true" sourcecode-name="ietf-network-hardware-inventory@2023-
 {::include ./ietf-hw-inventory-ref-topo.yang}
 ~~~~
 {: #fig-ref-yang title="Hardware inventory topology navigation YANG module"
-sourcecode-markers="true" sourcecode-name="ietf-hw-inventory-ref-topo@2023-03-09.yang"}
+sourcecode-markers="true" sourcecode-name="ietf-hw-inventory-ref-topo@2023-03-10.yang"}
 
 # Manageability Considerations
 
@@ -658,7 +658,7 @@ sourcecode-markers="true" sourcecode-name="ietf-hw-inventory-ref-topo@2023-03-09
 
 ## Comparison With Openconfig-platform Data Model
 
-Since more and more devices can be managed by domain controller through OpenConfig, to avoid that our inventory data model cannot cover these devices' inventory data, we have compared our inventory data model with the "openconfig-platform" model which is the data model used to manage inventory information in OpenConfig.
+Since more and more devices can be managed by domain controller through OpenConfig, to ensure that our inventory data model can cover these devices' inventory data, we have compared our inventory data model with the "openconfig-platform" model which is the data model used to manage inventory information in OpenConfig.
 
 Openconfig-platform data model is NE-level and uses a generic component concept to describe its inner devices and containers, which is similar to "ietf-hardware" model in {{?RFC8348}}. Since we have also reused the component concept of {{?RFC8348}} in our inventory data model, we can compare the component's attributes between "openconfig-platform" and our model directly , which is stated below:
 
@@ -707,7 +707,7 @@ Openconfig-platform data model is NE-level and uses a generic component concept 
 | controller-card            |                          | Controller card is considered as a specific functional board. And no need to define as a single component  |
 {: #tab-oc title="Comparison between openconfig platform and inventory data models"}
 
-As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same for alarm data and it should be defined in some other alarm data models separately. And for some component specific structures in "openconfig-platform", we consider some of them can be contained by our existing structure, such as fan, backplane, and controller-card. And for some of them, there is no need to manage for operators, such as storage and cpu.
+As it mentioned in {{reference-RFC8348}} that state data and performance data are out of scope of our data model, it is same for alarm data and it should be defined in some other alarm data models separately. And for some component specific structures in "openconfig-platform", we consider some of them can be contained by our existing structure, such as fan, backplane, and controller-card, while some others do not need to be included in this network inventory model like storage and cpu.
 
 Mostly, our inventory data model can cover the attributes from OpenConfig.
 
