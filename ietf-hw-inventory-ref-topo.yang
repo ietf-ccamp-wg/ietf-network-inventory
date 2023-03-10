@@ -74,7 +74,7 @@ module ietf-hw-inventory-ref-topo {
  // RFC Ed.: update the date below with the date of RFC publication
  // and remove this note.
 
-  revision 2023-03-09 {
+  revision 2023-03-10 {
     description
       "Initial revision.";
      reference
