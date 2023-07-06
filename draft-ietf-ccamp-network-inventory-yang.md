@@ -63,6 +63,10 @@ contributor:
     ins: O. Gonzalez de Dios
     org: Telefonica
     email: oscar.gonzalezdedios@telefonica.com
+  -
+    name: Nigel Davis
+    org: Ciena
+    email: ndavis@ciena.com
 
 normative:
   TMF_SD2-20:
@@ -241,15 +245,17 @@ Logically,  the relationship between these inventory objects can be described by
     +------------+               ||
           ||                     ||
           || 1:N                 \/
-          ||______________\+------------+
-          |---------------/|   chassis  |
-                           +------------+
+          ||______________\+-------------+
+          |---------------/|   chassis/  |---+
+                           | sub-chassis |<--|
+                           +-------------+
                                  ||
                   ______1:N______||_____1:M_______
                   ||------------------ ---------||
-                  \/                            \/      
+                  \/                            \/
            +--------------+               +-----------+
-           | slot/subslot |               |   board   |
+       +---|     slot     |               |   board   |
+       |-->|  /sub-slot   |               |           |
            +--------------+               +-----------+
                                                 ||
                                                 ||1:N
@@ -377,6 +383,20 @@ The YANG data model for network hardware inventory mainly follows the same appro
 
 Some of the definitions taken from {{!RFC8348}} are actually based on the ENTITY-MIB {{!RFC6933}}.
 
+For the location information of component, a relative position information will be preferred. In optical transport network, there is a suggested pattern referenced from {{ONF_TR-547}}, "/ne=<nw-ne-name>[/r=<r_index>][/sh=<sh_index>[/s_sh=<s_sh_index> ...]][[/sl=<sl_index>[/s_sl=<s_sl_index> ...]][/p=<p_index> …]]". The generic format is the concatenation of n tuple elements “/<field>=<index>”. The fields of tuple element includes:
+
+| field  |meaning   |
+| ------------ | ------------ |
+| ne  |netowrk element   |
+| r   |rack   |
+| sh  |chassis component   |
+| s_sh  |sub-chassis component  |
+| sl  | slot component |
+| s_sl  |sub-slot component |
+| p  | port component  |
+
+Some of fields are optional in some scenarios, such as sub-chassis and sub-slot, then the regarding fields don't need to be provided in those scenarios. We consider this format is also applicable for other technologies.
+
 For state data like admin-state, oper-state and so on, we consider they are related to device hardware management and not hardware inventory. Therefore, they are outside of scope of this document. Same for the sensor-data, they should be defined in some other performance monitoring data models instead of inventory data model.
 
 We re-defined some attributes listed in {{!RFC8348}}, based on some integration experience for network wide inventory data.
@@ -392,14 +412,10 @@ We re-defined some attributes listed in {{!RFC8348}}, based on some integration 
      +--ro component* [uuid]
         ...................................
         +--ro parent-references
-        |  +--ro equipment-room-uuid?    leafref
-        |  +--ro ne-uuid?                leafref
-        |  +--ro rack-uuid?              leafref
-        |  +--ro component-references
-        |     +--ro component-reference* [index]
-        |        +--ro index    uint8
-        |        +--ro class?   leafref
-        |        +--ro uuid?    leafref
+        |   +--ro component-reference* [index]
+        |      +--ro index    uint8
+        |      +--ro class?   leafref
+        |      +--ro uuid?    leafref
         ...................................
 ~~~~
 
@@ -441,9 +457,15 @@ According to the description in {{!RFC8348}}, the attribute named "model-name" u
 
 ### Equipment Room
 
+Usually equipment room is not detectable by domain controller. Sometimes people don't even manage equipment room though domain controller but from Operators' owned OSS, so equipment room could be optional when implementing this data model.
+
+Another scenatio is when racks are not located in equipment room, one possiblity is that the domain controller provides a "default" equipment room that contains all these racks.
+
 Note: add some more attributes about equipment room in the future.
 
 ### Rack
+
+Usually rack is not able to be detectable by domain controller automatically neither. Most of the information shall be input by the users manually. So racks can be optional too when implementing this data model.
 
 Besides the common attributes mentioned in above section, rack could have some specific attributes, such as appearance-related attributes and electricity-related attributes.
 The height, depth and width are described by the figure below (please consider that the door of the rack is facing the user):
@@ -508,7 +530,6 @@ We consider that some of the attributes defined in {{?RFC8348}} for components a
          +--ro network-element* [uuid]
             ...................................
             +--ro hardware-rev?    string
-            +--ro firmware-rev?    string
             +--ro software-rev?    string
             +--ro mfg-name?        string
             +--ro mfg-date?        yang:date-and-time
