@@ -4,7 +4,7 @@ coding: utf-8
 title: A YANG Data Model for Network Hardware Inventory
 
 abbrev: Network Hardware Inventory YANG
-docname: draft-ietf-ccamp-network-inventory-yang-01
+docname: draft-ietf-ccamp-network-inventory-yang-02
 submissiontype: IETF
 workgroup: CCAMP Working Group
 category: std
