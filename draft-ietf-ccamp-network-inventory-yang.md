@@ -459,7 +459,7 @@ According to the description in {{!RFC8348}}, the attribute named "model-name" u
 
 Usually the information about equipment rooms is not detectable by domain controller and configured manually. Sometimes, this information is not configured in the domain controller but directly in the Operators' owned OSS and therefore reporting information about the equipment rooms is optional when implementing this data model.
 
-Another scenatio is when racks are not located in equipment room, one possiblity is that the domain controller provides a "default" equipment room that contains all these racks.
+Another scenario to analyze is when racks are not located in any equipment room: one possible solution is that the domain controller provides a "default" equipment room that contains all these racks.
 
 Note: add some more attributes about equipment room in the future.
 
