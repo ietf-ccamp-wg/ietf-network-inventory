@@ -395,7 +395,9 @@ For the location information of component, a relative position information will 
 | s_sl  |sub-slot component |
 | p  | port component  |
 
-Some of fields are optional in some scenarios, such as sub-chassis and sub-slot, then the regarding fields don't need to be provided in those scenarios. We consider this format is also applicable for other technologies.
+Some of the fields are optional, such as sub-chassis and sub-slot, and consequently would not need to be provided in some scenarios.
+
+This pattern is a common practice in optical transport networks, but we consider it as also applicable for other technologies.
 
 For state data like admin-state, oper-state and so on, we consider they are related to device hardware management and not hardware inventory. Therefore, they are outside of scope of this document. Same for the sensor-data, they should be defined in some other performance monitoring data models instead of inventory data model.
 
