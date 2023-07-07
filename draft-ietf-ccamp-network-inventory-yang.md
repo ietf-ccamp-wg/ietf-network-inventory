@@ -387,7 +387,7 @@ For the location information of component, a relative position information will 
 
 | field  |meaning   |
 | ------------ | ------------ |
-| ne  |netowrk element   |
+| ne  |network element   |
 | r   |rack   |
 | sh  |chassis component   |
 | s_sh  |sub-chassis component  |
