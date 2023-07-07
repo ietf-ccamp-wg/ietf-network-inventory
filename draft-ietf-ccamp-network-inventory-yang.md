@@ -83,7 +83,6 @@ normative:
       org: IANA
     target: https://www.iana.org/assignments/yang-parameters
 
-informative:
   ONF_TR-547:
     title: TAPI v2.1.3 Reference Implementation Agreement
     author:
@@ -91,6 +90,8 @@ informative:
     date:  July 2020
     seriesinfo: ONF TR-547 TAPI RIA v1.0
     target: https://opennetworking.org/wp-content/uploads/2020/08/TR-547-TAPI-v2.1.3-Reference-Implementation-Agreement-1.pdf
+
+informative:
 
 --- abstract
 
@@ -383,7 +384,13 @@ The YANG data model for network hardware inventory mainly follows the same appro
 
 Some of the definitions taken from {{!RFC8348}} are actually based on the ENTITY-MIB {{!RFC6933}}.
 
-For the location information of component, a relative position information will be preferred. In optical transport network, there is a suggested pattern referenced from {{ONF_TR-547}}, "/ne=<nw-ne-name>[/r=<r_index>][/sh=<sh_index>[/s_sh=<s_sh_index> ...]][[/sl=<sl_index>[/s_sl=<s_sl_index> ...]][/p=<p_index> …]]". The generic format is the concatenation of n tuple elements “/<field>=<index>”. The fields of tuple element includes:
+For the component location information the suggested pattern is defined in {{ONF_TR-547}}:
+
+~~~~ ascii-art
+/ne=<nw-ne-name>[/r=<r_index>][/sh=<sh_index>[/s_sh=<s_sh_index> ...]][[/sl=<sl_index>[/s_sl=<s_sl_index> ...]][/p=<p_index> …]]
+~~~~
+
+The generic format is the concatenation of n tuple elements '/\<field>=\<index>'. The fields of tuple element include:
 
 | field  |meaning   |
 | ------------ | ------------ |
@@ -394,6 +401,8 @@ For the location information of component, a relative position information will 
 | sl  | slot component |
 | s_sl  |sub-slot component |
 | p  | port component  |
+
+In this draft the term 'chassis' is used instead of the [ONF TR-547] term 'shelf', because it is more recognized in the industry. However, the component location string will use the acronyms 'sh' and 's_sh' for consistency with the [ONF TR-547] definitions.
 
 Some of the fields are optional, such as sub-chassis and sub-slot, and consequently would not need to be provided in some scenarios.
 
