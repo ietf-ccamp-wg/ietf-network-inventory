@@ -465,7 +465,7 @@ Note: add some more attributes about equipment room in the future.
 
 ### Rack
 
-Usually rack is not able to be detectable by domain controller automatically neither. Most of the information shall be input by the users manually. So racks can be optional too when implementing this data model.
+Likewise for equipment rooms, usually the information about the rack is not detectable by domain controller and configured manually. Therefore reporting information about the racks is optional when implementing this data model.
 
 Besides the common attributes mentioned in above section, rack could have some specific attributes, such as appearance-related attributes and electricity-related attributes.
 The height, depth and width are described by the figure below (please consider that the door of the rack is facing the user):
