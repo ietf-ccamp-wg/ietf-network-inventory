@@ -411,7 +411,7 @@ We re-defined some attributes listed in {{!RFC8348}}, based on some integration 
   +--ro components
      +--ro component* [uuid]
         ...................................
-        +--ro parent-references
+        +--ro parent-component-references
         |   +--ro component-reference* [index]
         |      +--ro index    uint8
         |      +--ro class?   leafref
