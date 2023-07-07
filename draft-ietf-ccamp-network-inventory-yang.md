@@ -384,15 +384,13 @@ The YANG data model for network hardware inventory mainly follows the same appro
 
 Some of the definitions taken from {{!RFC8348}} are actually based on the ENTITY-MIB {{!RFC6933}}.
 
-For the component location information the suggested pattern is defined in {{ONF_TR-547}}:
+For the component location information, the suggested pattern is the same as the pattern defined in section 4.2 of {{ONF_TR-547}} for the INVENTORY_ID property.
 
-~~~~ ascii-art
-/ne=<nw-ne-name>[/r=<r_index>][/sh=<sh_index>[/s_sh=<s_sh_index> ...]][[/sl=<sl_index>[/s_sl=<s_sl_index> ...]][/p=<p_index> …]]
-~~~~
+In this draft the term 'chassis' is used instead of the term 'shelf', used in {{ONF_TR-547}}, since the term 'chassis' has broarder applicability than the term 'shelf' and it is aligned with the terminology of {{!RFC8348}}. However, the component location string will use the acronyms 'sh' and 's_sh' for consistency with the {{ONF_TR-547}} definitions.
 
-The generic format is the concatenation of n tuple elements '/\<field>=\<index>'. The fields of tuple element include:
+{{tab-onf}} summarizes the relationship between the \<field> defined in {{ONF_TR-547}} and the components defined in this document.
 
-| field  |meaning   |
+| \<field>  |meaning   |
 | ------------ | ------------ |
 | ne  |network element   |
 | r   |rack   |
@@ -401,10 +399,7 @@ The generic format is the concatenation of n tuple elements '/\<field>=\<index>'
 | sl  | slot component |
 | s_sl  |sub-slot component |
 | p  | port component  |
-
-In this draft the term 'chassis' is used instead of the [ONF TR-547] term 'shelf', because it is more recognized in the industry. However, the component location string will use the acronyms 'sh' and 's_sh' for consistency with the [ONF TR-547] definitions.
-
-Some of the fields are optional, such as sub-chassis and sub-slot, and consequently would not need to be provided in some scenarios.
+{: #tab-onf title="Meaning of \<field>"}
 
 This pattern is a common practice in optical transport networks, but we consider it as also applicable for other technologies.
 
