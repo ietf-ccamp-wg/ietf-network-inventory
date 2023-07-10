@@ -4,7 +4,7 @@ coding: utf-8
 title: A YANG Data Model for Network Hardware Inventory
 
 abbrev: Network Hardware Inventory YANG
-docname: draft-ietf-ccamp-network-inventory-yang-01
+docname: draft-ietf-ccamp-network-inventory-yang-02
 submissiontype: IETF
 workgroup: CCAMP Working Group
 category: std
@@ -63,6 +63,10 @@ contributor:
     ins: O. Gonzalez de Dios
     org: Telefonica
     email: oscar.gonzalezdedios@telefonica.com
+  -
+    name: Nigel Davis
+    org: Ciena
+    email: ndavis@ciena.com
 
 normative:
   TMF_SD2-20:
@@ -79,7 +83,6 @@ normative:
       org: IANA
     target: https://www.iana.org/assignments/yang-parameters
 
-informative:
   ONF_TR-547:
     title: TAPI v2.1.3 Reference Implementation Agreement
     author:
@@ -87,6 +90,8 @@ informative:
     date:  July 2020
     seriesinfo: ONF TR-547 TAPI RIA v1.0
     target: https://opennetworking.org/wp-content/uploads/2020/08/TR-547-TAPI-v2.1.3-Reference-Implementation-Agreement-1.pdf
+
+informative:
 
 --- abstract
 
@@ -241,15 +246,17 @@ Logically,  the relationship between these inventory objects can be described by
     +------------+               ||
           ||                     ||
           || 1:N                 \/
-          ||______________\+------------+
-          |---------------/|   chassis  |
-                           +------------+
+          ||______________\+-------------+
+          |---------------/|   chassis/  |---+
+                           | sub-chassis |<--|
+                           +-------------+
                                  ||
                   ______1:N______||_____1:M_______
                   ||------------------ ---------||
-                  \/                            \/      
+                  \/                            \/
            +--------------+               +-----------+
-           | slot/subslot |               |   board   |
+       +---|     slot     |               |   board   |
+       |-->|  /sub-slot   |               |           |
            +--------------+               +-----------+
                                                 ||
                                                 ||1:N
@@ -377,6 +384,25 @@ The YANG data model for network hardware inventory mainly follows the same appro
 
 Some of the definitions taken from {{!RFC8348}} are actually based on the ENTITY-MIB {{!RFC6933}}.
 
+For the component location information, the suggested pattern is the same as the pattern defined in section 4.2 of {{ONF_TR-547}} for the INVENTORY_ID property.
+
+In this draft the term 'chassis' is used instead of the term 'shelf', used in {{ONF_TR-547}}, since the term 'chassis' has broader applicability than the term 'shelf' and it is aligned with the terminology of {{!RFC8348}}. However, the component location string will use the acronyms 'sh' and 's_sh' for consistency with the {{ONF_TR-547}} definitions.
+
+{{tab-onf}} summarizes the relationship between the \<field> defined in {{ONF_TR-547}} and the components defined in this document.
+
+| &lt;field>  |meaning   |
+| ------------ | ------------ |
+| ne  |network element   |
+| r   |rack   |
+| sh  |chassis component   |
+| s_sh  |sub-chassis component  |
+| sl  | slot component |
+| s_sl  |sub-slot component |
+| p  | port component  |
+{: #tab-onf title="Meaning of &lt;field>"}
+
+This pattern is a common practice in optical transport networks, but we consider it as also applicable for other technologies.
+
 For state data like admin-state, oper-state and so on, we consider they are related to device hardware management and not hardware inventory. Therefore, they are outside of scope of this document. Same for the sensor-data, they should be defined in some other performance monitoring data models instead of inventory data model.
 
 We re-defined some attributes listed in {{!RFC8348}}, based on some integration experience for network wide inventory data.
@@ -391,15 +417,11 @@ We re-defined some attributes listed in {{!RFC8348}}, based on some integration 
   +--ro components
      +--ro component* [uuid]
         ...................................
-        +--ro parent-references
-        |  +--ro equipment-room-uuid?    leafref
-        |  +--ro ne-uuid?                leafref
-        |  +--ro rack-uuid?              leafref
-        |  +--ro component-references
-        |     +--ro component-reference* [index]
-        |        +--ro index    uint8
-        |        +--ro class?   leafref
-        |        +--ro uuid?    leafref
+        +--ro parent-component-references
+        |   +--ro component-reference* [index]
+        |      +--ro index    uint8
+        |      +--ro class?   -> ../../../class
+        |      +--ro uuid?    -> ../../../uuid
         ...................................
 ~~~~
 
@@ -441,9 +463,15 @@ According to the description in {{!RFC8348}}, the attribute named "model-name" u
 
 ### Equipment Room
 
+Usually the information about equipment rooms is not detectable by domain controller and configured manually. Sometimes, this information is not configured in the domain controller but directly in the Operators' owned OSS and therefore reporting information about the equipment rooms is optional when implementing this data model.
+
+Another scenario to analyze is when racks are not located in any equipment room: one possible solution is that the domain controller provides a "default" equipment room that contains all these racks.
+
 Note: add some more attributes about equipment room in the future.
 
 ### Rack
+
+Likewise for equipment rooms, usually the information about the rack is not detectable by domain controller and configured manually. Therefore reporting information about the racks is optional when implementing this data model.
 
 Besides the common attributes mentioned in above section, rack could have some specific attributes, such as appearance-related attributes and electricity-related attributes.
 The height, depth and width are described by the figure below (please consider that the door of the rack is facing the user):
@@ -508,7 +536,6 @@ We consider that some of the attributes defined in {{?RFC8348}} for components a
          +--ro network-element* [uuid]
             ...................................
             +--ro hardware-rev?    string
-            +--ro firmware-rev?    string
             +--ro software-rev?    string
             +--ro mfg-name?        string
             +--ro mfg-date?        yang:date-and-time
