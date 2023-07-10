@@ -386,11 +386,11 @@ Some of the definitions taken from {{!RFC8348}} are actually based on the ENTITY
 
 For the component location information, the suggested pattern is the same as the pattern defined in section 4.2 of {{ONF_TR-547}} for the INVENTORY_ID property.
 
-In this draft the term 'chassis' is used instead of the term 'shelf', used in {{ONF_TR-547}}, since the term 'chassis' has broarder applicability than the term 'shelf' and it is aligned with the terminology of {{!RFC8348}}. However, the component location string will use the acronyms 'sh' and 's_sh' for consistency with the {{ONF_TR-547}} definitions.
+In this draft the term 'chassis' is used instead of the term 'shelf', used in {{ONF_TR-547}}, since the term 'chassis' has broader applicability than the term 'shelf' and it is aligned with the terminology of {{!RFC8348}}. However, the component location string will use the acronyms 'sh' and 's_sh' for consistency with the {{ONF_TR-547}} definitions.
 
 {{tab-onf}} summarizes the relationship between the \<field> defined in {{ONF_TR-547}} and the components defined in this document.
 
-| \<field>  |meaning   |
+| &lt;field>  |meaning   |
 | ------------ | ------------ |
 | ne  |network element   |
 | r   |rack   |
@@ -399,7 +399,7 @@ In this draft the term 'chassis' is used instead of the term 'shelf', used in {{
 | sl  | slot component |
 | s_sl  |sub-slot component |
 | p  | port component  |
-{: #tab-onf title="Meaning of \<field>"}
+{: #tab-onf title="Meaning of &lt;field>"}
 
 This pattern is a common practice in optical transport networks, but we consider it as also applicable for other technologies.
 
